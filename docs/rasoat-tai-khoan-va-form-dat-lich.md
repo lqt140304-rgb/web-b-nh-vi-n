@@ -253,7 +253,7 @@ Nếu Lan đổi ngày hoặc dịch vụ thì tạo yêu cầu mới. Nếu Lan
 
 Cơ sở dữ liệu là nơi phân xử, không phải đoạn kiểm tra trong ứng dụng:
 1. Máy chủ chuẩn hóa các trường (Unicode NFC, cắt và gộp khoảng trắng, không phân biệt hoa thường, **không bỏ dấu tiếng Việt**; điện thoại về dạng quốc tế; email viết thường) rồi tạo **một khóa trùng gồm phạm vi (mục 4.2) và các trường đã chuẩn hóa**, lưu cùng yêu cầu, kèm số phiên bản của cách tạo khóa.
-2. Ràng buộc duy nhất cho khóa này, **chỉ áp dụng khi yêu cầu còn ở nhóm trạng thái giữ khóa**. Nhóm nào giữ khóa là **[Chưa duyệt]**, xem bảng đề xuất ở mục 4.2a (Đã hủy và Từ chối giải phóng khóa; Không liên lạc được chờ chủ dự án chọn).
+2. Ràng buộc duy nhất cho khóa này, **chỉ áp dụng khi yêu cầu còn ở nhóm trạng thái giữ khóa**. **Không liên lạc được giữ khóa chống trùng theo quyết định đã chốt tại mục 4.2b; khách gửi lại giống hệt thì đặt dấu nhắc trên yêu cầu hiện có, không tạo yêu cầu mới.** Nhóm giữ khóa của các trạng thái còn lại là **[Chưa duyệt]**, xem bảng đề xuất ở mục 4.2a (Chờ xác nhận, Đang liên hệ, Đã xác nhận giữ khóa; Đã hủy và Từ chối giải phóng khóa).
 3. Máy chủ thử ghi; nếu cơ sở dữ liệu báo trùng thì bỏ qua việc tạo mới. Hai lần gửi đồng thời: một lần ghi được, lần kia nhận "đã có".
 4. Ngày mong muốn bắt buộc và không được là ngày đã qua, nên yêu cầu "đã xác nhận" chỉ chặn tạo trùng trong giới hạn tự nhiên.
 5. Chỉ gửi email cho nhân viên khi tạo mới.
@@ -384,10 +384,10 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 | 28 | Gửi lại giống hệt, cùng phạm vi, khi yêu cầu cũ ở **Không liên lạc được** | Vẫn **một** yêu cầu, trạng thái giữ nguyên; trang lễ tân hiện "Khách vừa gửi lại — cần gọi lại" và thời điểm gửi lại; khách nhận phản hồi chung |
 | 28a | Nhân viên chuyển yêu cầu đó sang Đang liên hệ | Dấu nhắc bị xóa; lịch sử của lần gửi lại và các thay đổi trước đó vẫn còn |
 | 28b | Gửi lại khác thông tin (đổi ngày hoặc dịch vụ) khi có yêu cầu ở Không liên lạc được | Tạo yêu cầu mới; yêu cầu cũ không bị đặt dấu nhắc |
-| 28c | Bấm gửi lại giống hệt nhiều lần liên tiếp khi dấu nhắc đang hiển thị | Không ghi thêm sự kiện lịch sử, không tạo thông báo liên tục; thời điểm hiển thị không bị đổi liên tục (theo cách đã chốt ở 4.2b) |
+| 28c | Bấm gửi lại giống hệt nhiều lần liên tiếp khi dấu nhắc đang hiển thị | Không ghi thêm sự kiện lịch sử, không tạo thông báo liên tục; thời điểm hiển thị giữ lần gửi lại đầu của chu kỳ (**theo đề xuất kỹ thuật ở 4.2b, chưa duyệt**; kỳ vọng này chỉ áp dụng sau khi chủ dự án hoặc Codex chốt cách giữ thời điểm). Ví dụ giả lập: Lan gửi lại 10:00 đặt dấu nhắc; bấm lại 10:01, 10:02 vẫn một yêu cầu, một dấu nhắc, thời điểm giữ 10:00 |
 | 28d | Lễ tân chuyển sang Đang liên hệ **ngay trước** khi lần gửi lại được xử lý | Không dựng lại dấu nhắc, không ghi đè trạng thái; khách nhận phản hồi chung |
 | 28e | Lần gửi lại đến **ngay trước** khi lễ tân chuyển trạng thái | Dấu nhắc được đặt rồi bị xóa theo chuyển trạng thái; lần gửi lại vẫn có trong lịch sử |
-| 28f | Lễ tân thao tác trên màn hình cũ (chưa thấy dấu nhắc mới) | Không mất lần gửi lại; thao tác báo cập nhật hoặc xử lý an toàn theo cách đã chọn |
+| 28f | Lễ tân thao tác trên màn hình cũ (chưa thấy dấu nhắc mới) | Không mất lần gửi lại; thao tác báo cập nhật hoặc xử lý an toàn theo cách xử lý màn hình cũ mà Codex chọn (đề xuất ở 4.2b, chưa duyệt) |
 | 28g | Khách vãng lai gửi lại nội dung giống yêu cầu của một tài khoản ở Không liên lạc được | Không đặt dấu nhắc cho yêu cầu của tài khoản (khác phạm vi); không lộ, không gắn chéo |
 | 28h | So sánh phản hồi công khai giữa gửi mới, gửi trùng thường và gửi trùng có đặt dấu nhắc | Cùng nội dung thông báo, không phân biệt được |
 | 28i | Dùng dấu nhắc để khôi phục tài khoản hoặc đánh dấu số đã xác minh | Không có chức năng nào như vậy |
