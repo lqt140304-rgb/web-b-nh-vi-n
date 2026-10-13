@@ -1,6 +1,6 @@
-# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 2, sau phản hồi của Codex)
+# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 3, sau quyết định chống trùng)
 
-**Ngày:** 13/10/2026 · **Người soạn:** Claude · **Trạng thái:** bản nháp để Codex, Gemini và chủ dự án phản biện. Chưa phải quyết định chung, chưa phê duyệt quy trình nào.
+**Ngày:** 13/10/2026 · **Người soạn:** Claude · **Trạng thái:** bản nháp để Codex, Gemini và chủ dự án phản biện. Duy nhất mục 4.2 (phạm vi chống trùng) đã được chủ dự án chốt. Quyết định này **không** duyệt toàn bộ thiết kế, cơ chế đăng nhập, quy trình khôi phục hay tập trạng thái; các mục khác giữ nguyên nhãn.
 
 **Quy ước nhãn**
 - **[Đã chốt]**: do chủ dự án quyết định.
@@ -12,9 +12,9 @@ Không có dữ liệu cá nhân thật. Chưa có mã, chưa mua dịch vụ n�
 
 ---
 
-## 0. Thay đổi so với bản 1
+## 0. Thay đổi so với các bản trước
 
-Bản 1 nằm ở lịch sử git của nhánh. Bản này tiếp thu phản hồi của Codex như sau.
+Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu phản hồi của Codex, bản 3 ghi nhận quyết định chống trùng của chủ dự án, như sau.
 
 | Điểm Codex nêu | Claude xử lý |
 |---|---|
@@ -24,7 +24,7 @@ Bản 1 nằm ở lịch sử git của nhánh. Bản này tiếp thu phản h�
 | Gọi lại số đang lưu không chứng minh quyền với tài khoản cũ (số có thể đã cấp lại) | **Chấp nhận.** Tách ba việc: khôi phục tài khoản cũ, giải phóng số, đặt lại mật khẩu (mục 5). |
 | Mật khẩu tạm không tự hết hạn; thu hồi phiên chưa chắc có hiệu lực ngay | **Chấp nhận.** Chuyển sang [Chờ kiểm chứng], bỏ lời hứa "mọi phiên mất hiệu lực ngay" (mục 5.3). |
 | Câu "bảng không bật RLS là bảng mở" chưa chính xác | **Chấp nhận.** Diễn đạt lại (mục 6). |
-| Chống trùng theo phạm vi tài khoản là ngoại lệ so với điều đã chốt | **Chấp nhận.** Ghi rõ là ngoại lệ cần chủ dự án duyệt, đưa hai lựa chọn (mục 4.2). |
+| Chống trùng theo phạm vi tài khoản là ngoại lệ so với điều đã chốt | **Chấp nhận.** Bản 2 ghi là ngoại lệ cần duyệt. **Cập nhật bản 3:** chủ dự án đã chọn phương án 1, chống trùng trong từng phạm vi, và chấp nhận ngoại lệ (mục 4.2, **[Đã chốt]**). |
 | Giữ phạm vi nhỏ: chưa gộp yêu cầu, đặt hộ, form hỗ trợ riêng, nhiều tầng cảnh báo | **Chấp nhận.** Gỡ các mục này khỏi thiết kế chính, chuyển sang mục 8 "chưa duyệt". |
 | Bộ đếm lưu trong PostgreSQL, không mua Redis | **Đồng ý.** |
 
@@ -42,6 +42,7 @@ Bản 1 nằm ở lịch sử git của nhánh. Bản này tiếp thu phản h�
 - **[Đã chốt]** Khách vãng lai và khách đăng nhập đều gửi form. Khách vãng lai không bị tự gắn vào tài khoản theo số điện thoại và không tra cứu lịch sử chỉ bằng số điện thoại.
 - **[Đã chốt]** Yêu cầu giữ bản chụp thông tin tại thời điểm gửi. Khác thông tin thì tiếp nhận; giống toàn bộ thông tin sau chuẩn hóa thì chống tạo trùng; không dùng riêng số điện thoại để chặn. Gửi form chưa phải đã duyệt lịch.
 - **[Đã chốt]** Có trang quản trị và email báo nhân viên. Giữ giới hạn tần suất và kiểm tra dữ liệu phía máy chủ.
+- **[Đã chốt]** Chống trùng **trong từng phạm vi**: mỗi tài khoản một phạm vi, mọi khách vãng lai chung một phạm vi (chi tiết mục 4.2). Cùng nội dung gửi ở hai phạm vi khác nhau có thể thành hai yêu cầu; chủ dự án đã hiểu và chấp nhận.
 - **Giới hạn cần ghi rõ:** số điện thoại **chưa được xác minh quyền sở hữu**. Chưa có quy trình được duyệt cho đăng ký nhầm, tranh chấp số, quên mật khẩu.
 
 ---
@@ -127,20 +128,39 @@ Làm trên **dự án thử, dữ liệu giả, cấu hình không gửi SMS**. 
 1. Khách chỉ đọc được yêu cầu thuộc tài khoản của mình. Yêu cầu không có chủ sở hữu tài khoản thì **không khách nào đọc được**.
 2. Không có truy vấn dành cho khách nối số điện thoại trong yêu cầu với số điện thoại của tài khoản.
 3. Khách vãng lai không có cách xem, tìm hay đoán trạng thái của bất kỳ yêu cầu nào.
+4. **Chủ thể của yêu cầu (tài khoản hay vãng lai) chỉ lấy từ phiên đăng nhập đã kiểm tra phía máy chủ.** Không bao giờ tin mã tài khoản hay cờ "vãng lai" do trình duyệt gửi lên. Nếu không có phiên hợp lệ thì chủ thể là vãng lai.
 
-### 4.2. Phạm vi chống trùng: ngoại lệ cần chủ dự án duyệt [Cần chốt]
+### 4.2. Phạm vi chống trùng **[Đã chốt: phương án 1, chống trùng trong từng phạm vi]**
 
-Điều đã chốt là "giống toàn bộ thông tin thì chống tạo trùng", chưa nói rõ khi một bên là vãng lai và một bên đã đăng nhập. Đề xuất của Claude (tính khóa chống trùng theo chủ thể) tạo **ngoại lệ**: nội dung giống hệt, gửi một lần khi vãng lai và một lần sau khi đăng nhập, sẽ thành hai yêu cầu. Hai lựa chọn cho chủ dự án:
+Chủ dự án đã chọn (xác nhận trong chat Codex ngày 13/10/2026):
 
-1. **Chống trùng trong từng phạm vi** (mỗi tài khoản một phạm vi, tất cả khách vãng lai chung một phạm vi). Đôi khi có hai yêu cầu giống nhau qua hai phạm vi; nhân viên tự kiểm tra, **không tự gộp hay chuyển chủ sở hữu**. Ưu điểm: không lộ chéo, không gắn yêu cầu vãng lai vào tài khoản, đơn giản. **Claude và Codex cùng nghiêng về lựa chọn này.**
-2. **Chống trùng toàn hệ thống.** Phải thiết kế riêng phản hồi và lịch sử tài khoản khi trùng một yêu cầu vãng lai (khách đăng nhập báo thành công nhưng yêu cầu không có trong danh sách của mình), và không được tự nhận quyền sở hữu yêu cầu cũ.
+- Mỗi tài khoản là một phạm vi riêng. Tất cả khách vãng lai dùng chung một phạm vi.
+- Trong cùng phạm vi, nếu toàn bộ thông tin đặt lịch giống nhau sau chuẩn hóa thì **không tạo thêm yêu cầu**, theo các trạng thái được phép áp dụng (tập trạng thái vẫn **[Cần chốt]**, xem mục 4.3).
+- Khác thông tin thì vẫn tiếp nhận để nhân viên xét duyệt; không tự xác nhận lịch.
+- **Ngoại lệ đã được chấp nhận:** cùng nội dung gửi khi vãng lai rồi gửi lại sau khi đăng nhập có thể thành hai yêu cầu.
+- Nhân viên kiểm tra khi liên hệ xác nhận. **Không tự gộp, không chuyển chủ sở hữu, không đưa yêu cầu vãng lai vào lịch sử tài khoản.**
+- Khách chỉ thấy yêu cầu thuộc tài khoản của mình. Khách vãng lai không tra cứu lịch sử bằng số điện thoại.
 
-Chưa áp dụng lựa chọn nào cho đến khi chủ dự án duyệt.
+**Ví dụ đã được chủ dự án đồng ý** (dữ liệu giả): khách Lan đặt khám cho mèo Miu ngày 20/10.
+
+| Bước | Hành động | Kết quả |
+|---|---|---|
+| 1 | Chưa đăng nhập, gửi form | Tạo yêu cầu A (phạm vi vãng lai) |
+| 2 | Vẫn chưa đăng nhập, gửi lại nội dung giống hệt | Không tạo thêm |
+| 3 | Đăng nhập, gửi lại cùng nội dung | Tạo yêu cầu B (phạm vi tài khoản) |
+| 4 | Đang đăng nhập, gửi lại giống B | Không tạo thêm |
+| 5 | Đổi ngày mong muốn sang 21/10 | Tạo yêu cầu mới |
+
+Nhân viên thấy A và B. Khách chỉ thấy B trong tài khoản.
+
+**Hệ quả thiết kế:** khóa chống trùng gồm **phạm vi** (mã tài khoản đã kiểm tra phía máy chủ, hoặc giá trị cố định "vãng lai") cộng các trường đã chuẩn hóa. Chống trùng không bao giờ vượt qua ranh giới giữa các phạm vi, nên không lộ chéo và không gắn yêu cầu vãng lai vào tài khoản.
+
+**Phạm vi của quyết định này:** chỉ chốt phạm vi chống trùng. Chưa duyệt toàn bộ thiết kế, cơ chế đăng nhập (phương án A/B), quy trình khôi phục tài khoản hay tập trạng thái yêu cầu.
 
 ### 4.3. Cơ chế chống trùng chịu được hai lần gửi đồng thời [Đề xuất]
 
 Cơ sở dữ liệu là nơi phân xử, không phải đoạn kiểm tra trong ứng dụng:
-1. Máy chủ chuẩn hóa các trường (Unicode NFC, cắt và gộp khoảng trắng, không phân biệt hoa thường, **không bỏ dấu tiếng Việt**; điện thoại về dạng quốc tế; email viết thường) rồi tạo **một khóa trùng**, lưu cùng yêu cầu, kèm số phiên bản của cách tạo khóa.
+1. Máy chủ chuẩn hóa các trường (Unicode NFC, cắt và gộp khoảng trắng, không phân biệt hoa thường, **không bỏ dấu tiếng Việt**; điện thoại về dạng quốc tế; email viết thường) rồi tạo **một khóa trùng gồm phạm vi (mục 4.2) và các trường đã chuẩn hóa**, lưu cùng yêu cầu, kèm số phiên bản của cách tạo khóa.
 2. Ràng buộc duy nhất cho khóa này, **chỉ áp dụng khi yêu cầu còn ở nhóm trạng thái đang xử lý**. Yêu cầu bị hủy hoặc bị từ chối giải phóng khóa nên khách gửi lại được.
 3. Máy chủ thử ghi; nếu cơ sở dữ liệu báo trùng thì bỏ qua việc tạo mới. Hai lần gửi đồng thời: một lần ghi được, lần kia nhận "đã có".
 4. Ngày mong muốn bắt buộc và không được là ngày đã qua, nên yêu cầu "đã xác nhận" chỉ chặn tạo trùng trong giới hạn tự nhiên.
@@ -227,7 +247,9 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 
 ## 9. Quyết định còn thiếu
 
-**Chủ dự án:** (1) phạm vi chống trùng, chọn lựa chọn 1 hay 2 ở mục 4.2; (2) bằng chứng nào đủ để khôi phục tài khoản cũ, và ai quyết định; (3) lễ tân được làm thao tác nhạy cảm nào, ai dự phòng quản lý; (4) có nhận số cố định không; (5) xử lý "Không liên lạc được" khi khách gửi lại; (6) khách có sửa số liên hệ trong yêu cầu không; (7) ngưỡng giới hạn tần suất; (8) chính sách lưu trữ, xóa và nội dung đồng ý; (9) dự án thử cho kiểm chứng.
+**Đã chốt, không còn trong danh sách:** phạm vi chống trùng (mục 4.2).
+
+**Chủ dự án:** (1) tập trạng thái yêu cầu và những trạng thái nào còn chặn tạo trùng (mục 4.3); (2) bằng chứng nào đủ để khôi phục tài khoản cũ, và ai quyết định; (3) lễ tân được làm thao tác nhạy cảm nào, ai dự phòng quản lý; (4) có nhận số cố định không; (5) xử lý "Không liên lạc được" khi khách gửi lại; (6) khách có sửa số liên hệ trong yêu cầu không; (7) ngưỡng giới hạn tần suất; (8) chính sách lưu trữ, xóa và nội dung đồng ý; (9) dự án thử cho kiểm chứng.
 
 **Codex:** (10) chạy kế hoạch kiểm chứng mục 3.3 rồi chọn A hay B; (11) kết quả các mục [chờ kiểm chứng] ở mục 2; (12) phương án đặt lại mật khẩu (mật khẩu tạm hay mã dùng một lần) và chi phí.
 
@@ -247,8 +269,14 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 | 6 | Sai mật khẩu nhiều lần | Làm chậm, chống bot; chủ thật vẫn vào được sau đó |
 | 7 | Gọi trực tiếp API Auth đi vòng đường dẫn Next.js | Vẫn bị giới hạn theo kết quả kiểm chứng; ghi nhận hành vi thật |
 | 8 | Khách vãng lai gửi form với số đã có tài khoản | Phản hồi như mọi khách vãng lai; không có gợi ý riêng; yêu cầu không xuất hiện trong tài khoản nào |
-| 9 | Hai lần gửi đồng thời giống hệt | Một yêu cầu, cả hai thấy thành công |
-| 10 | Cùng nội dung, một vãng lai và một đã đăng nhập (theo lựa chọn đã duyệt ở 4.2) | Hành vi đúng lựa chọn; không lộ, không gắn chéo |
+| 9 | Hai lần gửi đồng thời giống hệt, **cùng phạm vi** | Đúng một yêu cầu, cả hai thấy thành công |
+| 9b | Hai lần gửi đồng thời giống hệt nhưng **khác phạm vi** (một vãng lai, một đã đăng nhập) | Có thể có hai yêu cầu; không lỗi, không gắn chéo |
+| 10a | Ví dụ Lan/Miu bước 1–2: vãng lai gửi, rồi gửi lại giống hệt | Một yêu cầu A |
+| 10b | Bước 3–4: đăng nhập gửi cùng nội dung, rồi gửi lại | Yêu cầu B riêng, sau đó không tạo thêm |
+| 10c | Bước 5: đổi ngày mong muốn | Tạo yêu cầu mới |
+| 10d | Sau 10a–10c, khách xem danh sách trong tài khoản | Chỉ thấy B (và yêu cầu mới của tài khoản); không thấy A |
+| 10e | Nhân viên xem trang quản trị | Thấy cả A và B, không tự gộp hay chuyển chủ |
+| 10f | Trình duyệt gửi kèm mã tài khoản hoặc cờ chủ thể giả | Bỏ qua; chủ thể lấy từ phiên đã kiểm tra phía máy chủ |
 | 11 | Khách đọc yêu cầu của tài khoản khác hoặc yêu cầu vãng lai | Bị chặn ở tầng cơ sở dữ liệu |
 | 12 | Truy cập dữ liệu bằng khóa công khai với bảng thiếu quyền hoặc RLS | Bị chặn; kiểm tra cả quyền được cấp lẫn RLS |
 | 13 | Token trình duyệt nhận có chứa thông tin gì | Ghi nhận đúng, không giả định là bí mật |
