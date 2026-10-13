@@ -1,6 +1,6 @@
-# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 5, sau quyết định khách gửi lại khi Không liên lạc được)
+# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 6, sau Codex xác minh tài liệu Supabase)
 
-**Ngày:** 13/10/2026 · **Người soạn:** Claude · **Trạng thái:** bản nháp để Codex, Gemini và chủ dự án phản biện. Chủ dự án đã chốt ba việc: phạm vi chống trùng (mục 4.2), sáu trạng thái yêu cầu cùng luồng chính (mục 4.2a), và cách xử lý khi khách gửi lại ở trạng thái Không liên lạc được (mục 4.2b). Các quyết định này **không** duyệt toàn bộ thiết kế, cơ chế đăng nhập, quy trình khôi phục, hay mọi chuyển trạng thái; các mục khác giữ nguyên nhãn.
+**Ngày:** 13/10/2026, cập nhật 14/10/2026 · **Người soạn:** Claude · **Trạng thái:** bản nháp để Codex, Gemini và chủ dự án phản biện. Bản 6 chỉ ghi nhận kết quả Codex **xác minh trên tài liệu chính thức**; chưa có kiểm thử API hay ứng dụng trên dự án hosted. Chủ dự án đã chốt ba việc: phạm vi chống trùng (mục 4.2), sáu trạng thái yêu cầu cùng luồng chính (mục 4.2a), và cách xử lý khi khách gửi lại ở trạng thái Không liên lạc được (mục 4.2b). Các quyết định này **không** duyệt toàn bộ thiết kế, cơ chế đăng nhập, quy trình khôi phục, hay mọi chuyển trạng thái; các mục khác giữ nguyên nhãn.
 
 **Quy ước nhãn**
 - **[Đã chốt]**: do chủ dự án quyết định.
@@ -14,7 +14,7 @@ Không có dữ liệu cá nhân thật. Chưa có mã, chưa mua dịch vụ n�
 
 ## 0. Thay đổi so với các bản trước
 
-Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu phản hồi của Codex, bản 3 ghi nhận quyết định chống trùng, bản 4 ghi nhận sáu trạng thái yêu cầu, bản 5 ghi nhận cách xử lý khách gửi lại khi Không liên lạc được, như sau.
+Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu phản hồi của Codex, bản 3 ghi nhận quyết định chống trùng, bản 4 ghi nhận sáu trạng thái yêu cầu, bản 5 ghi nhận cách xử lý khách gửi lại khi Không liên lạc được, bản 6 ghi nhận kết quả Codex xác minh tài liệu Supabase, như sau.
 
 | Điểm Codex nêu | Claude xử lý |
 |---|---|
@@ -29,6 +29,7 @@ Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu p
 | Bộ đếm lưu trong PostgreSQL, không mua Redis | **Đồng ý.** |
 | **Bản 4:** chủ dự án chốt sáu trạng thái yêu cầu và luồng chính Chờ xác nhận → Đang liên hệ → Đã xác nhận | **Ghi nhận [Đã chốt] ở mục 4.2a.** Thay tập trạng thái gợi ý ở bản trước (Mới, Khách hủy, Nhân viên từ chối…) bằng tên chính thức. Tách ba mốc thời gian, thêm lịch sử thay đổi. Các chuyển trạng thái cụ thể, quyền, mở lại, trạng thái nào giữ khóa chống trùng vẫn **chưa duyệt** và được ghi là [Đề xuất]/[Cần chốt]. |
 | **Bản 5:** chủ dự án chọn, cho yêu cầu ở Không liên lạc được mà khách gửi lại giống hệt trong cùng phạm vi: không tạo yêu cầu mới, giữ nguyên trạng thái, **hiện dấu nhắc "Khách vừa gửi lại — cần gọi lại"** kèm thời điểm gửi lại; khi nhân viên bắt đầu liên hệ thì chuyển Đang liên hệ và xóa dấu nhắc | **Ghi nhận [Đã chốt] ở mục 4.2b**, thay hai lựa chọn (a)/(b) ở bản 4. Gỡ khỏi danh sách quyết định còn thiếu và khỏi mục ý tưởng chưa duyệt. **Không thêm trạng thái thứ bảy**: dấu nhắc nằm trên yêu cầu hiện có. Chi tiết kỹ thuật (giới hạn tần suất, email, xử lý đồng thời) là [Đề xuất]/[Cần chốt]. |
+| **Bản 6:** Codex báo kết quả xác minh trên tài liệu chính thức (14/10): điện thoại + mật khẩu được hỗ trợ; Auth có giới hạn tần suất riêng theo IP; TOTP cho quản lý không cần SMS; chặn mật khẩu rò rỉ từ gói Pro; đăng xuất không làm token còn hạn mất hiệu lực ngay. Codex đồng ý cách xử lý màn hình cũ bằng số phiên bản và đánh giá hai cách đặt lại mật khẩu. Chủ dự án đã tạo dự án thử, chưa chạy kiểm chứng | **Cập nhật mục 2, 3.3, 3.5, 4.2b, 5.3, 9, 10.** Đây là xác minh tài liệu, **không phải bằng chứng kiểm thử**; Claude chưa tự đọc được các trang tài liệu. Phương án A/B vẫn **chưa chọn**. Ghi nhận điểm mới cần kiểm tra: giới hạn theo IP khi đăng nhập đi qua máy chủ. Cách đặt lại mật khẩu vẫn **chưa duyệt**. |
 
 **Điều Claude giữ lại một phần:** danh tính nội bộ ngẫu nhiên vẫn nên dùng nếu chọn B, vì nếu suy ra được từ số điện thoại thì kẻ tấn công đoán được danh tính của người khác. Nó không thay cho việc kiểm tra gọi trực tiếp.
 
@@ -56,15 +57,16 @@ Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu p
 | Nội dung | Tình trạng |
 |---|---|
 | Đăng nhập bằng điện thoại cần nhà cung cấp SMS khi muốn xác nhận điện thoại lúc đăng ký | Hai bên cùng thấy trong tài liệu (qua đoạn trích). |
-| Đăng nhập bằng điện thoại + mật khẩu; API quản trị tạo tài khoản có tham số xác nhận điện thoại | Codex dẫn tài liệu. [Chờ kiểm chứng] trên dự án thử. |
-| Đăng ký điện thoại + mật khẩu **không gửi SMS** và không cần nhà cung cấp SMS trên bản hosted | [Chờ kiểm chứng]. Chưa có bằng chứng đã chạy được. |
+| Đăng nhập bằng điện thoại + mật khẩu; API quản trị tạo tài khoản có tham số xác nhận điện thoại | Codex xác minh tài liệu (14/10): có hỗ trợ; cần nhà cung cấp SMS **nếu muốn xác nhận điện thoại** lúc đăng ký. Có căn cứ ưu tiên thử phương án A trước. **Chưa chạy trên dự án hosted.** |
+| Đăng ký điện thoại + mật khẩu **không gửi SMS** và không cần nhà cung cấp SMS trên bản hosted | [Chờ kiểm chứng]. Chủ dự án đã tạo dự án thử; chưa chạy, chưa có bằng chứng đã chạy được. |
 | Không có đăng nhập bằng tên đăng nhập có sẵn; dùng tra cứu phía máy chủ | Xác nhận theo đoạn trích. |
 | Token truy cập (JWT) được ký chứ không mã hóa mặc định; có thể chứa email | Codex dẫn tài liệu. Claude chấp nhận. |
 | Quản trị viên đổi mật khẩu bằng API quản trị (cần khóa quyền cao, chỉ ở máy chủ) | Xác nhận theo đoạn trích. |
 | Mật khẩu tạm có hết hạn riêng; ép đổi mật khẩu ở mọi đường truy cập | **Không có sẵn** theo Codex. Phải tự thiết kế và kiểm chứng. |
-| Thu hồi phiên có hiệu lực ngay, kể cả token truy cập còn hạn | [Chờ kiểm chứng]. Không hứa trước. |
-| Giới hạn tần suất đăng nhập mật khẩu theo gói; chặn mật khẩu bị rò rỉ theo gói | [Chờ kiểm chứng]. |
-| Xác thực hai bước không dùng SMS cho tài khoản quản lý | [Chờ kiểm chứng]. |
+| Thu hồi phiên có hiệu lực ngay, kể cả token truy cập còn hạn | Codex xác minh tài liệu: **đăng xuất không làm token truy cập còn hạn mất hiệu lực ngay.** Với thao tác cần bảo đảm mạnh, tài liệu mô tả kiểm tra mã phiên với bảng phiên của Auth; thiết kế phải xét cả đường máy chủ và truy cập dữ liệu trực tiếp. Chưa kiểm thử. |
+| Giới hạn tần suất của Auth | Codex xác minh tài liệu: Auth có giới hạn riêng; bảng hiện hành nêu endpoint token mặc định **150 yêu cầu/5 phút theo IP**, có dung lượng cho burst. Cần đọc **cấu hình dự án thật** và kiểm tra cách chuyển IP khi đăng nhập qua máy chủ; không mặc định giới hạn của Next.js bảo vệ API Auth trực tiếp. Chưa kiểm thử. |
+| Chặn mật khẩu bị rò rỉ | Codex xác minh tài liệu (Password security): tính năng **gói Pro trở lên**. Không phải lý do để tự mua Pro. |
+| Xác thực hai bước không dùng SMS cho tài khoản quản lý | Codex xác minh tài liệu: Supabase hỗ trợ ứng dụng **TOTP**, không cần SMS. **Không thay quyết định bỏ OTP cho khách.** |
 
 Nguồn đã dẫn (Claude chưa đọc toàn văn được):
 - https://supabase.com/docs/guides/auth/passwords
@@ -74,6 +76,9 @@ Nguồn đã dẫn (Claude chưa đọc toàn văn được):
 - https://supabase.com/docs/reference/javascript/auth-admin-createuser
 - https://supabase.com/docs/reference/javascript/auth-admin-updateuserbyid
 - https://supabase.com/docs/guides/auth/rate-limits
+- https://supabase.com/docs/guides/auth/auth-mfa/totp
+- https://supabase.com/docs/guides/auth/password-security
+- https://supabase.com/docs/reference/javascript/auth-signout
 
 ---
 
@@ -98,7 +103,7 @@ Cả hai đều để Supabase Auth lưu và băm mật khẩu. **Chúng ta khô
 
 ### 3.3. Kế hoạch kiểm chứng trước khi chọn A hay B (Codex đề xuất, Claude đồng ý)
 
-Làm trên **dự án thử, dữ liệu giả, cấu hình không gửi SMS**. **[Cần chốt]** dự án thử có phát sinh chi phí không, và ai tạo; chưa mua gì khi chưa duyệt.
+Làm trên **dự án thử, dữ liệu giả, cấu hình không gửi SMS**. Chủ dự án đã tạo dự án thử. **[Cần chốt]** dự án thử có phát sinh chi phí không (chủ dự án kiểm tra trên trang thanh toán); không mua thêm gì khi chưa duyệt.
 
 1. Tạo tài khoản bằng điện thoại + mật khẩu mà không gửi SMS: có được không, có cần nhà cung cấp SMS không.
 2. Đăng nhập, đổi số, đổi mật khẩu.
@@ -107,6 +112,9 @@ Làm trên **dự án thử, dữ liệu giả, cấu hình không gửi SMS**. 
 5. Nội dung token trình duyệt nhận (có email, số điện thoại không).
 6. Thu hồi phiên: token truy cập còn hạn dùng được bao lâu sau khi đổi mật khẩu hay đăng xuất.
 7. Hành vi khi cùng số điện thoại đăng ký hai lần hoặc hai định dạng khác nhau.
+8. **Giới hạn theo IP khi đăng nhập đi qua máy chủ:** Supabase thấy IP nào (IP máy chủ hay IP khách); giới hạn mặc định theo IP có chặn nhầm khách thật hoặc để kẻ tấn công làm cạn giới hạn của mọi khách không; cách chuyển IP khách ra sao.
+
+**Tình trạng (14/10):** chủ dự án đã tạo dự án thử và sẽ cung cấp URL dashboard; Codex chưa chạy các bước trên. **Không gửi khóa bí mật hoặc mật khẩu trong chat.** Chỉ dùng tài khoản và số điện thoại giả; không gửi SMS, không mua dịch vụ, không sửa dự án sản xuất. Nếu phương án A không đáp ứng thì mới thử B.
 
 ### 3.4. Quy tắc tên đăng nhập và số điện thoại [Đề xuất]
 
@@ -119,6 +127,7 @@ Làm trên **dự án thử, dữ liệu giả, cấu hình không gửi SMS**. 
 - Thông báo đăng nhập sai chung chung.
 - Làm chậm lũy tiến và kiểm tra chống bot sau vài lần sai, thay vì khóa cứng (khóa cứng cho phép kẻ xấu khóa tài khoản người khác).
 - **Giới hạn phải đặt ở nơi áp dụng thật**: giới hạn ở đường dẫn Next.js không tự áp dụng cho API Auth của Supabase (mục 3.3, bước 4). Kết quả kiểm chứng quyết định cần thêm biện pháp nào.
+- **Giới hạn theo IP của Auth khi đăng nhập qua máy chủ** (Codex nêu): nếu máy chủ Next.js gọi Auth thì Auth có thể chỉ thấy IP của máy chủ, nên mọi khách dùng chung một giới hạn, hoặc kẻ tấn công làm cạn giới hạn của khách thật. Cần kiểm tra cách chuyển IP khách và cấu hình dự án thật trước khi chọn A hay B (mục 3.3, bước 8).
 - Đăng ký phải báo "số/tên đã dùng", nên người ngoài dò được số nào đã có tài khoản. Không tránh được khi không có OTP. Giảm bằng chống bot và giới hạn tần suất; ghi nhận đây là rủi ro chấp nhận có chủ đích.
 - Mật khẩu: độ dài tối thiểu hợp lý (từ 8, nên 10), cho phép dài, chặn mật khẩu rất phổ biến; chặn mật khẩu bị rò rỉ nếu gói hỗ trợ [chờ kiểm chứng]. Dùng thư viện chính thức của Supabase cho Next.js để quản lý phiên.
 - Bộ đếm giới hạn tần suất lưu **trong PostgreSQL** bằng cập nhật nguyên tử, chưa cần dịch vụ riêng.
@@ -239,8 +248,8 @@ Nếu Lan đổi ngày hoặc dịch vụ thì tạo yêu cầu mới. Nếu Lan
 - **Xóa dấu nhắc chỉ qua chuyển trạng thái:** không có thao tác "xóa nhắc" độc lập. Mọi chuyển khỏi Không liên lạc được (không chỉ sang Đang liên hệ) phải xóa dấu nhắc trong cùng thao tác, để dấu nhắc không bao giờ lệch trạng thái.
 - **Cập nhật nguyên tử, có điều kiện:** lần gửi lại đặt dấu nhắc bằng một câu lệnh cập nhật chỉ khớp khi yêu cầu vẫn đang ở Không liên lạc được. Nếu lễ tân đã chuyển trạng thái trước đó thì không có dòng nào bị đổi, nên không ghi đè trạng thái và không dựng lại dấu nhắc không phù hợp; khách vẫn nhận phản hồi chung như thường.
 - **Hai thứ tự đồng thời đều đúng:** gửi lại trước rồi lễ tân chuyển → dấu nhắc được đặt rồi bị xóa theo quy tắc (nhân viên đang bắt đầu gọi); lễ tân chuyển trước rồi gửi lại → không đặt dấu nhắc.
-- **Màn hình cũ của lễ tân:** nên tăng số phiên bản khi đặt dấu nhắc. Khi lễ tân bấm chuyển trạng thái trên màn hình cũ, thao tác báo "đã được cập nhật, hãy tải lại" và họ thấy dấu nhắc mới. Lần gửi lại vẫn nằm trong lịch sử dù dấu nhắc sau đó bị xóa, nên không mất dữ liệu. **[Cần chốt]** Codex chọn giữa cách này và cách điều kiện theo thời điểm đặt dấu nhắc.
-- **Tránh bấm nhiều lần tạo lịch sử hoặc thông báo liên tục:** khi dấu nhắc đang hiển thị, các lần gửi lại giống hệt tiếp theo **không ghi thêm sự kiện và không đổi thời điểm**. Như vậy mỗi chu kỳ nhắc tối đa một sự kiện lịch sử. Thời điểm hiển thị là lần gửi lại đầu của chu kỳ. Sau khi dấu nhắc bị xóa, lần gửi lại mới sẽ đặt dấu mới. **[Cần chốt]** cách này có đủ, hay thời điểm cần cập nhật theo lần gửi lại gần nhất.
+- **Màn hình cũ của lễ tân [Đề xuất của Claude và Codex thống nhất, chưa duyệt chủ dự án]:** dùng số phiên bản của yêu cầu, đã có trong mô hình chống ghi đè. Khi đặt dấu nhắc **lần đầu của chu kỳ**, tăng phiên bản. Chuyển trạng thái chỉ thành công nếu phiên bản đang lưu bằng phiên bản trên màn hình; nếu khác thì báo "đã được cập nhật, hãy tải lại". Không cần dịch vụ trả phí. Ví dụ giả lập: lễ tân mở yêu cầu Lan/Miu ở phiên bản 4; Lan gửi lại, hệ thống đặt dấu nhắc và tăng lên 5; lễ tân bấm lưu từ màn hình phiên bản 4 thì không ghi đè, tải lại để thấy phiên bản 5 rồi bắt đầu liên hệ. Lần gửi lại vẫn nằm trong lịch sử dù dấu nhắc sau đó bị xóa, nên không mất dữ liệu.
+- **Tránh bấm nhiều lần tạo lịch sử hoặc thông báo liên tục [Đề xuất của Claude và Codex thống nhất, chưa duyệt chủ dự án]:** khi dấu nhắc đang hiển thị, các lần gửi lại giống hệt tiếp theo **không ghi thêm sự kiện, không tăng phiên bản và không đổi thời điểm**. Mỗi chu kỳ nhắc tối đa một sự kiện lịch sử; thời điểm hiển thị là lần gửi lại đầu của chu kỳ (ví dụ gửi 10:00, bấm lại 10:01 và 10:02 vẫn giữ 10:00). Sau khi dấu nhắc bị xóa, lần gửi lại mới sẽ đặt dấu mới. Cách này tránh danh sách dao động khi khách bấm liên tục. Nếu chủ dự án muốn thời điểm theo lần gần nhất thì đổi lại.
 - **Giới hạn tần suất là lớp riêng:** vẫn áp dụng giới hạn theo địa chỉ mạng, số điện thoại và phạm vi để chống bot. **Chưa có ngưỡng được chốt.**
 - **Email:** quyết định hiện tại chỉ yêu cầu hiển thị nhắc trên trang lễ tân. **Chưa chốt** có gửi thêm email khi khách gửi lại hay không. Nếu sau này thêm, không đưa dữ liệu cá nhân vào thư và không gửi mỗi lần bấm.
 - **Phản hồi công khai** giống hệt mọi trường hợp: tạo mới, trùng, hay trùng kèm đặt dấu nhắc. Không tiết lộ yêu cầu cũ, trạng thái hay chủ tài khoản. Thời gian phản hồi giữa các nhánh nên gần nhau.
@@ -295,11 +304,13 @@ Chủ số thật báo số đã bị đăng ký: quản lý liên hệ, xét th
 
 ### 5.3. Đặt lại mật khẩu [Chờ kiểm chứng]
 
-Codex chỉ ra: đổi mật khẩu bằng API quản trị **không tự tạo hết hạn cho mật khẩu tạm** và **không tự ép đổi mật khẩu ở mọi đường truy cập**; thu hồi phiên chưa chắc làm token còn hạn mất hiệu lực ngay. Nếu vẫn dùng mật khẩu tạm:
-- Việc bắt buộc đổi mật khẩu phải được kiểm tra **ở máy chủ cho mọi thao tác dữ liệu**, không chỉ chuyển hướng giao diện.
-- Mật khẩu tạm phải ngẫu nhiên, hiện một lần, và có cách hết hạn do ta thiết kế.
-- Không hứa mọi phiên cũ mất hiệu lực ngay; mô tả đúng hành vi sau khi chạy kiểm chứng ở mục 3.3.
-- Phương án khác (mã dùng một lần do nhân viên đọc, khách tự đặt mật khẩu mới) an toàn hơn về việc nhân viên không biết mật khẩu, nhưng phải tự xây phần kiểm tra mã. Codex đánh giá chi phí.
+**Quy trình này chưa được phê duyệt.** Codex (14/10) đánh giá hai cách; cả hai chưa được chọn và cần thử trên môi trường thử:
+
+- **Mật khẩu tạm.** Không có phí SMS nếu nhân viên giao trực tiếp, nhưng **không đơn giản chỉ bằng một API đổi mật khẩu**. Phải xây và kiểm tra: hạn dùng, ép đổi mật khẩu, chặn truy cập dữ liệu trước khi đổi (kiểm tra **ở máy chủ cho mọi thao tác dữ liệu**, không chỉ chuyển hướng giao diện), và xử lý phiên cũ. Mật khẩu tạm phải ngẫu nhiên, hiện một lần.
+- **Quyền đặt lại dùng một lần.** Nhân viên xác minh trước, khách tự chọn mật khẩu mới; nhân viên không biết mật khẩu của khách. Phải thiết kế lưu dấu xác minh, quyền đặt lại có hạn, chỉ dùng một lần, và giới hạn số lần thử. Không gửi SMS tự động; không thay quyết định bỏ OTP đăng ký và đăng nhập.
+- **Chi phí:** cả hai không có phí tin nhắn nếu xử lý trực tiếp, nhưng có công phát triển, thao tác của nhân viên và mức dùng dịch vụ. **Chưa đủ thông tin để báo số giờ hoặc chi phí tiền chính xác.**
+- **Phiên cũ:** không hứa mọi phiên cũ mất hiệu lực ngay (đăng xuất không làm token còn hạn mất hiệu lực, mục 2). Mô tả đúng hành vi sau khi chạy kiểm chứng ở mục 3.3.
+- **Bằng chứng khôi phục tài khoản cũ:** việc nhận được cuộc gọi hay biết tên thú cưng **không phải bằng chứng duy nhất**. Tranh chấp số và cấp lại số **không được chuyển lịch sử tài khoản** (mục 5.1).
 - Khôi phục qua email chỉ nên có khi email đã xác minh. Chưa đưa vào bản đầu.
 
 ### 5.4. Xóa tài khoản
@@ -343,7 +354,7 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 
 **Chủ dự án:** (1) bảng chuyển trạng thái hợp lệ và quyền thực hiện; mở lại yêu cầu đã hủy/từ chối; chuyển ngược từ Đã xác nhận; trạng thái nào còn giữ khóa chống trùng; danh mục lý do hủy/từ chối và có hiện cho khách không (mục 4.2a); (2) bằng chứng nào đủ để khôi phục tài khoản cũ, và ai quyết định; (3) lễ tân được làm thao tác nhạy cảm nào, ai dự phòng quản lý; (4) có nhận số cố định không; (5) thời gian gọi lại, số lần liên hệ và người dự phòng; có gửi thêm email khi khách gửi lại không (mục 4.2b); (6) khách có sửa số liên hệ trong yêu cầu không; (7) ngưỡng giới hạn tần suất; (8) chính sách lưu trữ, xóa và nội dung đồng ý; (9) dự án thử cho kiểm chứng.
 
-**Codex:** (10) chạy kế hoạch kiểm chứng mục 3.3 rồi chọn A hay B; (11) kết quả các mục [chờ kiểm chứng] ở mục 2; (12) phương án đặt lại mật khẩu (mật khẩu tạm hay mã dùng một lần) và chi phí.
+**Codex:** (10) chạy kiểm chứng hosted mục 3.3 trên dự án thử (chờ URL dashboard từ chủ dự án; không gửi khóa bí mật hay mật khẩu trong chat) rồi chọn A hay B; (11) xác minh tài liệu đã xong, còn kiểm thử API thật cho các mục ở mục 2; (12) chọn cách đặt lại mật khẩu (mật khẩu tạm hay quyền đặt lại dùng một lần) sau khi thử, và báo công sức; (12b) kiểm tra giới hạn theo IP khi đăng nhập qua máy chủ.
 
 **Gemini:** (13) luồng đăng ký và đăng nhập (một ô cho "số điện thoại hoặc tên đăng nhập"), thông báo lỗi chung, thông báo thành công thống nhất, và cách trình bày giới hạn "số điện thoại chưa xác minh" cho khách. Khoan vẽ màn hình hỗ trợ tài khoản cho đến khi quy trình mục 5 được duyệt.
 
@@ -392,6 +403,12 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 | 28h | So sánh phản hồi công khai giữa gửi mới, gửi trùng thường và gửi trùng có đặt dấu nhắc | Cùng nội dung thông báo, không phân biệt được |
 | 28i | Dùng dấu nhắc để khôi phục tài khoản hoặc đánh dấu số đã xác minh | Không có chức năng nào như vậy |
 | 29 | Đọc lại toàn bộ giao diện khách và email nhân viên | Không có chữ "đã đến", "đã khám", "hoàn thành" gắn với Đã xác nhận |
+| 30 | Nhiều khách khác nhau đăng nhập qua máy chủ Next.js (dự án thử, tài khoản giả) | Ghi nhận Auth thấy IP nào; giới hạn theo IP có chặn nhầm khách thật hoặc bị làm cạn chung không |
+| 31 | Gọi endpoint token trực tiếp vượt ngưỡng (dự án thử, tài khoản giả) | Ghi nhận ngưỡng thực tế và phản hồi; so với mặc định Codex nêu (150 yêu cầu/5 phút/IP) và cấu hình dự án |
+| 32 | Dùng token truy cập cũ còn hạn sau khi đăng xuất hoặc đổi mật khẩu | Thao tác cần bảo đảm mạnh bị từ chối nhờ kiểm tra phiên; thao tác thường: ghi nhận hành vi thật, không giả định mất hiệu lực ngay |
+| 33 | Lễ tân lưu từ màn hình phiên bản 4 sau khi lần gửi lại đặt dấu nhắc (phiên bản 5) | Không ghi đè; báo tải lại; thấy dấu nhắc rồi mới bắt đầu liên hệ (đề xuất 4.2b) |
+| 34 | Khách bấm gửi lại lần hai, ba khi dấu nhắc đang bật | Không tăng phiên bản, không thêm sự kiện, thời điểm vẫn là lần đầu (đề xuất 4.2b, chưa duyệt) |
+| 35 | Quản lý đăng nhập có bật TOTP | Thao tác nhạy cảm yêu cầu bước xác thực hai; không có SMS nào được gửi |
 | 11 | Khách đọc yêu cầu của tài khoản khác hoặc yêu cầu vãng lai | Bị chặn ở tầng cơ sở dữ liệu |
 | 12 | Truy cập dữ liệu bằng khóa công khai với bảng thiếu quyền hoặc RLS | Bị chặn; kiểm tra cả quyền được cấp lẫn RLS |
 | 13 | Token trình duyệt nhận có chứa thông tin gì | Ghi nhận đúng, không giả định là bí mật |
