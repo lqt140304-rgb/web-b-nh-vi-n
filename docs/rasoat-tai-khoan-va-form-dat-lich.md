@@ -1,6 +1,6 @@
-# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 3, sau quyết định chống trùng)
+# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 4, sau quyết định trạng thái yêu cầu)
 
-**Ngày:** 13/10/2026 · **Người soạn:** Claude · **Trạng thái:** bản nháp để Codex, Gemini và chủ dự án phản biện. Duy nhất mục 4.2 (phạm vi chống trùng) đã được chủ dự án chốt. Quyết định này **không** duyệt toàn bộ thiết kế, cơ chế đăng nhập, quy trình khôi phục hay tập trạng thái; các mục khác giữ nguyên nhãn.
+**Ngày:** 13/10/2026 · **Người soạn:** Claude · **Trạng thái:** bản nháp để Codex, Gemini và chủ dự án phản biện. Chủ dự án mới chốt hai việc: phạm vi chống trùng (mục 4.2) và sáu trạng thái yêu cầu cùng luồng chính (mục 4.2a). Các quyết định này **không** duyệt toàn bộ thiết kế, cơ chế đăng nhập, quy trình khôi phục, hay mọi chuyển trạng thái; các mục khác giữ nguyên nhãn.
 
 **Quy ước nhãn**
 - **[Đã chốt]**: do chủ dự án quyết định.
@@ -14,7 +14,7 @@ Không có dữ liệu cá nhân thật. Chưa có mã, chưa mua dịch vụ n�
 
 ## 0. Thay đổi so với các bản trước
 
-Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu phản hồi của Codex, bản 3 ghi nhận quyết định chống trùng của chủ dự án, như sau.
+Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu phản hồi của Codex, bản 3 ghi nhận quyết định chống trùng, bản 4 ghi nhận sáu trạng thái yêu cầu, như sau.
 
 | Điểm Codex nêu | Claude xử lý |
 |---|---|
@@ -27,6 +27,7 @@ Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu p
 | Chống trùng theo phạm vi tài khoản là ngoại lệ so với điều đã chốt | **Chấp nhận.** Bản 2 ghi là ngoại lệ cần duyệt. **Cập nhật bản 3:** chủ dự án đã chọn phương án 1, chống trùng trong từng phạm vi, và chấp nhận ngoại lệ (mục 4.2, **[Đã chốt]**). |
 | Giữ phạm vi nhỏ: chưa gộp yêu cầu, đặt hộ, form hỗ trợ riêng, nhiều tầng cảnh báo | **Chấp nhận.** Gỡ các mục này khỏi thiết kế chính, chuyển sang mục 8 "chưa duyệt". |
 | Bộ đếm lưu trong PostgreSQL, không mua Redis | **Đồng ý.** |
+| **Bản 4:** chủ dự án chốt sáu trạng thái yêu cầu và luồng chính Chờ xác nhận → Đang liên hệ → Đã xác nhận | **Ghi nhận [Đã chốt] ở mục 4.2a.** Thay tập trạng thái gợi ý ở bản trước (Mới, Khách hủy, Nhân viên từ chối…) bằng tên chính thức. Tách ba mốc thời gian, thêm lịch sử thay đổi. Các chuyển trạng thái cụ thể, quyền, mở lại, trạng thái nào giữ khóa chống trùng vẫn **chưa duyệt** và được ghi là [Đề xuất]/[Cần chốt]. |
 
 **Điều Claude giữ lại một phần:** danh tính nội bộ ngẫu nhiên vẫn nên dùng nếu chọn B, vì nếu suy ra được từ số điện thoại thì kẻ tấn công đoán được danh tính của người khác. Nó không thay cho việc kiểm tra gọi trực tiếp.
 
@@ -43,6 +44,7 @@ Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu p
 - **[Đã chốt]** Yêu cầu giữ bản chụp thông tin tại thời điểm gửi. Khác thông tin thì tiếp nhận; giống toàn bộ thông tin sau chuẩn hóa thì chống tạo trùng; không dùng riêng số điện thoại để chặn. Gửi form chưa phải đã duyệt lịch.
 - **[Đã chốt]** Có trang quản trị và email báo nhân viên. Giữ giới hạn tần suất và kiểm tra dữ liệu phía máy chủ.
 - **[Đã chốt]** Chống trùng **trong từng phạm vi**: mỗi tài khoản một phạm vi, mọi khách vãng lai chung một phạm vi (chi tiết mục 4.2). Cùng nội dung gửi ở hai phạm vi khác nhau có thể thành hai yêu cầu; chủ dự án đã hiểu và chấp nhận.
+- **[Đã chốt]** Sáu trạng thái yêu cầu: Chờ xác nhận, Đang liên hệ, Đã xác nhận, Không liên lạc được, Đã hủy, Từ chối. Luồng chính: Chờ xác nhận → Đang liên hệ → Đã xác nhận. **Đã xác nhận chỉ nghĩa là đã chốt lịch, không phải khách đã đến, đã khám hay hoàn thành dịch vụ** (mục 4.2a).
 - **Giới hạn cần ghi rõ:** số điện thoại **chưa được xác minh quyền sở hữu**. Chưa có quy trình được duyệt cho đăng ký nhầm, tranh chấp số, quên mật khẩu.
 
 ---
@@ -135,7 +137,7 @@ Làm trên **dự án thử, dữ liệu giả, cấu hình không gửi SMS**. 
 Chủ dự án đã chọn (xác nhận trong chat Codex ngày 13/10/2026):
 
 - Mỗi tài khoản là một phạm vi riêng. Tất cả khách vãng lai dùng chung một phạm vi.
-- Trong cùng phạm vi, nếu toàn bộ thông tin đặt lịch giống nhau sau chuẩn hóa thì **không tạo thêm yêu cầu**, theo các trạng thái được phép áp dụng (tập trạng thái vẫn **[Cần chốt]**, xem mục 4.3).
+- Trong cùng phạm vi, nếu toàn bộ thông tin đặt lịch giống nhau sau chuẩn hóa thì **không tạo thêm yêu cầu**, theo các trạng thái được phép áp dụng (trạng thái nào còn giữ khóa: xem mục 4.2a, **chưa duyệt**).
 - Khác thông tin thì vẫn tiếp nhận để nhân viên xét duyệt; không tự xác nhận lịch.
 - **Ngoại lệ đã được chấp nhận:** cùng nội dung gửi khi vãng lai rồi gửi lại sau khi đăng nhập có thể thành hai yêu cầu.
 - Nhân viên kiểm tra khi liên hệ xác nhận. **Không tự gộp, không chuyển chủ sở hữu, không đưa yêu cầu vãng lai vào lịch sử tài khoản.**
@@ -155,18 +157,69 @@ Nhân viên thấy A và B. Khách chỉ thấy B trong tài khoản.
 
 **Hệ quả thiết kế:** khóa chống trùng gồm **phạm vi** (mã tài khoản đã kiểm tra phía máy chủ, hoặc giá trị cố định "vãng lai") cộng các trường đã chuẩn hóa. Chống trùng không bao giờ vượt qua ranh giới giữa các phạm vi, nên không lộ chéo và không gắn yêu cầu vãng lai vào tài khoản.
 
-**Phạm vi của quyết định này:** chỉ chốt phạm vi chống trùng. Chưa duyệt toàn bộ thiết kế, cơ chế đăng nhập (phương án A/B), quy trình khôi phục tài khoản hay tập trạng thái yêu cầu.
+**Phạm vi của quyết định này:** chỉ chốt phạm vi chống trùng. Chưa duyệt toàn bộ thiết kế, cơ chế đăng nhập (phương án A/B) hay quy trình khôi phục tài khoản. Phạm vi chống trùng không đổi sau khi chốt trạng thái ở mục 4.2a: từng tài khoản riêng, khách vãng lai chung một phạm vi, không tự ghép chủ sở hữu.
+
+### 4.2a. Trạng thái yêu cầu **[Đã chốt: sáu trạng thái và luồng chính]**
+
+| Trạng thái | Ý nghĩa |
+|---|---|
+| Chờ xác nhận | Khách vừa gửi yêu cầu, nhân viên chưa xử lý. |
+| Đang liên hệ | Nhân viên đang gọi hoặc trao đổi với khách để xác nhận. |
+| Đã xác nhận | Khách và nhân viên đã thống nhất ngày, giờ hẹn; nhân viên ghi nhận vào hệ thống. |
+| Không liên lạc được | Nhân viên đã liên hệ nhưng chưa gặp được khách; có thể liên hệ lại. |
+| Đã hủy | Khách báo không đến hoặc yêu cầu hủy; nhân viên ghi nhận. |
+| Từ chối | Bệnh viện không thể tiếp nhận yêu cầu; nhân viên ghi lý do. |
+
+**Luồng chính [Đã chốt]:** Chờ xác nhận → Đang liên hệ → Đã xác nhận. Nếu chưa liên lạc được thì chuyển sang Không liên lạc được; khi liên hệ lại có thể tiếp tục xử lý để xác nhận. Hủy và từ chối phải ghi lý do.
+
+**Đã xác nhận chỉ nghĩa là đã chốt lịch.** Không có trạng thái "đã đến", "đã khám", "hoàn thành" hay bệnh án trong bản đầu; không thêm qua quyết định này. Giao diện và thông báo không được dùng từ ngụ ý khách đã được khám.
+
+Ví dụ (dữ liệu giả, khách Lan đặt khám cho mèo Miu ngày 20/10): gửi form → Chờ xác nhận; lễ tân bắt đầu liên hệ → Đang liên hệ; thống nhất 09:00 ngày 20/10 → Đã xác nhận; gọi không nghe → Không liên lạc được, gọi lại được; khách báo không đến → Đã hủy; bệnh viện không có dịch vụ yêu cầu → Từ chối, ghi lý do.
+
+**Ba mốc thời gian phải tách riêng [Đã chốt về nguyên tắc, Đề xuất về tên trường]:**
+1. **Ngày khách mong muốn:** khách nhập khi gửi, nằm trong bản chụp, không bao giờ bị nhân viên sửa đè.
+2. **Ngày và giờ hẹn đã thống nhất:** nhân viên nhập khi chuyển sang Đã xác nhận, **bắt buộc đủ cả ngày lẫn giờ**. Có thể khác ngày khách mong muốn.
+3. **Thời điểm nhân viên thực hiện xác nhận:** hệ thống tự ghi, cùng người thực hiện. Không nhập tay.
+
+**Lịch sử thay đổi trạng thái [Đề xuất theo yêu cầu của chủ dự án]:** chỉ ghi thêm, không sửa. Mỗi lần đổi ghi: người thực hiện, thời điểm, trạng thái cũ, trạng thái mới, lý do (**bắt buộc khi chuyển sang Đã hủy hoặc Từ chối**). Chống hai lễ tân ghi đè nhau: kiểm tra số phiên bản khi lưu; người đến sau nhận thông báo tải lại.
+
+**[Cần chốt]** lý do hủy/từ chối là văn bản tự do, danh mục có sẵn, hay cả hai; có hiện lý do cho khách không.
+
+#### Những điều **chưa được duyệt** (không coi là đã chốt)
+
+Chủ dự án nêu rõ quyết định trạng thái không tự duyệt các mục sau:
+
+- **Bảng chuyển trạng thái hợp lệ.** Đề xuất của Claude để phản biện:
+
+  | Từ | Được chuyển sang |
+  |---|---|
+  | Chờ xác nhận | Đang liên hệ, Đã hủy, Từ chối |
+  | Đang liên hệ | Đã xác nhận, Không liên lạc được, Đã hủy, Từ chối |
+  | Không liên lạc được | Đang liên hệ, Đã hủy, Từ chối |
+  | Đã xác nhận | Đã hủy |
+  | Đã hủy, Từ chối | (trạng thái cuối trong bản đầu) |
+
+  Chuyển ngược từ Đã xác nhận và mở lại yêu cầu đã hủy hoặc từ chối: **[Cần chốt]**, kèm quyền thực hiện (lễ tân hay quản lý).
+- **Trạng thái nào còn giữ khóa chống trùng** (trong cùng phạm vi). Đề xuất để duyệt, phù hợp đề xuất ban đầu của Codex:
+  - **Giữ khóa** (gửi lại giống hệt thì không tạo thêm): Chờ xác nhận, Đang liên hệ, Đã xác nhận.
+  - **Giải phóng khóa** (gửi lại giống hệt thì tạo yêu cầu mới): Đã hủy, Từ chối.
+  - **Không liên lạc được: [Cần chốt riêng].** Hai lựa chọn nằm trong phạm vi hiện tại:
+    - (a) Giữ khóa: khách gửi lại không tạo mới. Gọn, nhưng nếu không có nhắc gọi lại thì yêu cầu có thể bị bỏ quên dù khách đã gửi lại.
+    - (b) Giải phóng khóa: khách gửi lại tạo yêu cầu mới ở Chờ xác nhận, nổi lên đầu hàng đợi. Có thể sinh hai yêu cầu cho cùng một khách; nhân viên tự đóng yêu cầu cũ. Claude hơi nghiêng về (b) vì khách gửi lại là tín hiệu mới, nhưng cần chủ dự án chọn.
+    - Phương án (c) (giữ khóa nhưng báo nhân viên "khách gửi lại") nằm ở mục 8, chưa duyệt.
+  - Nếu cho phép mở lại yêu cầu đã giải phóng khóa, có thể xung đột khi khóa đã bị yêu cầu mới chiếm; cần quy tắc xử lý khi mở lại.
+- **Thời gian gọi lại, số lần liên hệ tối đa, người dự phòng** khi lễ tân vắng: **[Cần chốt]**.
 
 ### 4.3. Cơ chế chống trùng chịu được hai lần gửi đồng thời [Đề xuất]
 
 Cơ sở dữ liệu là nơi phân xử, không phải đoạn kiểm tra trong ứng dụng:
 1. Máy chủ chuẩn hóa các trường (Unicode NFC, cắt và gộp khoảng trắng, không phân biệt hoa thường, **không bỏ dấu tiếng Việt**; điện thoại về dạng quốc tế; email viết thường) rồi tạo **một khóa trùng gồm phạm vi (mục 4.2) và các trường đã chuẩn hóa**, lưu cùng yêu cầu, kèm số phiên bản của cách tạo khóa.
-2. Ràng buộc duy nhất cho khóa này, **chỉ áp dụng khi yêu cầu còn ở nhóm trạng thái đang xử lý**. Yêu cầu bị hủy hoặc bị từ chối giải phóng khóa nên khách gửi lại được.
+2. Ràng buộc duy nhất cho khóa này, **chỉ áp dụng khi yêu cầu còn ở nhóm trạng thái giữ khóa**. Nhóm nào giữ khóa là **[Chưa duyệt]**, xem bảng đề xuất ở mục 4.2a (Đã hủy và Từ chối giải phóng khóa; Không liên lạc được chờ chủ dự án chọn).
 3. Máy chủ thử ghi; nếu cơ sở dữ liệu báo trùng thì bỏ qua việc tạo mới. Hai lần gửi đồng thời: một lần ghi được, lần kia nhận "đã có".
 4. Ngày mong muốn bắt buộc và không được là ngày đã qua, nên yêu cầu "đã xác nhận" chỉ chặn tạo trùng trong giới hạn tự nhiên.
 5. Chỉ gửi email cho nhân viên khi tạo mới.
 6. Nút gửi bị vô hiệu sau khi bấm; trình duyệt coi phản hồi "trùng" như thành công.
-7. Trạng thái "Không liên lạc được" khi khách gửi lại giống hệt: **[Cần chốt]** vẫn chống trùng, hay cho tạo yêu cầu mới.
+7. Trạng thái "Không liên lạc được" khi khách gửi lại giống hệt: **[Cần chốt riêng]**, hai lựa chọn (a) giữ khóa hoặc (b) giải phóng khóa ở mục 4.2a.
 
 ### 4.4. Phản hồi giống hệt cho mọi trường hợp
 
@@ -241,15 +294,15 @@ Xóa mềm: giải phóng số và tên đăng nhập, giữ yêu cầu đã g�
 
 ## 8. Ý tưởng Claude từng nêu, nay NGOÀI phạm vi cho đến khi chủ dự án duyệt
 
-Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); form "Cần hỗ trợ tài khoản" riêng; nhiều tầng cảnh báo và cờ "cần xem xét"; trạng thái "nhân viên đã xác minh số điện thoại" sau cuộc gọi đầu tiên; sự kiện "khách gửi lại" cho nhân viên; cảnh báo mềm khi lưu thú cưng trùng; trạng thái "Spam/Không hợp lệ" riêng. Chỉ làm khi chủ dự án chọn.
+Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); form "Cần hỗ trợ tài khoản" riêng; nhiều tầng cảnh báo và cờ "cần xem xét"; trạng thái "nhân viên đã xác minh số điện thoại" sau cuộc gọi đầu tiên; sự kiện "khách gửi lại" cho nhân viên; cảnh báo mềm khi lưu thú cưng trùng; trạng thái "Spam/Không hợp lệ" riêng; các trạng thái "đã đến", "đã khám", "hoàn thành" và quy trình bệnh án (chủ dự án nêu rõ không thêm vào bản đầu). Chỉ làm khi chủ dự án chọn.
 
 ---
 
 ## 9. Quyết định còn thiếu
 
-**Đã chốt, không còn trong danh sách:** phạm vi chống trùng (mục 4.2).
+**Đã chốt, không còn trong danh sách:** phạm vi chống trùng (mục 4.2); sáu trạng thái và luồng chính (mục 4.2a).
 
-**Chủ dự án:** (1) tập trạng thái yêu cầu và những trạng thái nào còn chặn tạo trùng (mục 4.3); (2) bằng chứng nào đủ để khôi phục tài khoản cũ, và ai quyết định; (3) lễ tân được làm thao tác nhạy cảm nào, ai dự phòng quản lý; (4) có nhận số cố định không; (5) xử lý "Không liên lạc được" khi khách gửi lại; (6) khách có sửa số liên hệ trong yêu cầu không; (7) ngưỡng giới hạn tần suất; (8) chính sách lưu trữ, xóa và nội dung đồng ý; (9) dự án thử cho kiểm chứng.
+**Chủ dự án:** (1) bảng chuyển trạng thái hợp lệ và quyền thực hiện; mở lại yêu cầu đã hủy/từ chối; chuyển ngược từ Đã xác nhận; trạng thái nào còn giữ khóa chống trùng; danh mục lý do hủy/từ chối và có hiện cho khách không (mục 4.2a); (2) bằng chứng nào đủ để khôi phục tài khoản cũ, và ai quyết định; (3) lễ tân được làm thao tác nhạy cảm nào, ai dự phòng quản lý; (4) có nhận số cố định không; (5) xử lý "Không liên lạc được" khi khách gửi lại, cùng thời gian gọi lại, số lần liên hệ và người dự phòng; (6) khách có sửa số liên hệ trong yêu cầu không; (7) ngưỡng giới hạn tần suất; (8) chính sách lưu trữ, xóa và nội dung đồng ý; (9) dự án thử cho kiểm chứng.
 
 **Codex:** (10) chạy kế hoạch kiểm chứng mục 3.3 rồi chọn A hay B; (11) kết quả các mục [chờ kiểm chứng] ở mục 2; (12) phương án đặt lại mật khẩu (mật khẩu tạm hay mã dùng một lần) và chi phí.
 
@@ -277,6 +330,20 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 | 10d | Sau 10a–10c, khách xem danh sách trong tài khoản | Chỉ thấy B (và yêu cầu mới của tài khoản); không thấy A |
 | 10e | Nhân viên xem trang quản trị | Thấy cả A và B, không tự gộp hay chuyển chủ |
 | 10f | Trình duyệt gửi kèm mã tài khoản hoặc cờ chủ thể giả | Bỏ qua; chủ thể lấy từ phiên đã kiểm tra phía máy chủ |
+| 16 | Gửi form hợp lệ | Yêu cầu tạo ở **Chờ xác nhận**; khách thấy "Chờ nhân viên xác nhận", không thấy chữ ngụ ý đã có lịch |
+| 17 | Lễ tân bắt đầu liên hệ | Chuyển sang **Đang liên hệ**; lịch sử ghi người, thời điểm, cũ/mới |
+| 18 | Chuyển sang **Đã xác nhận** thiếu ngày hoặc thiếu giờ hẹn | Từ chối thao tác |
+| 19 | Chuyển sang Đã xác nhận với đủ ngày và giờ (ví dụ 09:00 ngày 20/10) | Lưu ngày giờ hẹn; hệ thống tự ghi thời điểm và người xác nhận; **ngày khách mong muốn không đổi** |
+| 20 | Ngày giờ hẹn khác ngày khách mong muốn | Ba mốc thời gian vẫn là ba giá trị riêng |
+| 21 | Đang liên hệ → Không liên lạc được → Đang liên hệ (gọi lại) → Đã xác nhận | Hợp lệ; lịch sử ghi đủ từng bước |
+| 22 | Chuyển sang **Đã hủy** hoặc **Từ chối** không nhập lý do | Từ chối thao tác; có lý do thì lưu và ghi lịch sử |
+| 23 | Hai lễ tân đổi trạng thái cùng một yêu cầu đồng thời | Một thành công; người kia nhận thông báo tải lại, không ghi đè |
+| 24 | Khách (đã đăng nhập hay vãng lai) cố đặt trạng thái hoặc ngày giờ hẹn qua dữ liệu gửi lên | Bị bỏ qua hoặc từ chối; khách không đổi được trạng thái |
+| 25 | Chuyển trạng thái ngoài bảng hợp lệ (áp dụng **sau khi** chủ dự án duyệt bảng ở 4.2a) | Bị từ chối |
+| 26 | Gửi lại giống hệt (cùng phạm vi) khi yêu cầu ở Chờ xác nhận, Đang liên hệ hoặc Đã xác nhận (theo nhóm giữ khóa được duyệt) | Không tạo thêm |
+| 27 | Gửi lại giống hệt khi yêu cầu cũ ở Đã hủy hoặc Từ chối (theo nhóm được duyệt) | Tạo yêu cầu mới |
+| 28 | Gửi lại giống hệt khi yêu cầu cũ ở Không liên lạc được | Theo lựa chọn (a) hoặc (b) sau khi chủ dự án chốt; chưa kiểm thử đến khi chốt |
+| 29 | Đọc lại toàn bộ giao diện khách và email nhân viên | Không có chữ "đã đến", "đã khám", "hoàn thành" gắn với Đã xác nhận |
 | 11 | Khách đọc yêu cầu của tài khoản khác hoặc yêu cầu vãng lai | Bị chặn ở tầng cơ sở dữ liệu |
 | 12 | Truy cập dữ liệu bằng khóa công khai với bảng thiếu quyền hoặc RLS | Bị chặn; kiểm tra cả quyền được cấp lẫn RLS |
 | 13 | Token trình duyệt nhận có chứa thông tin gì | Ghi nhận đúng, không giả định là bí mật |
