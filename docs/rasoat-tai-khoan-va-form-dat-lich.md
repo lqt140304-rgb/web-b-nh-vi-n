@@ -1,4 +1,4 @@
-# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 9, sau kiểm chứng phương án A chạy được với số giả)
+# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 10, sau Codex xác minh Supabase Free và vận hành)
 
 **Ngày:** 13/10/2026, cập nhật 14/10/2026 · **Người soạn:** Claude · **Trạng thái:** bản nháp để Codex, Gemini và chủ dự án phản biện. Bản 6 ghi nhận kết quả Codex **xác minh trên tài liệu chính thức**. Bản 7 ghi thêm một thao tác thử trên **dashboard** của dự án thử (Phone không OTP). Bản 9 ghi nhận **bằng chứng chạy thật**: phương án A (điện thoại + mật khẩu, không OTP) đăng ký và đăng nhập thành công trên dự án thử với số giả. Phạm vi bằng chứng rất hẹp (mục 2); ứng dụng chưa được xây.
 
@@ -16,7 +16,7 @@ Không có dữ liệu cá nhân thật. Chưa có mã, chưa mua dịch vụ n�
 
 ## 0. Thay đổi so với các bản trước
 
-Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu phản hồi của Codex, bản 3 ghi nhận quyết định chống trùng, bản 4 ghi nhận sáu trạng thái yêu cầu, bản 5 ghi nhận cách xử lý khách gửi lại khi Không liên lạc được, bản 6 ghi nhận kết quả Codex xác minh tài liệu Supabase, bản 7 ghi nhận kết quả thử Phone không OTP trên dashboard, bản 8 ghi nhận kết quả Codex kết nối dự án thử và đọc cấu hình Auth công khai, bản 9 ghi nhận kết quả kiểm chứng phương án A, như sau.
+Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu phản hồi của Codex, bản 3 ghi nhận quyết định chống trùng, bản 4 ghi nhận sáu trạng thái yêu cầu, bản 5 ghi nhận cách xử lý khách gửi lại khi Không liên lạc được, bản 6 ghi nhận kết quả Codex xác minh tài liệu Supabase, bản 7 ghi nhận kết quả thử Phone không OTP trên dashboard, bản 8 ghi nhận kết quả Codex kết nối dự án thử và đọc cấu hình Auth công khai, bản 9 ghi nhận kết quả kiểm chứng phương án A, bản 10 ghi nhận Codex xác minh tài liệu Supabase Free và đề xuất vận hành, như sau.
 
 | Điểm Codex nêu | Claude xử lý |
 |---|---|
@@ -35,6 +35,7 @@ Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu p
 | **Bản 7:** Codex thử trên dashboard dự án thử `leson-test` (14/10, chủ dự án cho phép): bật Phone provider, tắt Phone confirmations, giữ trống thông tin SMS, bấm Save. **Form không cho lưu**, báo cần Twilio Account SID, Auth Token và Message Service SID. Không nhập thông tin giả, không cấu hình hay gửi SMS; đã hủy thay đổi, cấu hình về như cũ | **Ghi nhận ở mục 2, 3.1, 3.3.** Phương án A **gặp trở ngại ở dashboard**, nhưng **chưa được coi là thử API thất bại** và chưa kết luận A bất khả thi. Phương án B cũng **chưa chạy thử hoặc chọn chính thức**. Không yêu cầu bật lại OTP, không yêu cầu đăng ký Twilio chỉ để vượt qua form. |
 | **Bản 8:** Codex kết nối được dự án `leson-test` (trạng thái ACTIVE_HEALTHY; đếm người dùng Auth bằng 0, không đọc mật khẩu hay thông tin cá nhân) và đọc cấu hình Auth công khai bằng khóa công khai: Phone tắt, tự xác nhận điện thoại tắt, Email bật, tự xác nhận email tắt, đăng ký công khai **chưa tắt**. Tiện ích Supabase hiện có **không** có thao tác đọc/ghi cấu hình Auth qua Management API hay API quản trị người dùng. Chưa gọi PATCH, chưa tạo tài khoản thử | **Ghi nhận ở mục 2, 3.3, 9, 10.** Đây là bằng chứng cấu hình hiện tại, **không phải kiểm thử tạo tài khoản hay đăng nhập**. Không kết luận A thất bại; B cũng chưa thử. Bước kế tiếp của A cần cơ chế xác thực Management API do chủ dự án quyết định. |
 | **Bản 9:** chủ dự án chạy công cụ kiểm chứng bản 3 và gửi file kết quả cho Codex: cấu hình được chấp nhận, tạo người dùng thành công, đăng ký đạt, đăng nhập đạt, đã hoàn nguyên. Đăng nhập trả về cùng ID với đăng ký; không có nhà cung cấp SMS, không gọi endpoint OTP; số thử là dải số hư cấu. Hai lần thử trước lỗi do đọc Auth trước khi Auth nhận cấu hình (sau chờ 5 giây thì thấy bật). Codex đề xuất A làm hướng chính | **Chuyển "đăng ký và đăng nhập điện thoại + mật khẩu không OTP" từ Chờ kiểm chứng sang Đã kiểm chứng với số giả** (mục 2, 3.1, 3.3, 9, 10). Hướng A là **đề xuất của Codex**, chưa phải phê duyệt toàn bộ cơ chế tài khoản. Các kiểm tra còn lại **giữ chưa chạy**. **Không đổi quyết định đã chốt:** không OTP khách, cả vãng lai và tài khoản gửi form, chống trùng theo phạm vi, sáu trạng thái cùng dấu nhắc gọi lại. Nền tảng triển khai **[Đã chốt, chủ dự án xác nhận 14/10]**: Cloudflare Workers Paid + Supabase Free thay Vercel. Claude chưa kiểm tra tài liệu Cloudflare nên các điểm kỹ thuật theo nền tảng này vẫn là cần kiểm chứng. **Điểm cần kiểm tra lại theo nền tảng/gói mới** [Đề xuất]: IP khách mà Auth thấy khi đăng nhập đi qua máy chủ (mục 3.5); tính năng theo gói Supabase Free (sao lưu, dung lượng, trạng thái tạm dừng khi không dùng, chặn mật khẩu rò rỉ, TOTP, giới hạn Auth); chỗ lưu bộ đếm giới hạn tần suất; khả năng khôi phục khi mất dữ liệu. |
+| **Bản 10:** Codex xác minh tài liệu Supabase Free (14/10): không có sao lưu tự động; có thể bị tạm dừng sau 7 ngày ít hoạt động; hạn mức 500 MB cơ sở dữ liệu, 1 GB Storage, 50.000 người dùng hoạt động/tháng; MFA TOTP có sẵn; chặn mật khẩu rò rỉ không có; chuyển IP khách cho Auth cần khóa bí mật phía máy chủ. Chủ dự án đã xác nhận nền tảng Cloudflare Workers Paid + Supabase Free | **Ghi nhận ở mục 2, 4.4, 6a, 9, 10.** Đây là **xác minh tài liệu**; **chưa thiết lập sao lưu, thử khôi phục, hay kiểm thử IP trên Cloudflare**. Không đổi nền tảng. Thêm mục vận hành 6a (sao lưu hằng ngày, cổng "khôi phục thử đạt mới nhận dữ liệu thật", ứng phó khi dự án bị tạm dừng, không báo "đã nhận" khi lưu thất bại). Ngân sách 300.000 đồng do Codex nêu, chưa rõ kỳ tính. Bản này **không bảo đảm** Free đáp ứng vận hành liên tục hay ngân sách ở mọi mức tải. |
 
 **Điều Claude giữ lại một phần:** danh tính nội bộ ngẫu nhiên vẫn nên dùng nếu chọn B, vì nếu suy ra được từ số điện thoại thì kẻ tấn công đoán được danh tính của người khác. Nó không thay cho việc kiểm tra gọi trực tiếp.
 
@@ -75,7 +76,11 @@ Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu p
 | Mật khẩu tạm có hết hạn riêng; ép đổi mật khẩu ở mọi đường truy cập | **Không có sẵn** theo Codex. Phải tự thiết kế và kiểm chứng. |
 | Thu hồi phiên có hiệu lực ngay, kể cả token truy cập còn hạn | Codex xác minh tài liệu: **đăng xuất không làm token truy cập còn hạn mất hiệu lực ngay.** Với thao tác cần bảo đảm mạnh, tài liệu mô tả kiểm tra mã phiên với bảng phiên của Auth; thiết kế phải xét cả đường máy chủ và truy cập dữ liệu trực tiếp. Chưa kiểm thử. |
 | Giới hạn tần suất của Auth | Codex xác minh tài liệu: Auth có giới hạn riêng; bảng hiện hành nêu endpoint token mặc định **150 yêu cầu/5 phút theo IP**, có dung lượng cho burst. Cần đọc **cấu hình dự án thật** và kiểm tra cách chuyển IP khi đăng nhập qua máy chủ; không mặc định giới hạn của Next.js bảo vệ API Auth trực tiếp. Chưa kiểm thử. |
-| Chặn mật khẩu bị rò rỉ | Codex xác minh tài liệu (Password security): tính năng **gói Pro trở lên**. Không phải lý do để tự mua Pro. |
+| Chặn mật khẩu bị rò rỉ | Codex xác minh tài liệu (Password security): tính năng **gói Pro trở lên**. **Bản 10: đối chiếu trang giá, không có trong Free.** Không phải lý do để tự mua Pro; thay bằng chính sách mật khẩu ở mục 3.5. |
+| Sao lưu trên Supabase Free | **Bản 10, Codex xác minh tài liệu:** Free **không có sao lưu tự động** do nền tảng cung cấp như Pro. Supabase khuyến nghị Free xuất dữ liệu định kỳ bằng CLI và giữ bản sao ngoài nền tảng. Bản sao cơ sở dữ liệu **không chứa tệp thực của Storage**, chỉ có metadata; ảnh cần sao lưu riêng nếu dùng. Nguồn: https://supabase.com/docs/guides/platform/backups. **Chưa thử xuất rồi khôi phục.** |
+| Tạm dừng dự án Free khi ít hoạt động | **Bản 10, Codex xác minh tài liệu:** Free có thể bị tạm dừng khi quá ít hoạt động cơ sở dữ liệu trong 7 ngày; Supabase gửi email trước và sau; mức hoạt động thấp chưa chắc đủ để tránh bị dừng. Cloudflare Paid không đổi chính sách này. Truy cập trang giới thiệu, kiểm tra sức khỏe hay tác vụ sao lưu **không phải bảo đảm** dự án không bị dừng. Nguồn: https://supabase.com/docs/guides/platform/free-project-pausing |
+| Hạn mức Supabase Free (trang giá hiện hành) | Codex đối chiếu: cơ sở dữ liệu 500 MB; Storage 1 GB; 50.000 người dùng hoạt động mỗi tháng; MFA cơ bản có sẵn (ứng dụng TOTP); chặn mật khẩu rò rỉ **không** có. Đây là hạn mức dịch vụ, **không phải bằng chứng ứng dụng đã bảo mật hay chịu được tải.** Nguồn: https://supabase.com/pricing |
+| Chuyển IP khách cho Auth khi đăng nhập qua máy chủ | **Bản 10, Codex xác minh tài liệu:** Auth giới hạn theo IP và nhận IP chuyển tiếp qua một tiêu đề chuyên dụng cùng khóa bí mật phía máy chủ; phải bật chuyển tiếp IP. Khóa công khai và khóa cũ **không** hỗ trợ cơ chế này; khóa bí mật không được đưa ra trình duyệt. Nguồn: https://supabase.com/docs/guides/auth/rate-limits. **Chưa kiểm thử trên Cloudflare** (nhận IP khách từ hạ tầng tin cậy, không tin tiêu đề do khách giả mạo, Auth nhận đúng IP, khách không làm cạn giới hạn dùng chung); chỉ kiểm tra được khi có phần máy chủ và môi trường thử. |
 | Xác thực hai bước không dùng SMS cho tài khoản quản lý | Codex xác minh tài liệu: Supabase hỗ trợ ứng dụng **TOTP**, không cần SMS. **Không thay quyết định bỏ OTP cho khách.** |
 
 Nguồn đã dẫn (Claude chưa đọc toàn văn được):
@@ -283,6 +288,7 @@ Cơ sở dữ liệu là nơi phân xử, không phải đoạn kiểm tra trong
 
 - Mọi lần gửi hợp lệ (tạo mới hay bị chống trùng) trả cùng một thông báo, ví dụ: "Chúng tôi đã nhận yêu cầu. Nhân viên sẽ gọi xác nhận."
 - Không bao giờ hiển thị nội dung, trạng thái hay thời gian của yêu cầu có sẵn.
+- **Chỉ hiện "đã nhận yêu cầu" khi yêu cầu đã được lưu thành công.** Nếu lưu thất bại (ví dụ cơ sở dữ liệu bị tạm dừng hoặc lỗi), hiện thông báo thử lại hoặc gọi bệnh viện, không báo đã nhận (mục 6a).
 - **Không nhắc "số này đã có tài khoản, hãy đăng nhập"** khi khách vãng lai gửi form: đó là bộ dò số điện thoại. Lời mời đăng ký, nếu có, phải giống nhau cho mọi khách vãng lai.
 - Không gửi email xác nhận tới email do khách nhập. Email báo nhân viên không chứa tên chủ, số điện thoại hay thông tin thú cưng, chỉ có "có yêu cầu mới" và liên kết đăng nhập.
 
@@ -341,6 +347,27 @@ Xóa mềm: giải phóng số và tên đăng nhập, giữ yêu cầu đã g�
 
 ---
 
+## 6a. Vận hành bản đầu trên Supabase Free [Đề xuất của Codex, Claude đồng ý; chưa duyệt chủ dự án]
+
+Nền tảng Cloudflare Workers Paid + Supabase Free đã chốt. Codex xác minh tài liệu (14/10) và nêu các hệ quả vận hành sau. Đây là đề xuất, chưa thiết lập gì.
+
+**Sao lưu và khôi phục**
+- Sao lưu cơ sở dữ liệu **mỗi ngày**, mã hóa, lưu ở nơi riêng, giới hạn quyền. Phải bao gồm **dữ liệu tài khoản Auth, hồ sơ, thú cưng, yêu cầu và lịch sử**, không chỉ xuất vài bảng ra CSV. Phạm vi Auth và cách xuất, nhập cần kiểm tra theo công cụ thực tế trước khi xây lịch sao lưu.
+- Cấu trúc dữ liệu (migration) và cấu hình triển khai có kiểm soát phiên bản. Bí mật nằm ở nơi quản lý bí mật, **không** trong GitHub hay tệp báo cáo.
+- Giữ 7–14 bản gần nhất là đề xuất. Một bản mỗi ngày **không bảo đảm** không mất dữ liệu: ví dụ bản sao lúc 02:00 mà dữ liệu mất lúc 15:00 thì dữ liệu sau 02:00 chưa chắc khôi phục được. Chủ dự án cần biết và chấp nhận mức mất tối đa này.
+- Ảnh trong Storage (nếu dùng) sao lưu riêng.
+- **Cổng bắt buộc:** chỉ nhận dữ liệu khách thật sau khi một lần **khôi phục thử** đạt (xuất, khôi phục sang môi trường tách biệt, đối chiếu số bản ghi, đăng nhập được bằng tài khoản giả cũ, đúng quyền đọc, thấy đúng yêu cầu). Không khôi phục đè dự án đang dùng chỉ để thử.
+- Kiểm tra dung lượng, băng thông và chỗ giữ bản sao có nằm trong ngân sách hay không. Codex nêu ngân sách **300.000 đồng**; Claude chưa thấy văn bản gốc và **chưa rõ kỳ tính (tháng hay cả giai đoạn)**: **[Cần chốt]**.
+
+**Tạm dừng dự án khi ít hoạt động**
+- Nếu Supabase tạm dừng, trang giới thiệu trên Cloudflare vẫn mở được nhưng **đăng nhập và gửi yêu cầu có thể không hoạt động**.
+- Hệ thống **không được báo "đã nhận yêu cầu" khi lưu thất bại.** Phải hiện thông báo thử lại hoặc gọi bệnh viện; người vận hành nhận cảnh báo và biết cách khôi phục.
+- Không thiết kế truy vấn giả chỉ để lách hạn mức. Nếu bệnh viện yêu cầu luôn nhận được lịch tự động kể cả lúc ít dùng, Free không bảo đảm điều đó; nâng cấp chỉ khi chủ dự án chấp nhận chi phí. **[Cần chốt]** mức chấp nhận rủi ro này và người nhận cảnh báo.
+
+**Bộ đếm giới hạn tần suất:** lưu trong PostgreSQL bằng cập nhật nguyên tử và dọn dữ liệu cũ; chưa cần Redis. Giới hạn theo tài khoản và IP phải xét mạng dùng chung (nhiều khách cùng mạng). Không thử vượt giới hạn bằng hàng loạt yêu cầu trên dự án thật.
+
+---
+
 ## 7. Rủi ro còn lại do bỏ OTP (ghi nhận)
 
 1. Số điện thoại chưa xác minh: có thể bị chiếm đăng ký, nhân viên có thể gọi nhầm người.
@@ -364,7 +391,7 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 
 **Chủ dự án:** (1) bảng chuyển trạng thái hợp lệ và quyền thực hiện; mở lại yêu cầu đã hủy/từ chối; chuyển ngược từ Đã xác nhận; trạng thái nào còn giữ khóa chống trùng; danh mục lý do hủy/từ chối và có hiện cho khách không (mục 4.2a); (2) bằng chứng nào đủ để khôi phục tài khoản cũ, và ai quyết định; (3) lễ tân được làm thao tác nhạy cảm nào, ai dự phòng quản lý; (4) có nhận số cố định không; (5) thời gian gọi lại, số lần liên hệ và người dự phòng; có gửi thêm email khi khách gửi lại không (mục 4.2b); (6) khách có sửa số liên hệ trong yêu cầu không; (7) ngưỡng giới hạn tần suất; (8) chính sách lưu trữ, xóa và nội dung đồng ý; (9) dự án thử đã tạo; **bản 9: chủ dự án đã tự chạy công cụ kiểm chứng A và gửi file kết quả, nên cơ chế xác thực Management API cho lần thử này đã được giải quyết** (không gửi mã bí mật qua chat hoặc GitHub; cấu hình đã hoàn nguyên). Nếu cần chạy thêm, vẫn theo cách đó. **Cần duyệt riêng:** có chọn A làm hướng triển khai chính không (đề xuất của Codex), và chạy các điểm kiểm tra theo nền tảng/gói đã chốt (Cloudflare Workers Paid + Supabase Free) ở mục 0, dòng Bản 9. Đề xuất của Claude [Đề xuất]: ưu tiên cách để chủ dự án giữ mã bí mật, ví dụ chủ dự án tự chạy đúng lệnh Codex soạn trên dự án thử, hoặc cấp mã tạm thời có thể thu hồi ngay sau khi thử; chủ dự án chọn.
 
-**Codex:** (10) tiếp tục kiểm chứng hosted mục 3.3 trên dự án thử `leson-test` (không gửi khóa bí mật hay mật khẩu trong chat): kiểm tra Management API có cho cấu hình Phone không SMS không và, nếu có, tạo tài khoản và đăng nhập có chạy không; nếu A không đáp ứng thì thử B; rồi chọn A hay B và báo bằng chứng; (11) xác minh tài liệu đã xong, còn kiểm thử API thật cho các mục ở mục 2; (12) chọn cách đặt lại mật khẩu (mật khẩu tạm hay quyền đặt lại dùng một lần) sau khi thử, và báo công sức; (12b) kiểm tra giới hạn theo IP khi đăng nhập qua máy chủ.
+**Codex (bản 10):** (10c) kiểm thử chuyển IP khách trên Cloudflare khi có môi trường thử; (10d) công cụ và phạm vi xuất sao lưu (có gồm Auth không), thử khôi phục tách biệt; (10e) cảnh báo khi dự án bị tạm dừng; (10f) bộ đếm trong PostgreSQL. **Codex:** (10) tiếp tục kiểm chứng hosted mục 3.3 trên dự án thử `leson-test` (không gửi khóa bí mật hay mật khẩu trong chat): kiểm tra Management API có cho cấu hình Phone không SMS không và, nếu có, tạo tài khoản và đăng nhập có chạy không; nếu A không đáp ứng thì thử B; rồi chọn A hay B và báo bằng chứng; (11) xác minh tài liệu đã xong, còn kiểm thử API thật cho các mục ở mục 2; (12) chọn cách đặt lại mật khẩu (mật khẩu tạm hay quyền đặt lại dùng một lần) sau khi thử, và báo công sức; (12b) kiểm tra giới hạn theo IP khi đăng nhập qua máy chủ.
 
 **Gemini:** (13) luồng đăng ký và đăng nhập (một ô cho "số điện thoại hoặc tên đăng nhập"), thông báo lỗi chung, thông báo thành công thống nhất, và cách trình bày giới hạn "số điện thoại chưa xác minh" cho khách. Khoan vẽ màn hình hỗ trợ tài khoản cho đến khi quy trình mục 5 được duyệt.
 
@@ -424,6 +451,10 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 | 36a | Đọc cấu hình Auth ban đầu trước khi đổi bất kỳ giá trị nào (Management API, dự án thử) | Ghi lại giá trị gốc để hoàn nguyên: Phone tắt, tự xác nhận điện thoại tắt, Email bật, tự xác nhận email tắt, đăng ký công khai chưa tắt |
 | 36b | Sau khi thử A, trả cấu hình về giá trị ban đầu nếu không đáp ứng | Đọc lại: khớp với giá trị gốc |
 | 36c | Đăng ký công khai tắt (điều kiện cho mọi phương án cuối cùng) | Đăng ký trực tiếp từ trình duyệt bị từ chối; đăng ký chỉ qua đường dẫn máy chủ |
+| 37a | Khôi phục thử từ bản sao sang môi trường tách biệt (dữ liệu giả) | Số bản ghi khớp; đăng nhập được bằng tài khoản giả cũ; đúng quyền đọc; khách thấy đúng yêu cầu của mình. Chỉ khi đạt mới nhận dữ liệu thật |
+| 37b | Cơ sở dữ liệu không phản hồi hoặc dự án bị tạm dừng (môi trường thử) | Form không báo "đã nhận"; hiện thông báo thử lại hoặc gọi bệnh viện; cảnh báo tới người vận hành |
+| 37c | Chuyển IP khách cho Auth trên Cloudflare (môi trường thử) | Auth nhận đúng IP khách; tiêu đề IP do khách giả mạo bị bỏ qua; một khách không làm cạn giới hạn dùng chung |
+| 37d | Bản sao lưu có đủ dữ liệu Auth, hồ sơ, thú cưng, yêu cầu và lịch sử | Đối chiếu đủ các bảng; không chứa bí mật; mã hóa; quyền truy cập hạn chế |
 | 37 | Cấu hình A (nếu chạy được) có bền qua các thao tác thông thường trên dashboard | Ghi nhận cấu hình không bị ghi đè hay báo lỗi; dùng để đánh giá mức hỗ trợ ổn định của A |
 | 11 | Khách đọc yêu cầu của tài khoản khác hoặc yêu cầu vãng lai | Bị chặn ở tầng cơ sở dữ liệu |
 | 12 | Truy cập dữ liệu bằng khóa công khai với bảng thiếu quyền hoặc RLS | Bị chặn; kiểm tra cả quyền được cấp lẫn RLS |
