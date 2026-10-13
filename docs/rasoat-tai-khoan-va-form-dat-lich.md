@@ -1,6 +1,6 @@
-# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 6, sau Codex xác minh tài liệu Supabase)
+# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 7, sau thử Phone không OTP trên dự án thử)
 
-**Ngày:** 13/10/2026, cập nhật 14/10/2026 · **Người soạn:** Claude · **Trạng thái:** bản nháp để Codex, Gemini và chủ dự án phản biện. Bản 6 chỉ ghi nhận kết quả Codex **xác minh trên tài liệu chính thức**; chưa có kiểm thử API hay ứng dụng trên dự án hosted. Chủ dự án đã chốt ba việc: phạm vi chống trùng (mục 4.2), sáu trạng thái yêu cầu cùng luồng chính (mục 4.2a), và cách xử lý khi khách gửi lại ở trạng thái Không liên lạc được (mục 4.2b). Các quyết định này **không** duyệt toàn bộ thiết kế, cơ chế đăng nhập, quy trình khôi phục, hay mọi chuyển trạng thái; các mục khác giữ nguyên nhãn.
+**Ngày:** 13/10/2026, cập nhật 14/10/2026 · **Người soạn:** Claude · **Trạng thái:** bản nháp để Codex, Gemini và chủ dự án phản biện. Bản 6 ghi nhận kết quả Codex **xác minh trên tài liệu chính thức**. Bản 7 ghi thêm một thao tác thử trên **dashboard** của dự án thử (Phone không OTP). Chưa có kiểm thử API hay ứng dụng trên dự án hosted. Chủ dự án đã chốt ba việc: phạm vi chống trùng (mục 4.2), sáu trạng thái yêu cầu cùng luồng chính (mục 4.2a), và cách xử lý khi khách gửi lại ở trạng thái Không liên lạc được (mục 4.2b). Các quyết định này **không** duyệt toàn bộ thiết kế, cơ chế đăng nhập, quy trình khôi phục, hay mọi chuyển trạng thái; các mục khác giữ nguyên nhãn.
 
 **Quy ước nhãn**
 - **[Đã chốt]**: do chủ dự án quyết định.
@@ -14,7 +14,7 @@ Không có dữ liệu cá nhân thật. Chưa có mã, chưa mua dịch vụ n�
 
 ## 0. Thay đổi so với các bản trước
 
-Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu phản hồi của Codex, bản 3 ghi nhận quyết định chống trùng, bản 4 ghi nhận sáu trạng thái yêu cầu, bản 5 ghi nhận cách xử lý khách gửi lại khi Không liên lạc được, bản 6 ghi nhận kết quả Codex xác minh tài liệu Supabase, như sau.
+Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu phản hồi của Codex, bản 3 ghi nhận quyết định chống trùng, bản 4 ghi nhận sáu trạng thái yêu cầu, bản 5 ghi nhận cách xử lý khách gửi lại khi Không liên lạc được, bản 6 ghi nhận kết quả Codex xác minh tài liệu Supabase, bản 7 ghi nhận kết quả thử Phone không OTP trên dashboard, như sau.
 
 | Điểm Codex nêu | Claude xử lý |
 |---|---|
@@ -30,6 +30,7 @@ Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu p
 | **Bản 4:** chủ dự án chốt sáu trạng thái yêu cầu và luồng chính Chờ xác nhận → Đang liên hệ → Đã xác nhận | **Ghi nhận [Đã chốt] ở mục 4.2a.** Thay tập trạng thái gợi ý ở bản trước (Mới, Khách hủy, Nhân viên từ chối…) bằng tên chính thức. Tách ba mốc thời gian, thêm lịch sử thay đổi. Các chuyển trạng thái cụ thể, quyền, mở lại, trạng thái nào giữ khóa chống trùng vẫn **chưa duyệt** và được ghi là [Đề xuất]/[Cần chốt]. |
 | **Bản 5:** chủ dự án chọn, cho yêu cầu ở Không liên lạc được mà khách gửi lại giống hệt trong cùng phạm vi: không tạo yêu cầu mới, giữ nguyên trạng thái, **hiện dấu nhắc "Khách vừa gửi lại — cần gọi lại"** kèm thời điểm gửi lại; khi nhân viên bắt đầu liên hệ thì chuyển Đang liên hệ và xóa dấu nhắc | **Ghi nhận [Đã chốt] ở mục 4.2b**, thay hai lựa chọn (a)/(b) ở bản 4. Gỡ khỏi danh sách quyết định còn thiếu và khỏi mục ý tưởng chưa duyệt. **Không thêm trạng thái thứ bảy**: dấu nhắc nằm trên yêu cầu hiện có. Chi tiết kỹ thuật (giới hạn tần suất, email, xử lý đồng thời) là [Đề xuất]/[Cần chốt]. |
 | **Bản 6:** Codex báo kết quả xác minh trên tài liệu chính thức (14/10): điện thoại + mật khẩu được hỗ trợ; Auth có giới hạn tần suất riêng theo IP; TOTP cho quản lý không cần SMS; chặn mật khẩu rò rỉ từ gói Pro; đăng xuất không làm token còn hạn mất hiệu lực ngay. Codex đồng ý cách xử lý màn hình cũ bằng số phiên bản và đánh giá hai cách đặt lại mật khẩu. Chủ dự án đã tạo dự án thử, chưa chạy kiểm chứng | **Cập nhật mục 2, 3.3, 3.5, 4.2b, 5.3, 9, 10.** Đây là xác minh tài liệu, **không phải bằng chứng kiểm thử**; Claude chưa tự đọc được các trang tài liệu. Phương án A/B vẫn **chưa chọn**. Ghi nhận điểm mới cần kiểm tra: giới hạn theo IP khi đăng nhập đi qua máy chủ. Cách đặt lại mật khẩu vẫn **chưa duyệt**. |
+| **Bản 7:** Codex thử trên dashboard dự án thử `leson-test` (14/10, chủ dự án cho phép): bật Phone provider, tắt Phone confirmations, giữ trống thông tin SMS, bấm Save. **Form không cho lưu**, báo cần Twilio Account SID, Auth Token và Message Service SID. Không nhập thông tin giả, không cấu hình hay gửi SMS; đã hủy thay đổi, cấu hình về như cũ | **Ghi nhận ở mục 2, 3.1, 3.3.** Phương án A **gặp trở ngại ở dashboard**, nhưng **chưa được coi là thử API thất bại** và chưa kết luận A bất khả thi. Phương án B cũng **chưa chạy thử hoặc chọn chính thức**. Không yêu cầu bật lại OTP, không yêu cầu đăng ký Twilio chỉ để vượt qua form. |
 
 **Điều Claude giữ lại một phần:** danh tính nội bộ ngẫu nhiên vẫn nên dùng nếu chọn B, vì nếu suy ra được từ số điện thoại thì kẻ tấn công đoán được danh tính của người khác. Nó không thay cho việc kiểm tra gọi trực tiếp.
 
@@ -58,7 +59,7 @@ Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu p
 |---|---|
 | Đăng nhập bằng điện thoại cần nhà cung cấp SMS khi muốn xác nhận điện thoại lúc đăng ký | Hai bên cùng thấy trong tài liệu (qua đoạn trích). |
 | Đăng nhập bằng điện thoại + mật khẩu; API quản trị tạo tài khoản có tham số xác nhận điện thoại | Codex xác minh tài liệu (14/10): có hỗ trợ; cần nhà cung cấp SMS **nếu muốn xác nhận điện thoại** lúc đăng ký. Có căn cứ ưu tiên thử phương án A trước. **Chưa chạy trên dự án hosted.** |
-| Đăng ký điện thoại + mật khẩu **không gửi SMS** và không cần nhà cung cấp SMS trên bản hosted | [Chờ kiểm chứng]. Chủ dự án đã tạo dự án thử; chưa chạy, chưa có bằng chứng đã chạy được. |
+| Đăng ký điện thoại + mật khẩu **không gửi SMS** và không cần nhà cung cấp SMS trên bản hosted | **Đã thử trên dashboard (14/10, dự án thử):** bật Phone provider, tắt confirmations, để trống SMS, bấm Save thì **form từ chối lưu**, yêu cầu Twilio Account SID, Auth Token, Message Service SID. **Chưa kiểm chứng:** Management API có cho cấu hình không SMS không; tạo tài khoản và đăng nhập bằng điện thoại có chạy nếu cấu hình qua API không. Chưa tạo tài khoản thử. **Không kết luận A bất khả thi chỉ từ lỗi form.** |
 | Không có đăng nhập bằng tên đăng nhập có sẵn; dùng tra cứu phía máy chủ | Xác nhận theo đoạn trích. |
 | Token truy cập (JWT) được ký chứ không mã hóa mặc định; có thể chứa email | Codex dẫn tài liệu. Claude chấp nhận. |
 | Quản trị viên đổi mật khẩu bằng API quản trị (cần khóa quyền cao, chỉ ở máy chủ) | Xác nhận theo đoạn trích. |
@@ -88,7 +89,7 @@ Nguồn đã dẫn (Claude chưa đọc toàn văn được):
 
 Cả hai đều để Supabase Auth lưu và băm mật khẩu. **Chúng ta không tự xây hệ thống lưu mật khẩu.**
 
-- **Phương án A: danh tính là số điện thoại + mật khẩu của Supabase, không gửi SMS.** Đơn giản nếu chạy được. Tên đăng nhập vẫn cần tra cứu phía máy chủ ra số điện thoại. Chờ kiểm chứng việc có cần nhà cung cấp SMS không.
+- **Phương án A: danh tính là số điện thoại + mật khẩu của Supabase, không gửi SMS.** Đơn giản nếu chạy được. Tên đăng nhập vẫn cần tra cứu phía máy chủ ra số điện thoại. Chờ kiểm chứng việc có cần nhà cung cấp SMS không. **Kết quả mới (14/10):** dashboard hiện tại không cho lưu Phone provider khi để trống thông tin Twilio, kể cả khi đã tắt xác nhận điện thoại (chi tiết mục 2). Phương án A vì vậy gặp trở ngại ở dashboard; chưa thử qua API nên chưa phải thất bại. Đọc của Claude [Đề xuất]: nếu A chỉ chạy được qua một cấu hình mà dashboard không cho đặt, thì cấu hình đó có thể không được hỗ trợ ổn định; Codex cần xác nhận rõ trước khi dựa vào A. Không đăng ký Twilio chỉ để vượt qua form.
 - **Phương án B: danh tính nội bộ + tra cứu phía máy chủ.** Mỗi tài khoản có danh tính nội bộ trong Supabase Auth (ví dụ email ngẫu nhiên không suy ra từ số hay tên). Đường dẫn máy chủ nhận "số điện thoại hoặc tên đăng nhập", tra hồ sơ rồi đăng nhập bằng mật khẩu. Không phụ thuộc SMS, nhưng email nội bộ **không phải bí mật** và phải chịu được việc gọi trực tiếp Auth.
 
 **[Đề xuất của cả hai bên]** chọn phương án sau khi kiểm chứng, không chọn trước (mục 3.3). Không yêu cầu chủ dự án bật lại OTP.
@@ -114,7 +115,7 @@ Làm trên **dự án thử, dữ liệu giả, cấu hình không gửi SMS**. 
 7. Hành vi khi cùng số điện thoại đăng ký hai lần hoặc hai định dạng khác nhau.
 8. **Giới hạn theo IP khi đăng nhập đi qua máy chủ:** Supabase thấy IP nào (IP máy chủ hay IP khách); giới hạn mặc định theo IP có chặn nhầm khách thật hoặc để kẻ tấn công làm cạn giới hạn của mọi khách không; cách chuyển IP khách ra sao.
 
-**Tình trạng (14/10):** chủ dự án đã tạo dự án thử và sẽ cung cấp URL dashboard; Codex chưa chạy các bước trên. **Không gửi khóa bí mật hoặc mật khẩu trong chat.** Chỉ dùng tài khoản và số điện thoại giả; không gửi SMS, không mua dịch vụ, không sửa dự án sản xuất. Nếu phương án A không đáp ứng thì mới thử B.
+**Tình trạng (14/10):** chủ dự án đã tạo dự án thử `leson-test`. Codex mới thử đúng một thao tác trên dashboard (bật Phone, tắt confirmations, Save với SMS trống): form không cho lưu, đã hủy thay đổi. **Các bước 1–8 ở trên vẫn chưa chạy.** Nếu thử tiếp B, vẫn giữ yêu cầu tên đăng nhập hoặc số điện thoại + mật khẩu, email khách không bắt buộc, danh tính email nội bộ không coi là bí mật. Cũng cần ghi nhớ: **Không gửi khóa bí mật hoặc mật khẩu trong chat.** Chỉ dùng tài khoản và số điện thoại giả; không gửi SMS, không mua dịch vụ, không sửa dự án sản xuất. Nếu phương án A không đáp ứng thì mới thử B.
 
 ### 3.4. Quy tắc tên đăng nhập và số điện thoại [Đề xuất]
 
@@ -354,7 +355,7 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 
 **Chủ dự án:** (1) bảng chuyển trạng thái hợp lệ và quyền thực hiện; mở lại yêu cầu đã hủy/từ chối; chuyển ngược từ Đã xác nhận; trạng thái nào còn giữ khóa chống trùng; danh mục lý do hủy/từ chối và có hiện cho khách không (mục 4.2a); (2) bằng chứng nào đủ để khôi phục tài khoản cũ, và ai quyết định; (3) lễ tân được làm thao tác nhạy cảm nào, ai dự phòng quản lý; (4) có nhận số cố định không; (5) thời gian gọi lại, số lần liên hệ và người dự phòng; có gửi thêm email khi khách gửi lại không (mục 4.2b); (6) khách có sửa số liên hệ trong yêu cầu không; (7) ngưỡng giới hạn tần suất; (8) chính sách lưu trữ, xóa và nội dung đồng ý; (9) dự án thử cho kiểm chứng.
 
-**Codex:** (10) chạy kiểm chứng hosted mục 3.3 trên dự án thử (chờ URL dashboard từ chủ dự án; không gửi khóa bí mật hay mật khẩu trong chat) rồi chọn A hay B; (11) xác minh tài liệu đã xong, còn kiểm thử API thật cho các mục ở mục 2; (12) chọn cách đặt lại mật khẩu (mật khẩu tạm hay quyền đặt lại dùng một lần) sau khi thử, và báo công sức; (12b) kiểm tra giới hạn theo IP khi đăng nhập qua máy chủ.
+**Codex:** (10) tiếp tục kiểm chứng hosted mục 3.3 trên dự án thử `leson-test` (không gửi khóa bí mật hay mật khẩu trong chat): kiểm tra Management API có cho cấu hình Phone không SMS không và, nếu có, tạo tài khoản và đăng nhập có chạy không; nếu A không đáp ứng thì thử B; rồi chọn A hay B và báo bằng chứng; (11) xác minh tài liệu đã xong, còn kiểm thử API thật cho các mục ở mục 2; (12) chọn cách đặt lại mật khẩu (mật khẩu tạm hay quyền đặt lại dùng một lần) sau khi thử, và báo công sức; (12b) kiểm tra giới hạn theo IP khi đăng nhập qua máy chủ.
 
 **Gemini:** (13) luồng đăng ký và đăng nhập (một ô cho "số điện thoại hoặc tên đăng nhập"), thông báo lỗi chung, thông báo thành công thống nhất, và cách trình bày giới hạn "số điện thoại chưa xác minh" cho khách. Khoan vẽ màn hình hỗ trợ tài khoản cho đến khi quy trình mục 5 được duyệt.
 
@@ -409,6 +410,8 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 | 33 | Lễ tân lưu từ màn hình phiên bản 4 sau khi lần gửi lại đặt dấu nhắc (phiên bản 5) | Không ghi đè; báo tải lại; thấy dấu nhắc rồi mới bắt đầu liên hệ (đề xuất 4.2b) |
 | 34 | Khách bấm gửi lại lần hai, ba khi dấu nhắc đang bật | Không tăng phiên bản, không thêm sự kiện, thời điểm vẫn là lần đầu (đề xuất 4.2b, chưa duyệt) |
 | 35 | Quản lý đăng nhập có bật TOTP | Thao tác nhạy cảm yêu cầu bước xác thực hai; không có SMS nào được gửi |
+| 36 | Cấu hình Phone không SMS qua Management API (dự án thử, tài khoản giả) | Ghi nhận API chấp nhận hay từ chối; nếu chấp nhận thì tạo tài khoản và đăng nhập bằng điện thoại + mật khẩu có chạy không, không gửi SMS nào. Kết quả quyết định A còn khả thi hay không |
+| 37 | Cấu hình A (nếu chạy được) có bền qua các thao tác thông thường trên dashboard | Ghi nhận cấu hình không bị ghi đè hay báo lỗi; dùng để đánh giá mức hỗ trợ ổn định của A |
 | 11 | Khách đọc yêu cầu của tài khoản khác hoặc yêu cầu vãng lai | Bị chặn ở tầng cơ sở dữ liệu |
 | 12 | Truy cập dữ liệu bằng khóa công khai với bảng thiếu quyền hoặc RLS | Bị chặn; kiểm tra cả quyền được cấp lẫn RLS |
 | 13 | Token trình duyệt nhận có chứa thông tin gì | Ghi nhận đúng, không giả định là bí mật |
