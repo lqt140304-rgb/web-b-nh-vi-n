@@ -1,213 +1,210 @@
-# Rà soát của Claude: tài khoản khách và form đặt lịch (bản cập nhật không OTP)
+# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 2, sau phản hồi của Codex)
 
-**Ngày:** 13/10/2026 · **Người soạn:** Claude · **Trạng thái:** bản nháp để Codex và Gemini phản biện, chưa phải quyết định chung.
+**Ngày:** 13/10/2026 · **Người soạn:** Claude · **Trạng thái:** bản nháp để Codex, Gemini và chủ dự án phản biện. Chưa phải quyết định chung, chưa phê duyệt quy trình nào.
 
 **Quy ước nhãn**
-- **[Đã chốt]**: do chủ dự án quyết định (theo bản cập nhật gần nhất).
-- **[Đề xuất]**: ý kiến của Claude, cần phản biện.
-- **[Giả định]**: điều tạm dùng để tính, chưa được xác nhận.
-- **[Đã xác minh]** / **[Chưa xác minh]**: tình trạng kiểm chứng với tài liệu Supabase (xem mục 2).
+- **[Đã chốt]**: do chủ dự án quyết định.
+- **[Đề xuất]**: ý kiến của Claude hoặc Codex, cần phản biện.
+- **[Chờ kiểm chứng]**: chưa có căn cứ đủ để khẳng định, phải thử hoặc đọc tài liệu hiện hành.
 - **[Cần chốt]**: quyết định còn thiếu.
 
-Không có dữ liệu cá nhân thật trong tài liệu này. Chưa có mã, chưa mua dịch vụ nào.
+Không có dữ liệu cá nhân thật. Chưa có mã, chưa mua dịch vụ nào.
 
 ---
 
-## 1. Những gì đã chốt (nhắc lại để đối chiếu)
+## 0. Thay đổi so với bản 1
+
+Bản 1 nằm ở lịch sử git của nhánh. Bản này tiếp thu phản hồi của Codex như sau.
+
+| Điểm Codex nêu | Claude xử lý |
+|---|---|
+| Email nội bộ không phải bí mật; trình duyệt có thể thấy nó (JWT chứa email) | **Chấp nhận.** Bỏ câu "trình duyệt không bao giờ thấy". Chỉ giữ ý: danh tính ngẫu nhiên, không suy ra từ số điện thoại, là lớp phụ chứ không phải bảo vệ chính (mục 3.2). |
+| Giới hạn ở đường dẫn Next.js không áp dụng cho API Auth của Supabase | **Chấp nhận.** Phải kiểm tra việc gọi trực tiếp Auth (mục 3.3). |
+| Chưa đủ căn cứ loại phương án điện thoại + mật khẩu | **Chấp nhận.** Giữ cả A và B ở trạng thái chờ kiểm chứng; bỏ lời khuyến nghị B (mục 3.1). |
+| Gọi lại số đang lưu không chứng minh quyền với tài khoản cũ (số có thể đã cấp lại) | **Chấp nhận.** Tách ba việc: khôi phục tài khoản cũ, giải phóng số, đặt lại mật khẩu (mục 5). |
+| Mật khẩu tạm không tự hết hạn; thu hồi phiên chưa chắc có hiệu lực ngay | **Chấp nhận.** Chuyển sang [Chờ kiểm chứng], bỏ lời hứa "mọi phiên mất hiệu lực ngay" (mục 5.3). |
+| Câu "bảng không bật RLS là bảng mở" chưa chính xác | **Chấp nhận.** Diễn đạt lại (mục 6). |
+| Chống trùng theo phạm vi tài khoản là ngoại lệ so với điều đã chốt | **Chấp nhận.** Ghi rõ là ngoại lệ cần chủ dự án duyệt, đưa hai lựa chọn (mục 4.2). |
+| Giữ phạm vi nhỏ: chưa gộp yêu cầu, đặt hộ, form hỗ trợ riêng, nhiều tầng cảnh báo | **Chấp nhận.** Gỡ các mục này khỏi thiết kế chính, chuyển sang mục 8 "chưa duyệt". |
+| Bộ đếm lưu trong PostgreSQL, không mua Redis | **Đồng ý.** |
+
+**Điều Claude giữ lại một phần:** danh tính nội bộ ngẫu nhiên vẫn nên dùng nếu chọn B, vì nếu suy ra được từ số điện thoại thì kẻ tấn công đoán được danh tính của người khác. Nó không thay cho việc kiểm tra gọi trực tiếp.
+
+**Lưu ý kiểm chứng:** môi trường của Claude không truy cập được `supabase.com` (lỗi mạng), nên Claude **chưa tự đọc** các trang tài liệu Codex dẫn. Các khẳng định về Supabase trong tài liệu này dựa trên đoạn trích tìm kiếm và phản hồi của Codex, đều cần xác minh trên tài liệu hiện hành.
+
+---
+
+## 1. Những gì đã chốt
 
 - **[Đã chốt]** Đăng ký bắt buộc: tên đăng nhập, số điện thoại, mật khẩu; hồ sơ có tên khách.
-- **[Đã chốt]** Tên đăng nhập duy nhất; mỗi số điện thoại một tài khoản; đăng nhập bằng số điện thoại **hoặc** tên đăng nhập + mật khẩu.
-- **[Đã chốt]** Tên đăng nhập không được có dạng số điện thoại. Chuẩn hóa số điện thoại trước khi kiểm tra trùng và đăng nhập.
+- **[Đã chốt]** Tên đăng nhập duy nhất; mỗi số điện thoại một tài khoản; đăng nhập bằng số điện thoại hoặc tên đăng nhập + mật khẩu; tên đăng nhập không có dạng số điện thoại; chuẩn hóa số điện thoại trước khi kiểm tra trùng và đăng nhập.
 - **[Đã chốt]** Email không bắt buộc. Không OTP ở bản đầu.
-- **[Đã chốt]** Cả khách vãng lai và khách đăng nhập đều gửi được form. Khách vãng lai không bị tự gắn vào tài khoản theo số điện thoại và không tra cứu lịch sử chỉ bằng số điện thoại.
-- **[Đã chốt]** Yêu cầu giữ bản chụp thông tin tại thời điểm gửi.
-- **[Đã chốt]** Khác thông tin thì tiếp nhận; giống toàn bộ thông tin sau chuẩn hóa thì chống trùng; không dùng riêng số điện thoại để chặn.
-- **[Đã chốt]** Vẫn giữ giới hạn tần suất và kiểm tra dữ liệu phía máy chủ.
-- **Giới hạn cần ghi rõ:** số điện thoại **chưa được xác minh quyền sở hữu**, và chưa có quy trình được duyệt cho đăng ký nhầm, tranh chấp số, quên mật khẩu. Mục 5 đề xuất quy trình tối thiểu.
+- **[Đã chốt]** Khách vãng lai và khách đăng nhập đều gửi form. Khách vãng lai không bị tự gắn vào tài khoản theo số điện thoại và không tra cứu lịch sử chỉ bằng số điện thoại.
+- **[Đã chốt]** Yêu cầu giữ bản chụp thông tin tại thời điểm gửi. Khác thông tin thì tiếp nhận; giống toàn bộ thông tin sau chuẩn hóa thì chống tạo trùng; không dùng riêng số điện thoại để chặn. Gửi form chưa phải đã duyệt lịch.
+- **[Đã chốt]** Có trang quản trị và email báo nhân viên. Giữ giới hạn tần suất và kiểm tra dữ liệu phía máy chủ.
+- **Giới hạn cần ghi rõ:** số điện thoại **chưa được xác minh quyền sở hữu**. Chưa có quy trình được duyệt cho đăng ký nhầm, tranh chấp số, quên mật khẩu.
 
 ---
 
-## 2. Kết quả kiểm chứng Supabase
+## 2. Tình trạng kiểm chứng Supabase
 
-Ghi chú về phương pháp: truy cập trực tiếp trang `supabase.com` từ môi trường làm việc bị lỗi mạng, nên tôi chỉ đọc được **đoạn trích kết quả tìm kiếm**, không đọc được toàn văn tài liệu. Vì vậy mọi mục dưới đây cần Codex xác minh lại trên tài liệu hiện hành trước khi dựa vào.
+| Nội dung | Tình trạng |
+|---|---|
+| Đăng nhập bằng điện thoại cần nhà cung cấp SMS khi muốn xác nhận điện thoại lúc đăng ký | Hai bên cùng thấy trong tài liệu (qua đoạn trích). |
+| Đăng nhập bằng điện thoại + mật khẩu; API quản trị tạo tài khoản có tham số xác nhận điện thoại | Codex dẫn tài liệu. [Chờ kiểm chứng] trên dự án thử. |
+| Đăng ký điện thoại + mật khẩu **không gửi SMS** và không cần nhà cung cấp SMS trên bản hosted | [Chờ kiểm chứng]. Chưa có bằng chứng đã chạy được. |
+| Không có đăng nhập bằng tên đăng nhập có sẵn; dùng tra cứu phía máy chủ | Xác nhận theo đoạn trích. |
+| Token truy cập (JWT) được ký chứ không mã hóa mặc định; có thể chứa email | Codex dẫn tài liệu. Claude chấp nhận. |
+| Quản trị viên đổi mật khẩu bằng API quản trị (cần khóa quyền cao, chỉ ở máy chủ) | Xác nhận theo đoạn trích. |
+| Mật khẩu tạm có hết hạn riêng; ép đổi mật khẩu ở mọi đường truy cập | **Không có sẵn** theo Codex. Phải tự thiết kế và kiểm chứng. |
+| Thu hồi phiên có hiệu lực ngay, kể cả token truy cập còn hạn | [Chờ kiểm chứng]. Không hứa trước. |
+| Giới hạn tần suất đăng nhập mật khẩu theo gói; chặn mật khẩu bị rò rỉ theo gói | [Chờ kiểm chứng]. |
+| Xác thực hai bước không dùng SMS cho tài khoản quản lý | [Chờ kiểm chứng]. |
 
-| Nội dung | Tình trạng | Ghi chú |
-|---|---|---|
-| Đăng nhập bằng số điện thoại cần cấu hình nhà cung cấp SMS | [Đã xác minh] theo đoạn trích | Tài liệu về đăng nhập bằng điện thoại nói cần thiết lập nhà cung cấp SMS. |
-| Khi bật xác minh điện thoại, người dùng nhận mã 6 số qua SMS và phải xác nhận trong 60 giây | [Đã xác minh] theo đoạn trích | Khi tắt thì không có bước này, nhưng tôi **chưa thấy** tài liệu hosted nêu rõ công tắc tương ứng. |
-| Có thể đăng ký bằng điện thoại **không cần xác nhận** | [Chưa xác minh] | Mẫu cấu hình cộng đồng cho môi trường cục bộ có tùy chọn tắt xác nhận. Chưa rõ trên bản hosted có tương đương không, và chưa rõ có còn cần nhà cung cấp SMS khi tắt xác nhận hay không. |
-| Tài liệu cảnh báo số điện thoại bị nhà mạng cấp lại, khuyến nghị dùng xác thực hai bước | [Đã xác minh] theo đoạn trích | Đúng với rủi ro chiếm số ở dự án này. |
-| Không có đăng nhập bằng tên đăng nhập có sẵn | [Đã xác minh] theo đoạn trích | Hướng thường dùng là hàm phía máy chủ: tra tên đăng nhập, rồi đăng nhập bằng danh tính nội bộ. Một bài hướng dẫn của Supabase mô tả hướng này nhưng đoạn trích không đầy đủ. |
-| Quản trị viên đổi mật khẩu người dùng bằng API quản trị (cần khóa service-role, chỉ chạy ở máy chủ) | [Đã xác minh] theo đoạn trích | Trang tham chiếu `updateUserById` có ví dụ đổi mật khẩu. |
-| Giới hạn tần suất của Auth, một số mức chỉnh được | [Đã xác minh] một phần | Email gửi mặc định rất thấp (3/giờ, số liệu năm 2023) cho tới khi dùng SMTP riêng; OTP mặc định 30/giờ. Mức giới hạn đăng nhập bằng mật khẩu theo từng gói **chưa xác minh**. |
-| Chặn mật khẩu bị lộ (kiểm tra qua cơ sở dữ liệu rò rỉ) chỉ ở gói Pro trở lên | [Chưa xác minh] | Chỉ có nguồn thứ cấp. Cần kiểm tra trang giá và tài liệu chính thức. |
-| API thu hồi toàn bộ phiên của một người dùng khi đổi mật khẩu | [Chưa xác minh] | Cần Codex tra cứu. |
-
-Nguồn đã đọc (đoạn trích):
-- Đăng nhập bằng điện thoại: https://supabase.io/docs/guides/auth/phone-login và https://supabase.com/docs/guides/auth/phone-login/twilio
-- Mật khẩu: https://supabase.com/docs/guides/auth/passwords?flow=pkce
-- Quản trị đổi người dùng: https://supabase.com/docs/reference/javascript/auth-admin-updateuserbyid
-- Giới hạn tần suất: https://supabase.com/docs/guides/auth/rate-limits
-- Đăng nhập bằng tên đăng nhập (bài hướng dẫn): https://dev.to/supabase/building-user-authentication-with-username-and-password-using-supabase-n4h
+Nguồn đã dẫn (Claude chưa đọc toàn văn được):
+- https://supabase.com/docs/guides/auth/passwords
+- https://supabase.com/docs/guides/auth/jwts
+- https://supabase.com/docs/guides/auth/sessions
+- https://supabase.com/docs/guides/database/secure-data
+- https://supabase.com/docs/reference/javascript/auth-admin-createuser
+- https://supabase.com/docs/reference/javascript/auth-admin-updateuserbyid
+- https://supabase.com/docs/guides/auth/rate-limits
 
 ---
 
-## 3. Mô hình tài khoản [Đề xuất]
+## 3. Mô hình tài khoản [Đề xuất, chờ kiểm chứng]
 
-### 3.1. Hai phương án nền
+### 3.1. Hai phương án nền, chưa chọn
 
-**Phương án B (khuyến nghị): danh tín nội bộ + tra cứu phía máy chủ.**
-- Mỗi tài khoản khách có một **danh tính nội bộ** trong Supabase Auth (email giả ngẫu nhiên, không lộ ra ngoài, không suy ra từ số điện thoại hay tên đăng nhập). Mật khẩu do Supabase Auth lưu và băm. **Chúng ta không tự lưu mật khẩu.**
-- Form đăng nhập gửi "số điện thoại hoặc tên đăng nhập" + mật khẩu tới **một đường dẫn phía máy chủ**. Máy chủ chuẩn hóa, tra bảng hồ sơ để lấy danh tính nội bộ, rồi gọi đăng nhập bằng mật khẩu của Supabase. Trình duyệt không bao giờ thấy email giả.
-- **Tắt đăng ký trực tiếp** trên Supabase. Mọi đăng ký đi qua đường dẫn máy chủ của chúng ta: kiểm tra dữ liệu, giới hạn tần suất, chống bot, tạo tài khoản, tạo hồ sơ.
-- Ưu điểm: không phụ thuộc nhà cung cấp SMS, không cần xác nhận điện thoại hay email, chi phí thấp. Hai cách đăng nhập chạy cùng một cơ chế.
-- Nhược điểm: ta tự viết tầng tra cứu và đăng ký, nên phải tự lo chống dò quét (mục 3.4). Chức năng gửi email đặt lại mật khẩu có sẵn của Supabase không dùng được với email giả.
+Cả hai đều để Supabase Auth lưu và băm mật khẩu. **Chúng ta không tự xây hệ thống lưu mật khẩu.**
 
-**Phương án A: dùng số điện thoại làm danh tính của Supabase với xác nhận tắt.**
-- Đơn giản hơn nếu hoạt động, nhưng **[Chưa xác minh]** còn cần nhà cung cấp SMS hay không khi tắt xác nhận. Tên đăng nhập vẫn phải tra cứu phía máy chủ. Thêm rủi ro: danh tính gắn với số điện thoại làm dễ dò quét trực tiếp vào Supabase, đi vòng qua giới hạn của ta.
-- Chỉ nên xét nếu Codex xác minh được rằng nó chạy không cần SMS.
+- **Phương án A: danh tính là số điện thoại + mật khẩu của Supabase, không gửi SMS.** Đơn giản nếu chạy được. Tên đăng nhập vẫn cần tra cứu phía máy chủ ra số điện thoại. Chờ kiểm chứng việc có cần nhà cung cấp SMS không.
+- **Phương án B: danh tính nội bộ + tra cứu phía máy chủ.** Mỗi tài khoản có danh tính nội bộ trong Supabase Auth (ví dụ email ngẫu nhiên không suy ra từ số hay tên). Đường dẫn máy chủ nhận "số điện thoại hoặc tên đăng nhập", tra hồ sơ rồi đăng nhập bằng mật khẩu. Không phụ thuộc SMS, nhưng email nội bộ **không phải bí mật** và phải chịu được việc gọi trực tiếp Auth.
 
-**[Cần chốt]** Codex đánh giá và chọn phương án; Claude nghiêng về B.
+**[Đề xuất của cả hai bên]** chọn phương án sau khi kiểm chứng, không chọn trước (mục 3.3). Không yêu cầu chủ dự án bật lại OTP.
 
 ### 3.2. Thực thể (mức khái niệm, chưa phải schema)
 
-- **Danh tính đăng nhập** (Supabase Auth): chỉ chứa danh tính nội bộ và mật khẩu băm. Không chứa dữ liệu nghiệp vụ.
-- **Hồ sơ tài khoản web** (bảng của ta, khóa = mã danh tính nội bộ):
-  - Tên khách.
-  - Tên đăng nhập (chuẩn hóa chữ thường, duy nhất không phân biệt hoa thường).
-  - Số điện thoại dạng chuẩn quốc tế (duy nhất trong các tài khoản đang hoạt động).
-  - Trạng thái số điện thoại: `chưa_xác_minh`, `nhân_viên_đã_xác_minh`, `đang_tranh_chấp`.
-  - Email tùy chọn và thời điểm xác minh (trống ở bản đầu).
-  - Trạng thái tài khoản (hoạt động, bị khóa, đã xóa), cờ "phải đổi mật khẩu".
-- **Hồ sơ khách hàng** (bản ghi chuẩn của bệnh viện): **chưa tạo ở bản đầu.** Khi nhập GPet sau này, liên kết giữa tài khoản web và hồ sơ khách hàng chỉ do nhân viên tạo sau khi xác minh, **không bao giờ tự động theo số điện thoại**. Chừa sẵn chỗ cho tham chiếu GPet.
-- **Thú cưng** thuộc về tài khoản. **Yêu cầu đặt lịch** giữ bản chụp riêng nên không bị đổi khi sửa hoặc xóa thú cưng.
-- Các bảng hỗ trợ: yêu cầu hỗ trợ tài khoản, nhật ký thao tác nhạy cảm, bộ đếm giới hạn tần suất, bản ghi đồng ý, hàng đợi thông báo. Chi tiết ở các mục 5, 6, 7.
+- **Danh tính đăng nhập** (Supabase Auth): chỉ danh tính và mật khẩu băm. Không chứa dữ liệu nghiệp vụ. Nếu chọn B, danh tính nội bộ nên ngẫu nhiên và không suy ra từ số điện thoại hay tên đăng nhập, như lớp phụ, **không** coi là bí mật.
+- **Hồ sơ tài khoản web** (bảng của ta): tên khách; tên đăng nhập đã chuẩn hóa (duy nhất không phân biệt hoa thường); số điện thoại dạng chuẩn quốc tế (duy nhất trong các tài khoản đang hoạt động); trạng thái số điện thoại (`chưa_xác_minh` là mặc định); email tùy chọn chưa xác minh; trạng thái tài khoản; cờ "phải đổi mật khẩu" nếu giữ cơ chế mật khẩu tạm.
+- **Hồ sơ khách hàng** (bản ghi chuẩn của bệnh viện, dùng khi nhập GPet): **chưa tạo ở bản đầu.** Sau này liên kết giữa tài khoản web và hồ sơ khách hàng do nhân viên tạo sau khi xác minh, **không bao giờ tự động theo số điện thoại.**
+- **Thú cưng** thuộc tài khoản. **Yêu cầu đặt lịch** giữ bản chụp riêng nên không đổi khi sửa hoặc xóa thú cưng.
+- **Nhật ký thao tác nhạy cảm** (đặt lại mật khẩu, giải phóng số, khóa tài khoản): ai, lúc nào, tài khoản nào. **Không ghi mật khẩu hay token.**
 
-### 3.3. Quy tắc tên đăng nhập và số điện thoại [Đề xuất]
+### 3.3. Kế hoạch kiểm chứng trước khi chọn A hay B (Codex đề xuất, Claude đồng ý)
 
-**Tên đăng nhập**
-- Dài khoảng 4–30 ký tự, chỉ dùng chữ Latin không dấu, số, và vài dấu nối (ví dụ `.`, `_`, `-`). Dùng ASCII để tránh ký tự lừa mắt.
-- **Phải có ít nhất một chữ cái.** Quy tắc này đã loại các chuỗi chỉ gồm số. Sau khi bỏ khoảng trắng, dấu nối và dấu `+`, nếu kết quả là một số điện thoại hợp lệ thì từ chối. Như vậy một chuỗi nhập vào luôn thuộc đúng một trong hai loại: số điện thoại hoặc tên đăng nhập.
-- Chặn từ dành riêng (ví dụ admin, lễ tân, tên bệnh viện).
-- Không phân biệt hoa thường: lưu dạng chuẩn thường, kiểm tra duy nhất trên dạng đó.
+Làm trên **dự án thử, dữ liệu giả, cấu hình không gửi SMS**. **[Cần chốt]** dự án thử có phát sinh chi phí không, và ai tạo; chưa mua gì khi chưa duyệt.
 
-**Số điện thoại**
-- Chuẩn hóa về dạng quốc tế: `0912…`, `84912…`, `+84912…` cùng một khóa.
-- Dùng thư viện số điện thoại đã được kiểm chứng để kiểm tra, không tự viết biểu thức. Có thể giới hạn ở số di động Việt Nam; **[Cần chốt]** có nhận số cố định không.
-- Chuẩn hóa dùng chung cho đăng ký, đăng nhập, form đặt lịch và so khớp chống trùng, để không lệch.
+1. Tạo tài khoản bằng điện thoại + mật khẩu mà không gửi SMS: có được không, có cần nhà cung cấp SMS không.
+2. Đăng nhập, đổi số, đổi mật khẩu.
+3. Tắt đăng ký trực tiếp: có còn tạo được tài khoản từ trình duyệt không.
+4. **Gọi trực tiếp API Auth từ ngoài, đi vòng qua đường dẫn Next.js:** giới hạn tần suất nào còn hiệu lực; có thể dò danh tính hay thử mật khẩu bao nhiêu lần.
+5. Nội dung token trình duyệt nhận (có email, số điện thoại không).
+6. Thu hồi phiên: token truy cập còn hạn dùng được bao lâu sau khi đổi mật khẩu hay đăng xuất.
+7. Hành vi khi cùng số điện thoại đăng ký hai lần hoặc hai định dạng khác nhau.
 
-### 3.4. Chống dò quét và tấn công đoán mật khẩu
+### 3.4. Quy tắc tên đăng nhập và số điện thoại [Đề xuất]
 
-- **Thông báo đăng nhập sai chung chung**, không phân biệt "không có tài khoản" với "sai mật khẩu".
-- **Giới hạn đăng nhập sai** theo từng định danh được nhập và theo địa chỉ mạng, ở lớp máy chủ của ta (đường dẫn tra cứu), vì Supabase chỉ thấy danh tính nội bộ. Ưu tiên **làm chậm lũy tiến và yêu cầu kiểm tra chống bot sau vài lần sai**, thay vì khóa cứng. Khóa cứng cho phép kẻ xấu cố ý khóa tài khoản người khác.
-- **Đăng ký tiết lộ sự tồn tại.** Khi báo "số này đã đăng ký" hoặc "tên đăng nhập đã dùng", người ngoài dò được số điện thoại nào là khách của bệnh viện. Không tránh được hoàn toàn khi không có OTP. Giảm bằng chống bot, giới hạn tần suất theo địa chỉ và theo số điện thoại, và đặt thông báo ở mức tối thiểu cần thiết. Cần ghi nhận đây là rủi ro được chấp nhận có chủ đích. Kiểm tra tên đăng nhập còn trống (nếu có) cũng cần giới hạn tần suất.
-- **Danh tính nội bộ ngẫu nhiên**, không suy ra từ điện thoại hay tên đăng nhập. Nếu suy ra được, kẻ tấn công gọi thẳng vào Supabase để đi vòng giới hạn của ta.
-- **Chính sách mật khẩu:** độ dài tối thiểu hợp lý (từ 8, nên 10) và cho phép dài; không bắt quy tắc ký tự phức tạp; chặn mật khẩu rất phổ biến. Chặn mật khẩu bị rò rỉ nếu gói dịch vụ hỗ trợ **[Chưa xác minh]**.
-- **Phiên đăng nhập:** dùng thư viện chính thức của Supabase cho Next.js, không tự phát minh cách lưu phiên. Sau khi đổi hoặc đặt lại mật khẩu, thu hồi các phiên khác **[Chưa xác minh] API**.
-- **Mật khẩu của khách không bao giờ hiện cho nhân viên**, không ghi vào nhật ký, không đưa vào email.
+**Tên đăng nhập:** khoảng 4–30 ký tự; ASCII, chữ thường, số và vài dấu nối; **phải có ít nhất một chữ cái**; nếu bỏ khoảng trắng, dấu nối và dấu `+` mà thành số điện thoại hợp lệ thì từ chối; chặn từ dành riêng; không phân biệt hoa thường. Nhờ đó một chuỗi nhập luôn thuộc đúng một loại: số điện thoại hoặc tên đăng nhập.
+
+**Số điện thoại:** chuẩn hóa về dạng quốc tế (`0900000001`, `84900000001`, `+84900000001` cùng một khóa); dùng thư viện số điện thoại đã kiểm chứng; **[Cần chốt]** có nhận số cố định không. Chuẩn hóa dùng chung cho đăng ký, đăng nhập, form đặt lịch và chống trùng.
+
+### 3.5. Chống đoán mật khẩu và dò tài khoản
+
+- Thông báo đăng nhập sai chung chung.
+- Làm chậm lũy tiến và kiểm tra chống bot sau vài lần sai, thay vì khóa cứng (khóa cứng cho phép kẻ xấu khóa tài khoản người khác).
+- **Giới hạn phải đặt ở nơi áp dụng thật**: giới hạn ở đường dẫn Next.js không tự áp dụng cho API Auth của Supabase (mục 3.3, bước 4). Kết quả kiểm chứng quyết định cần thêm biện pháp nào.
+- Đăng ký phải báo "số/tên đã dùng", nên người ngoài dò được số nào đã có tài khoản. Không tránh được khi không có OTP. Giảm bằng chống bot và giới hạn tần suất; ghi nhận đây là rủi ro chấp nhận có chủ đích.
+- Mật khẩu: độ dài tối thiểu hợp lý (từ 8, nên 10), cho phép dài, chặn mật khẩu rất phổ biến; chặn mật khẩu bị rò rỉ nếu gói hỗ trợ [chờ kiểm chứng]. Dùng thư viện chính thức của Supabase cho Next.js để quản lý phiên.
+- Bộ đếm giới hạn tần suất lưu **trong PostgreSQL** bằng cập nhật nguyên tử, chưa cần dịch vụ riêng.
 
 ---
 
-## 4. Form đặt lịch, chống trùng và rò rỉ giữa khách vãng lai và tài khoản [Đề xuất]
+## 4. Form đặt lịch và chống trùng
 
-### 4.1. Nguyên tắc: không bao giờ nối theo nội dung hoặc số điện thoại
+### 4.1. Bất biến cần giữ và kiểm thử
 
-Một yêu cầu của khách vãng lai không có chủ sở hữu là tài khoản. Không cơ chế nào được tạo liên kết giữa yêu cầu và tài khoản dựa trên số điện thoại, tên hay nội dung trùng.
-
-**Bất biến cần giữ và kiểm thử:**
-1. Khách chỉ đọc được yêu cầu có mã tài khoản trùng với tài khoản đang đăng nhập. Yêu cầu không có mã tài khoản thì **không ai trong số khách đọc được**.
-2. Không có truy vấn nào dành cho khách nối số điện thoại của yêu cầu với số điện thoại của tài khoản.
+1. Khách chỉ đọc được yêu cầu thuộc tài khoản của mình. Yêu cầu không có chủ sở hữu tài khoản thì **không khách nào đọc được**.
+2. Không có truy vấn dành cho khách nối số điện thoại trong yêu cầu với số điện thoại của tài khoản.
 3. Khách vãng lai không có cách xem, tìm hay đoán trạng thái của bất kỳ yêu cầu nào.
 
-### 4.2. Chống trùng theo phạm vi chủ thể [Đề xuất chính]
+### 4.2. Phạm vi chống trùng: ngoại lệ cần chủ dự án duyệt [Cần chốt]
 
-Khóa chống trùng gồm **chủ thể** + các trường đã chuẩn hóa:
-- Chủ thể = mã tài khoản nếu đang đăng nhập; = một giá trị cố định "vãng lai" nếu không.
-- Hệ quả: chống trùng **không bao giờ vượt qua ranh giới giữa các chủ thể**.
-  - Khách vãng lai gửi nội dung giống một yêu cầu của tài khoản: tạo yêu cầu mới (không khớp, không lộ gì, không gắn vào tài khoản đó).
-  - Tài khoản gửi nội dung giống một yêu cầu vãng lai: cũng tạo yêu cầu mới, và xuất hiện đúng trong danh sách của tài khoản đó.
-- Chi phí chấp nhận được: thỉnh thoảng nhân viên thấy hai yêu cầu cùng nội dung. Giao diện nhân viên đã có gợi ý "còn N yêu cầu cùng số điện thoại" và thao tác gộp, nên không cần chặn thêm.
-- Lý do không dùng khóa chung toàn hệ thống: nếu tài khoản gửi nội dung trùng với yêu cầu vãng lai cũ, hệ thống chống trùng sẽ thông báo thành công mà yêu cầu không xuất hiện trong danh sách "Yêu cầu của tôi", gây khó hiểu; còn nếu để khắc phục bằng cách gắn yêu cầu cũ vào tài khoản thì vi phạm điều đã chốt.
-- Bên trong chủ thể "vãng lai": các khách vãng lai khác nhau gửi nội dung giống hệt nhau cũng bị coi là trùng. Điều này vô hại vì nhân viên sẽ gọi đúng số điện thoại đó.
+Điều đã chốt là "giống toàn bộ thông tin thì chống tạo trùng", chưa nói rõ khi một bên là vãng lai và một bên đã đăng nhập. Đề xuất của Claude (tính khóa chống trùng theo chủ thể) tạo **ngoại lệ**: nội dung giống hệt, gửi một lần khi vãng lai và một lần sau khi đăng nhập, sẽ thành hai yêu cầu. Hai lựa chọn cho chủ dự án:
 
-### 4.3. Thông báo phản hồi: giống hệt trong mọi trường hợp
+1. **Chống trùng trong từng phạm vi** (mỗi tài khoản một phạm vi, tất cả khách vãng lai chung một phạm vi). Đôi khi có hai yêu cầu giống nhau qua hai phạm vi; nhân viên tự kiểm tra, **không tự gộp hay chuyển chủ sở hữu**. Ưu điểm: không lộ chéo, không gắn yêu cầu vãng lai vào tài khoản, đơn giản. **Claude và Codex cùng nghiêng về lựa chọn này.**
+2. **Chống trùng toàn hệ thống.** Phải thiết kế riêng phản hồi và lịch sử tài khoản khi trùng một yêu cầu vãng lai (khách đăng nhập báo thành công nhưng yêu cầu không có trong danh sách của mình), và không được tự nhận quyền sở hữu yêu cầu cũ.
 
-- Mọi lần gửi hợp lệ (tạo mới hoặc bị chống trùng) trả về **cùng một thông báo thành công**, ví dụ: "Chúng tôi đã nhận yêu cầu. Nhân viên sẽ gọi xác nhận."
-- Không bao giờ hiển thị nội dung, trạng thái hay thời gian của yêu cầu đang có.
-- **Không bao giờ nhắc "số này đã có tài khoản, hãy đăng nhập"** khi khách vãng lai gửi form. Lời nhắc đó là bộ dò số điện thoại. Chỉ hiển thị lời mời đăng ký tài khoản **giống nhau cho mọi khách vãng lai**.
-- Sự kiện "khách gửi lại" chỉ ghi vào lịch sử cho nhân viên, **không hiện cho khách**.
-- Không gửi email xác nhận tới email do khách nhập (tránh bị lợi dụng gửi thư cho người thứ ba). Email chỉ báo cho nhân viên và không chứa tên chủ, số điện thoại hay thú cưng.
+Chưa áp dụng lựa chọn nào cho đến khi chủ dự án duyệt.
 
-### 4.4. Các điểm khác của form
+### 4.3. Cơ chế chống trùng chịu được hai lần gửi đồng thời [Đề xuất]
 
-- **Khách đăng nhập:** tự điền tên và số điện thoại từ hồ sơ; chọn thú cưng đã lưu hoặc thêm mới; chọn dịch vụ và ngày. **[Cần chốt]** khách có được sửa số liên hệ trong từng yêu cầu (ví dụ đặt hộ người thân) không. Đề xuất: cho sửa, vì bản chụp đã lưu số được dùng cho yêu cầu đó, nhưng gắn cờ cho nhân viên khi số khác số trong hồ sơ.
-- **Thú cưng đã lưu:** khi lưu thêm, cảnh báo mềm nếu trùng tên + loài + giống với con đã có (không chặn, vì có thể là hai con cùng tên).
-- **Bản chụp:** yêu cầu lưu sao chép tên chủ, số liên hệ, thông tin thú cưng, tên dịch vụ tại thời điểm gửi.
-- **Ngày mong muốn bắt buộc** và không được là ngày đã qua. Điều này giữ cho chặn trùng với yêu cầu "đã xác nhận" có giới hạn tự nhiên.
-- **Kiểm tra dữ liệu phía máy chủ**: độ dài, định dạng, danh sách giá trị cho loài và dịch vụ; ghi chú (nếu có) giới hạn độ dài.
-- **Ghi nhận đồng ý** xử lý dữ liệu cá nhân với phiên bản nội dung và thời điểm.
+Cơ sở dữ liệu là nơi phân xử, không phải đoạn kiểm tra trong ứng dụng:
+1. Máy chủ chuẩn hóa các trường (Unicode NFC, cắt và gộp khoảng trắng, không phân biệt hoa thường, **không bỏ dấu tiếng Việt**; điện thoại về dạng quốc tế; email viết thường) rồi tạo **một khóa trùng**, lưu cùng yêu cầu, kèm số phiên bản của cách tạo khóa.
+2. Ràng buộc duy nhất cho khóa này, **chỉ áp dụng khi yêu cầu còn ở nhóm trạng thái đang xử lý**. Yêu cầu bị hủy hoặc bị từ chối giải phóng khóa nên khách gửi lại được.
+3. Máy chủ thử ghi; nếu cơ sở dữ liệu báo trùng thì bỏ qua việc tạo mới. Hai lần gửi đồng thời: một lần ghi được, lần kia nhận "đã có".
+4. Ngày mong muốn bắt buộc và không được là ngày đã qua, nên yêu cầu "đã xác nhận" chỉ chặn tạo trùng trong giới hạn tự nhiên.
+5. Chỉ gửi email cho nhân viên khi tạo mới.
+6. Nút gửi bị vô hiệu sau khi bấm; trình duyệt coi phản hồi "trùng" như thành công.
+7. Trạng thái "Không liên lạc được" khi khách gửi lại giống hệt: **[Cần chốt]** vẫn chống trùng, hay cho tạo yêu cầu mới.
 
-### 4.5. Chống spam (tách riêng với chống trùng)
+### 4.4. Phản hồi giống hệt cho mọi trường hợp
 
-Chống trùng là quy tắc xác định, bảo vệ khỏi gửi lặp. Chống spam là lớp giới hạn khác (theo địa chỉ mạng, theo số điện thoại đã nhập, theo tài khoản; chống bot; cờ "cần xem xét" ở ngưỡng thấp, từ chối ở ngưỡng cao). Ngưỡng cần điều chỉnh theo thực tế, **[Cần chốt]**. Bộ đếm phải nằm ở nơi dùng chung (cơ sở dữ liệu hoặc kho khóa-giá trị), vì môi trường serverless không giữ bộ nhớ giữa các lần gọi.
+- Mọi lần gửi hợp lệ (tạo mới hay bị chống trùng) trả cùng một thông báo, ví dụ: "Chúng tôi đã nhận yêu cầu. Nhân viên sẽ gọi xác nhận."
+- Không bao giờ hiển thị nội dung, trạng thái hay thời gian của yêu cầu có sẵn.
+- **Không nhắc "số này đã có tài khoản, hãy đăng nhập"** khi khách vãng lai gửi form: đó là bộ dò số điện thoại. Lời mời đăng ký, nếu có, phải giống nhau cho mọi khách vãng lai.
+- Không gửi email xác nhận tới email do khách nhập. Email báo nhân viên không chứa tên chủ, số điện thoại hay thông tin thú cưng, chỉ có "có yêu cầu mới" và liên kết đăng nhập.
+
+### 4.5. Các điểm khác của form
+
+- Khách đăng nhập: điền sẵn tên và số điện thoại; chọn thú cưng đã lưu hoặc thêm mới; chọn dịch vụ và ngày mong muốn.
+- Khách đăng nhập có sửa số liên hệ trong từng yêu cầu không: **[Cần chốt]**. Đề xuất mặc định khóa, vì "đặt hộ" nằm ngoài phạm vi chưa duyệt (mục 8).
+- Kiểm tra dữ liệu phía máy chủ: độ dài, định dạng, danh sách giá trị cho loài và dịch vụ.
+- Ghi nhận đồng ý xử lý dữ liệu cá nhân (phiên bản nội dung, thời điểm).
+- Chống spam là lớp riêng với chống trùng: giới hạn tần suất theo địa chỉ mạng, số điện thoại và tài khoản; chống bot. Ngưỡng và cách xử lý khi vượt: **[Cần chốt]**.
 
 ---
 
-## 5. Quy trình tối thiểu không dùng OTP [Đề xuất]
+## 5. Hỗ trợ tài khoản tối thiểu [Đề xuất, chưa duyệt]
 
-Nguyên tắc: khối lượng nhỏ, làm thủ công qua nhân viên, mọi bước nhạy cảm ghi nhật ký. Cần quản lý và lễ tân duyệt quy trình, vì chủ dự án chưa duyệt quy trình nào.
+Phạm vi thu hẹp: **không mở form hỗ trợ riêng**. Khách liên hệ bệnh viện qua thông tin liên hệ sẵn có (điện thoại, tại quầy); quản lý xử lý và ghi nhận trên trang quản trị. Cần quản lý và lễ tân duyệt quy trình này.
 
-### 5.1. Công cụ chung: yêu cầu hỗ trợ tài khoản
+### 5.1. Ba việc phải tách riêng
 
-- Một form công khai "Cần hỗ trợ tài khoản" (loại: quên mật khẩu, đổi số, số bị đăng ký nhầm, khác), thu: định danh khách nhớ (tên đăng nhập hoặc số), số điện thoại liên hệ, mô tả ngắn.
-- Phản hồi thống nhất "Chúng tôi sẽ liên hệ lại", không tiết lộ tài khoản có tồn tại không. Khách cũng có thể gọi thẳng cho bệnh viện.
-- Nhân viên xử lý yêu cầu trên trang quản trị, có trạng thái và nhật ký như yêu cầu đặt lịch. Giới hạn tần suất và chống bot cho form này.
+Một cuộc gọi chứng minh người đó **hiện nhận được cuộc gọi ở số này**, không chứng minh họ **có quyền với tài khoản và lịch sử cũ** (số có thể đã được nhà mạng cấp cho người khác).
 
-### 5.2. Quên mật khẩu
+1. **Khôi phục quyền vào tài khoản cũ.** Cần bằng chứng mạnh hơn việc giữ số. Tên thú cưng hay ngày yêu cầu **không đủ** làm bằng chứng duy nhất. Nếu không đủ bằng chứng: **không giao tài khoản hay dữ liệu cũ.** Chứng cứ nào được coi là đủ (ví dụ gặp trực tiếp tại bệnh viện kèm thú cưng và nhân viên nhận ra) là **[Cần chốt]** của quản lý.
+2. **Giải phóng số để đăng ký tài khoản mới.** Quản lý quyết định, tách khỏi việc 1. Tài khoản cũ bị khóa, không xóa. **Không sao chép lịch sử cũ sang tài khoản mới.**
+3. **Đặt lại mật khẩu cho người đã chứng minh được quyền ở việc 1.**
 
-1. Khách gửi yêu cầu hỗ trợ hoặc gọi.
-2. Nhân viên **gọi lại đúng số điện thoại đang lưu trong tài khoản** (không gọi số khách tự đọc). Gọi lại là điểm bảo vệ: nếu số bị người khác chiếm đăng ký, cuộc gọi sẽ đến chủ số thật.
-3. Hỏi vài thông tin chỉ chủ tài khoản biết (ví dụ tên thú cưng đã lưu, ngày gần nhất gửi yêu cầu). Nhân viên **không đọc dữ liệu tài khoản cho người gọi**.
-4. Nếu đạt: nhân viên kích hoạt "đặt lại mật khẩu"; hệ thống tạo **mật khẩu tạm ngẫu nhiên**, hiển thị **một lần** cho nhân viên đọc qua điện thoại, và bật cờ "phải đổi mật khẩu". Khách đăng nhập và phải đặt mật khẩu mới ngay. Mật khẩu tạm dùng API quản trị của Supabase (đã xác minh cơ bản ở mục 2), hết hạn nếu không dùng.
-5. Thu hồi các phiên cũ. Ghi nhật ký: ai, lúc nào, tài khoản nào, kết quả.
-6. Nếu tài khoản có email đã xác minh (giai đoạn sau), gửi thông báo "mật khẩu vừa được đặt lại".
-- **Rủi ro chính:** đây là điểm tấn công kỹ thuật xã hội (kẻ xấu gọi bệnh viện giả làm chủ tài khoản). Giảm bằng: gọi lại số trên hồ sơ, câu hỏi kiểm tra, không tiết lộ dữ liệu, bắt buộc đổi mật khẩu, nhật ký. Dữ liệu trong tài khoản là mức nhạy cảm vừa (tên, số điện thoại, thông tin thú cưng, lịch sử yêu cầu).
-- **Phương án khác:** mã dùng một lần do nhân viên đọc cho khách rồi khách tự đặt mật khẩu mới trên web. An toàn hơn (nhân viên không biết mật khẩu nào), nhưng phải tự xây phần kiểm tra mã. Codex đánh giá chi phí.
-- **Khôi phục bằng email (giai đoạn sau, tùy chọn):** chỉ khi email đã xác minh bằng thư xác nhận. Với phương án B, cần tự gửi thư thông qua dịch vụ email riêng vì email giả không dùng được. Chưa đưa vào bản đầu.
+### 5.2. Đăng ký nhầm, số cấp lại
 
-### 5.3. Đổi số điện thoại
+Chủ số thật báo số đã bị đăng ký: quản lý liên hệ, xét theo 5.1, và nếu quyết định giải phóng thì khóa tài khoản cũ và ghi nhật ký. Nếu hai bên cùng nhận và không đủ bằng chứng, quản lý quyết định; không thể giải quyết hoàn toàn bằng kỹ thuật.
 
-- **Khách tự đổi khi đang đăng nhập:** yêu cầu nhập lại mật khẩu hiện tại; kiểm tra số mới chưa có tài khoản; trạng thái số quay về `chưa_xác_minh`; ghi nhật ký; giới hạn số lần đổi. Không thêm rủi ro mới so với đăng ký (vì đăng ký cũng không xác minh), nhưng cần giới hạn để tránh chiếm hàng loạt số.
-- **Khách mất cả mật khẩu và số cũ:** đi qua quy trình hỗ trợ 5.1, nhân viên xác minh bằng thông tin kiểm tra và cuộc gọi, rồi quản lý đổi số hoặc cấp tài khoản mới. Chọn cách nào là **[Cần chốt]**.
+### 5.3. Đặt lại mật khẩu [Chờ kiểm chứng]
 
-### 5.4. Đăng ký nhầm và tranh chấp số
+Codex chỉ ra: đổi mật khẩu bằng API quản trị **không tự tạo hết hạn cho mật khẩu tạm** và **không tự ép đổi mật khẩu ở mọi đường truy cập**; thu hồi phiên chưa chắc làm token còn hạn mất hiệu lực ngay. Nếu vẫn dùng mật khẩu tạm:
+- Việc bắt buộc đổi mật khẩu phải được kiểm tra **ở máy chủ cho mọi thao tác dữ liệu**, không chỉ chuyển hướng giao diện.
+- Mật khẩu tạm phải ngẫu nhiên, hiện một lần, và có cách hết hạn do ta thiết kế.
+- Không hứa mọi phiên cũ mất hiệu lực ngay; mô tả đúng hành vi sau khi chạy kiểm chứng ở mục 3.3.
+- Phương án khác (mã dùng một lần do nhân viên đọc, khách tự đặt mật khẩu mới) an toàn hơn về việc nhân viên không biết mật khẩu, nhưng phải tự xây phần kiểm tra mã. Codex đánh giá chi phí.
+- Khôi phục qua email chỉ nên có khi email đã xác minh. Chưa đưa vào bản đầu.
 
-Tình huống: ai đó đã đăng ký tài khoản bằng số của người khác (cố ý hoặc nhầm), chủ số thật không đăng ký được.
-1. Chủ số thật gửi yêu cầu hỗ trợ "số bị đăng ký nhầm" hoặc gọi bệnh viện.
-2. Quản lý **gọi vào số đó** và xác nhận người nghe là chủ số, hỏi họ có đăng ký tài khoản không.
-3. Nếu chủ số xác nhận **không đăng ký**: quản lý đặt tài khoản kia vào trạng thái `đang_tranh_chấp` và **khóa tạm** (không xóa, giữ lịch sử và yêu cầu), **giải phóng số** để chủ số thật đăng ký. Ghi nhật ký đầy đủ.
-4. Nếu chủ số **là người đăng ký** nhưng đã quên: chuyển sang quy trình quên mật khẩu.
-5. Nếu hai bên cùng nhận: quản lý quyết định theo thông tin sẵn có, có thể yêu cầu cả hai đến trực tiếp. Không thể giải quyết hoàn toàn bằng kỹ thuật.
-- Khi nhân viên **gọi xác nhận lần đầu** một yêu cầu đặt lịch thành công, có thể đánh dấu số là `nhân_viên_đã_xác_minh`. Số đã xác minh khó bị chiếm hơn trong tranh chấp (cần quản lý), và là cách xác minh số điện thoại **không tốn phí SMS**.
-- Chiếm số bởi người lạ **không cho họ xem dữ liệu của chủ số thật**, nhờ nguyên tắc ở mục 4.1: khách vãng lai không tự gắn vào tài khoản theo số điện thoại. Tác hại chính là chủ số thật bị chặn đăng ký và nhân viên có thể gọi nhầm người.
+### 5.4. Xóa tài khoản
 
-### 5.5. Số bị nhà mạng cấp lại cho người khác
-
-Giống 5.4: người dùng mới của số gặp thông báo "số đã đăng ký". Quản lý gọi số đó, nếu chủ cũ không còn dùng được và người mới chứng minh đang giữ số, thì giải phóng. Nhật ký bắt buộc.
-
-### 5.6. Xóa tài khoản
-
-Xóa mềm: giải phóng số và tên đăng nhập, giữ yêu cầu đã gửi (đã có bản chụp) theo chính sách lưu trữ, bỏ thông tin định danh thừa nếu chính sách yêu cầu. **[Cần chốt]** thời gian lưu và nội dung chính sách.
+Xóa mềm: giải phóng số và tên đăng nhập, giữ yêu cầu đã gửi theo chính sách lưu trữ. **[Cần chốt]** thời gian lưu, nội dung chính sách.
 
 ---
 
 ## 6. Phân quyền [Đề xuất]
 
-- Khách: chỉ đọc và thêm dữ liệu của chính tài khoản mình; không bao giờ sửa trạng thái hay trường nhân viên.
-- Dữ liệu của khách bật Row Level Security cho mọi bảng; **bảng quên bật là bảng mở**. Khóa service-role chỉ có ở máy chủ, không bao giờ có trong biến môi trường công khai.
-- Vai trò nhân viên lưu ở nơi người dùng không tự sửa được (bảng riêng, hoặc metadata chỉ máy chủ ghi). Tài khoản nhân viên do quản lý tạo; khách tự đăng ký không bao giờ có vai trò nhân viên.
-- Thao tác nhạy cảm (đặt lại mật khẩu, giải phóng hoặc đổi số, khóa tài khoản) chỉ qua máy chủ, kiểm tra vai trò, ghi nhật ký. **[Cần chốt]** lễ tân được làm những thao tác nào. Gợi ý: lễ tân xử lý quên mật khẩu thông thường; chỉ quản lý giải phóng/đổi số và khóa tài khoản. Vì quản lý chỉ có một người nên cần phương án dự phòng.
-- Quản lý bật xác thực hai bước cho tài khoản của mình (một người giữ toàn quyền, tài khoản đó là mục tiêu lớn nhất). Phương thức không cần SMS, ví dụ ứng dụng sinh mã, **[Chưa xác minh]** cách Supabase hỗ trợ.
+- Khách chỉ đọc và thêm dữ liệu thuộc tài khoản mình; không bao giờ sửa trạng thái hay trường của nhân viên.
+- Khả năng truy cập dữ liệu qua API của Supabase phụ thuộc **cả hai**: schema nào được đưa ra qua API, quyền đã cấp cho từng vai trò, và chính sách RLS. Kiểm tra cả quyền lẫn RLS cho từng bảng, không dựa vào riêng một lớp.
+- Khóa có quyền cao có thể bỏ qua RLS; chỉ dùng ở máy chủ, không có trong biến môi trường công khai, và **mọi thao tác dùng khóa này phải kiểm tra người dùng và vai trò ở máy chủ**.
+- Vai trò nhân viên lưu ở nơi người dùng không tự sửa được. Tài khoản nhân viên do quản lý tạo; khách tự đăng ký không bao giờ có vai trò nhân viên.
+- Thao tác nhạy cảm (đặt lại mật khẩu, giải phóng số, khóa tài khoản) qua máy chủ, kiểm tra vai trò, ghi nhật ký. **[Cần chốt]** lễ tân được làm gì; quản lý chỉ một người nên cần phương án dự phòng.
+- Quản lý bật xác thực hai bước không dùng SMS [chờ kiểm chứng cách Supabase hỗ trợ].
+- Môi trường thử dùng dữ liệu giả, tách khỏi dữ liệu thật.
 
 ---
 
@@ -215,55 +212,49 @@ Xóa mềm: giải phóng số và tên đăng nhập, giữ yêu cầu đã g�
 
 1. Số điện thoại chưa xác minh: có thể bị chiếm đăng ký, nhân viên có thể gọi nhầm người.
 2. Dò số điện thoại qua thông báo "số đã đăng ký".
-3. Kỹ thuật xã hội vào quy trình quên mật khẩu qua điện thoại.
-4. Quản lý là một điểm nghẽn cho các thao tác nhạy cảm.
-5. Tài khoản rác và đăng ký hàng loạt (chi phí nhỏ, nhưng làm bẩn dữ liệu và nhật ký).
-6. Chưa có cách thông báo cho khách ngoài cuộc gọi, vì không có email hoặc SMS bắt buộc.
-Các điểm này **không** phải lý do bỏ quyết định của chủ dự án, nhưng cần được ghi nhận và xem lại khi lưu lượng tăng.
+3. Kỹ thuật xã hội vào quy trình hỗ trợ tài khoản qua điện thoại.
+4. Quản lý là điểm nghẽn cho thao tác nhạy cảm.
+5. Đăng ký rác và hàng loạt.
+6. Chưa có kênh thông báo cho khách ngoài cuộc gọi.
 
 ---
 
-## 8. Quyết định còn thiếu [Cần chốt]
+## 8. Ý tưởng Claude từng nêu, nay NGOÀI phạm vi cho đến khi chủ dự án duyệt
 
-**Từ chủ dự án**
-1. Có nhận số cố định hay chỉ số di động?
-2. Khách đăng nhập có được sửa số liên hệ trong từng yêu cầu không?
-3. Lễ tân được làm thao tác nhạy cảm nào; ai dự phòng khi quản lý vắng?
-4. Duyệt quy trình tối thiểu ở mục 5 (quên mật khẩu, đổi số, tranh chấp số) hay điều chỉnh.
-5. Chính sách lưu trữ và xóa dữ liệu, nội dung thông báo đồng ý.
-6. Ngưỡng giới hạn tần suất ban đầu, người theo dõi cờ "cần xem xét".
-7. Có đưa email xác minh (khôi phục qua thư) vào giai đoạn sau không.
-
-**Từ Codex**
-8. Phương án A hay B (mục 3.1); xác minh phone+mật khẩu không xác nhận trên bản hosted có cần nhà cung cấp SMS không.
-9. Xác minh các mục [Chưa xác minh] ở mục 2, đặc biệt: chặn mật khẩu bị rò rỉ theo gói, thu hồi phiên, hỗ trợ xác thực hai bước không SMS, giới hạn đăng nhập theo gói.
-10. Đánh giá chi phí phương án "mã dùng một lần do nhân viên đọc" so với "mật khẩu tạm".
-11. Cách chạy bộ đếm giới hạn tần suất trên Vercel (kho dùng chung).
-
-**Từ Gemini**
-12. Luồng đăng ký, đăng nhập (một ô cho "số điện thoại hoặc tên đăng nhập"), thông báo lỗi chung, màn hình "Cần hỗ trợ tài khoản", thông báo thành công thống nhất, và lời mời đăng ký không lộ trạng thái số điện thoại.
+Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); form "Cần hỗ trợ tài khoản" riêng; nhiều tầng cảnh báo và cờ "cần xem xét"; trạng thái "nhân viên đã xác minh số điện thoại" sau cuộc gọi đầu tiên; sự kiện "khách gửi lại" cho nhân viên; cảnh báo mềm khi lưu thú cưng trùng; trạng thái "Spam/Không hợp lệ" riêng. Chỉ làm khi chủ dự án chọn.
 
 ---
 
-## 9. Kịch bản kiểm thử gợi ý (dữ liệu giả)
+## 9. Quyết định còn thiếu
+
+**Chủ dự án:** (1) phạm vi chống trùng, chọn lựa chọn 1 hay 2 ở mục 4.2; (2) bằng chứng nào đủ để khôi phục tài khoản cũ, và ai quyết định; (3) lễ tân được làm thao tác nhạy cảm nào, ai dự phòng quản lý; (4) có nhận số cố định không; (5) xử lý "Không liên lạc được" khi khách gửi lại; (6) khách có sửa số liên hệ trong yêu cầu không; (7) ngưỡng giới hạn tần suất; (8) chính sách lưu trữ, xóa và nội dung đồng ý; (9) dự án thử cho kiểm chứng.
+
+**Codex:** (10) chạy kế hoạch kiểm chứng mục 3.3 rồi chọn A hay B; (11) kết quả các mục [chờ kiểm chứng] ở mục 2; (12) phương án đặt lại mật khẩu (mật khẩu tạm hay mã dùng một lần) và chi phí.
+
+**Gemini:** (13) luồng đăng ký và đăng nhập (một ô cho "số điện thoại hoặc tên đăng nhập"), thông báo lỗi chung, thông báo thành công thống nhất, và cách trình bày giới hạn "số điện thoại chưa xác minh" cho khách. Khoan vẽ màn hình hỗ trợ tài khoản cho đến khi quy trình mục 5 được duyệt.
+
+---
+
+## 10. Kịch bản kiểm thử gợi ý (dữ liệu giả)
 
 | # | Tình huống | Kết quả mong đợi |
 |---|---|---|
-| 1 | Đăng ký tên đăng nhập toàn số hoặc dạng số điện thoại | Từ chối |
-| 2 | Đăng ký hai lần cùng số `0900000001` và `+84900000001` | Lần hai bị từ chối (cùng khóa chuẩn hóa) |
+| 1 | Tên đăng nhập toàn số hoặc dạng số điện thoại | Từ chối |
+| 2 | Đăng ký cùng số ở hai định dạng (`0900000001`, `+84900000001`) | Lần hai bị từ chối |
 | 3 | Tên đăng nhập `Khach.A` và `khach.a` | Coi là trùng |
-| 4 | Đăng nhập bằng số dạng `0900000001`, `+84900000001` | Cùng một tài khoản |
-| 5 | Đăng nhập sai (không có tài khoản / sai mật khẩu) | Cùng một thông báo, thời gian gần nhau |
-| 6 | Sai mật khẩu nhiều lần | Làm chậm và yêu cầu chống bot; chủ thật vẫn đăng nhập được sau đó |
-| 7 | Khách vãng lai gửi form với số đã có tài khoản | Phản hồi như khách vãng lai khác; không có gợi ý đăng nhập riêng; yêu cầu **không** xuất hiện trong tài khoản nào |
-| 8 | Tài khoản gửi nội dung giống một yêu cầu vãng lai | Tạo yêu cầu mới, hiện trong danh sách của tài khoản |
-| 9 | Vãng lai gửi nội dung giống yêu cầu của tài khoản | Phản hồi thành công như thường, không lộ, không gắn vào tài khoản |
-| 10 | Khách cố đọc yêu cầu của tài khoản khác hoặc yêu cầu vãng lai | Bị chặn ở tầng cơ sở dữ liệu |
-| 11 | Mật khẩu tạm | Chỉ hiện một lần; đăng nhập xong bắt buộc đổi; phiên cũ bị thu hồi |
-| 12 | Giải phóng số sau tranh chấp | Tài khoản cũ khóa, giữ dữ liệu; số đăng ký lại được; có nhật ký |
-| 13 | Đổi số sang số đã có tài khoản | Từ chối, không lộ thêm thông tin |
-| 14 | Gửi yêu cầu hỗ trợ cho tài khoản không tồn tại | Cùng phản hồi như tài khoản có tồn tại |
+| 4 | Đăng nhập bằng số ở các định dạng khác nhau | Cùng một tài khoản |
+| 5 | Không có tài khoản và sai mật khẩu | Cùng một thông báo, thời gian gần nhau |
+| 6 | Sai mật khẩu nhiều lần | Làm chậm, chống bot; chủ thật vẫn vào được sau đó |
+| 7 | Gọi trực tiếp API Auth đi vòng đường dẫn Next.js | Vẫn bị giới hạn theo kết quả kiểm chứng; ghi nhận hành vi thật |
+| 8 | Khách vãng lai gửi form với số đã có tài khoản | Phản hồi như mọi khách vãng lai; không có gợi ý riêng; yêu cầu không xuất hiện trong tài khoản nào |
+| 9 | Hai lần gửi đồng thời giống hệt | Một yêu cầu, cả hai thấy thành công |
+| 10 | Cùng nội dung, một vãng lai và một đã đăng nhập (theo lựa chọn đã duyệt ở 4.2) | Hành vi đúng lựa chọn; không lộ, không gắn chéo |
+| 11 | Khách đọc yêu cầu của tài khoản khác hoặc yêu cầu vãng lai | Bị chặn ở tầng cơ sở dữ liệu |
+| 12 | Truy cập dữ liệu bằng khóa công khai với bảng thiếu quyền hoặc RLS | Bị chặn; kiểm tra cả quyền được cấp lẫn RLS |
+| 13 | Token trình duyệt nhận có chứa thông tin gì | Ghi nhận đúng, không giả định là bí mật |
+| 14 | Đổi mật khẩu rồi dùng token cũ còn hạn | Ghi nhận hành vi thật, không hứa mất hiệu lực ngay |
+| 15 | Giải phóng số sau tranh chấp | Tài khoản cũ khóa, giữ dữ liệu; số đăng ký lại được; **không** chuyển lịch sử cũ; có nhật ký |
 
 ---
 
-*Tài liệu này chưa chốt kiến trúc hay công nghệ; mọi nội dung [Đề xuất] cần các bên phản biện trước khi trở thành quyết định.*
+*Tài liệu này chưa chốt kiến trúc hay công nghệ và chưa phê duyệt quy trình khôi phục tài khoản nào.*
