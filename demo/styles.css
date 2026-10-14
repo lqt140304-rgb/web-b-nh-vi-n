@@ -1081,11 +1081,11 @@ img {
   pointer-events: none;
 }
 
-/* Bên trái: Cuộn len ở x ≈ 15%, sợi cong nhẹ xuống chạm đúng đỉnh ảnh mèo trái */
+/* Bên trái: Cuộn len ở x ≈ 20%, sợi ngắn cong nhẹ thanh thoát nối xuống đỉnh ảnh mèo trái */
 .hero-decor-yarn {
   position: absolute;
-  top: 50px;
-  left: calc(50% - 530px);
+  top: 90px;
+  left: calc(50% - 430px);
   z-index: 1;
   pointer-events: none;
 }
