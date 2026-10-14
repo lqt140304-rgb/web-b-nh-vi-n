@@ -2,9 +2,9 @@
 **Dự án:** Bệnh viện Thú y Lê Sơn  
 **Tác giả:** Antigravity (UI/UX Specialist)  
 **Phối hợp:** Claude (Nghiệp vụ & Rà soát), Codex (Triển khai chính thức), ChatGPT (Điều phối), Chủ dự án (Phê duyệt cuối cùng)  
-**Trạng thái:** **Chờ rà soát và chờ chủ dự án duyệt**  
-**Nhánh Git:** `antigravity/hero-v1`  
-**Phiên bản cập nhật:** V1.1 (Theo biên bản yêu cầu sửa đổi từ Claude & ChatGPT)
+**Trạng thái:** **Đã hoàn thiện theo bản thiết kế chốt 15/10/2026**  
+**Nhánh Git:** `antigravity/design`  
+**Phiên bản cập nhật:** V1.2 (Áp dụng bản thiết kế chốt 15/10/2026 từ Chủ dự án, Codex và Claude)
 
 ---
 
@@ -15,22 +15,24 @@
 2. **Nhận diện Lê Sơn:** Kế thừa bản sắc thương hiệu, sử dụng đúng logo chính thức trong suốt do Chủ dự án cung cấp (`assets/logo-le-son.png`), không biến dạng méo mó.
 3. **Bố cục Hero:** Tiêu đề lớn căn giữa thanh lịch, không dùng floating card phức tạp. Ba khung ảnh thú cưng bo vòm chạm chân trang, phân lớp rõ ràng, không che lấp chữ hay nút bấm.
 
-### 1.2. Nội dung Hero (Áp dụng theo mặc định và chờ Chủ dự án xác nhận):
-- **Nhãn mở đầu (Eyebrow):** `♥ BỆNH VIỆN THÚ Y LÊ SƠN`
+### 1.2. Nội dung Hero (Đã chốt chính thức ngày 15/10/2026):
+- **Nhãn mở đầu (Eyebrow):** Đã bỏ hoàn toàn theo quyết định chốt của Chủ dự án.
 - **Tiêu đề chính (H1):**
-  > *Khoảng an toàn nhỏ*  
-  > *cho những người bạn lớn*
+  > *Không gian lớn*  
+  > *cho những người bạn nhỏ*
 - **Mô tả phụ (S12: text-wrap balance, không rớt từ đơn):**
   > *Chăm sóc bằng chuyên môn, đồng hành bằng sự thấu hiểu.*
 - **Nút hành động chính:** `Gửi yêu cầu đặt lịch →` (không dùng "Đặt lịch ngay", không ngụ ý có chỗ tức thì).
 - **Nút hành động phụ:** `Xem dịch vụ`
-- **Cụm chú thích bảo đảm & không cần tài khoản (S8):**
-  - `📞 Nhân viên sẽ liên hệ để xác nhận lịch hẹn.` *(Chờ chủ dự án xác nhận)*
-  - `·`
-  - `👤 Không cần tài khoản để gửi yêu cầu.` *(Hiển thị trực quan ngay trang chủ, đạt tương phản ≥ 4.5:1)*
-- **Lược bỏ nội dung ngoài phạm vi Phase 1 (Q1, Q3):**
-  - Đã bỏ mục "Tin tức", "Cẩm nang thú cưng" và ô tìm kiếm nhanh khỏi Header.
-  - Đã bỏ chữ viết tay tiếng Anh "Care / Create / Stronger / Bonds", giữ lại họa tiết vòng cung cam mỏng đối xứng và dấu chân thú tím tinh tế.
+- **Cụm chú thích dưới nút:** Đã bỏ cả 2 dòng ghi chú theo quyết định chốt của Chủ dự án (thu gọn khoảng cách cân đối, giữ nguyên giải thích xác nhận lịch trong form và menu).
+- **Họa tiết trang trí (Chuẩn chốt theo ảnh mẫu 15/10/2026):**
+  - Hai cung cam mảnh ôm phía ngoài hai ảnh bên (`pet-arch-halo-left`, `pet-arch-halo-right`), chừa khe đều, không đè ảnh/chữ; không vẽ viền cho ảnh giữa.
+  - Bên trái: Cuộn len tím nhạt (`hero-decor-yarn`) với sợi nối cong hướng xuống ảnh mèo trái.
+  - Bên phải: Ba dấu chân tím nhạt (`hero-decor-paws`) nhỏ dần hướng lên trên.
+  - Góc dưới trái: Quả bóng nhỏ nét tím nhạt (`hero-decor-ball`).
+  - Góc trên phải: Nét cong ngắn và 2 chấm tím nhạt (`hero-decor-top-right`).
+  - Toàn bộ là SVG/CSS tĩnh, nhẹ nhàng, không có hiệu ứng rung/nhấp nháy lặp vô hạn.
+  - Mọi hiệu ứng hover bọc trong `@media (hover: hover)` chống dính trên màn hình cảm ứng.
 
 ### 1.3. Hình ảnh thú cưng Hero (S10, Q4)
 Sử dụng ảnh gốc hình chữ nhật độ phân giải cao (Retina 2x), không nướng sẵn khung vòm kem hay vạch đáy, để CSS tự bo vòm mượt mà:
