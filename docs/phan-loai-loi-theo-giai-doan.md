@@ -1,6 +1,6 @@
 # Phân loại lỗi QA theo giai đoạn: cái nào sửa ngay, cái nào được bỏ qua
 
-**Người soạn:** Claude · **Ngày:** 14/10/2026 · **Căn cứ:** chủ dự án nói dự án làm theo từng phần nên có chỗ chưa hiển thị; yêu cầu xem phần nào đủ điều kiện bỏ qua. Áp dụng cho Hero V1 và Services V1 (báo cáo [Hero bản 3a](ra-soat-hero-v1-claude.md), [Services lượt 2](ra-soat-services-v1-claude.md)). **Đề xuất của Claude, chờ chủ dự án duyệt.**
+**Người soạn:** Claude · **Ngày:** 14/10/2026 · **Căn cứ:** chủ dự án nói dự án làm theo từng phần nên có chỗ chưa hiển thị; yêu cầu xem phần nào đủ điều kiện bỏ qua. Áp dụng cho Hero V1 và Services V1 (báo cáo [Hero bản 3a](ra-soat-hero-v1-claude.md), [Services lượt 2](ra-soat-services-v1-claude.md)). **Đề xuất của Claude. Chủ dự án đã trả lời ba câu hỏi 14/10/2026 (mục 4); bảng chốt cuối nằm ở [`yeu-cau-sua-services-v1-lan-2-antigravity.md`](yeu-cau-sua-services-v1-lan-2-antigravity.md).**
 
 ## 1. Tiêu chí được bỏ qua (cả bốn ý đều đúng thì mới bỏ)
 
@@ -42,7 +42,13 @@
 
 Ghi chú: mục 8 không nằm trong báo cáo lượt 2; Claude đã chỉ kiểm menu của Services. Không coi là bỏ qua, chỉ chưa kiểm.
 
-## 4. Quyết định cần chủ dự án
+## 4. Quyết định của chủ dự án (14/10/2026)
+
+- **Q4: bỏ hai nút Maps và Facebook ở header** [Đã chốt]. Khối liên hệ ở menu điện thoại giữ theo đề xuất (chủ dự án không nói bỏ).
+- **B2: ảnh Cấp cứu là ảnh tạm thời** [Đã chốt] → bỏ qua lỗi cắt mất đầu chú chó.
+- **Bỏ nút "Tìm hiểu thêm & Chỉ đường" ở thẻ Cấp cứu** [Đã chốt].
+
+### Câu hỏi ban đầu (giữ để đối chiếu)
 
 - **Duyệt bảng phân loại** (cột "có thể bỏ qua" và "phải sửa ngay").
 - **Q4** (mục 3, số 7): giữ hay bỏ nút Maps/Facebook ở header.
