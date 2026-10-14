@@ -41,8 +41,20 @@ Chỉ những điều chủ dự án mới quyết định được. Chi tiết 
 12. **Định nghĩa "hoạt động thương mại"** để áp dụng cổng chọn gói (đề xuất: khi công khai cho khách thật hoặc nhận dữ liệu khách thật).
 13. **Mục tiêu chi phí vận hành thương mại:** 300.000 đồng/tháng được đặt khi nền tảng là Cloudflare. Ước tính trước đó của Codex cho gói trả phí Vercel và Supabase cao hơn nhiều (Claude chưa kiểm chứng). Cần xác nhận lại mục tiêu hoặc chấp nhận mức cao hơn khi đến cổng; không cần quyết định ngay.
 
+## 3c. Phân công mới (14/10)
+
+| Bên | Việc |
+|---|---|
+| Antigravity (thay Gemini) | Thiết kế UI/UX, responsive, hiệu ứng, demo giao diện với dữ liệu giả; dùng logo do chủ dự án cung cấp, nhận diện tím, kem, cam, xanh ngọc; ưu tiên Hero/Header |
+| Claude | Phân tích nghiệp vụ, tài liệu, tiêu chí nghiệm thu, rà soát |
+| Codex | Lập trình chính thức, tích hợp Supabase, kiểm thử, triển khai Vercel |
+| ChatGPT | Điều phối và đánh giá phương án |
+| Chủ dự án | Cung cấp logo; **duyệt giao diện trước khi Codex triển khai chính thức** |
+
+Brief mới: `antigravity-brief-hero.md` (thay `gemini-brief-hero.md`). Tiêu chí nghiệm thu Hero/Header nằm ở mục 7 của brief.
+
 ## 4. Việc Codex làm tiếp khi được duyệt (không cần thêm vòng duyệt)
 
 - Chạy Next.js trên Vercel Hobby trong phát triển; kiểm thử chuyển IP khách trên Vercel; đánh giá điều khoản và gói cho vận hành thương mại khi đến cổng.
 - Các kiểm chứng kỹ thuật còn lại ở mục 2 và 10 của tài liệu rà soát (số di động Việt Nam, tên đăng nhập qua tra cứu, chuyển IP khách, quyền dữ liệu, thử xuất và khôi phục).
-- Cùng Claude hoàn thiện mô hình dữ liệu và phân quyền theo khả năng; Gemini hoàn thiện thiết kế giao diện, bắt đầu từ Hero/Header.
+- Cùng Claude hoàn thiện mô hình dữ liệu và phân quyền theo khả năng; Antigravity hoàn thiện thiết kế giao diện, bắt đầu từ Hero/Header.

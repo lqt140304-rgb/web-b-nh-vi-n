@@ -1,4 +1,4 @@
-# Kế hoạch đề xuất: giai đoạn 1 website Bệnh viện thú y Lê Sơn (bản 4)
+# Kế hoạch đề xuất: giai đoạn 1 website Bệnh viện thú y Lê Sơn (bản 5)
 
 **Ngày:** 14/10/2026 · **Người soạn:** Claude, đã chỉnh theo phản biện của Codex và rà soát của chủ dự án · **Trạng thái:** **bản nháp đề xuất**. Chủ dự án đã chấp nhận sáu nội dung chỉnh sửa của bản 2 nhưng **chưa phê duyệt toàn bộ kế hoạch để bắt đầu lập trình**. Chưa có mã, chưa mua dịch vụ nào, **chưa merge vào main**, không bắt đầu triển khai chính thức khi chủ dự án chưa phê duyệt.
 
@@ -6,13 +6,15 @@
 
 **Quy ước nhãn:** **[Đã chốt]** chủ dự án quyết định · **[Đề xuất]** của Claude hoặc Codex, cần phản biện · **[Giả định]** chưa xác nhận · **[Cần chốt]** quyết định còn thiếu · **[Chờ kiểm chứng]** chưa có bằng chứng.
 
-Nguồn chi tiết: [tài liệu rà soát](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/rasoat-tai-khoan-va-form-dat-lich.md) (số mục dẫn bên dưới là mục của tài liệu đó) và [brief Hero/Header cho Gemini](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/gemini-brief-hero.md).
+Nguồn chi tiết: [tài liệu rà soát](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/rasoat-tai-khoan-va-form-dat-lich.md) (số mục dẫn bên dưới là mục của tài liệu đó) và [brief Hero/Header cho Antigravity](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/antigravity-brief-hero.md).
+
+**Thay đổi bản 5 (quyết định phân công của chủ dự án, 14/10):** **Google Antigravity thay Gemini** đảm nhiệm thiết kế UI/UX và dựng giao diện trực quan (responsive, hiệu ứng, bản demo với dữ liệu giả). Claude: phân tích nghiệp vụ, tài liệu, tiêu chí nghiệm thu, rà soát. Codex: lập trình chính thức, tích hợp Supabase, kiểm thử, triển khai Vercel. ChatGPT: hỗ trợ điều phối và đánh giá phương án. Antigravity dùng logo Lê Sơn do chủ dự án cung cấp và kế thừa nhận diện tím, kem, cam, xanh ngọc; ưu tiên Hero/Header; chủ dự án duyệt giao diện trước khi Codex triển khai chính thức. Các quyết định nghiệp vụ đã chốt không đổi.
 
 **Thay đổi bản 4 (quyết định hạ tầng của chủ dự án, 14/10):** Vercel Hobby + Supabase Free trong phát triển và kiểm thử nội bộ, ưu tiên Next.js; chưa mua Vercel Pro hay nâng Supabase; **phân biệt môi trường phát triển miễn phí với môi trường vận hành thương mại** (mục 6); trước hoạt động thương mại phải đánh giá và chọn gói phù hợp điều khoản; khi hoàn thiện căn cứ số liệu để đề xuất nâng cấp; không tự nâng cấp hay phát sinh chi phí. **Bỏ yêu cầu bắt buộc kiểm chứng OpenNext/Cloudflare** cho phương án chính. Giữ Supabase Free và yêu cầu sao lưu, khôi phục, bảo mật.
 
 **Thay đổi bản 3 (theo rà soát của chủ dự án, 14/10):** (1) làm rõ giai đoạn 1 và hệ thống tổng thể; chức năng ngoài giai đoạn 1 là "chưa triển khai trong giai đoạn này", không loại bỏ vĩnh viễn; (2) điều chỉnh cơ cấu nhân sự: không có lễ tân riêng, phân quyền theo khả năng kiêm nhiệm (đã đổi thuật ngữ "lễ tân" thành "người tiếp nhận" trong các tài liệu); (3) yêu cầu hệ thống tổng thể lưu ở tài liệu định hướng sản phẩm; (4) nền tảng và chi phí chỉ áp dụng cho website giai đoạn 1 (bản 3 ghi Cloudflare + Supabase Free; **đã thay ở bản 4**); (5) tiếp tục hoàn thiện quyết định nghiệp vụ, thiết kế giao diện và mô hình dữ liệu trước khi viết mã.
 
-**Thay đổi bản 2 (theo phản biện của Codex):** sửa thứ tự phụ thuộc giữa kiểm chứng, thiết kế và xây dựng (không còn coi mọi kiểm thử là điều kiện phải đạt trước khi thiết kế); bổ sung hồ sơ khách và thú cưng; bổ sung độ tin cậy của email; ngân sách là mỗi tháng; phương án A ghi đúng là đề xuất chưa chốt; Gemini mới có brief Hero/Header, chưa có mockup được duyệt.
+**Thay đổi bản 2 (theo phản biện của Codex):** sửa thứ tự phụ thuộc giữa kiểm chứng, thiết kế và xây dựng (không còn coi mọi kiểm thử là điều kiện phải đạt trước khi thiết kế); bổ sung hồ sơ khách và thú cưng; bổ sung độ tin cậy của email; ngân sách là mỗi tháng; phương án A ghi đúng là đề xuất chưa chốt; Antigravity mới có brief Hero/Header, chưa có mockup được duyệt.
 
 ---
 
@@ -39,10 +41,13 @@ Nguồn chi tiết: [tài liệu rà soát](https://github.com/lqt140304-rgb/web
 
 | Bên | Việc chính |
 |---|---|
-| Chủ dự án | Quyết định nghiệp vụ, duyệt thiết kế và kế hoạch trước xây dựng, cung cấp nội dung chính thức, chạy công cụ cần quyền bí mật trên dự án thử |
-| Codex | Xây dựng, tích hợp, kiểm thử, kiểm chứng kỹ thuật trên môi trường thử |
-| Claude | Rà soát nghiệp vụ, mô hình dữ liệu, phân quyền, chất lượng mã; soạn tài liệu và kịch bản kiểm thử |
-| Gemini | Giao diện và trải nghiệm. Hiện có **brief Hero/Header**; chưa có mockup được duyệt |
+| Chủ dự án | Quyết định nghiệp vụ; cung cấp logo và nội dung chính thức; **duyệt giao diện trước khi Codex triển khai chính thức**; duyệt thiết kế và kế hoạch; chạy công cụ cần quyền bí mật trên dự án thử |
+| **Antigravity** (Google Antigravity, thay Gemini) | Thiết kế UI/UX, responsive, hiệu ứng, bản demo giao diện **với dữ liệu giả**. Dùng logo Lê Sơn do chủ dự án cung cấp; kế thừa nhận diện tím, kem, cam, xanh ngọc. Ưu tiên Hero/Header (có [brief](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/antigravity-brief-hero.md)); chưa có bản được duyệt. Không tích hợp dữ liệu khách thật |
+| Claude | Phân tích nghiệp vụ, tài liệu, **tiêu chí nghiệm thu**, rà soát (nghiệp vụ, mô hình dữ liệu, phân quyền, chất lượng mã); soạn kịch bản kiểm thử |
+| Codex | Lập trình chính thức, tích hợp Supabase, kiểm thử, triển khai Vercel; kiểm chứng kỹ thuật trên môi trường thử |
+| ChatGPT | Hỗ trợ điều phối và đánh giá phương án |
+
+**Quy tắc phối hợp [Đã chốt]:** Antigravity chỉ dựng bản demo giao diện với dữ liệu giả; **chủ dự án duyệt giao diện trước khi Codex triển khai chính thức**. Mã của bản demo là tham chiếu giao diện, không mặc định là mã chính thức (Codex quyết định có tái sử dụng hay không) [Đề xuất].
 
 Phân công có thể điều chỉnh.
 
@@ -56,10 +61,10 @@ Mỗi bước có một cổng ngắn. Các bước có thể gối nhau khi kh�
 
 ### Bước 1: chốt brief, quyết định nghiệp vụ ảnh hưởng bản đầu, chọn hướng giao diện
 
-- Gemini nộp thiết kế Hero/Header theo brief; chủ dự án chọn hướng. Có thể dùng nội dung nháp có nhãn để đánh giá.
+- Antigravity nộp thiết kế Hero/Header và **bản demo với dữ liệu giả** theo [brief](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/antigravity-brief-hero.md), dùng logo do chủ dự án cung cấp và nhận diện tím, kem, cam, xanh ngọc; Claude rà soát theo tiêu chí nghiệm thu trong brief (mục 7); chủ dự án chọn hướng. Có thể dùng nội dung nháp có nhãn để đánh giá, **không đưa chỗ giữ chỗ lên bản công khai**.
 - Chủ dự án chốt các quyết định nghiệp vụ thật sự còn thiếu (mục 5 dưới đây) và cung cấp nội dung chính thức dần: nhận diện, ảnh, địa chỉ, số điện thoại, giờ làm việc, danh sách dịch vụ, bảng giá (có hiển thị công khai không), câu giới thiệu.
 
-**Cổng 1:** hướng giao diện được chọn; các quyết định nghiệp vụ bắt buộc cho thiết kế đã chốt hoặc ghi tạm thời có nhãn.
+**Cổng 1:** hướng giao diện Hero/Header được **chủ dự án duyệt**; các quyết định nghiệp vụ bắt buộc cho thiết kế đã chốt hoặc ghi tạm thời có nhãn.
 
 ### Bước 2: chọn hướng Auth bằng bằng chứng tối thiểu
 
@@ -73,10 +78,10 @@ Mỗi bước có một cổng ngắn. Các bước có thể gối nhau khi kh�
 ### Bước 3: thiết kế mô hình dữ liệu, quyền, luồng form và vận hành
 
 - Claude + Codex: mô hình dữ liệu và **phân quyền theo khả năng** (một người có thể giữ nhiều khả năng: tiếp nhận yêu cầu, quản lý nội dung, quản lý tài khoản nhân viên, thao tác nhạy cảm, quản trị; vai trò chỉ là bộ khả năng soạn sẵn), và mô hình dữ liệu: tài khoản web tách khỏi hồ sơ khách hàng; thú cưng thuộc tài khoản; bản chụp yêu cầu; lịch sử đổi trạng thái chỉ ghi thêm; ba mốc thời gian; dấu nhắc; khóa chống trùng theo phạm vi; bản ghi thông báo email; nhật ký thao tác nhạy cảm.
-- Gemini: luồng đăng ký, đăng nhập, form (vãng lai và đăng nhập), xem lại yêu cầu, hồ sơ và thú cưng, thông báo "Chờ nhân viên xác nhận", màn hình tiếp nhận, các phần còn lại của trang. Quy trình hỗ trợ tài khoản chỉ vẽ sau khi được duyệt.
+- Antigravity (thiết kế và demo dữ liệu giả, không tích hợp dữ liệu thật): luồng đăng ký, đăng nhập, form (vãng lai và đăng nhập), xem lại yêu cầu, hồ sơ và thú cưng, thông báo "Chờ nhân viên xác nhận", màn hình tiếp nhận, các phần còn lại của trang. Quy trình hỗ trợ tài khoản chỉ vẽ sau khi được duyệt.
 - Vận hành: sao lưu, giám sát, ứng phó khi dự án bị tạm dừng (mục 6a).
 
-**Cổng 3:** **chủ dự án duyệt bản thiết kế và kế hoạch trước khi xây dựng.** Claude rà soát phản hồi công khai theo mục 4.4.
+**Cổng 3:** **chủ dự án duyệt giao diện và bản thiết kế (mô hình dữ liệu, phân quyền) và kế hoạch trước khi Codex triển khai chính thức.** Claude rà soát phản hồi công khai theo mục 4.4.
 
 ### Bước 4: xây một luồng hoàn chỉnh trên môi trường thử, kiểm thử song song
 
@@ -144,7 +149,7 @@ Chỉ liệt kê điều chủ dự án mới quyết định được. Các chi
 8. **Chính sách lưu trữ và xóa dữ liệu**, nội dung thông báo đồng ý.
 9. **Email báo nhân viên:** ai nhận; có gửi email khi khách gửi lại không.
 10. **Chấp nhận rủi ro gói Free:** dự án có thể bị tạm dừng khi ít dùng; mất tối đa dữ liệu từ lần sao lưu cuối khi có sự cố.
-11. **Nội dung chính thức:** nhận diện, ảnh, liên hệ, danh sách dịch vụ, có hiển thị bảng giá công khai không.
+11. **Nội dung chính thức:** logo (chủ dự án cung cấp trực tiếp cho Antigravity; Claude chưa nhận tệp), mã màu cụ thể cho hướng tím, kem, cam, xanh ngọc, ảnh, liên hệ, danh sách dịch vụ, có hiển thị bảng giá công khai không.
 12. **Vận hành thương mại:** định nghĩa "hoạt động thương mại" để áp dụng cổng; mục tiêu chi phí vận hành thương mại (300.000 đồng/tháng được đặt khi nền tảng là Cloudflare; gói thương mại của Vercel và Supabase có thể cao hơn nhiều); chấp nhận hay không việc nâng cấp khi đến cổng. Không cần quyết định ngay; cần trước Cổng 5.
 
 ## 6. Môi trường phát triển và vận hành thương mại
