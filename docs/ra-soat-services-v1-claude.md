@@ -162,6 +162,6 @@ Bài học ghi vào quy trình: với nút có thể bấm, Claude **bấm thử
 
 ## D. NEED CODEX (tùy chọn)
 
-Thử `tel:` trên điện thoại có SIM; trình đọc màn hình (VoiceOver/TalkBack) cho cửa sổ chi tiết và menu; Safari.
+~~Thử `tel:` trên điện thoại có SIM~~ → **chủ dự án tự kiểm sau (14/10)**, chưa xác minh, giữ trạng thái "chưa xác minh trình gọi thực tế" cho đến khi có kết quả; trình đọc màn hình (VoiceOver/TalkBack) cho cửa sổ chi tiết và menu; Safari.
 
 Ảnh bằng chứng lượt 3: 10 đến 13.
