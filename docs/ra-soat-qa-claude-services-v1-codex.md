@@ -32,7 +32,7 @@ Giữ quyết định mới của chủ dự án: ảnh cấp cứu tạm, bỏ 
 Chưa chạy lại toàn bộ giao diện, Safari hay điện thoại thật. Codex chưa sửa hoặc merge code.
 
 
-Căn cứ và việc sửa đã chốt: [QA Claude](ra-soat-services-v1-claude.md), [yêu cầu sửa lần 2](yeu-cau-sua-services-v1-lan-2-antigravity.md). Báo cáo bổ sung này không thay thế danh sách của Claude; thêm lỗi P1 vào cùng đợt sửa.
+Căn cứ và việc sửa đã chốt: [QA Claude](ra-soat-services-v1-claude.md), [yêu cầu sửa lần 2](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/yeu-cau-sua-services-v1-lan-2-antigravity.md). Báo cáo bổ sung này không thay thế danh sách của Claude; thêm lỗi P1 vào cùng đợt sửa.
 
 
 ---
