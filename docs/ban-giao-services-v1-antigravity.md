@@ -61,6 +61,7 @@ Tuân thủ nghiêm ngặt yêu cầu thiết kế của Chủ dự án: **Chỉ
 | **8** | Hover, focus, active rõ ràng; hỗ trợ bàn phím | **Đã thực hiện** | Hover card nhấc lên 6px, ảnh zoom 1.05 nhẹ nhàng; viền focus kép tím sẫm `#421247` đạt chuẩn WCAG SC 1.4.11 (13.96:1 trên kem); Modal chi tiết có bẫy tiêu điểm và phím ESC. |
 | **9** | Không tự thêm giá, cam kết 24/7 hay thông tin chưa xác nhận | **Đã thực hiện** | Toàn bộ thẻ không hiển thị giá tiền, không dùng từ "24/7", câu từ trung thực, chuẩn mực y tế. |
 | **10** | Demo dữ liệu giả, chưa nối backend | **Đã thực hiện** | Dữ liệu demo tĩnh dạng JSON giả lập trong `services.js`, chạy độc lập không phụ thuộc backend hay API ngoài. |
+| **11** | Tích hợp liên kết Google Maps & Facebook thực tế | **Đã thực hiện** | Tích hợp biểu tượng chỉ đường Google Maps (`https://maps.app.goo.gl/xFbQ4BjKtGVa3rp86`) và Fanpage Facebook (`https://www.facebook.com/benhvienthuyleson?locale=vi_VN`) trên Header Desktop, Mobile Drawer và Modal dịch vụ; thiết lập hồ sơ phòng khám tại `docs/thong-tin-benh-vien-le-son.md`. |
 
 ---
 

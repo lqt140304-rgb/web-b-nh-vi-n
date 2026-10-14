@@ -248,6 +248,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  if (urlParams.get('drawer') === 'open') {
+    openMobileDrawer();
+  }
+
   // 5. Modal Chi tiết Dịch vụ (Service Detail Modal)
   serviceDetailModal.setAttribute('inert', '');
 
@@ -272,8 +276,18 @@ document.addEventListener('DOMContentLoaded', () => {
           ${data.features.map(f => `<li>${f}</li>`).join('')}
         </ul>
       </div>
-      <div style="display: flex; gap: 10px; justify-content: flex-end;">
-        <a href="index.html#dat-lich" class="btn-cta-primary" style="font-size: 13.5px; padding: 10px 18px; text-decoration: none;">Gửi yêu cầu đặt hẹn →</a>
+      <div class="modal-contact-row">
+        <div class="modal-contact-group">
+          <a href="https://maps.app.goo.gl/xFbQ4BjKtGVa3rp86" target="_blank" rel="noopener noreferrer" class="modal-contact-link modal-link-maps" title="105 Khuất Duy Tiến, Thanh Xuân, Hà Nội" aria-label="Xem vị trí bệnh viện trên Google Maps (mở tab mới)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Chỉ đường Maps</span>
+          </a>
+          <a href="https://www.facebook.com/benhvienthuyleson?locale=vi_VN" target="_blank" rel="noopener noreferrer" class="modal-contact-link modal-link-fb" title="Nhắn tin qua Fanpage Facebook" aria-label="Tư vấn qua Facebook Fanpage (mở tab mới)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <span>Tư vấn Facebook</span>
+          </a>
+        </div>
+        <a href="index.html#dat-lich" class="btn-cta-primary" style="font-size: 13.5px; padding: 9px 18px; text-decoration: none;">Gửi yêu cầu đặt hẹn →</a>
       </div>
     `;
     serviceDetailBody.innerHTML = html;
