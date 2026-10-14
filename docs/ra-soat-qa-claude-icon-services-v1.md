@@ -1,7 +1,7 @@
 # Codex rà soát QA Claude — bộ icon Services V1
 
 Ngày: 15/10/2026. Đối tượng: Services `f20a7e43af094b7b75fbb9754c05ab31d15f7c2d`.
-Căn cứ: [Claude lượt 5](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/b95bb386ef9700115ff9ad8c47be0dd723fabc4c/docs/ra-soat-services-v1-claude.md), [quyết định chủ dự án](chot-icon-services-v1.md) và ảnh mẫu người dùng chọn trong cuộc trò chuyện.
+Căn cứ: [Claude lượt 5](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/b95bb386ef9700115ff9ad8c47be0dd723fabc4c/docs/ra-soat-services-v1-claude.md), [quyết định chủ dự án](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/chot-icon-services-v1.md) và ảnh mẫu người dùng chọn trong cuộc trò chuyện.
 
 ## Kết luận
 
