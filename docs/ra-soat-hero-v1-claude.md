@@ -312,3 +312,21 @@ Ghi nhận (không chặn): ở 320 px ảnh trái bị lệch ra mép (x = −1
 3. Ảnh vẫn không được dùng công khai trước khi chủ dự án xác nhận nguồn và giấy phép.
 
 Ảnh bằng chứng bản 3: 17 đến 21 trong `ra-soat-hero-v1-bang-chung/`.
+
+---
+
+# BẢN 3a — Kiểm tra bổ sung cùng commit `64b059e`
+
+**Lý do:** chủ dự án yêu cầu kiểm tra lại lần nữa. Claude đọc thay đổi mã giữa `904c4dd` và `64b059e`, rồi kiểm thêm những phần bản 3 chưa đo: chế độ xem thử "Mobile (390px)" trong demo, cửa sổ Tiêu chí, lỗi JavaScript, chế độ giảm chuyển động, màn hình laptop phổ biến. Các kết luận PASS của bản 3 giữ nguyên.
+
+| # | Mục | Nhãn | Bằng chứng |
+|---|---|---|---|
+| A1 | Mở menu thì phần nội dung phía sau phải bị khóa (`inert`) | **FIX (Thấp)** | `app.js` khóa `siteHeader` và `heroMain`, nhưng phần Hero có `id="hero-main"`, **không có** `id="heroMain"`, nên Hero không bị khóa. Đo khi menu mở: header `inert` = có, Hero = không. Bàn phím vẫn bị giữ trong menu (đạt), nhưng trình đọc màn hình vẫn đọc được "Gửi yêu cầu đặt lịch", "Xem dịch vụ" phía sau lớp phủ. Sửa: dùng đúng id `hero-main` (không đổi id vì liên kết "Chuyển đến nội dung chính" đang trỏ tới `#hero-main`) |
+| A2 | Chế độ xem thử "Mobile (390px)" trong demo | **FIX (Thấp, chỉ ở công cụ demo)** | Khi bấm "Mobile (390px)" rồi mở menu, menu hiện ở **mép phải cửa sổ trình duyệt** (x = 1130 trên cửa sổ 1440), **ngoài khung điện thoại** (khung ở x 525 đến 915); lớp phủ phủ cả màn hình. Chủ dự án xem thử bằng chế độ này sẽ thấy sai vị trí. Không ảnh hưởng website thật. Ảnh 22 |
+| A3 | Cửa sổ Tiêu chí | **PASS** | Mở: tiêu điểm vào nút đóng; Tab/Shift+Tab giữ trong cửa sổ; Escape đóng, bật lại `inert`, trả tiêu điểm về nút "Tiêu chí" |
+| A4 | Lỗi JavaScript | **PASS** | Bấm qua ba chế độ xem và đổi trạng thái đăng nhập: không có lỗi trong console |
+| A5 | Giảm chuyển động | **PASS** | Bật `prefers-reduced-motion`: chuyển động menu gần như tắt |
+| A6 | Chế độ Mobile (390px) và đã đăng nhập | **PASS** | Ba ảnh một hàng (106 / 148 / 106 px), header 64 px ở cả hai trạng thái, không tràn trong khung 390 |
+| A7 | Laptop 1366×768 và 1280×720 | **Ý kiến (không phải lỗi)** | Màn hình đầu chỉ thấy khoảng 130 px phần trên ba ảnh ở 1366×768 (thanh demo chiếm 55 px), khoảng 70 đến 100 px ở 1280×720. Chữ và nút chính đều nằm trọn màn hình đầu. Nếu chủ dự án muốn thấy ảnh rõ hơn trên laptop, có thể giảm khoảng trống phía trên hoặc chiều cao ảnh khi màn hình thấp. Ảnh 23 |
+
+**Kết luận sau kiểm tra bổ sung:** không thay đổi kết luận bản 3. Giao diện và chức năng chính vẫn PASS. Danh sách gửi Antigravity trong một đợt nhỏ: mục 7 (bảng nguồn ảnh), A1 (sửa id), A2 (menu trong chế độ xem thử mobile). Không mục nào chặn việc chủ dự án duyệt giao diện; A7 do chủ dự án quyết định có cần không.
