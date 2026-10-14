@@ -30,7 +30,7 @@
 |---|---|
 | 1 | Ba câu chữ đúng từng chữ (tiêu đề, mô tả, nút đặt lịch); **không còn chữ "Không cần tài khoản"**; có nút "097 355 51 05" gọi được; không còn khối CTA cũ, không có cún trong khối này |
 | 2 | Nền kem pha tím nhạt (không tím đậm, không gradient), viền tím nhạt 1–2 px, bo 20–24 px, bóng đổ không có hoặc rất nhẹ |
-| 3 | Desktop 1440/1024: chữ trái, hai nút phải (đặt lịch và gọi, cùng cao, cạnh nhau), căn giữa dọc; khối cao ≤ khoảng 180 px; không tràn |
+| 3 | **Desktop 1440:** chữ trái, hai nút phải **cạnh nhau** (đặt lịch và gọi, cùng cao), căn giữa dọc, khối cao ≤ khoảng 180 px. **Tablet/laptop nhỏ 1024 (khoảng 701–1100 px):** hai nút **xếp dọc**, nút đặt lịch ở trên, nút gọi ở dưới (cùng rộng khoảng 236 px), tiêu đề và mô tả **dài một dòng như ở 1440** (không ngắt xuống dòng); khối cao ≤ khoảng 180 px; không tràn |
 | 4 | Mobile 390/360: xếp dọc (chữ, nút đặt lịch, nút gọi), không tràn ngang, cả hai nút cao ≥ 48 px (đề xuất rộng hết khung) |
 | 5 | Tiêu đề font serif hiện tại (Lora), màu tím mận, cỡ nhỏ hơn H1 trang; tương phản chữ ≥ 4,5:1 |
 | 6 | Chỉ nút đặt lịch nền tím đậm, chữ kem, mũi tên nhỏ, trỏ đúng `index.html#form-dat-lich` (đích form: HOÃN ĐÃ CHỐT); nút gọi nền trong, `tel:+84973555105` không bị `preventDefault` (gọi thật trên điện thoại: CHƯA KIỂM đến khi chủ dự án thử) |
