@@ -27,10 +27,10 @@
   --color-bg-cream-pure: #FFF9F1;       /* Kem sáng */
   --color-white: #FFFFFF;
 
-  /* Thang màu chữ (Typography Colors) — Đạt chuẩn WCAG 2.1 AA */
-  --color-text-main: #231627;           /* Chữ chính, tương phản > 12:1 */
-  --color-text-muted: #5E5362;          /* Chữ mô tả, tương phản > 5.5:1 */
-  --color-text-subtle: #7A6F7E;         /* Chú thích nhỏ, tương phản > 4.5:1 */
+  /* Thang màu chữ (Typography Colors) — Đạt chuẩn WCAG 2.1 AA (≥ 4.5:1) */
+  --color-text-main: #231627;           /* Chữ chính, tương phản 14.8:1 trên nền kem */
+  --color-text-muted: #5E5362;          /* Chữ mô tả & phụ, tương phản 6.81:1 trên nền kem */
+  --color-text-subtle: #5E5362;         /* Chú thích nhỏ (đã nâng từ #7A6F7E), tương phản 6.81:1 */
   --color-border-subtle: #E9DEEA;
 
   /* Typography Stacks */
@@ -54,10 +54,21 @@
   --transition-smooth: 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Accessibility Focus Visible */
+/* Accessibility Focus Visible (WCAG 2.1 Non-text Contrast SC 1.4.11 ≥ 3:1) */
 *:focus-visible {
-  outline: 3px solid var(--color-brand-orange-focus) !important;
+  outline: 3px solid var(--color-brand-purple) !important;
+  outline-offset: 2px !important;
+}
+
+/* Focus viền kép nổi bật cho các nút nền tối/tím đậm */
+.btn-cta-primary:focus-visible,
+.btn-auth-register:focus-visible,
+.demo-btn-toggle:focus-visible,
+.demo-btn-action:focus-visible,
+.skip-link:focus-visible {
+  outline: 3px solid var(--color-brand-orange) !important;
   outline-offset: 3px !important;
+  box-shadow: 0 0 0 2px var(--color-white) !important;
 }
 
 /* Base Styles */
@@ -454,8 +465,9 @@ img {
 .btn-user-profile {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 5px 14px 5px 6px;
+  gap: 8px;
+  padding: 4px 12px 4px 6px;
+  min-height: 44px;
   background: #F4EBF5;
   border: 1.5px solid var(--color-brand-purple-soft);
   border-radius: var(--radius-pill);
@@ -468,6 +480,15 @@ img {
   background: #EADCEB;
   border-color: #DCC6DE;
 }
+.user-profile-name {
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.user-profile-arrow {
+  flex-shrink: 0;
+}
 .user-avatar-initial {
   width: 32px;
   height: 32px;
@@ -479,6 +500,7 @@ img {
   justify-content: center;
   font-weight: 700;
   font-size: 13px;
+  flex-shrink: 0;
 }
 .user-dropdown-menu {
   position: absolute;
@@ -510,6 +532,10 @@ img {
 .user-dropdown-phone {
   font-size: 12px;
   color: var(--color-text-subtle);
+}
+.dropdown-subtext {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
 }
 .dropdown-item {
   display: flex;
@@ -583,11 +609,14 @@ img {
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms ease, visibility 260ms ease;
+  box-shadow: none;
+  visibility: hidden;
 }
 .mobile-drawer.open {
   transform: translateX(0);
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
+  visibility: visible;
 }
 .drawer-header {
   display: flex;
@@ -684,7 +713,7 @@ img {
   text-wrap: balance;
 }
 
-/* Dòng mô tả thanh lịch */
+/* Dòng mô tả thanh lịch (S12: tránh rớt chữ 'hiểu.') */
 .hero-description {
   font-family: var(--font-body);
   font-size: 19px;
@@ -694,6 +723,7 @@ img {
   margin: 0 auto 32px;
   padding: 0 20px;
   font-weight: 400;
+  text-wrap: balance;
 }
 
 /* Cụm 2 nút hành động (Dual CTA Buttons) */
@@ -762,21 +792,35 @@ img {
   transform: translateY(0);
 }
 
-/* Dòng chú thích bắt buộc dưới nút đặt lịch */
-.hero-reassurance-note {
+/* Cụm chú thích bảo đảm & không cần tài khoản (S8, S5) */
+.hero-reassurance-block {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 38px;
+  padding: 0 16px;
+  flex-wrap: wrap;
+}
+.hero-reassurance-note,
+.hero-guest-note {
   font-size: 14px;
-  color: var(--color-text-subtle);
-  font-style: italic;
+  color: var(--color-text-muted); /* #5E5362: 6.81:1 trên nền kem */
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  margin-bottom: 40px;
-  padding: 0 16px;
   line-height: 1.4;
+  margin: 0;
 }
-.hero-reassurance-note .note-icon {
+.hero-reassurance-note .note-icon,
+.hero-guest-note .note-icon {
   color: var(--color-brand-purple);
   flex-shrink: 0;
+}
+.hero-reassurance-dot {
+  color: var(--color-brand-purple-muted);
+  font-weight: 700;
+  user-select: none;
 }
 
 /* ==========================================================================
@@ -1022,7 +1066,7 @@ img {
 }
 .specs-card-desc {
   font-size: 12px;
-  color: #746878;
+  color: var(--color-text-muted);
 }
 .specs-checklist {
   list-style: none;
@@ -1038,6 +1082,17 @@ img {
   padding: 10px 14px;
   border-radius: 8px;
   border: 1px solid #F0E6F2;
+}
+.specs-badge-eval {
+  background: #EAE0EB;
+  color: var(--color-brand-purple-dark);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid #D6C2D8;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 .specs-badge-pass {
   background: #DCFCE7;
@@ -1083,18 +1138,37 @@ img {
 }
 .viewport-outer.mode-mobile .btn-mobile-menu {
   display: inline-flex !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
 }
 .viewport-outer.mode-mobile .site-header {
-  padding: 12px 18px !important;
+  padding: 10px 16px !important;
+  height: 64px !important;
+  min-height: 64px !important;
+  box-sizing: border-box !important;
 }
 .viewport-outer.mode-mobile .brand-logo-img {
   height: 38px !important;
+}
+.viewport-outer.mode-mobile .brand-text-block {
+  white-space: nowrap !important;
 }
 .viewport-outer.mode-mobile .brand-subtitle {
   font-size: 9.5px !important;
 }
 .viewport-outer.mode-mobile .brand-name {
   font-size: 17px !important;
+}
+.viewport-outer.mode-mobile .user-profile-name {
+  display: none !important;
+}
+.viewport-outer.mode-mobile .btn-user-profile {
+  padding: 4px 6px !important;
+  gap: 4px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
 }
 .viewport-outer.mode-mobile .hero-minimal-creative {
   padding-top: 14px !important;
@@ -1116,6 +1190,7 @@ img {
   line-height: 1.5 !important;
   margin-bottom: 20px !important;
   padding: 0 16px !important;
+  text-wrap: balance !important;
 }
 .viewport-outer.mode-mobile .hero-cta-group {
   flex-direction: column !important;
@@ -1123,7 +1198,7 @@ img {
   max-width: 320px !important;
   padding: 0 !important;
   gap: 10px !important;
-  margin-bottom: 10px !important;
+  margin-bottom: 12px !important;
 }
 .viewport-outer.mode-mobile .btn-cta-primary,
 .viewport-outer.mode-mobile .btn-cta-secondary {
@@ -1132,10 +1207,18 @@ img {
   padding: 13px 20px !important;
   font-size: 15px !important;
 }
-.viewport-outer.mode-mobile .hero-reassurance-note {
-  font-size: 12.5px !important;
+.viewport-outer.mode-mobile .hero-reassurance-block {
+  flex-direction: column !important;
+  gap: 6px !important;
   margin-bottom: 24px !important;
   padding: 0 12px !important;
+}
+.viewport-outer.mode-mobile .hero-reassurance-note,
+.viewport-outer.mode-mobile .hero-guest-note {
+  font-size: 12.5px !important;
+}
+.viewport-outer.mode-mobile .hero-reassurance-dot {
+  display: none !important;
 }
 .viewport-outer.mode-mobile .hero-arches-stage {
   gap: 10px !important;
@@ -1193,18 +1276,55 @@ img {
   .decor-group-right { right: 20px; }
 }
 
-@media (max-width: 600px) {
-  .site-header { padding: 12px 18px; }
+@media (max-width: 680px) {
+  .site-header {
+    padding: 10px 16px;
+    height: 64px;
+    min-height: 64px;
+    box-sizing: border-box;
+  }
   .brand-logo-img { height: 38px; }
+  .brand-text-block { white-space: nowrap; }
   .brand-subtitle { font-size: 9.5px; }
   .brand-name { font-size: 17px; }
+
+  /* User profile & hamburger trên mobile */
+  .btn-user-profile {
+    padding: 4px 6px;
+    gap: 4px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .user-profile-name {
+    display: none !important;
+  }
+  .btn-mobile-menu {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
   .hero-minimal-creative { padding-top: 14px; }
   .hero-eyebrow { font-size: 11px; letter-spacing: 0.12em; padding: 4px 12px; margin-bottom: 12px; }
   .hero-title { font-size: 25px; line-height: 1.25; margin-bottom: 12px; padding: 0 14px; }
-  .hero-description { font-size: 14.5px; line-height: 1.5; margin-bottom: 20px; padding: 0 16px; }
-  .hero-cta-group { flex-direction: column; width: 100%; max-width: 320px; padding: 0; gap: 10px; margin-bottom: 10px; }
+  .hero-description { font-size: 14.5px; line-height: 1.5; margin-bottom: 20px; padding: 0 16px; text-wrap: balance; }
+  .hero-cta-group { flex-direction: column; width: 100%; max-width: 320px; padding: 0; gap: 10px; margin-bottom: 12px; }
   .btn-cta-primary, .btn-cta-secondary { width: 100%; min-height: 48px; padding: 13px 20px; font-size: 15px; }
-  .hero-reassurance-note { font-size: 12.5px; margin-bottom: 24px; padding: 0 12px; }
+
+  .hero-reassurance-block {
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 24px;
+    padding: 0 12px;
+  }
+  .hero-reassurance-note, .hero-guest-note {
+    font-size: 12.5px;
+  }
+  .hero-reassurance-dot {
+    display: none;
+  }
+
   .hero-arches-stage { gap: 10px; padding: 0 10px; width: 100%; justify-content: center; position: relative; overflow: visible; }
   .pet-arch-center { width: 220px; height: 200px; border-radius: 110px 110px 0 0; flex-shrink: 0; z-index: 3; box-shadow: 0 10px 25px rgba(45, 15, 50, 0.14); }
   .pet-arch-left, .pet-arch-right { width: 65px; height: 170px; border-radius: 35px 35px 0 0; opacity: 0.85; flex-shrink: 0; z-index: 2; }
@@ -1212,6 +1332,18 @@ img {
   .pet-arch-right { transform: translateX(-10px) scale(0.92); }
   .decor-group-left, .decor-group-right { display: none !important; }
   .mobile-dots-indicator { display: flex !important; }
+}
+
+@media (max-width: 360px) {
+  .site-header {
+    padding: 8px 12px;
+    height: 60px;
+    min-height: 60px;
+  }
+  .brand-logo-img { height: 34px; }
+  .brand-name { font-size: 15.5px; }
+  .brand-subtitle { font-size: 9px; }
+  .hero-title { font-size: 22px; }
 }
 
 /* Tôn trọng người dùng chọn Giảm chuyển động (Reduced Motion) */
@@ -1316,16 +1448,14 @@ img {
 }
 
 /* Ẩn hiện giữa 3 Khung ảnh và Bóng Mèo khi bấm nút đổi Concept */
-.show-arches .hero-arches-stage,
-.show-arches .mobile-dots-indicator {
+.show-arches .hero-arches-stage {
   display: flex !important;
 }
 .show-arches .hero-cat-stage {
   display: none !important;
 }
 
-.show-cat .hero-arches-stage,
-.show-cat .mobile-dots-indicator {
+.show-cat .hero-arches-stage {
   display: none !important;
 }
 .show-cat .hero-cat-stage {

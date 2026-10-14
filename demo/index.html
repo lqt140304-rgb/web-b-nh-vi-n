@@ -79,20 +79,11 @@
           <a href="#top" class="nav-link active" aria-current="page">Trang chủ</a>
           <a href="#dich-vu" class="nav-link">Dịch vụ</a>
           <a href="#gioi-thieu" class="nav-link">Giới thiệu</a>
-          <a href="#tin-tuc" class="nav-link">Tin tức</a>
           <a href="#lien-he" class="nav-link">Liên hệ</a>
         </nav>
 
         <!-- Khu vực tác vụ bên phải Header -->
         <div class="header-actions">
-          <!-- Nút tìm kiếm nhanh -->
-          <button type="button" class="btn-icon-search" aria-label="Tìm kiếm dịch vụ hoặc bài viết">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
-
           <!-- TRẠNG THÁI 1: Khách vãng lai (Chưa đăng nhập) -->
           <div class="auth-guest-group" id="authGuestGroup">
             <button type="button" class="btn-auth-login">Đăng nhập</button>
@@ -101,38 +92,38 @@
 
           <!-- TRẠNG THÁI 2: Đã đăng nhập (Mô phỏng dữ liệu giả) -->
           <div class="auth-user-group" id="authUserGroup">
-            <button type="button" class="btn-user-profile" id="btnUserProfile" aria-expanded="false" aria-haspopup="true">
+            <button type="button" class="btn-user-profile" id="btnUserProfile" aria-expanded="false" aria-haspopup="true" aria-controls="userDropdownMenu" aria-label="Tài khoản cá nhân: Khách Demo">
               <span class="user-avatar-initial">K</span>
-              <span>Nguyễn Minh Khang</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              <span class="user-profile-name">Khách Demo</span>
+              <svg class="user-profile-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
 
-            <!-- Dropdown tài khoản -->
-            <div class="user-dropdown-menu" id="userDropdownMenu" role="menu">
+            <!-- Dropdown tài khoản (Mẫu nút mở rộng với danh sách liên kết ngữ nghĩa) -->
+            <div class="user-dropdown-menu" id="userDropdownMenu" aria-label="Menu tài khoản cá nhân">
               <div class="user-dropdown-header">
-                <div class="user-dropdown-name">Nguyễn Minh Khang</div>
-                <div class="user-dropdown-phone">098 ••• ••34 · Khách thân thiết</div>
+                <div class="user-dropdown-name">Khách Demo</div>
+                <div class="user-dropdown-phone">098 ••• ••34 · Tài khoản mẫu</div>
               </div>
-              <a href="#yeu-cau" class="dropdown-item" role="menuitem">
+              <a href="#yeu-cau" class="dropdown-item">
                 <span>📋 Yêu cầu của tôi</span>
-                <span class="dropdown-badge">2 đang xử lý</span>
+                <span class="dropdown-badge">Chờ nhân viên xác nhận</span>
               </a>
-              <a href="#thu-cung" class="dropdown-item" role="menuitem">
+              <a href="#thu-cung" class="dropdown-item">
                 <span>🐾 Hồ sơ thú cưng</span>
-                <span style="font-size: 11.5px; color: #7A6F7E;">Bé Miu, Lu Lu</span>
+                <span class="dropdown-subtext">Bé Miu, Lu Lu</span>
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#cai-dat" class="dropdown-item" role="menuitem">
+              <a href="#cai-dat" class="dropdown-item">
                 <span>⚙️ Cài đặt tài khoản</span>
               </a>
-              <a href="#dang-xuat" class="dropdown-item" role="menuitem" style="color: #9C2A2A;">
+              <a href="#dang-xuat" class="dropdown-item" style="color: #9C2A2A;">
                 <span>🚪 Đăng xuất</span>
               </a>
             </div>
           </div>
 
           <!-- Nút mở Menu trên Mobile -->
-          <button type="button" class="btn-mobile-menu" id="btnMobileMenu" aria-label="Mở danh mục điều hướng">
+          <button type="button" class="btn-mobile-menu" id="btnMobileMenu" aria-label="Mở danh mục điều hướng" aria-expanded="false" aria-controls="mobileDrawer">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
         </div>
@@ -174,19 +165,28 @@
           </a>
         </div>
 
-        <!-- Dòng chú thích bắt buộc dưới nút đặt lịch -->
-        <p class="hero-reassurance-note">
-          <svg class="note-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-          <span>Nhân viên sẽ liên hệ để xác nhận lịch hẹn.</span>
-        </p>
+        <!-- Cụm chú thích bảo đảm & không cần tài khoản (S8) -->
+        <div class="hero-reassurance-block">
+          <p class="hero-reassurance-note">
+            <svg class="note-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span>Nhân viên sẽ liên hệ để xác nhận lịch hẹn.</span>
+          </p>
+          <span class="hero-reassurance-dot" aria-hidden="true">·</span>
+          <p class="hero-guest-note">
+            <svg class="note-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span>Không cần tài khoản để gửi yêu cầu.</span>
+          </p>
+        </div>
 
         <!-- ==========================================================================
              BA KHUNG BO CONG SÁNG TẠO (THREE ARCHED PET FRAMES)
              Chạm đáy bố cục, không che khuất chữ, có họa tiết tinh tế
              ========================================================================== -->
-        <div class="hero-arches-stage" role="region" aria-label="Hình ảnh các người bạn nhỏ tại Lê Sơn">
+        <div class="hero-arches-stage" role="region" aria-label="Hình ảnh thú cưng minh họa">
 
           <!-- Họa tiết trang trí bên trái: Vòng cung cam mỏng + Dấu chân tím -->
           <div class="decor-group-left" aria-hidden="true">
@@ -198,33 +198,27 @@
               <path d="M12 9c-3.2 0-5.8 2.2-5.8 5 0 2.3 2 4.2 4.5 4.5.8.1 1.8.1 2.6 0 2.5-.3 4.5-2.2 4.5-4.5 0-2.8-2.6-5-5.8-5z"/>
             </svg>
             <svg class="decor-arc-svg" viewBox="0 0 160 220" fill="none">
-              <path d="M15 220C15 100 60 20 150 15" stroke="#FC9238" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2 0"/>
+              <path d="M15 220C15 100 60 20 150 15" stroke="#FC9238" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
           </div>
 
           <!-- KHUNG 1 (TRÁI): Mèo vàng giơ chân chào -->
           <div class="pet-arch-card pet-arch-left" id="petArchLeft">
-            <img src="assets/pet-left.png" alt="Chú mèo vàng dễ thương giơ chân chào thân thiện" class="pet-img" loading="eager">
+            <img src="assets/pet-left.png" alt="Ảnh minh họa: chú mèo mướp vui tươi đeo khăn vàng" class="pet-img" loading="eager">
           </div>
 
           <!-- KHUNG 2 (GIỮA - TRỌNG TÂM): Chú chó Golden Retriever cận cảnh -->
           <div class="pet-arch-card pet-arch-center" id="petArchCenter">
-            <img src="assets/pet-center.png" alt="Gương mặt cận cảnh ấm áp của chú chó Golden Retriever tại Bệnh viện Thú y Lê Sơn" class="pet-img" loading="eager">
+            <img src="assets/pet-center.png" alt="Ảnh minh họa: chú chó Golden Retriever ngậm hoa tulip" class="pet-img" loading="eager">
           </div>
 
           <!-- KHUNG 3 (PHẢI): Mèo vằn ngước nhìn tò mò -->
           <div class="pet-arch-card pet-arch-right" id="petArchRight">
-            <img src="assets/pet-right.png" alt="Bé mèo vằn đáng yêu ngước nhìn với đôi mắt tròn xoe" class="pet-img" loading="eager">
+            <img src="assets/pet-right.png" alt="Ảnh minh họa: chú mèo mướp mắt xanh ngước nhìn" class="pet-img" loading="eager">
           </div>
 
-          <!-- Họa tiết trang trí bên phải: Vòng cung cam mỏng + Chữ viết tay -->
+          <!-- Họa tiết trang trí bên phải: Vòng cung cam mỏng đối xứng -->
           <div class="decor-group-right" aria-hidden="true">
-            <div class="decor-handwriting">
-              Care<br>
-              Create<br>
-              Stronger<br>
-              Bonds
-            </div>
             <svg class="decor-arc-svg" viewBox="0 0 160 220" fill="none">
               <path d="M145 220C145 100 100 20 10 15" stroke="#FC9238" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
@@ -243,7 +237,7 @@
 
       <!-- MENU DRAWER TRÊN MOBILE -->
       <div class="mobile-drawer-overlay" id="drawerOverlay"></div>
-      <aside class="mobile-drawer" id="mobileDrawer" aria-label="Menu trên di động">
+      <aside class="mobile-drawer" id="mobileDrawer" aria-label="Menu trên di động" inert>
         <div class="drawer-header">
           <div class="brand-link">
             <img src="assets/logo-le-son.png" alt="" style="height: 38px;">
@@ -258,7 +252,6 @@
           <a href="#top" class="drawer-link active">Trang chủ</a>
           <a href="#dich-vu" class="drawer-link">Dịch vụ khám & điều trị</a>
           <a href="#gioi-thieu" class="drawer-link">Giới thiệu bệnh viện</a>
-          <a href="#tin-tuc" class="drawer-link">Cẩm nang thú cưng</a>
           <a href="#lien-he" class="drawer-link">Liên hệ & Địa chỉ</a>
         </nav>
         <div class="drawer-actions">
@@ -281,11 +274,12 @@
   <!-- ==========================================================================
        MODAL THÔNG SỐ THIẾT KẾ & TIÊU CHÍ NGHIỆM THU CLAUDE (MỤC 7)
        ========================================================================== -->
-  <div class="specs-modal-overlay" id="specsModal" role="dialog" aria-modal="true" aria-labelledby="specsTitle">
+  <div class="specs-modal-overlay" id="specsModal" role="dialog" aria-modal="true" aria-labelledby="specsTitle" inert>
     <div class="specs-modal">
       <div class="specs-modal-header">
         <div class="specs-modal-title" id="specsTitle">
-          <span>📋 Bảng đối chiếu Design Tokens & Tiêu chí nghiệm thu (Mục 7 Brief)</span>
+          <span style="font-weight: 700; font-size: 16px;">📋 Bảng đối chiếu Design Tokens & Tiêu chí nghiệm thu</span>
+          <p style="font-size: 12.5px; font-weight: normal; color: var(--color-text-muted); margin-top: 4px;">Tiêu chí do Claude soạn; kết quả do Antigravity tự đánh giá, chưa qua rà soát</p>
         </div>
         <button type="button" class="specs-modal-close" id="btnCloseSpecs" aria-label="Đóng cửa sổ">✕</button>
       </div>
@@ -298,9 +292,19 @@
             <div class="specs-card-desc">Dùng cho tiêu đề H1, nút CTA chính, viền logo. Tương phản 14.8:1 trên nền kem.</div>
           </div>
           <div class="specs-card">
-            <div class="specs-card-name">Cam mái nhà logo (Accent)</div>
+            <div class="specs-card-name">Tím thứ cấp (Muted / Soft)</div>
+            <div class="specs-card-val" style="color: #824787;">#824787 / #F5EDF6</div>
+            <div class="specs-card-desc">Dùng cho viền, trạng thái hover, badge nhẹ.</div>
+          </div>
+          <div class="specs-card">
+            <div class="specs-card-name">Cam điểm nhấn (Accent)</div>
             <div class="specs-card-val" style="color: #EA7A24;">#EA7A24 / #FC9238</div>
-            <div class="specs-card-desc">Vòng cung trang trí nghệ thuật, outline focus bàn phím, badge thông báo.</div>
+            <div class="specs-card-desc">Mái nhà logo, vòng cung trang trí, điểm nhấn viền tương phản.</div>
+          </div>
+          <div class="specs-card">
+            <div class="specs-card-name">Cam nền nhạt (Orange Light)</div>
+            <div class="specs-card-val" style="color: #EA7A24;">#FDEBDD / #A34803</div>
+            <div class="specs-card-desc">Nền badge trạng thái trong menu tài khoản.</div>
           </div>
           <div class="specs-card">
             <div class="specs-card-name">Kem nền dịu ấm (Background)</div>
@@ -308,37 +312,37 @@
             <div class="specs-card-desc">Nền tổng thể tạo cảm giác ấm áp như gia đình, dịu mắt hơn màu trắng toát.</div>
           </div>
           <div class="specs-card">
-            <div class="specs-card-name">Kiểu chữ hiển thị (Typography)</div>
-            <div class="specs-card-val">Lora & Be Vietnam Pro</div>
-            <div class="specs-card-desc">Hỗ trợ trọn vẹn dấu tiếng Việt, kết hợp sang trọng giữa Serif và Modern Sans.</div>
+            <div class="specs-card-name">Thang màu chữ (Typography)</div>
+            <div class="specs-card-val">#231627 / #5E5362</div>
+            <div class="specs-card-desc">Chữ chính (14.8:1), chữ phụ và chú thích (6.81:1), đạt chuẩn WCAG AA (≥ 4.5:1).</div>
           </div>
         </div>
 
         <h3 class="specs-section-title">2. Đối chiếu Tiêu chí nghiệm thu Hero/Header (Claude soạn)</h3>
         <ul class="specs-checklist">
           <li>
-            <span class="specs-badge-pass">ĐẠT 100%</span>
-            <div><strong>Nội dung & Nghiệp vụ:</strong> Nút chính ghi đúng <em>"Gửi yêu cầu đặt lịch"</em>, có dòng giải thích rõ <em>"Nhân viên sẽ liên hệ để xác nhận lịch hẹn"</em>. Không cam kết sai lệch, không từ ngữ "đặt lịch thành công tức thì", không nhắc đến OTP.</div>
+            <span class="specs-badge-eval">Tự đánh giá</span>
+            <div><strong>Nội dung & Nghiệp vụ:</strong> Nút chính ghi đúng <em>"Gửi yêu cầu đặt lịch"</em>, có dòng giải thích rõ <em>"Nhân viên sẽ liên hệ để xác nhận lịch hẹn"</em> và <em>"Không cần tài khoản để gửi yêu cầu."</em>. Không cam kết sai lệch, không từ ngữ "đặt lịch thành công tức thì", không nhắc đến OTP.</div>
           </li>
           <li>
-            <span class="specs-badge-pass">ĐẠT 100%</span>
-            <div><strong>Khách vãng lai & Đã đăng nhập:</strong> Header có đầy đủ 2 trạng thái. Khách vãng lai được nêu rõ không bắt buộc đăng ký tài khoản mới được gửi lịch.</div>
+            <span class="specs-badge-eval">Tự đánh giá</span>
+            <div><strong>Khách vãng lai & Đã đăng nhập:</strong> Header có đầy đủ 2 trạng thái. Khách vãng lai được nêu rõ không bắt buộc đăng ký tài khoản mới được gửi lịch. Chiều cao header đồng đều trên mobile.</div>
           </li>
           <li>
-            <span class="specs-badge-pass">ĐẠT 100%</span>
+            <span class="specs-badge-eval">Tự đánh giá</span>
             <div><strong>Nhận diện thương hiệu:</strong> Sử dụng đúng Logo chính thức do Chủ dự án cung cấp, không méo, không đổi màu, tách nền trong suốt sắc nét. Kế thừa chuẩn bảng màu Tím - Cam - Ngọc - Kem.</div>
           </li>
           <li>
-            <span class="specs-badge-pass">ĐẠT 100%</span>
-            <div><strong>Bố cục Phương án D (Minimal Creative):</strong> Đúng chuẩn mẫu D được duyệt: Tiêu đề căn giữa, 3 khung vòm thú cưng cân đối dưới chân trang, không xếp chồng chữ lên ảnh, không dùng floating card phức tạp.</div>
+            <span class="specs-badge-eval">Tự đánh giá</span>
+            <div><strong>Bố cục Phương án D (Minimal Creative):</strong> Bố cục căn giữa thanh lịch, 3 khung vòm thú cưng cân đối dưới chân trang, ảnh gốc sắc nét do CSS bo góc, không xếp chồng chữ lên ảnh.</div>
           </li>
           <li>
-            <span class="specs-badge-pass">ĐẠT 100%</span>
-            <div><strong>Mobile Ergonomics (390px):</strong> Không ép 3 ảnh nhỏ vào 1 hàng! Khung chú chó Golden làm trung tâm nổi bật, 2 bên hé lộ nhẹ nhàng kèm 3 chấm điều hướng mượt mà. Vùng chạm nút tối thiểu 48px.</div>
+            <span class="specs-badge-eval">Tự đánh giá</span>
+            <div><strong>Mobile Ergonomics (390px & 360px):</strong> Không ép 3 ảnh nhỏ vào 1 hàng! Khung chú chó Golden làm trung tâm nổi bật, 2 bên hé lộ nhẹ nhàng kèm 3 chấm điều hướng mượt mà. Vùng chạm nút tối thiểu 44×44px.</div>
           </li>
           <li>
-            <span class="specs-badge-pass">ĐẠT 100%</span>
-            <div><strong>Khả năng tiếp cận (WCAG 2.1 AA):</strong> Tỷ lệ tương phản chữ/nền vượt ngưỡng 4.5:1; điều hướng bàn phím với focus-visible màu cam nổi bật; hỗ trợ đầy đủ <code>prefers-reduced-motion</code>.</div>
+            <span class="specs-badge-eval">Tự đánh giá</span>
+            <div><strong>Khả năng tiếp cận (WCAG 2.1 AA):</strong> Tỷ lệ tương phản chữ/nền vượt ngưỡng 4.5:1; viền focus bàn phím tương phản ≥ 3:1 trên mọi nền; bẫy tiêu điểm phím Tab và hỗ trợ phím Escape; hỗ trợ đầy đủ <code>prefers-reduced-motion</code>.</div>
           </li>
         </ul>
 
