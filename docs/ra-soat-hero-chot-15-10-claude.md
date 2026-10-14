@@ -2,6 +2,8 @@
 
 **Người rà soát:** Claude (Opus) · **Ngày:** 15/10/2026 · **Đối tượng:** nhánh `antigravity/design`, commit `252ad9d` ("implement 15/10/2026 approved Hero layout") · **Yêu cầu đối chiếu:** [thiết kế Hero đã chốt](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/thiet-ke-hero-chot-2026-10-15.md) và [yêu cầu chỉnh Hero](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/yeu-cau-chinh-hero-chu-du-an-2026-10-15.md). Không sửa code, không duyệt thay chủ dự án.
 
+**Bổ sung 15/10 theo quy tắc README:** xem [QA hồi quy Services và bổ sung Hero](qa-hoi-quy-services-va-bo-sung-hero-db30489-claude.md) (kiểm trên `db30489`, thêm 3 FIX P3 về tài liệu; mức ưu tiên ở báo cáo này quy đổi: Trung bình = P2).
+
 **Phạm vi đã kiểm:** đọc `index.html`; đo ở 1440, 1280, 1024, 768, 390, 360 px (tràn ngang, chồng lấn, vị trí họa tiết so với ảnh/chữ/nút); hiệu ứng lặp (khi tải và khi rê chuột); liên kết hai nút và menu; menu điện thoại; header đã đăng nhập; lỗi JS; so ảnh chụp với ảnh tham khảo đã chốt (ảnh 00). **Chưa kiểm:** iPhone/Android thật, Safari.
 
 ## Kết luận: **FIX** (4 lỗi, **cả bốn bắt buộc sửa** theo quy tắc "giống ảnh demo"). Phần còn lại PASS.
