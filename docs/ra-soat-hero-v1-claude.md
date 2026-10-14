@@ -8,6 +8,8 @@
 
 **Quy ước:** **[Đã xác minh]** có bằng chứng Claude tự đo hoặc đọc · **[Chưa xác minh]** thiếu bằng chứng, không coi là đạt hay không đạt · **[Đề xuất]** của Claude. Mức ưu tiên: **Cao** (sửa trước khi chủ dự án duyệt), **Trung bình** (sửa trước khi Codex triển khai), **Thấp** (nên sửa).
 
+**Cập nhật 14/10 (bản 2):** đã rà soát lại commit `904c4dd`, xem phần "BẢN 2" ở cuối tài liệu (kết luận: Đạt có điều kiện).
+
 ---
 
 ## 0. Phương pháp và giới hạn của bằng chứng
@@ -217,3 +219,62 @@ Lỗi S11, S12 và các điểm ở mục 3 có thể sửa trong lúc Codex tri
 - `08-anh-pet-center-goc-nen-hong.png`: ảnh gốc trên nền hồng để lộ viền nướng sẵn (S10).
 - `09-logo-goc-va-logo-nen-trong.png`: hai tệp logo (Đ7).
 - `10-focus-ban-phim-nut-chinh.png`: viền focus (Đ10, S6).
+
+---
+
+# BẢN 2 — Rà soát lại sau bản sửa (commit `904c4dd`)
+
+**Ngày:** 14/10/2026 · **Đối tượng:** nhánh `antigravity/hero-v1`, commit `904c4dd6d39aceeaf824c00680e7430fa4aed0bc` ("resolve review issues S1-S12 and T1-T8"). Claude chạy lại demo trên máy rà soát (Chromium, Playwright), đo ở 1440, 1024, 992, 900, 768, 681, 680, 390, 360, 320 px, và đọc mã `index.html`, `app.js`, `styles.css`. Không sửa gì trên nhánh của Antigravity. **Báo cáo này không phê duyệt thay chủ dự án.**
+
+## Kết luận bản 2: **Đạt có điều kiện** (còn 3 lỗi phải sửa, 1 yêu cầu mới của chủ dự án)
+
+Phần lớn lỗi đã sửa đúng và có bằng chứng. Còn lỗi thật ở bàn phím (S2), chấm tròn (S3, kèm yêu cầu mới), viền focus cam (S6) và một số liệu sai trong tài liệu.
+
+## A. Yêu cầu mới của chủ dự án (14/10, gửi trong lúc rà soát)
+
+> Bỏ phần nút nhỏ (chấm tròn) ở dưới phần ảnh; mặc định theo form gốc.
+
+Claude hiểu là: **bỏ dải chấm tròn chuyển ảnh** (`#mobileDotsIndicator`, ba nút `.dot-btn`) ở mọi kích thước, hiển thị ba ảnh mặc định như bố cục gốc Phương án D. **[Chưa rõ]** "form gốc" trên mobile là ba ảnh trong một hàng hay chú chó giữa với hai ảnh hé hai bên (như bản hiện tại, bỏ chấm); cần chủ dự án hoặc Antigravity xác nhận. Việc bỏ chấm cũng giải quyết lỗi S3 bên dưới. Claude chưa sửa gì; việc này giao Antigravity.
+
+## B. Đối chiếu S1–S12
+
+| Mã | Kết quả | Bằng chứng Claude đo |
+|---|---|---|
+| S1 (ghi sai "đã phê duyệt/đạt 100%") | **Đã sửa** | Cửa sổ Tiêu chí ghi "Tự đánh giá… chưa qua rà soát"; không còn chữ "ĐÃ PHÊ DUYỆT" |
+| S2 (bàn phím, drawer) | **Sửa một phần, còn lỗi** | Đúng: drawer đóng có `inert`, Tab không vào drawer; `aria-expanded` đổi true/false; Escape đóng drawer và trả tiêu điểm về nút menu; Escape đóng dropdown tài khoản và trả tiêu điểm. **Sai:** mở drawer bằng bàn phím (Enter) rồi đợi 1 giây, tiêu điểm **vẫn ở nút menu**, không chuyển vào drawer. Tab tiếp đi qua nút CTA, chấm tròn ở phía sau lớp phủ rồi mới tới drawer, tức bẫy tiêu điểm không hoạt động. Nguyên nhân khả dĩ: `requestAnimationFrame(...focus())` chạy khi drawer còn `visibility:hidden` (đang chuyển 260 ms). Ảnh 15 |
+| S3 (chấm tròn làm vỡ bố cục) | **Sửa một phần, còn lỗi** | Trên 680 px chấm ẩn (đo ở 681–1440: `display:none`; tốt, tài liệu bàn giao ghi 993 px là mô tả chưa khớp mã, mã dùng 680 px). **Từ 680 px trở xuống chấm vẫn hiện, bấm chấm phải: ảnh giữa 220 px → 68 px (vỡ như cũ).** Ảnh 13. Sẽ hết khi bỏ chấm theo yêu cầu mới |
+| S4 (header đã đăng nhập vỡ ở 390) | **Đã sửa** | Cao header 64 px cả khách và đã đăng nhập ở 390 (60 px ở 360 và 320); tên dài "Nguyễn Thị Phương Thảo Nhi" không làm vỡ; nút menu 44×44; không tràn ngang. Ảnh 14 |
+| S5 (chữ chú thích 4,47:1) | **Đã sửa** | Màu chú thích `#5E5362` trên `#FBF7F1` = **6,81:1**; mô tả 6,81:1; chữ eyebrow `#824787` = 6,15:1 |
+| S6 (viền focus) | **Sửa một phần** | Nền sáng: viền tím `#5A1E5E` 3 px, 11,04:1, đạt. Nút tím: viền **cam `#EA7A24` trên nền kem chỉ 2,69:1** (dưới ngưỡng 3:1 của WCAG 1.4.11), dù có vòng trắng trong. Ảnh 16. Nên dùng viền tím đậm hoặc viền kép tím-trắng |
+| S7 (nội dung chưa xác nhận) | **Đã sửa** | Không còn Tin tức, Cẩm nang, ô tìm kiếm, "Khách thân thiết", chữ viết tay tiếng Anh; alt ảnh trung tính "Ảnh minh họa: …"; tên mẫu "Khách Demo"; huy hiệu "Chờ nhân viên xác nhận" |
+| S8 ("không cần tài khoản") | **Đã sửa** | Dòng "Không cần tài khoản để gửi yêu cầu." hiện ngay dưới nút ở cả desktop và mobile, không cần mở menu |
+| S9 (cung cam cắt chữ, mảnh rời) | **Đã sửa** | Desktop: cung cam bắt đầu từ y≈597, chữ chú thích ở y 527–547, không cắt nhau; mảnh viết tay đã bỏ. Còn dấu chân tím đứng rời cạnh cung trái (chỉ là trang trí, mức Thấp). Ẩn trên mobile |
+| S10 (ảnh có lề nền hỏng, thanh đáy) | **Đã sửa** | Ba ảnh nay là ảnh đầy khung (RGB, không còn lề trong suốt/thanh đáy), 700×840 / 960×845 / 700×840, hiển thị `object-fit:cover`; ở khung 420×310 là ảnh gốc co lại, không bị phóng to mờ |
+| S11 (bóng drawer rò ở mép phải) | **Đã sửa** | Drawer đóng: `box-shadow:none`, `visibility:hidden`; ảnh mép phải sạch |
+| S12 (chữ "hiểu." đứng một mình) | **Đã sửa** | Mô tả ngắt hai dòng cân ("Chăm sóc bằng chuyên môn, / đồng hành bằng sự thấu hiểu.") |
+
+Ghi chú khác (không phải lỗi mới):
+- **Số liệu sai trong cửa sổ Tiêu chí và tài liệu:** ghi tím `#5A1E5E` có "tương phản 14,8:1 trên nền kem" và chữ chính "14,8:1". Claude đo: `#5A1E5E` = 11,04:1, tiêu đề `#421247` = 13,96:1, `#231627` = 16,19:1. Không có số nào 14,8. Cần sửa số hoặc bỏ số.
+- **Nguồn ảnh:** ba ảnh thú cưng vẫn **[Chưa xác nhận]** bản quyền. Antigravity ghi giấy phép Unsplash nhưng chưa cung cấp địa chỉ từng ảnh và tác giả; Claude không kiểm chứng được. Chưa dùng công khai trước khi chủ dự án hoặc Antigravity xác nhận.
+- **Dung lượng:** ba ảnh PNG 0,85 MB + 0,93 MB + 0,73 MB ≈ **2,5 MB** (bản 1 khoảng 1,2 MB). Mã demo cũng đã bỏ Google Fonts (không còn tài nguyên ngoài, đã đo: không có yêu cầu bên ngoài). Khi Codex làm thật cần nén (WebP/AVIF) và có kích thước đáp ứng; ghi vào việc cho Codex, **không chặn bản demo**.
+- Liên kết `#dich-vu`, `#gioi-thieu`, `#lien-he`, `#form-dat-lich`, `#yeu-cau` vẫn chưa có đích: chấp nhận được ở demo, Codex phải nối khi làm thật.
+- Dòng khách vãng lai "Không cần tài khoản" đã có; sau khi bỏ chấm, vùng dưới ảnh trên mobile sẽ trống một khoảng, cần Antigravity kiểm tra lại khoảng cách.
+
+## C. Lỗi tài liệu T1–T8
+
+Claude kiểm tra: tên nhánh và commit trong tài liệu bàn giao đã đúng; Antigravity chỉ đổi hai tệp tài liệu của chính họ (`ban-giao-hero-header-antigravity.md`, `thiet-ke-hero-phuong-an-d.md`), không động vào tài liệu của Claude; tài liệu có bảng đối chiếu S1–S12/T1–T8 và ghi "Tự đánh giá" thay cho "phê duyệt". **[Chưa xác minh từng mục T]**: Claude chưa đối chiếu hết từng dòng T1–T8; riêng mục số liệu "14,8:1" ở trên là **chưa đạt**, cần sửa.
+
+## D. Việc phải làm tiếp (giao Antigravity)
+
+| Ưu tiên | Việc | Đạt khi |
+|---|---|---|
+| **Cao** | Bỏ dải chấm tròn ở mọi kích thước (yêu cầu chủ dự án) | Không còn `#mobileDotsIndicator` / `.dot-btn`; không còn nút nhỏ dưới ảnh; ảnh hiển thị theo bố cục gốc đã xác nhận; không vỡ ở 360, 390, 680, 768; Tab không dừng ở chấm |
+| **Cao** | Sửa S2: mở drawer bằng bàn phím phải chuyển tiêu điểm vào drawer và giữ trong drawer | Nhấn Enter ở nút menu → `document.activeElement` là nút đóng drawer; Tab tuần hoàn trong drawer; Escape trả tiêu điểm về nút menu |
+| **Trung bình** | Sửa S6: viền focus nút tím đạt ≥3:1 trên nền kem | Màu viền ngoài ≥3:1 với kem (ví dụ tím `#5A1E5E` hoặc kép tím-trắng) |
+| **Trung bình** | Sửa số "14,8:1" trong cửa sổ Tiêu chí và tài liệu bàn giao | Số khớp số đo (11,04 / 13,96 / 16,19) |
+| **Trung bình** | Cung cấp địa chỉ và tác giả từng ảnh, hoặc đánh dấu "ảnh minh họa chưa xác nhận bản quyền" | Mỗi ảnh có nguồn kiểm chứng được |
+| Thấp | Dấu chân tím đứng rời cạnh cung trái | Gắn vào cung hoặc bỏ |
+
+## E. Bằng chứng bản 2
+
+Ảnh trong `ra-soat-hero-v1-bang-chung/`: 11 (desktop 1440), 12 (mobile 390 mặc định), 13 (mobile sau khi bấm chấm, vẫn vỡ), 14 (mobile đã đăng nhập, header ổn), 15 (menu mở bằng bàn phím, tiêu điểm còn ở ngoài), 16 (viền focus cam nút chính).
