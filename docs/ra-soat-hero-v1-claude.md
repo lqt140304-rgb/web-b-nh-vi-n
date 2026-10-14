@@ -278,3 +278,37 @@ Claude kiểm tra: tên nhánh và commit trong tài liệu bàn giao đã đún
 ## E. Bằng chứng bản 2
 
 Ảnh trong `ra-soat-hero-v1-bang-chung/`: 11 (desktop 1440), 12 (mobile 390 mặc định), 13 (mobile sau khi bấm chấm, vẫn vỡ), 14 (mobile đã đăng nhập, header ổn), 15 (menu mở bằng bàn phím, tiêu điểm còn ở ngoài), 16 (viền focus cam nút chính).
+
+---
+
+# BẢN 3 — Rà soát lại sau lần sửa 2 (commit `64b059e`)
+
+**Ngày:** 14/10/2026 · **Đối tượng:** nhánh `antigravity/hero-v1`, commit `64b059e` ("fulfill round 2 review requirements"). Theo [quy trình QA](quy-trinh-qa-ui-ux.md), Claude kiểm tra đúng các mục trong [yêu cầu sửa lần 2](yeu-cau-sua-hero-v1-lan-2-antigravity.md), đo ở 1440, 1024, 768, 681, 680, 600, 390, 360, 320 px. Báo cáo này không phê duyệt thay chủ dự án.
+
+## Kết luận bản 3: giao diện và chức năng **PASS**; còn **1 mục FIX về tài liệu** (nguồn ảnh), không chặn việc chủ dự án duyệt giao diện
+
+| # | Mục | Nhãn | Bằng chứng |
+|---|---|---|---|
+| 1 | Bỏ chấm tròn | **PASS** | Không còn `#mobileDotsIndicator` và `.dot-btn` trong HTML, CSS, JS; Tab ở mobile đi qua nút menu, hai nút chính rồi ra ngoài, không dừng ở chấm |
+| 2 | Ba ảnh một hàng ở mọi kích thước | **PASS** | Ở 390: trái 106×160, giữa 148×195, phải 106×160, khoảng cách 8 px, không tràn (`scrollWidth` 390). Ở 360: 96 / 136 / 96 px. Ở 680, 681, 768, 1024, 1440 đều ba ảnh một hàng, không chồng lấn. Ảnh giữa cao và rộng hơn hai bên. Ảnh 17, 18, 21 |
+| 3 | Khoảng trống dưới ảnh | **PASS (ý kiến)** | Không còn khoảng trắng do chấm. Dưới ảnh trên khung xem thử còn nền kem vì trang demo chỉ có Hero; khi có phần kế tiếp sẽ nối liền. Không ghi là lỗi |
+| 4 | S2: tiêu điểm menu | **PASS** | Enter ở nút menu → tiêu điểm vào nút đóng menu; Tab quay vòng trong menu (8 phần tử rồi trở lại đầu); Escape đóng, `aria-expanded=false`, `inert` bật lại, tiêu điểm về nút menu; bấm chuột cũng đưa tiêu điểm vào menu. Ảnh 19 |
+| 5 | S6: viền focus nút tím | **PASS** | Nút tím và nút trên nền tối dùng viền `#421247` 3 px kèm vòng trắng; trên nền kem 13,96:1. Ảnh 20 |
+| 6 | Số tương phản | **PASS** | Cửa sổ Tiêu chí còn các số 16,19 / 13,96 / 11,04 / 6,81 / 6,15 (khớp số Claude đo); không còn "14,8" |
+| 7 | Nguồn ba ảnh | **FIX (Trung bình)** | Có bảng nguồn nhưng **mô tả không khớp ảnh thật**: tài liệu ghi ảnh trái là "chó Corgi", giữa là "mèo lông ngắn", phải là "mèo con vằn"; ảnh thực tế là mèo mướp đeo khăn vàng (trái), chó Golden ngậm hoa (giữa), mèo vằn mắt xanh (phải). Ghi lẫn "Unsplash / Pixabay". Địa chỉ dạng `unsplash.com/photos/a-corgi-looking-up` không giống địa chỉ ảnh thật của Unsplash; Claude không truy cập được để kiểm chứng (mạng ngoài bị chặn). **Chưa xác nhận bản quyền**, tài liệu đã ghi "không dùng công khai". Đề nghị: ghi lại mô tả đúng theo ảnh, dán địa chỉ ảnh thật hoặc bỏ cột nguồn và chỉ giữ nhãn "ảnh minh họa chưa xác nhận bản quyền" |
+| 8 | Dấu chân rời cạnh cung trái | **PASS** (mức Thấp, không còn đáng kể) | Không còn lỗi chồng chữ; chỉ là trang trí |
+| 9 | Tài liệu khớp mã (ngưỡng chấm) | **PASS** | Không còn mục chấm tròn |
+
+Kiểm tra thêm, không phát hiện lỗi mới: header khách và đã đăng nhập cùng 64 px ở 390 kể cả tên dài, không tràn ngang; chỉ dùng phông hệ thống/không còn tải ngoài; alt ảnh trung tính; ghi chú "Không cần tài khoản" hiện sẵn.
+
+Ghi nhận (không chặn): ở 320 px ảnh trái bị lệch ra mép (x = −10), nằm dưới mức tối thiểu 360 px của dự án; ảnh PNG tổng khoảng 2,5 MB (Codex nén khi làm thật); liên kết `#dich-vu`, `#gioi-thieu`, `#lien-he`, `#form-dat-lich` chưa có đích (demo).
+
+**NEED CODEX (không bắt buộc cho Hero):** Safari và thiết bị thật, chạy axe hoặc Lighthouse tự động, đo hiệu năng. Claude chưa chuyển Codex vì phần còn lại đã tự đo được.
+
+## Việc tiếp theo
+
+1. **Chủ dự án:** quyết định duyệt giao diện Hero/Header V1 hay chưa (Claude không duyệt thay).
+2. **Antigravity (một đợt nhỏ, không chặn duyệt):** sửa mục 7, bảng nguồn ảnh, theo đúng cột "Đề nghị" ở trên.
+3. Ảnh vẫn không được dùng công khai trước khi chủ dự án xác nhận nguồn và giấy phép.
+
+Ảnh bằng chứng bản 3: 17 đến 21 trong `ra-soat-hero-v1-bang-chung/`.
