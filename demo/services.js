@@ -68,16 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
         '[Nội dung mẫu 2 — chờ bệnh viện cung cấp]',
         '[Nội dung mẫu 3 — chờ bệnh viện cung cấp]'
       ]
-    },
-    capcuu: {
-      title: 'Cấp cứu 24/24',
-      badge: 'Cấp cứu 24/24 [Đã xác nhận]',
-      desc: 'Bệnh viện Thú y Lê Sơn tiếp nhận cấp cứu 24/24. Trong trường hợp khẩn cấp, quý khách vui lòng liên hệ trực tiếp hotline để được hỗ trợ tức thì, không gửi yêu cầu qua web.',
-      features: [
-        'Tiếp nhận cấp cứu thú y 24/24 tất cả các ngày trong tuần',
-        '[Nội dung mẫu 1 — chờ bệnh viện cung cấp]',
-        '[Nội dung mẫu 2 — chờ bệnh viện cung cấp]'
-      ]
     }
   };
 
@@ -265,40 +255,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     serviceDetailTitle.textContent = data.title;
-    let actionsHtml = '';
-    if (serviceKey === 'capcuu') {
-      actionsHtml = `
-        <div style="background: #FDF2E8; border-left: 4px solid #EA7A24; padding: 12px 14px; border-radius: 8px; margin-bottom: 16px; font-size: 13.5px; color: #A34803; line-height: 1.5;">
-          <strong>⚠️ Ca khẩn cấp vui lòng gọi trực tiếp:</strong> Để thú cưng được tiếp nhận kịp thời nhất, xin vui lòng gọi hotline cấp cứu, không gửi yêu cầu qua web.
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <a href="tel:+84973555105" class="btn-card-learn btn-card-emergency" style="font-size: 15px; padding: 13px 20px; text-decoration: none; display: inline-flex; justify-content: center; align-items: center; gap: 8px;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span>Gọi cấp cứu ngay: 097 355 51 05</span>
-          </a>
-          <a href="https://maps.app.goo.gl/xFbQ4BjKtGVa3rp86" target="_blank" rel="noopener noreferrer" class="drawer-contact-btn drawer-btn-maps" style="width: 100%; font-size: 13px; min-height: 42px; box-sizing: border-box;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Chỉ đường tới bệnh viện (101 Khuất Duy Tiến, Hà Nội)</span>
-          </a>
-        </div>
-      `;
-    } else {
-      actionsHtml = `
-        <div class="modal-contact-row">
-          <div class="modal-contact-group">
-            <a href="https://maps.app.goo.gl/xFbQ4BjKtGVa3rp86" target="_blank" rel="noopener noreferrer" class="modal-contact-link modal-link-maps" title="101 Khuất Duy Tiến, Thanh Xuân, Hà Nội" aria-label="Xem vị trí bệnh viện trên Google Maps (mở tab mới)">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>Chỉ đường Maps</span>
-            </a>
-            <a href="https://www.facebook.com/benhvienthuyleson" target="_blank" rel="noopener noreferrer" class="modal-contact-link modal-link-fb" title="Nhắn tin qua Fanpage Facebook" aria-label="Tư vấn qua Facebook Fanpage (mở tab mới)">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              <span>Tư vấn Facebook</span>
-            </a>
-          </div>
-          <a href="index.html#form-dat-lich" class="btn-cta-primary" style="font-size: 13.5px; padding: 10px 20px; text-decoration: none;">Gửi yêu cầu đặt lịch →</a>
-        </div>
-      `;
-    }
+    const actionsHtml = `
+      <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+        <a href="index.html#form-dat-lich" class="btn-cta-primary" style="font-size: 13.5px; padding: 11px 22px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Gửi yêu cầu đặt lịch →</a>
+      </div>
+    `;
 
     let html = `
       <div style="margin-bottom: 14px;">

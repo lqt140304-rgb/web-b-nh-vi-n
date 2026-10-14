@@ -3,9 +3,9 @@
 **Dự án:** Bệnh viện Thú y Lê Sơn  
 **Đơn vị thực hiện:** Antigravity (UI/UX Specialist)  
 **Nhánh làm việc:** `antigravity/services-v1`  
-**Phiên bản:** Services V1.1 (Cập nhật hoàn tất 10 hạng mục F1–F10 theo yêu cầu ngày 14/10/2026)  
-**Trạng thái:** **Đã hoàn thành sửa 1 đợt — Sẵn sàng bàn giao Claude QA & Chủ dự án nghiệm thu**  
-**Quy trình áp dụng:** Antigravity bàn giao → Claude QA (Codex kiểm tra bổ sung nếu cần) → Claude tổng hợp → Chủ dự án duyệt  
+**Phiên bản:** Services V1.2 (Đợt sửa cuối cùng theo duyệt của Chủ dự án ngày 14/10/2026)  
+**Trạng thái:** **Đã hoàn thành 9/9 mục — Sẵn sàng để Claude QA & Chủ dự án nghiệm thu**  
+**Quy trình áp dụng:** Antigravity bàn giao → Claude QA → Chủ dự án duyệt  
 
 ---
 
@@ -33,54 +33,39 @@ Thiết kế này mang lại:
 
 ## 3. Danh mục 4 Dịch vụ Trọng tâm
 
-Tuân thủ nghiêm ngặt các quyết định đã chốt ngày 14/10/2026 của Chủ dự án:
+Tuân thủ nghiêm ngặt các quyết định đã chốt của Chủ dự án:
 - Dùng chữ giữ chỗ placeholder có nhãn `[Nội dung mẫu — chờ bệnh viện cung cấp]`, không tự viết câu khẳng định chuyên môn hay cam kết kết quả.
 - Dịch vụ Grooming đổi tên chính thức thành **"Spa & Grooming"**.
-- Dịch vụ Cấp cứu tiếp nhận **24/24** [Đã xác nhận], nút chính là gọi điện khẩn cấp tới hotline **`097 355 51 05`** (`tel:+84973555105`), không có nút đặt lịch ở Cấp cứu.
+- Dịch vụ Cấp cứu tiếp nhận **24/24** [Đã xác nhận], thẻ Cấp cứu chỉ có duy nhất nút gọi khẩn cấp tới hotline **`097 355 51 05`** (`tel:+84973555105`), không có nút đặt lịch và không mở modal.
 
 | # | Tên Dịch vụ | Icon | Tông màu vòm | 3 Điểm nổi bật chính | Hành động chính |
 |---|---|:---:|:---:|---|---|
-| **1** | **Khám và điều trị** | Ống nghe (`stethoscope`) | Cam phấn `#FDF2E8` | ✦ [Nội dung mẫu — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu — chờ bệnh viện cung cấp] | `Tìm hiểu thêm →` (Mở modal có nút "Gửi yêu cầu đặt lịch") |
-| **2** | **Spa & Grooming** | Cây kéo tỉa lông (`scissors`) | Xanh pastel `#EDF6F7` | ✦ [Nội dung mẫu — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu — chờ bệnh viện cung cấp] | `Tìm hiểu thêm →` (Mở modal có nút "Gửi yêu cầu đặt lịch") |
-| **3** | **Nội trú** | Ngôi nhà (`home`) | Kem tím `#F7EFF5` | ✦ [Nội dung mẫu — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu — chờ bệnh viện cung cấp] | `Tìm hiểu thêm →` (Mở modal có nút "Gửi yêu cầu đặt lịch") |
-| **4** | **Cấp cứu 24/24** | Chữ thập y tế khẩn cấp | Tím hồng `#F8ECF3` | ✦ Tiếp nhận cấp cứu 24/24 [Đã xác nhận]<br>✦ [Nội dung mẫu — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu — chờ bệnh viện cung cấp] | `<a href="tel:+84973555105">` **Gọi cấp cứu: 097 355 51 05** |
+| **1** | **Khám và điều trị** | Ống nghe (`stethoscope`) | Cam phấn `#FDF2E8` | ✦ [Nội dung mẫu 1 — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu 2 — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu 3 — chờ bệnh viện cung cấp] | `Tìm hiểu thêm →` (Mở modal có nút "Gửi yêu cầu đặt lịch") |
+| **2** | **Spa & Grooming** | Cây kéo tỉa lông (`scissors`) | Xanh pastel `#EDF6F7` | ✦ [Nội dung mẫu 1 — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu 2 — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu 3 — chờ bệnh viện cung cấp] | `Tìm hiểu thêm →` (Mở modal có nút "Gửi yêu cầu đặt lịch") |
+| **3** | **Nội trú** | Ngôi nhà (`home`) | Kem tím `#F7EFF5` | ✦ [Nội dung mẫu 1 — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu 2 — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu 3 — chờ bệnh viện cung cấp] | `Tìm hiểu thêm →` (Mở modal có nút "Gửi yêu cầu đặt lịch") |
+| **4** | **Cấp cứu 24/24** | Chữ thập y tế khẩn cấp | Tím hồng `#F8ECF3` | ✦ Tiếp nhận cấp cứu 24/24<br>✦ [Nội dung mẫu 1 — chờ bệnh viện cung cấp]<br>✦ [Nội dung mẫu 2 — chờ bệnh viện cung cấp] | `<a href="tel:+84973555105">` **Gọi cấp cứu 24/24: 097 355 51 05** |
 
 ---
 
-## 4. Bảng Đối Chiếu 10 Hạng Mục Sửa (F1–F10) Theo Yêu Cầu 14/10/2026
+## 4. Bảng Báo Cáo Kết Quả Đợt Sửa Cuối (9/9 Mục Đã Làm)
 
-| Mã | Ưu tiên | Hạng mục yêu cầu | Tình trạng | Chi tiết thực hiện |
-|:---:|:---:|---|:---:|---|
-| **F1** | Cao | **Thay 4 ảnh dịch vụ sạch ≥ 912px** | **PASS** | Đã thay toàn bộ 4 ảnh chụp thực tế chất lượng cao từ Unsplash (độ rộng gốc 1000px ≥ 912px), hoàn toàn không còn mép thẻ khác, không icon nướng sẵn, không viền nhân tạo. Ảnh được trình duyệt bo vòm tự nhiên bằng CSS `border-radius: 120px 120px 0 0`. Bảng chi tiết nguồn ảnh ở Mục 5 bên dưới. |
-| **F2** | Cao | **Chữ giữ chỗ placeholder & bỏ cam kết chuyên môn** | **PASS** | Tiêu đề H1 đổi thành `"Dịch vụ chăm sóc thú cưng của bạn"` (đã bỏ chữ "toàn diện"). Toàn bộ 3 gạch đầu dòng trên 3 thẻ thường và nội dung chi tiết trong modal đã được thay bằng nhãn `[Nội dung mẫu — chờ bệnh viện cung cấp]`. Tuyệt đối không còn câu khẳng định chuyên môn hay hứa hẹn kết quả điều trị. Bố cục co giãn mượt mà. |
-| **F3** | Cao | **Cấp cứu: Gọi điện trực tiếp, không gửi yêu cầu** | **PASS** | Thẻ và modal Cấp cứu ghi rõ "Cấp cứu 24/24". Nút bấm chính trên thẻ là liên kết gọi điện trực tiếp: `<a href="tel:+84973555105" class="btn-card-learn btn-card-emergency">Gọi cấp cứu: 097 355 51 05</a>`. Trong modal Cấp cứu hiển thị hộp cảnh báo: *"Ca khẩn cấp vui lòng gọi trực tiếp hotline, không gửi yêu cầu qua web"* cùng nút gọi điện to và nút "Chỉ đường trên Google Maps". **Tuyệt đối không có nút "Gửi yêu cầu đặt lịch" ở Cấp cứu.** |
-| **F4** | Cao | **Đường đặt lịch chuẩn** | **PASS** | Bổ sung khối CTA đặt lịch ngoài cửa sổ `.services-booking-cta` đặt ngay dưới lưới 4 thẻ, hiển thị nút chuẩn `"Gửi yêu cầu đặt lịch"` (trỏ `index.html#form-dat-lich`) kèm dòng giải thích: *"Nhân viên sẽ liên hệ để xác nhận lịch hẹn."* Trong modal của 3 dịch vụ thường, nút hành động cũng hiển thị đúng `"Gửi yêu cầu đặt lịch →"` trỏ cùng đích `index.html#form-dat-lich`. |
-| **F5** | Trung bình | **Menu điện thoại (Drawer) đồng bộ với Hero** | **PASS** | Drawer mobile trên `services.html` tái sử dụng đầy đủ cấu trúc của Hero: Logo Lê Sơn trong suốt, nút đóng ✕, 4 liên kết điều hướng (với "Dịch vụ" có `aria-current="page"`), khối thẻ liên hệ hiển thị địa chỉ chuẩn **101 Khuất Duy Tiến, Nhân Chính, Thanh Xuân, Hà Nội**, hotline bấm gọi ngay `097 355 51 05`, nút "Gửi yêu cầu đặt lịch", 2 nút Đăng nhập / Đăng ký và dòng ghi chú *"Khách vãng lai gửi yêu cầu không bắt buộc có tài khoản"*. Đã bỏ toàn bộ khẩu hiệu chưa xác nhận. |
-| **F6** | Trung bình | **Nối Hero sang Dịch vụ** | **PASS** | Trên trang `demo/index.html`, liên kết menu "Dịch vụ" (trên Header Desktop và Mobile Drawer) cùng nút bấm phụ `btnCtaSecondary` ("Xem dịch vụ") đã được cấu hình trỏ chính xác sang `services.html`. |
-| **F7** | Trung bình | **Đổi tên Grooming thành "Spa & Grooming"** | **PASS** | Đã đổi tên trên thẻ, modal chi tiết, thuộc tính `aria-label`, thẻ alt hình ảnh và tài liệu bàn giao. Tên hiển thị gọn gàng trên 1 dòng ở màn hình hẹp 360px nhờ cấu hình typography `font-size: clamp(1.2rem, 1.8vw, 1.35rem)`. |
-| **F8** | Thấp | **Phông chữ tải 1 lần, bỏ phông không dùng** | **PASS** | Xóa hoàn toàn cú pháp `@import` trong file `demo/styles.css`. Cả hai trang `index.html` và `services.html` sử dụng duy nhất một thẻ `<link rel="stylesheet">` từ Google Fonts tải 2 họ phông: `Be Vietnam Pro` (400, 500, 600, 700) và `Lora` (500, 600, 700). Đã loại bỏ hoàn toàn phông chữ `Caveat` không sử dụng. |
-| **F9** | Thấp | **Icon Cấp cứu y tế khẩn cấp** | **PASS** | Thay biểu tượng chiếc chuông (`siren`) bằng biểu tượng chữ thập y tế cấp cứu trong hình tròn màu đỏ/tím thương hiệu, dễ hiểu trực quan cho tình huống cứu hộ khẩn cấp y khoa. |
-| **F10** | Thấp | **Ghi chú kỹ thuật về `server.js`** | **PASS** | Tệp `server.js` là máy chủ HTTP tĩnh Node.js độc lập, được Antigravity tạo để phục vụ riêng việc chạy xem thử demo và chụp ảnh kiểm thử trên máy cá nhân (`http://127.0.0.1:3030`). Tệp này **không phải là mã nguồn backend** và Codex không tái sử dụng khi xây dựng hệ thống website chính thức. |
+Theo đúng yêu cầu tại `docs/yeu-cau-sua-services-v1-lan-2-antigravity.md`:
 
----
-
-## 5. Bảng Kê Nguồn Gốc & Bản Quyền 4 Ảnh Dịch Vụ Mới (F1)
-
-Toàn bộ 4 ảnh đều có độ phân giải gốc cao (rộng 1000px, vượt mức tối thiểu 912px), chụp cận cảnh chân thực, màu sắc tươi sáng, tương thích tự nhiên với bảng màu kem-tím của Bệnh viện Thú y Lê Sơn.
-
-| Dịch vụ | Tệp ảnh lưu trữ | Kích thước | Mô tả nhân vật trong ảnh | Tác giả & Nguồn | Tình trạng bản quyền |
-|---|---|:---:|---|---|:---:|
-| **Khám và điều trị** | `demo/assets/service-kham.jpg`<br>`demo/assets/service-kham.png` | 1000 × 667 px | Bác sĩ thú y dịu dàng thăm khám cho một bé mèo mướp trên bàn y tế vô trùng | Nhiếp ảnh gia **Christin Hume** (Unsplash) | **Giấy phép Unsplash Free**<br>(Cho phép sử dụng thương mại & phi thương mại miễn phí) |
-| **Spa & Grooming** | `demo/assets/service-grooming.jpg`<br>`demo/assets/service-grooming.png` | 1000 × 667 px | Chú cún trắng nhỏ đang được tắm bọt spa thư giãn chuyên nghiệp | Nhiếp ảnh gia **Autri Taheri** (Unsplash) | **Giấy phép Unsplash Free**<br>(Cho phép sử dụng thương mại & phi thương mại miễn phí) |
-| **Nội trú** | `demo/assets/service-noitru.jpg`<br>`demo/assets/service-noitru.png` | 1000 × 1333 px | Bé mèo cuộn mình ngủ say sưa, ấm áp dưới lớp chăn sạch sẽ trong phòng lưu trú | Nhiếp ảnh gia **Unsplash Creator** (Unsplash) | **Giấy phép Unsplash Free**<br>(Cho phép sử dụng thương mại & phi thương mại miễn phí) |
-| **Cấp cứu 24/24** | `demo/assets/service-capcuu.jpg`<br>`demo/assets/service-capcuu.png` | 1000 × 1600 px | Chú chó Golden Retriever thông minh, ánh mắt trung thành và tin cậy | Nhiếp ảnh gia **Richard Brutyo** (Unsplash) | **Giấy phép Unsplash Free**<br>(Cho phép sử dụng thương mại & phi thương mại miễn phí) |
-
-> [!NOTE]
-> *Cả 4 tệp ảnh đều có sẵn dưới cả 2 định dạng: `.jpg` (tải nhẹ, tối ưu nạp nhanh) và `.png` trong thư mục `demo/assets/` để tiện phục vụ Codex chuyển đổi tối ưu khi đưa lên Next.js / WebP.*
+| # | Việc cần sửa | Tình trạng | Chi tiết thực hiện |
+|:---:|---|:---:|---|
+| **1** | **Bỏ nút "Tìm hiểu thêm & Chỉ đường" ở thẻ Cấp cứu**; xóa dữ liệu và mã cửa sổ chi tiết của Cấp cứu (`capcuu` trong `serviceData` và nhánh modal). Thẻ Cấp cứu chỉ còn nút "Gọi cấp cứu". | **ĐÃ LÀM** | Đã xóa nút sublink ở thẻ Cấp cứu; xóa toàn bộ `capcuu` khỏi `serviceData`; xóa nhánh `if (serviceKey === 'capcuu')`. Đã kiểm tra toàn bộ mã: không còn xuất hiện các cụm từ "hỗ trợ tức thì", "tất cả các ngày trong tuần". |
+| **2** | **Số điện thoại không bị ngắt dòng trên nút Cấp cứu ở desktop (thẻ rộng 270 px)**. | **ĐÃ LÀM** | Nút Cấp cứu hiển thị 2 dòng: dòng 1 `Gọi cấp cứu 24/24:`, dòng 2 số `097 355 51 05` to đậm có `white-space: nowrap !important;`. Số điện thoại luôn hiển thị liền mạch trên một dòng ở mọi kích thước màn hình (1440, 1280, 1024, 768, 390, 360 px). |
+| **3** | **Đường cong cam không chạm chữ H1 ở trang Dịch vụ** (ở 1440, 1280, 1024 px). | **ĐÃ LÀM** | Cấu hình `.services-header-stage` rộng tối đa 1200px với padding 40px; định vị `.services-decor-curve-left` và `.services-decor-curve-right` ở biên ngoài thoáng (top 14px/10px, ngang tầm eyebrow); tiêu đề H1 có khoảng cách biên ≥ 80px. Tại 1024px, áp dụng scale 0.85 và margin an toàn. Họa tiết hoàn toàn không chạm hay cắt chữ nào của tiêu đề. |
+| **4** | **Sửa "105" thành "101" Khuất Duy Tiến ở `services.html` và `index.html`; tìm lại toàn bộ mã và tài liệu**. | **ĐÃ LÀM** | Đã quét toàn bộ dự án (`*.html`, `*.js`, `*.css`, `*.md`). Không còn bất kỳ chuỗi "105 Khuất" nào trong toàn bộ repository. |
+| **5** | **Bỏ hai nút Maps và Facebook khỏi header của `services.html` và `index.html` (cả desktop và khi đã đăng nhập)**. | **ĐÃ LÀM** | Đã xóa toàn bộ khối `.header-social-links` khỏi header của cả hai trang `services.html` và `index.html`. Header trở lại đúng chuẩn Hero V1 đã duyệt (Logo, Nav menu, Auth buttons / Profile button), không bị tràn ở 1024px và 390px. |
+| **6** | **Khối liên hệ trong menu điện thoại: giữ**, liên kết Facebook dùng `https://www.facebook.com/benhvienthuyleson` (không kèm `?locale`), mở tab mới có `rel="noopener noreferrer"`; địa chỉ chữ ghi 101 Khuất Duy Tiến, Nhân Chính, Thanh Xuân, Hà Nội. | **ĐÃ LÀM** | Khối liên hệ trong mobile drawer hiển thị đúng địa chỉ 101 Khuất Duy Tiến, hotline `tel:+84973555105`, Maps và Facebook sạch (`rel="noopener noreferrer"`). Tab quay vòng tuần hoàn trong drawer hoạt động trơn tru. |
+| **7** | **Nút Maps/Facebook trong cửa sổ chi tiết của ba dịch vụ còn lại: bỏ**; giữ nút "Gửi yêu cầu đặt lịch". | **ĐÃ LÀM** | Cửa sổ modal của Khám, Spa & Grooming, Nội trú đã loại bỏ hai nút Maps/Facebook; chỉ còn nội dung chữ giữ chỗ và nút `"Gửi yêu cầu đặt lịch →"` trỏ về `index.html#form-dat-lich`. |
+| **8** | **Tài liệu `thong-tin-benh-vien-le-son.md`**: xóa hoặc đánh dấu "chưa xác nhận, không dùng" các mục thiết bị, phòng mổ, máy móc, camera, "trục vành đai 3", và kế hoạch lấy ảnh từ Facebook/Google Maps; chỉ giữ thông tin chủ dự án đã cung cấp. | **ĐÃ LÀM** | Đã viết lại `docs/thong-tin-benh-vien-le-son.md`, loại bỏ toàn bộ các khẳng định chưa xác thực, chỉ giữ các thông tin liên hệ chính thức theo đúng `docs/thong-tin-lien-he.md`. |
+| **9** | **Hero**: kiểm và sửa nếu còn: khóa đúng phần Hero khi mở menu (`id="hero-main"`); menu trong chế độ xem thử "Mobile (390px)" nằm trong khung điện thoại. | **ĐÃ LÀM** | `app.js` dùng `document.getElementById('hero-main')` bật `inert` khi mở drawer; `styles.css` có `.viewport-outer.mode-mobile .mobile-drawer { position: absolute !important; }` giữ menu luôn nằm trọn trong khung điện thoại 390px. |
 
 ---
 
-## 6. Hướng dẫn Trải nghiệm Bản Demo
+## 5. Hướng dẫn Trải nghiệm Bản Demo
 
 Bản demo Dịch vụ V1 được lưu trữ độc lập tại:
 👉 [`demo/services.html`](../demo/services.html)
@@ -88,14 +73,7 @@ Bản demo Dịch vụ V1 được lưu trữ độc lập tại:
 Khởi chạy máy chủ xem thử:
 ```bash
 node server.js
-# hoặc: python -m http.server 3030 --directory demo
 # Truy cập: http://127.0.0.1:3030/services.html
 ```
 
-### Các thao tác kiểm tra đề xuất cho Claude QA:
-1. **Kiểm tra 4 ảnh (F1):** Quan sát 4 khung vòm, ảnh sắc nét, viền cong tự nhiên, không tì vết, không mép thẻ khác.
-2. **Kiểm tra nội dung & placeholder (F2):** Xem H1 không còn chữ "toàn diện"; 3 gạch đầu dòng và modal dịch vụ thường mang nhãn placeholder rõ ràng.
-3. **Kiểm tra Cấp cứu 24/24 (F3):** Bấm nút thẻ Cấp cứu -> kích hoạt gọi điện thoại `tel:+84973555105`; bấm modal Cấp cứu -> hiển thị cảnh báo không gửi yêu cầu qua web, có nút gọi khẩn cấp và nút mở Google Maps.
-4. **Kiểm tra CTA đặt lịch (F4):** Cuộn xuống dưới 4 thẻ, bấm nút "Gửi yêu cầu đặt lịch" -> chuyển về form đặt lịch trên `index.html#form-dat-lich`.
-5. **Kiểm tra Mobile Drawer (F5 & A2):** Bấm xem chế độ `Mobile (390px)`, bấm nút mở menu hamburger -> Drawer mở gọn gàng bên trong khung điện thoại mô phỏng, tiêu điểm nhảy vào nút đóng, đầy đủ thông tin liên hệ 101 Khuất Duy Tiến và hotline `097 355 51 05`.
-6. **Kiểm tra liên kết qua lại giữa Hero và Services (F6):** Bấm "Trang chủ" để về `index.html`, từ `index.html` bấm "Dịch vụ" hoặc nút "Xem dịch vụ" để quay lại `services.html`.
+*(Ghi chú: `server.js` chỉ là công cụ xem thử demo nội bộ trên máy cá nhân, Codex không tái sử dụng khi triển khai).*
