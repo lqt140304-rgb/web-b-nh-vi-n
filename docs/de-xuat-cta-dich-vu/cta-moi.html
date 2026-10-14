@@ -1,53 +1,59 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Đề xuất CTA mới cho trang Dịch vụ</title>
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Đề xuất CTA mới có bé cún (xóa phông) cho trang Dịch vụ</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--purple:#5A1E5E;--purple-dark:#421247;--cream:#FBF7F1;--orange:#FC9238;--lilac:#B896BF}
+:root{--purple:#5A1E5E;--purple-dark:#421247;--cream:#FBF7F1;--orange:#FC9238}
 *{box-sizing:border-box}body{margin:0;padding:32px;background:#EFE9E1;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:#231627}
-h1{font:600 20px 'Lora',serif;color:var(--purple-dark);margin:0 0 4px}.sub{font-size:13px;color:#5E5362;margin:0 0 20px}
-.frame{container-type:inline-size;background:var(--cream);border-radius:20px;padding:40px 24px;margin-bottom:24px}.label{font-size:12px;font-weight:700;color:#5E5362;margin:0 0 10px;letter-spacing:.04em}
-.mobile{width:390px;padding:24px 16px}
-/* ====== CTA MỚI (đề xuất) ====== */
-.cta{position:relative;overflow:hidden;max-width:1000px;margin:0 auto;border-radius:28px;background:linear-gradient(135deg,var(--purple) 0%,var(--purple-dark) 100%);color:var(--cream);padding:36px 44px 36px 84px;display:flex;align-items:center;justify-content:space-between;gap:32px}
-.cta-text{position:relative;z-index:1;max-width:600px}
+h1{font:600 20px 'Lora',serif;color:var(--purple-dark);margin:0 0 4px}.sub{font-size:13px;color:#5E5362;margin:0 0 20px;max-width:900px}
+.frame{container-type:inline-size;background:var(--cream);border-radius:20px;padding:24px;margin-bottom:24px}.label{font-size:12px;font-weight:700;color:#5E5362;margin:0 0 10px;letter-spacing:.04em}
+.mobile{width:390px;padding:16px}
+/* ===== CTA ===== */
+.cta{position:relative;max-width:1060px;margin:96px auto 0;border-radius:28px;background:linear-gradient(135deg,var(--purple) 0%,var(--purple-dark) 100%);color:var(--cream);display:flex;align-items:center;gap:28px;padding:40px 44px 40px 292px;min-height:190px}
+.cta-bg{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none}
+.cta-bg .arch{position:absolute;right:-40px;bottom:-70px;width:270px;height:270px;border:2px solid rgba(184,150,191,.26);border-radius:135px 135px 0 0}
+.cta-bg .arch.two{right:6px;width:190px;height:190px;border-radius:95px 95px 0 0;border-color:rgba(252,146,56,.32)}
+/* bé cún xóa phông: nhô lên khỏi mép trên dải */
+.cta-dog{position:absolute;left:40px;bottom:0;width:236px;z-index:2;pointer-events:none;filter:drop-shadow(0 10px 14px rgba(0,0,0,.28))}
+.cta-dog img{display:block;width:100%;height:auto}
+.cta-text{position:relative;z-index:1;flex:1;min-width:0}
 .cta-title{font:600 28px/1.25 'Lora',serif;margin:0 0 8px;text-wrap:balance}
 .cta-note{margin:0;font-size:15px;line-height:1.5;color:#E9DDEB}
-.cta-actions{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;flex-shrink:0}
-.cta-btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;background:var(--cream);color:var(--purple-dark);font:600 16px 'Be Vietnam Pro',sans-serif;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.22);transition:transform .25s,box-shadow .25s}
-.cta-btn svg{width:18px;height:18px;transition:transform .25s}
-@media(hover:hover){.cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(0,0,0,.28)}.cta-btn:hover svg{transform:translateX(3px)}}
-.cta-btn:focus-visible{outline:3px solid var(--cream);outline-offset:3px;box-shadow:0 0 0 6px var(--orange)}
-.cta-tel{font-size:14px;color:#E9DDEB;text-decoration:none}.cta-tel strong{color:var(--cream);font-weight:600;white-space:nowrap}
-.cta-tel:focus-visible{outline:2px solid var(--cream);outline-offset:3px;border-radius:4px}
-/* bé cún (ảnh tạm) nhô lên khỏi mép trên dải CTA */
-.cta{overflow:visible}.cta-bg{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none}
-.cta-dog{position:absolute;left:44px;bottom:0;width:176px;height:222px;border-radius:88px 88px 0 0;overflow:hidden;border:4px solid var(--cream);border-bottom:0;box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:2;background:#222}
-.cta-dog img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
-.cta.has-dog{margin-top:56px;padding-left:272px;min-height:164px}
-/* trang trí tĩnh, nhẹ */
-.cta-bg .arch{position:absolute;right:-30px;bottom:-60px;width:260px;height:260px;border:2px solid rgba(184,150,191,.28);border-radius:130px 130px 0 0;pointer-events:none}
-.cta-bg .arch.two{right:10px;bottom:-60px;width:190px;height:190px;border-radius:95px 95px 0 0;border-color:rgba(252,146,56,.35)}
-
-@container (max-width:760px){.cta{flex-direction:column;align-items:stretch;text-align:center;padding:30px 22px;gap:22px;border-radius:24px}
-.cta-title{font-size:23px}.cta-note{font-size:14px}.cta-actions{align-items:stretch}.cta-btn{justify-content:center;width:100%}.cta-bg{display:none}.cta.has-dog{margin-top:84px;padding:112px 22px 30px}.cta-dog{left:50%;transform:translateX(-50%);top:-84px;bottom:auto;width:124px;height:168px;border-radius:62px 62px 0 0;border-width:3px;border-bottom:0}}
+.cta-actions{position:relative;z-index:1;display:flex;flex-direction:column;gap:12px;width:300px;flex-shrink:0}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;text-decoration:none;font-family:'Be Vietnam Pro',sans-serif;transition:transform .25s,box-shadow .25s,background .25s}
+.btn svg{width:20px;height:20px;flex-shrink:0}
+.btn-primary{min-height:68px;padding:0 28px;background:var(--cream);color:var(--purple-dark);font-weight:700;font-size:18px;box-shadow:0 10px 24px rgba(0,0,0,.28)}
+.btn-call{min-height:56px;padding:0 24px;border:2px solid var(--cream);color:var(--cream);font-weight:600;font-size:16px;background:transparent;white-space:nowrap}
+.btn-call strong{font-weight:700;letter-spacing:.02em}
+@media(hover:hover){.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(0,0,0,.34)}.btn-call:hover{background:rgba(251,247,241,.12)}}
+.btn:focus-visible{outline:3px solid var(--cream);outline-offset:3px;box-shadow:0 0 0 7px var(--orange)}
+@container (max-width:860px){
+ .cta{flex-direction:column;align-items:stretch;text-align:center;padding:124px 22px 26px;margin-top:96px;gap:20px;border-radius:24px}
+ .cta-dog{left:50%;transform:translateX(-50%);bottom:auto;top:-96px;width:178px;filter:none;-webkit-mask:none}
+ .cta-dog img{height:196px;object-fit:cover;object-position:top;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
+ .cta-bg{display:none}.cta-title{font-size:23px}.cta-note{font-size:14px}.cta-actions{width:100%}
+ .btn-primary{min-height:64px;font-size:17px}}
 </style></head><body>
-<h1>Đề xuất CTA mới có bé cún cho trang Dịch vụ (thay khối "Bạn cần đặt lịch…")</h1>
-<p class="sub">Claude · bản minh họa để chủ dự án xem. Chữ dùng lại nội dung đã có; số điện thoại là số chung đã xác nhận. <b>Ảnh cún là ảnh tạm</b> (ảnh có sẵn trong demo) để xem bố cục; sẽ thay bằng ảnh cún chủ dự án chọn.</p>
+<h1>Đề xuất CTA mới có bé cún (xóa phông) cho trang Dịch vụ</h1>
+<p class="sub">Claude · bản minh họa. Chữ dùng lại nội dung đã có, số điện thoại là số chung đã xác nhận. <b>Ảnh cún là ảnh tạm</b> (ảnh có sẵn trong demo, đã xóa phông tự động để xem bố cục, đường cắt chưa tinh); sẽ thay bằng ảnh động vật xóa phông chủ dự án chọn.</p>
 
 <p class="label">DESKTOP (1440)</p>
-<div class="frame"><section class="cta has-dog" aria-label="Gửi yêu cầu đặt lịch">
+<div class="frame"><section class="cta" aria-label="Gửi yêu cầu đặt lịch">
  <div class="cta-bg" aria-hidden="true"><span class="arch two"></span><span class="arch"></span></div>
- <div class="cta-dog" aria-hidden="true"><img src="anh-tam-cun.jpg" alt=""></div>
+ <div class="cta-dog" aria-hidden="true"><img src="anh-cun-xoa-phong-tam.png" alt=""></div>
  <div class="cta-text"><h2 class="cta-title">Bạn cần đặt lịch chăm sóc cho thú cưng?</h2><p class="cta-note">Nhân viên sẽ liên hệ để xác nhận lịch hẹn. Không cần tài khoản để gửi yêu cầu.</p></div>
- <div class="cta-actions"><a class="cta-btn" href="index.html#form-dat-lich"><span>Gửi yêu cầu đặt lịch</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
- <a class="cta-tel" href="tel:+84973555105">Hoặc gọi <strong>097 355 51 05</strong></a></div>
+ <div class="cta-actions">
+  <a class="btn btn-primary" href="index.html#form-dat-lich"><span>Gửi yêu cầu đặt lịch</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  <a class="btn btn-call" href="tel:+84973555105" aria-label="Gọi 097 355 51 05"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Gọi <strong>097 355 51 05</strong></span></a>
+ </div>
 </section></div>
 
 <p class="label">MOBILE (390)</p>
-<div class="frame mobile"><section class="cta has-dog" aria-label="Gửi yêu cầu đặt lịch">
- <div class="cta-dog" aria-hidden="true"><img src="anh-tam-cun.jpg" alt=""></div>
+<div class="frame mobile"><section class="cta" aria-label="Gửi yêu cầu đặt lịch">
+ <div class="cta-dog" aria-hidden="true"><img src="anh-cun-xoa-phong-tam.png" alt=""></div>
  <div class="cta-text"><h2 class="cta-title">Bạn cần đặt lịch chăm sóc cho thú cưng?</h2><p class="cta-note">Nhân viên sẽ liên hệ để xác nhận lịch hẹn. Không cần tài khoản để gửi yêu cầu.</p></div>
- <div class="cta-actions"><a class="cta-btn" href="index.html#form-dat-lich"><span>Gửi yêu cầu đặt lịch</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
- <a class="cta-tel" href="tel:+84973555105">Hoặc gọi <strong>097 355 51 05</strong></a></div>
+ <div class="cta-actions">
+  <a class="btn btn-primary" href="index.html#form-dat-lich"><span>Gửi yêu cầu đặt lịch</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  <a class="btn btn-call" href="tel:+84973555105" aria-label="Gọi 097 355 51 05"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Gọi <strong>097 355 51 05</strong></span></a>
+ </div>
 </section></div>
 </body></html>
