@@ -1,6 +1,10 @@
-# Đề xuất CTA mới cho trang Dịch vụ (Claude, 15/10/2026, bản 3)
+# Đề xuất CTA mới cho trang Dịch vụ (Claude, 15/10/2026, bản 4)
 
 **Trạng thái:** đề xuất, **chờ chủ dự án duyệt**; chưa là yêu cầu cho Antigravity. Thay khối cũ "Bạn cần đặt lịch chăm sóc cho thú cưng?" ở cuối trang Dịch vụ. Xem [ảnh](cta-moi.png) và [bản HTML chạy được](cta-moi.html).
+
+## Bản 4 (góp ý chủ dự án)
+
+- **Cún to hơn và dịch sang trái, tràn ra ngoài khung CTA** để tạo lớp: desktop rộng khoảng 420 px, nửa trái nằm ngoài mép trái dải tím, đầu nhô cao khoảng 190 px trên mép trên; thân chạm mép dưới dải. Dải CTA lùi sang phải chừa chỗ cho cún. Mobile: cún rộng khoảng 300 px, lệch trái, đầu nhô khoảng 170 px trên dải. Khung chứa phải cho phép tràn (không `overflow:hidden` ở dải), và trang phải chừa khoảng trống phía trên CTA.
 
 ## Thay đổi theo góp ý của chủ dự án (bản 3)
 
