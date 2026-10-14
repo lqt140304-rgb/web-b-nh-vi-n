@@ -37,9 +37,9 @@ Theo các quyết định đã thống nhất cùng nhóm AI và Chủ dự án:
    - **Cụm chú thích bảo đảm & không cần tài khoản:** Nêu rõ `📞 Nhân viên sẽ liên hệ để xác nhận lịch hẹn.` và `👤 Không cần tài khoản để gửi yêu cầu.` ngay trên màn hình đầu tiên, không bắt buộc người dùng phải mở menu.
 3. **Ba khung ảnh vòm chạm đáy (Three Arched Frames):**
    - Sử dụng ảnh gốc chất lượng cao, hình chữ nhật chưa cắt khung từ Unsplash, để CSS bo vòm tự nhiên, không có viền kem nướng sẵn hay vệt sáng đáy:
-     - Khung 1 (Trái): Chú chó Corgi ngước nhìn vui tươi (`demo/assets/pet-left.png`).
-     - Khung 2 (Giữa - Trọng tâm): Chú mèo lông ngắn mắt to ngơ ngác (`demo/assets/pet-center.png`, độ phân giải thật 960×845 px).
-     - Khung 3 (Phải): Bé mèo vằn con mắt tròn ngước nhìn (`demo/assets/pet-right.png`).
+     - Khung 1 (Trái): Chú mèo mướp vui tươi đeo khăn quàng vàng cổ (`demo/assets/pet-left.png`).
+     - Khung 2 (Giữa - Trọng tâm): Chú chó Golden Retriever ngậm cành hoa tulip (`demo/assets/pet-center.png`, độ phân giải thật 960×845 px).
+     - Khung 3 (Phải): Bé mèo vằn mắt xanh ngước nhìn tò mò (`demo/assets/pet-right.png`).
    - *Ghi chú bản quyền ảnh:* Toàn bộ 3 ảnh thú cưng là ảnh minh họa giai đoạn demo UI/UX từ Unsplash, chưa xác nhận bản quyền thương mại chính thức, không dùng cho mục đích xuất bản công khai thương mại. Khi đưa vào vận hành thực tế sẽ thay bằng ảnh chụp thực tế tại Bệnh viện Thú y Lê Sơn hoặc ảnh có bản quyền đã mua.
    - Họa tiết trang trí: Vòng cung cam mỏng (`#FC9238`) đối xứng hai bên thanh mảnh, sạch sẽ, không chạm hoặc cắt ngang chữ hay khung hình (đã loại bỏ dấu chân tím đứng rời).
 4. **Trải nghiệm di động chuẩn Mobile-First (390px & 360px):**

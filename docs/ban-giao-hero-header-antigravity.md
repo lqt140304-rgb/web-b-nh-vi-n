@@ -106,9 +106,9 @@ web-benh-vien/
 │   ├── app.js                   # Logic tương tác và trợ năng bàn phím
 │   └── assets/                  # Tài nguyên ảnh và SVG
 │       ├── logo-le-son.png
-│       ├── pet-left.png         # 700×840 px (chó Corgi, chưa cắt vòm)
-│       ├── pet-center.png       # 960×845 px (mèo lông ngắn, chưa cắt vòm)
-│       ├── pet-right.png        # 700×840 px (mèo con vằn, chưa cắt vòm)
+│       ├── pet-left.png         # 700×840 px (mèo mướp đeo khăn vàng, chưa cắt vòm)
+│       ├── pet-center.png       # 960×845 px (chó Golden ngậm hoa, chưa cắt vòm)
+│       ├── pet-right.png        # 700×840 px (mèo vằn mắt xanh, chưa cắt vòm)
 │       ├── cat-silhouette.svg
 │       ├── cat-pose-services.svg
 │       └── cat-pose-booking.svg
@@ -151,14 +151,14 @@ web-benh-vien/
    - Sử dụng Next.js `<Image>` với các tệp ảnh gốc hình chữ nhật trong `demo/assets/`. Áp dụng thuộc tính `priority` cho Hero pet images, sử dụng CSS `border-radius: var(--radius-arch-lg)` và `object-fit: cover` để trình duyệt tự cắt viền cong sắc nét, không nướng viền vào ảnh.
 
 ### 3.5. Nguồn gốc & Bản quyền Hình ảnh Thú cưng (Mục 7)
-| Vị trí | Nhân vật minh họa | Tác giả & Nguồn gốc | Giấy phép & Tình trạng sử dụng |
+| Vị trí | Tệp ảnh | Nhân vật trong ảnh thực tế | Tình trạng bản quyền & Giấy phép |
 |---|---|---|---|
-| **Cung Trái** (`pet-left.png`) | Chú chó Corgi ngước nhìn | Tác giả **Charly Cavalier** ([Unsplash](https://unsplash.com/photos/a-corgi-looking-up)) | Ảnh minh họa giai đoạn demo UI/UX, chưa xác nhận bản quyền thương mại, **không dùng công khai**. |
-| **Cung Giữa** (`pet-center.png`) | Mèo lông ngắn mắt to ngơ ngác | Tác giả **Richard Brutyo** ([Unsplash](https://unsplash.com/photos/a-cat-looking-at-the-camera)) | Ảnh minh họa giai đoạn demo UI/UX, chưa xác nhận bản quyền thương mại, **không dùng công khai**. |
-| **Cung Phải** (`pet-right.png`) | Bé mèo con vằn mắt tròn | Tác giả **Alexas_Fotos** ([Unsplash / Pixabay](https://unsplash.com/photos/close-up-of-tabby-cat)) | Ảnh minh họa giai đoạn demo UI/UX, chưa xác nhận bản quyền thương mại, **không dùng công khai**. |
+| **Cung Trái** | `demo/assets/pet-left.png` (700×840 px) | Mèo mướp đeo khăn quàng vàng cổ | **Ảnh minh họa giai đoạn demo UI/UX, chưa xác nhận bản quyền thương mại, không dùng công khai.** |
+| **Cung Giữa** | `demo/assets/pet-center.png` (960×845 px) | Chú chó Golden Retriever ngậm cành hoa tulip | **Ảnh minh họa giai đoạn demo UI/UX, chưa xác nhận bản quyền thương mại, không dùng công khai.** |
+| **Cung Phải** | `demo/assets/pet-right.png` (700×840 px) | Bé mèo vằn mắt xanh ngước nhìn tò mò | **Ảnh minh họa giai đoạn demo UI/UX, chưa xác nhận bản quyền thương mại, không dùng công khai.** |
 
-> [!NOTE]
-> Khi đưa hệ thống vào vận hành thực tế (Production), toàn bộ hình ảnh minh họa trên sẽ được thay thế bằng hình ảnh chụp thực tế tại Bệnh viện Thú y Lê Sơn hoặc ảnh có bản quyền thương mại đã mua theo đúng quy định pháp luật.
+> [!IMPORTANT]
+> **Khuyến cáo bản quyền:** Toàn bộ 3 hình ảnh thú cưng trên chỉ phục vụ mục đích dựng bản mẫu demo UI/UX nội bộ để đánh giá bố cục và độ phân giải hiển thị, **chưa có bản quyền thương mại chính thức và tuyệt đối không dùng cho mục đích xuất bản công khai thương mại**. Khi đưa hệ thống vào vận hành thực tế (Production), toàn bộ hình ảnh minh họa trên sẽ được thay thế bằng hình ảnh chụp thực tế tại Bệnh viện Thú y Lê Sơn hoặc hình ảnh có bản quyền thương mại đã mua theo đúng quy định pháp luật.
 
 ---
 
@@ -233,6 +233,6 @@ Toàn bộ tài nguyên vector SVG đã được bảo tồn nguyên vẹn tại
 | **4** | **S2: Bàn phím & Mobile Drawer** | Cao | • Bỏ `visibility` khỏi thuộc tính `transition` của `.mobile-drawer` (`transition: transform 260ms ..., box-shadow 260ms ...`). Khi có class `.open`, `visibility: visible !important` ngay lập tức.<br>• Khi mở drawer (qua Click hoặc phím Enter): gán `inert` cho `#siteHeader` và `#heroMain`, gỡ `inert` khỏi drawer, và gọi ngay `btnCloseDrawer.focus()`.<br>• Bẫy tiêu điểm xoay vòng Tab / Shift+Tab trong drawer.<br>• Phím Escape đóng drawer và trả tiêu điểm về `btnMobileMenu`. | Đo bằng script tự động và tương tác bàn phím: Nhấn Enter tại `btnMobileMenu`, sau 1 giây `document.activeElement` chính xác là `btnCloseDrawer`. Tab tuần hoàn trong drawer. Nhấn ESC hoàn trả tiêu điểm về `btnMobileMenu`. |
 | **5** | **S6: Viền focus nút tím không dùng cam trên nền kem** | Trung bình | • Đổi viền focus cho các nút nền tối/tím đậm (`.btn-cta-primary`, `.btn-auth-register`, `.skip-link`) thành `outline: 3px solid #421247 !important; box-shadow: 0 0 0 2px #FFFFFF !important;`.<br>• Màu viền ngoài tím sẫm `#421247` đạt tỷ lệ tương phản 13.96:1 trên nền kem `#FBF7F1`. Vòng đệm trắng tạo tương phản rõ rệt trên cả nền tím lẫn nền kem. | Đo độ tương phản màu viền: `#421247` trên nền kem `#FBF7F1` = 13.96:1 (vượt xa yêu cầu ≥ 3:1 của WCAG 2.1 SC 1.4.11). |
 | **6** | **Sửa số tương phản sai trong cửa sổ Tiêu chí và tài liệu** | Trung bình | • Xóa bỏ hoàn toàn con số không chính xác "14,8:1".<br>• Cập nhật số liệu đo đạc thật theo công thức WCAG 2.1:<br>  - `#231627` (chữ chính): **16.19:1** trên nền kem `#FBF7F1`.<br>  - `#421247` (tím sẫm H1/viền focus): **13.96:1** trên nền kem.<br>  - `#5A1E5E` (tím thương hiệu): **11.04:1** trên nền kem.<br>  - `#5E5362` (chữ phụ/mô tả): **6.81:1** trên nền kem. | Quét toàn bộ repository: Không còn xuất hiện chuỗi "14,8:1" hay "14.8". Bảng tiêu chí trong Modal (`index.html`) và tài liệu bàn giao khớp 100% với số đo thật. |
-| **7** | **Nguồn ba ảnh thú cưng** | Trung bình | • Bổ sung bảng kê Mục 3.5 chi tiết: nêu rõ tác giả Charly Cavalier, Richard Brutyo, Alexas_Fotos và liên kết gốc trên Unsplash.<br>• Ghi rõ tuyên bố pháp lý: *"Toàn bộ 3 ảnh thú cưng là ảnh minh họa giai đoạn demo UI/UX, chưa xác nhận bản quyền thương mại chính thức, không dùng cho mục đích xuất bản công khai thương mại. Khi vận hành sẽ thay thế bằng ảnh chụp thực tế hoặc ảnh có bản quyền đã mua."* | Kiểm tra Mục 3.5 trong tài liệu bàn giao: Đầy đủ URL nguồn, tên tác giả, trạng thái bản quyền và khuyến cáo triển khai. |
+| **7** | **Nguồn ba ảnh thú cưng** | Trung bình | • Bổ sung bảng kê Mục 3.5 chi tiết: mô tả chuẩn xác 3 nhân vật trong ảnh thực tế (trái: mèo mướp đeo khăn vàng, giữa: chó Golden ngậm hoa tulip, phải: mèo vằn mắt xanh ngước nhìn).<br>• Ghi rõ tuyên bố pháp lý: *"Toàn bộ 3 ảnh thú cưng là ảnh minh họa giai đoạn demo UI/UX, chưa xác nhận bản quyền thương mại chính thức, không dùng cho mục đích xuất bản công khai thương mại. Khi vận hành sẽ thay thế bằng ảnh chụp thực tế hoặc ảnh có bản quyền đã mua."* | Kiểm tra Mục 3.5 trong tài liệu bàn giao: Khớp chính xác ảnh thực tế và khuyến cáo bản quyền. |
 | **8** | **Dấu chân tím (`decor-paw`) đứng rời cạnh cung trái** | Thấp | • Xóa bỏ hoàn toàn phần tử SVG `decor-paw` trong `demo/index.html`.<br>• Xóa sạch quy tắc CSS `.decor-paw` trong `demo/styles.css`. Vòng cung cam hai bên giữ nguyên thanh mảnh, sạch sẽ, đối xứng. | Kiểm tra cây DOM và CSS: Không còn `decor-paw`. Vùng họa tiết cung trái liền lạc, không còn đối tượng rời rạc. |
 | **9** | **Đồng bộ tài liệu bàn giao với mã** | Thấp | • Đồng bộ lại Bảng Điểm ngắt Responsive (Mục 3.2): xóa bỏ mô tả dải chấm tròn và chế độ hé lộ 2 ảnh bên; cập nhật chuẩn xác quy cách 3 ảnh nằm trong một hàng ở mọi kích thước.<br>• Xóa toàn bộ các đoạn văn nhắc tới việc ẩn/hiện chấm tròn ở các ngưỡng màn hình khác nhau. | Đối chiếu từng thông số trong Mục 3.2 với các quy tắc media query trong `demo/styles.css`: 100% khớp nhau. |

@@ -1114,6 +1114,22 @@ img {
   min-width: 44px !important;
   min-height: 44px !important;
 }
+
+/* Định vị Drawer và Overlay nằm gọn trong khung điện thoại 390px khi xem thử (Lỗi A2) */
+.viewport-outer.mode-mobile .mobile-drawer-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 46px !important;
+}
+.viewport-outer.mode-mobile .mobile-drawer {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 310px !important;
+  max-width: 85% !important;
+  border-radius: 0 46px 46px 0 !important;
+}
 .viewport-outer.mode-mobile .site-header {
   padding: 10px 16px !important;
   height: 64px !important;
