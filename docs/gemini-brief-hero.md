@@ -56,7 +56,7 @@ Xin trả về **một tệp `.md`** (kèm hình minh họa nếu công cụ c�
 ## 5. Ngoài phạm vi (chưa làm)
 
 - Các phần khác của trang (dịch vụ, giới thiệu, form đặt lịch, chân trang).
-- Màn hình đăng ký, đăng nhập, khôi phục mật khẩu, hỗ trợ tài khoản, trang lễ tân. Một số quy trình tài khoản **chưa được duyệt**; chưa vẽ.
+- Màn hình đăng ký, đăng nhập, khôi phục mật khẩu, hỗ trợ tài khoản, trang tiếp nhận. Một số quy trình tài khoản **chưa được duyệt**; chưa vẽ.
 - Chọn công nghệ hoặc viết mã hoàn chỉnh; mua ảnh, phông chữ hay dịch vụ.
 - Quyết định nhận diện thương hiệu cuối cùng.
 

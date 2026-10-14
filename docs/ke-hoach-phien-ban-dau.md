@@ -1,31 +1,35 @@
-# Kế hoạch đề xuất: phiên bản đầu website Bệnh viện thú y Lê Sơn (bản 2)
+# Kế hoạch đề xuất: giai đoạn 1 website Bệnh viện thú y Lê Sơn (bản 3)
 
-**Ngày:** 14/10/2026 · **Người soạn:** Claude, đã chỉnh theo phản biện của Codex · **Trạng thái:** **bản nháp đề xuất**, chưa phải kế hoạch được duyệt. Cần chủ dự án duyệt thiết kế và kế hoạch **trước khi xây dựng**. Chưa có mã, chưa mua dịch vụ nào, chưa merge vào main.
+**Ngày:** 14/10/2026 · **Người soạn:** Claude, đã chỉnh theo phản biện của Codex và rà soát của chủ dự án · **Trạng thái:** **bản nháp đề xuất**. Chủ dự án đã chấp nhận sáu nội dung chỉnh sửa của bản 2 nhưng **chưa phê duyệt toàn bộ kế hoạch để bắt đầu lập trình**. Chưa có mã, chưa mua dịch vụ nào, **chưa merge vào main**, không bắt đầu triển khai chính thức khi chủ dự án chưa phê duyệt.
+
+**Thuật ngữ:** "**giai đoạn 1**" là phạm vi sản phẩm (website, tài khoản khách, thú cưng, form yêu cầu). "**Bước 1–6**" là các bước thực hiện bên trong giai đoạn 1. Hệ thống tổng thể tương lai: xem [định hướng sản phẩm](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/dinh-huong-san-pham.md).
 
 **Quy ước nhãn:** **[Đã chốt]** chủ dự án quyết định · **[Đề xuất]** của Claude hoặc Codex, cần phản biện · **[Giả định]** chưa xác nhận · **[Cần chốt]** quyết định còn thiếu · **[Chờ kiểm chứng]** chưa có bằng chứng.
 
 Nguồn chi tiết: [tài liệu rà soát](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/rasoat-tai-khoan-va-form-dat-lich.md) (số mục dẫn bên dưới là mục của tài liệu đó) và [brief Hero/Header cho Gemini](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/gemini-brief-hero.md).
 
-**Thay đổi so với bản 1 (theo phản biện của Codex):** sửa thứ tự phụ thuộc giữa kiểm chứng, thiết kế và xây dựng (không còn coi mọi kiểm thử là điều kiện phải đạt trước khi thiết kế); bổ sung hồ sơ khách và thú cưng; bổ sung độ tin cậy của email; ngân sách là mỗi tháng; phương án A ghi đúng là đề xuất chưa chốt; Gemini mới có brief Hero/Header, chưa có mockup được duyệt.
+**Thay đổi bản 3 (theo rà soát của chủ dự án, 14/10):** (1) làm rõ giai đoạn 1 và hệ thống tổng thể; chức năng ngoài giai đoạn 1 là "chưa triển khai trong giai đoạn này", không loại bỏ vĩnh viễn; (2) điều chỉnh cơ cấu nhân sự: không có lễ tân riêng, phân quyền theo khả năng kiêm nhiệm (đã đổi thuật ngữ "lễ tân" thành "người tiếp nhận" trong các tài liệu); (3) yêu cầu hệ thống tổng thể lưu ở tài liệu định hướng sản phẩm; (4) Cloudflare + Supabase Free và 300.000 đồng/tháng chỉ áp dụng cho website giai đoạn 1; kiểm chứng Next.js/OpenNext trên Cloudflare Workers là điều kiện trước khi khóa kiến trúc; (5) tiếp tục hoàn thiện quyết định nghiệp vụ, thiết kế giao diện và mô hình dữ liệu trước khi viết mã.
+
+**Thay đổi bản 2 (theo phản biện của Codex):** sửa thứ tự phụ thuộc giữa kiểm chứng, thiết kế và xây dựng (không còn coi mọi kiểm thử là điều kiện phải đạt trước khi thiết kế); bổ sung hồ sơ khách và thú cưng; bổ sung độ tin cậy của email; ngân sách là mỗi tháng; phương án A ghi đúng là đề xuất chưa chốt; Gemini mới có brief Hero/Header, chưa có mockup được duyệt.
 
 ---
 
 ## 1. Phạm vi và nguyên tắc
 
-**[Đã chốt] Có trong phiên bản đầu:** website giới thiệu bệnh viện, dịch vụ và đặt lịch; tài khoản khách; trang quản trị cho nhân viên xử lý yêu cầu; email báo nhân viên.
+**[Đã chốt] Giai đoạn 1 gồm:** website giới thiệu bệnh viện và dịch vụ; tài khoản khách hàng; hồ sơ thú cưng; form yêu cầu đặt lịch; trang quản trị cho nhân viên xử lý yêu cầu; email báo nhân viên.
 
-**[Đã chốt] Ngoài phạm vi:** nhập hoặc đồng bộ dữ liệu GPet; bệnh án, nội trú, bán hàng, kho; thanh toán; hóa đơn điện tử; trạng thái "đã đến/đã khám". GPet vẫn là hệ thống vận hành chính.
+**[Đã chốt] Chưa triển khai trong giai đoạn 1** (không phải bị loại bỏ vĩnh viễn): nhập hoặc đồng bộ dữ liệu GPet; bệnh án, nội trú, chăm sóc, điều trị, video, quản lý công việc, kho, bán hàng, thanh toán, hóa đơn điện tử và các phân hệ khác; trạng thái "đã đến/đã khám". GPet vẫn là hệ thống vận hành chính trong giai đoạn 1. Yêu cầu của hệ thống tổng thể được lưu trong [định hướng sản phẩm](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/dinh-huong-san-pham.md).
 
 **[Đã chốt] Quy tắc đã khóa:**
 - Nền tảng Cloudflare Workers Paid + Supabase Free thay Vercel. Không OTP cho khách.
-- Mục tiêu dự toán khoảng **300.000 đồng mỗi tháng** cho dịch vụ vận hành web: hosting, phần dùng cơ sở dữ liệu và email còn trong hạn mức, tên miền phân bổ theo năm, dự phòng nhỏ. **Chưa gồm** công phát triển, bảo trì, phí AI. Đây là mục tiêu dự toán, **không phải trần hóa đơn** khi vượt hạn mức.
+- Mục tiêu dự toán khoảng **300.000 đồng mỗi tháng** cho dịch vụ vận hành **website giai đoạn 1** (**không được suy rộng** thành chi phí vận hành toàn bộ phần mềm bệnh viện): hosting, phần dùng cơ sở dữ liệu và email còn trong hạn mức, tên miền phân bổ theo năm, dự phòng nhỏ. **Chưa gồm** công phát triển, bảo trì, phí AI. Đây là mục tiêu dự toán, **không phải trần hóa đơn** khi vượt hạn mức.
 - Khách vãng lai và khách đăng nhập đều gửi được form; không tự gắn yêu cầu vãng lai vào tài khoản theo số điện thoại.
 - Chống trùng theo phạm vi (mục 4.2); sáu trạng thái và luồng chính (mục 4.2a); dấu nhắc "cần gọi lại" khi Không liên lạc được (mục 4.2b).
 - Giữ bản chụp thông tin tại thời điểm gửi; nhân viên gọi xác nhận; gửi form chưa phải đã có lịch.
 
 **[Đề xuất của Codex, chưa chốt] Phương án A** (điện thoại + mật khẩu không OTP): đã đăng ký và đăng nhập được với số giả. Chủ dự án **chưa duyệt** lựa chọn này; bằng chứng mới tối thiểu, chưa đủ cho sản xuất.
 
-**Nguyên tắc làm việc [Đề xuất]:** dữ liệu giả cho mọi thử nghiệm; chưa đưa dữ liệu khách thật vào cho đến cổng ở Giai đoạn 5; điều chưa chốt là điều kiện chặn có nhãn rõ, không tự quyết; **không dùng kiểm thử còn thiếu để chặn việc viết bản thiết kế nháp**; nội dung nháp có nhãn dùng để đánh giá nhưng **không đưa chỗ giữ chỗ lên bản công khai**; không thêm biểu mẫu hay vòng duyệt cho chi tiết triển khai thông thường.
+**Nguyên tắc làm việc [Đề xuất]:** dữ liệu giả cho mọi thử nghiệm; chưa đưa dữ liệu khách thật vào cho đến Cổng 5 (Bước 5); điều chưa chốt là điều kiện chặn có nhãn rõ, không tự quyết; **không dùng kiểm thử còn thiếu để chặn việc viết bản thiết kế nháp**; nội dung nháp có nhãn dùng để đánh giá nhưng **không đưa chỗ giữ chỗ lên bản công khai**; không thêm biểu mẫu hay vòng duyệt cho chi tiết triển khai thông thường.
 
 ---
 
@@ -39,6 +43,8 @@ Nguồn chi tiết: [tài liệu rà soát](https://github.com/lqt140304-rgb/web
 | Gemini | Giao diện và trải nghiệm. Hiện có **brief Hero/Header**; chưa có mockup được duyệt |
 
 Phân công có thể điều chỉnh.
+
+**Cơ cấu nhân sự của bệnh viện [Đã chốt]:** không có lễ tân riêng. Quản lý kiêm tiếp nhận khách hàng và điều hành; bác sĩ kiêm nhân viên khám, điều trị và chăm sóc; nhân viên Spa theo nhiệm vụ được phân công. **Thiết kế phân quyền theo khả năng kiêm nhiệm** (một người giữ nhiều khả năng, mỗi người một tài khoản cá nhân), không mặc định mỗi vai trò là một nhân sự riêng (xem [định hướng sản phẩm](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/dinh-huong-san-pham.md), mục 2). Trong các tài liệu, "người tiếp nhận" chỉ **khả năng** xử lý yêu cầu đặt lịch, không phải một chức danh riêng.
 
 ---
 
@@ -60,19 +66,19 @@ Mỗi bước có một cổng ngắn. Các bước có thể gối nhau khi kh�
 - Chỉ thử B nếu A không đáp ứng.
 - **Không coi bằng chứng tối thiểu là đạt mọi điều kiện sản xuất.**
 
-**Cổng 2:** chủ dự án duyệt chọn A (hoặc B nếu A không đáp ứng).
+**Cổng 2:** chủ dự án duyệt chọn A (hoặc B nếu A không đáp ứng) **và tính tương thích Next.js/OpenNext trên Cloudflare Workers đã được kiểm chứng.** Cho đến khi đạt, **kiến trúc chưa được khóa** (Codex nêu việc này; Claude chưa xác minh).
 
 ### Bước 3: thiết kế mô hình dữ liệu, quyền, luồng form và vận hành
 
-- Claude + Codex: mô hình dữ liệu và phân quyền: tài khoản web tách khỏi hồ sơ khách hàng; thú cưng thuộc tài khoản; bản chụp yêu cầu; lịch sử đổi trạng thái chỉ ghi thêm; ba mốc thời gian; dấu nhắc; khóa chống trùng theo phạm vi; bản ghi thông báo email; nhật ký thao tác nhạy cảm.
-- Gemini: luồng đăng ký, đăng nhập, form (vãng lai và đăng nhập), xem lại yêu cầu, hồ sơ và thú cưng, thông báo "Chờ nhân viên xác nhận", màn hình lễ tân, các phần còn lại của trang. Quy trình hỗ trợ tài khoản chỉ vẽ sau khi được duyệt.
+- Claude + Codex: mô hình dữ liệu và **phân quyền theo khả năng** (một người có thể giữ nhiều khả năng: tiếp nhận yêu cầu, quản lý nội dung, quản lý tài khoản nhân viên, thao tác nhạy cảm, quản trị; vai trò chỉ là bộ khả năng soạn sẵn), và mô hình dữ liệu: tài khoản web tách khỏi hồ sơ khách hàng; thú cưng thuộc tài khoản; bản chụp yêu cầu; lịch sử đổi trạng thái chỉ ghi thêm; ba mốc thời gian; dấu nhắc; khóa chống trùng theo phạm vi; bản ghi thông báo email; nhật ký thao tác nhạy cảm.
+- Gemini: luồng đăng ký, đăng nhập, form (vãng lai và đăng nhập), xem lại yêu cầu, hồ sơ và thú cưng, thông báo "Chờ nhân viên xác nhận", màn hình tiếp nhận, các phần còn lại của trang. Quy trình hỗ trợ tài khoản chỉ vẽ sau khi được duyệt.
 - Vận hành: sao lưu, giám sát, ứng phó khi dự án bị tạm dừng (mục 6a).
 
 **Cổng 3:** **chủ dự án duyệt bản thiết kế và kế hoạch trước khi xây dựng.** Claude rà soát phản hồi công khai theo mục 4.4.
 
 ### Bước 4: xây một luồng hoàn chỉnh trên môi trường thử, kiểm thử song song
 
-Chọn một luồng đầu-cuối nhỏ nhất có ý nghĩa, ví dụ: khách đăng ký, đăng nhập, thêm thú cưng, gửi yêu cầu; lễ tân thấy, đổi trạng thái; email báo nhân viên. Mở rộng dần.
+Chọn một luồng đầu-cuối nhỏ nhất có ý nghĩa, ví dụ: khách đăng ký, đăng nhập, thêm thú cưng, gửi yêu cầu; người tiếp nhận thấy, đổi trạng thái; email báo nhân viên. Mở rộng dần.
 
 **Hạng mục xây dựng:**
 - Website giới thiệu và dịch vụ; nội dung do chủ dự án quản lý.
@@ -80,7 +86,7 @@ Chọn một luồng đầu-cuối nhỏ nhất có ý nghĩa, ví dụ: khách 
 - **Hồ sơ tài khoản** (tên, số liên hệ tự điền) và **danh sách thú cưng thuộc tài khoản**; chọn thú cưng đã có hoặc thêm và lưu thú cưng mới từ form; **kiểm tra quyền** (không chọn được thú cưng của tài khoản khác); **bản chụp** thông tin tại thời điểm gửi (sửa thú cưng sau không sửa ngược yêu cầu cũ). Không mở rộng sang bệnh án hay nhập GPet.
 - Form cho khách vãng lai và khách đăng nhập; chống trùng theo phạm vi; dấu nhắc gọi lại; giới hạn tần suất và chống bot.
 - Trang quản trị: danh sách yêu cầu, đổi trạng thái có lý do, lịch sử, kiểm tra phiên bản; tài khoản nhân viên do quản lý tạo; xác thực hai bước cho quản lý.
-- **Email báo nhân viên có độ tin cậy:** lưu yêu cầu và bản ghi thông báo chờ gửi **trong cùng một giao dịch**, gửi email sau; có thử lại, giới hạn số lần, hiển thị hoặc cảnh báo khi lỗi; chưa cần dịch vụ hàng đợi riêng. Ví dụ: Lan gửi form lúc dịch vụ email lỗi: yêu cầu vẫn lưu và hiện cho lễ tân, hệ thống thử lại email, Lan không phải gửi lại. Nếu cơ sở dữ liệu lỗi thì **không báo đã nhận**. Sao lưu và giám sát không thay cho cơ chế này. Email khi khách gửi lại **chưa chốt**.
+- **Email báo nhân viên có độ tin cậy:** lưu yêu cầu và bản ghi thông báo chờ gửi **trong cùng một giao dịch**, gửi email sau; có thử lại, giới hạn số lần, hiển thị hoặc cảnh báo khi lỗi; chưa cần dịch vụ hàng đợi riêng. Ví dụ: Lan gửi form lúc dịch vụ email lỗi: yêu cầu vẫn lưu và hiện cho người tiếp nhận, hệ thống thử lại email, Lan không phải gửi lại. Nếu cơ sở dữ liệu lỗi thì **không báo đã nhận**. Sao lưu và giám sát không thay cho cơ chế này. Email khi khách gửi lại **chưa chốt**.
 
 **Kiểm thử song song** theo phần đã có: tên đăng nhập, số di động Việt Nam, quyền dữ liệu, chuyển IP khách trên Cloudflare, chống trùng, email, theo danh sách mục 10 của tài liệu rà soát.
 
@@ -93,7 +99,7 @@ Chọn một luồng đầu-cuối nhỏ nhất có ý nghĩa, ví dụ: khách 
 - Kiểm thử tải ở mức phù hợp (hạn mức dịch vụ không phải bằng chứng chịu tải).
 - Sao lưu hằng ngày, mã hóa, lưu riêng (bản sao có mật khẩu đã băm và dữ liệu cá nhân nên phải bảo vệ); giám sát và cảnh báo; quy trình khi Supabase bị tạm dừng; thông báo "thử lại hoặc gọi bệnh viện" khi lưu thất bại.
 - Chính sách quyền riêng tư, thông báo đồng ý, chính sách lưu trữ và xóa dữ liệu; rà soát pháp lý về lưu dữ liệu cá nhân (chưa có kết luận).
-- Hướng dẫn lễ tân và quản lý; quy trình hỗ trợ tài khoản; tên miền và cấu hình Cloudflare; kiểm tra chi phí thực tế so với mục tiêu dự toán.
+- Hướng dẫn người tiếp nhận và quản lý; quy trình hỗ trợ tài khoản; tên miền và cấu hình Cloudflare; kiểm tra chi phí thực tế so với mục tiêu dự toán.
 
 **Cổng 5 (bắt buộc trước dữ liệu thật):** khôi phục thử đạt với mô hình cuối; chủ dự án duyệt quy trình vận hành và rủi ro còn lại.
 
@@ -117,7 +123,7 @@ Chọn một luồng đầu-cuối nhỏ nhất có ý nghĩa, ví dụ: khách 
 | Cấu hình Phone chỉ đặt được qua Management API | Kiểm thử độ bền; không bấm lưu mục Phone trong dashboard cho tới khi rõ hậu quả |
 | Tương thích khung ứng dụng với Cloudflare Workers | Probe có phạm vi ở Bước 2 [Chờ kiểm chứng] |
 | Kỹ thuật xã hội vào quy trình khôi phục tài khoản | Quy trình có bằng chứng, nhật ký, không lộ dữ liệu qua điện thoại |
-| Email lỗi làm lễ tân bỏ sót yêu cầu | Yêu cầu luôn hiện trên trang quản trị; thử lại có giới hạn; cảnh báo |
+| Email lỗi làm người tiếp nhận bỏ sót yêu cầu | Yêu cầu luôn hiện trên trang quản trị; thử lại có giới hạn; cảnh báo |
 | Nội dung chính thức chậm | Nội dung nháp chỉ ở môi trường thử; không đưa chỗ giữ chỗ lên bản công khai |
 | Phạm vi phình ra | Giữ danh sách "ngoài phạm vi" (mục 1; mục 8 của tài liệu rà soát) |
 
@@ -127,7 +133,7 @@ Chỉ liệt kê điều chủ dự án mới quyết định được. Các chi
 
 1. **Duyệt chọn phương án A** cho tài khoản (đề xuất của Codex).
 2. **Chuyển trạng thái và quyền:** ai được hủy, mở lại yêu cầu đã hủy hoặc từ chối, chuyển ngược từ Đã xác nhận; trạng thái nào còn chặn tạo trùng (đề xuất ở mục 4.2a).
-3. **Lễ tân được làm thao tác nhạy cảm nào** (đặt lại mật khẩu, giải phóng số, khóa tài khoản); **ai dự phòng khi quản lý vắng.**
+3. **Ai giữ khả năng nào** (bệnh viện không có lễ tân riêng): ai ngoài quản lý tiếp nhận và xử lý yêu cầu đặt lịch (ví dụ bác sĩ nào); ai được làm thao tác nhạy cảm (đặt lại mật khẩu, giải phóng số, khóa tài khoản); **ai dự phòng khi quản lý vắng.**
 4. **Bằng chứng đủ để khôi phục tài khoản cũ** và ai quyết định (mục 5.1 của tài liệu rà soát).
 5. **Thời gian gọi lại và số lần liên hệ tối đa** trước khi đóng yêu cầu.
 6. **Lý do hủy/từ chối:** văn bản tự do hay danh mục; có hiện cho khách không.

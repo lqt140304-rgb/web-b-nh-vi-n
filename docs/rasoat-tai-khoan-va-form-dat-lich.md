@@ -1,4 +1,4 @@
-# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 11, sau Codex phản biện kế hoạch phiên bản đầu)
+# Rà soát của Claude: tài khoản khách và form đặt lịch (bản 12, sau rà soát của chủ dự án về phạm vi và nhân sự)
 
 **Ngày:** 13/10/2026, cập nhật 14/10/2026 · **Người soạn:** Claude · **Trạng thái:** bản nháp để Codex, Gemini và chủ dự án phản biện. Bản 6 ghi nhận kết quả Codex **xác minh trên tài liệu chính thức**. Bản 7 ghi thêm một thao tác thử trên **dashboard** của dự án thử (Phone không OTP). Bản 9 ghi nhận **bằng chứng chạy thật**: phương án A (điện thoại + mật khẩu, không OTP) đăng ký và đăng nhập thành công trên dự án thử với số giả. Phạm vi bằng chứng rất hẹp (mục 2); ứng dụng chưa được xây.
 
@@ -16,7 +16,7 @@ Không có dữ liệu cá nhân thật. Chưa có mã, chưa mua dịch vụ n�
 
 ## 0. Thay đổi so với các bản trước
 
-Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu phản hồi của Codex, bản 3 ghi nhận quyết định chống trùng, bản 4 ghi nhận sáu trạng thái yêu cầu, bản 5 ghi nhận cách xử lý khách gửi lại khi Không liên lạc được, bản 6 ghi nhận kết quả Codex xác minh tài liệu Supabase, bản 7 ghi nhận kết quả thử Phone không OTP trên dashboard, bản 8 ghi nhận kết quả Codex kết nối dự án thử và đọc cấu hình Auth công khai, bản 9 ghi nhận kết quả kiểm chứng phương án A, bản 10 ghi nhận Codex xác minh tài liệu Supabase Free và đề xuất vận hành, bản 11 ghi nhận Codex phản biện kế hoạch phiên bản đầu, như sau.
+Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu phản hồi của Codex, bản 3 ghi nhận quyết định chống trùng, bản 4 ghi nhận sáu trạng thái yêu cầu, bản 5 ghi nhận cách xử lý khách gửi lại khi Không liên lạc được, bản 6 ghi nhận kết quả Codex xác minh tài liệu Supabase, bản 7 ghi nhận kết quả thử Phone không OTP trên dashboard, bản 8 ghi nhận kết quả Codex kết nối dự án thử và đọc cấu hình Auth công khai, bản 9 ghi nhận kết quả kiểm chứng phương án A, bản 10 ghi nhận Codex xác minh tài liệu Supabase Free và đề xuất vận hành, bản 11 ghi nhận Codex phản biện kế hoạch phiên bản đầu, bản 12 ghi nhận rà soát của chủ dự án về phạm vi và cơ cấu nhân sự, như sau.
 
 | Điểm Codex nêu | Claude xử lý |
 |---|---|
@@ -37,6 +37,7 @@ Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu p
 | **Bản 9:** chủ dự án chạy công cụ kiểm chứng bản 3 và gửi file kết quả cho Codex: cấu hình được chấp nhận, tạo người dùng thành công, đăng ký đạt, đăng nhập đạt, đã hoàn nguyên. Đăng nhập trả về cùng ID với đăng ký; không có nhà cung cấp SMS, không gọi endpoint OTP; số thử là dải số hư cấu. Hai lần thử trước lỗi do đọc Auth trước khi Auth nhận cấu hình (sau chờ 5 giây thì thấy bật). Codex đề xuất A làm hướng chính | **Chuyển "đăng ký và đăng nhập điện thoại + mật khẩu không OTP" từ Chờ kiểm chứng sang Đã kiểm chứng với số giả** (mục 2, 3.1, 3.3, 9, 10). Hướng A là **đề xuất của Codex**, chưa phải phê duyệt toàn bộ cơ chế tài khoản. Các kiểm tra còn lại **giữ chưa chạy**. **Không đổi quyết định đã chốt:** không OTP khách, cả vãng lai và tài khoản gửi form, chống trùng theo phạm vi, sáu trạng thái cùng dấu nhắc gọi lại. Nền tảng triển khai **[Đã chốt, chủ dự án xác nhận 14/10]**: Cloudflare Workers Paid + Supabase Free thay Vercel. Claude chưa kiểm tra tài liệu Cloudflare nên các điểm kỹ thuật theo nền tảng này vẫn là cần kiểm chứng. **Điểm cần kiểm tra lại theo nền tảng/gói mới** [Đề xuất]: IP khách mà Auth thấy khi đăng nhập đi qua máy chủ (mục 3.5); tính năng theo gói Supabase Free (sao lưu, dung lượng, trạng thái tạm dừng khi không dùng, chặn mật khẩu rò rỉ, TOTP, giới hạn Auth); chỗ lưu bộ đếm giới hạn tần suất; khả năng khôi phục khi mất dữ liệu. |
 | **Bản 10:** Codex xác minh tài liệu Supabase Free (14/10): không có sao lưu tự động; có thể bị tạm dừng sau 7 ngày ít hoạt động; hạn mức 500 MB cơ sở dữ liệu, 1 GB Storage, 50.000 người dùng hoạt động/tháng; MFA TOTP có sẵn; chặn mật khẩu rò rỉ không có; chuyển IP khách cho Auth cần khóa bí mật phía máy chủ. Chủ dự án đã xác nhận nền tảng Cloudflare Workers Paid + Supabase Free | **Ghi nhận ở mục 2, 4.4, 6a, 9, 10.** Đây là **xác minh tài liệu**; **chưa thiết lập sao lưu, thử khôi phục, hay kiểm thử IP trên Cloudflare**. Không đổi nền tảng. Thêm mục vận hành 6a (sao lưu hằng ngày, cổng "khôi phục thử đạt mới nhận dữ liệu thật", ứng phó khi dự án bị tạm dừng, không báo "đã nhận" khi lưu thất bại). Mục tiêu dự toán khoảng 300.000 đồng mỗi tháng cho dịch vụ vận hành web (không gồm công phát triển, bảo trì, phí AI; không phải trần hóa đơn). Bản này **không bảo đảm** Free đáp ứng vận hành liên tục hay ngân sách ở mọi mức tải. |
 | **Bản 11:** Codex phản biện kế hoạch (14/10): ngân sách là khoảng 300.000 đồng **mỗi tháng** (không hỏi lại kỳ tính); sửa thứ tự phụ thuộc giữa kiểm chứng, thiết kế và xây dựng; bổ sung hồ sơ khách và thú cưng vào hạng mục xây dựng; bổ sung độ tin cậy của email; sửa tiêu chí "bản sao không chứa bí mật"; giữ trạng thái quyết định nhất quán | **Chấp nhận cả sáu điểm.** Sửa mục 6a (ngân sách, tính nhạy cảm của bản sao), mục 4.5 (thú cưng, email), mục 9 (phần Management API đã đạt), mục 10 (kịch bản 37d–37h). Kế hoạch được viết lại theo thứ tự mới (`ke-hoach-phien-ban-dau.md`). Phương án A vẫn là **đề xuất của Codex**, chưa phải đã chốt. Brief Hero/Header của Gemini chưa phải mockup được duyệt. |
+| **Bản 12:** chủ dự án rà soát kế hoạch bản 2 và tài liệu bản 11 (14/10): chấp nhận sáu nội dung chỉnh sửa, chưa phê duyệt để lập trình. Yêu cầu: (1) tách rõ giai đoạn 1 và hệ thống tổng thể, chức năng ngoài giai đoạn 1 là chưa triển khai chứ không loại bỏ; (2) không có lễ tân riêng, phân quyền theo khả năng kiêm nhiệm; (3) lưu yêu cầu hệ thống tổng thể vào tài liệu định hướng; (4) Cloudflare + Supabase Free và 300.000 đồng/tháng chỉ cho website giai đoạn 1, cần kiểm chứng Next.js/OpenNext trước khi khóa kiến trúc; (5) hoàn thiện quyết định nghiệp vụ, thiết kế giao diện, mô hình dữ liệu trước khi viết mã | **Chấp nhận cả năm điểm.** Thêm tài liệu mới `dinh-huong-san-pham.md`; đổi thuật ngữ "lễ tân" thành "người tiếp nhận" (khả năng, không phải chức danh) trong các tài liệu; viết lại mục 6 theo khả năng kiêm nhiệm; cập nhật kế hoạch bản 3. Tài liệu này vẫn chỉ phủ **giai đoạn 1**. Không merge vào main, không bắt đầu triển khai chính thức. |
 
 **Điều Claude giữ lại một phần:** danh tính nội bộ ngẫu nhiên vẫn nên dùng nếu chọn B, vì nếu suy ra được từ số điện thoại thì kẻ tấn công đoán được danh tính của người khác. Nó không thay cho việc kiểm tra gọi trực tiếp.
 
@@ -54,7 +55,7 @@ Các bản trước nằm ở lịch sử git của nhánh. Bản 2 tiếp thu p
 - **[Đã chốt]** Có trang quản trị và email báo nhân viên. Giữ giới hạn tần suất và kiểm tra dữ liệu phía máy chủ.
 - **[Đã chốt]** Chống trùng **trong từng phạm vi**: mỗi tài khoản một phạm vi, mọi khách vãng lai chung một phạm vi (chi tiết mục 4.2). Cùng nội dung gửi ở hai phạm vi khác nhau có thể thành hai yêu cầu; chủ dự án đã hiểu và chấp nhận.
 - **[Đã chốt]** Sáu trạng thái yêu cầu: Chờ xác nhận, Đang liên hệ, Đã xác nhận, Không liên lạc được, Đã hủy, Từ chối. Luồng chính: Chờ xác nhận → Đang liên hệ → Đã xác nhận. **Đã xác nhận chỉ nghĩa là đã chốt lịch, không phải khách đã đến, đã khám hay hoàn thành dịch vụ** (mục 4.2a).
-- **[Đã chốt]** Khi yêu cầu ở **Không liên lạc được** và khách gửi lại toàn bộ thông tin giống nhau trong cùng phạm vi: không tạo yêu cầu mới, trạng thái giữ nguyên, trang lễ tân hiện "Khách vừa gửi lại — cần gọi lại" kèm thời điểm; nhân viên bắt đầu liên hệ thì chuyển Đang liên hệ và xóa dấu nhắc. Thông tin khác thì tiếp nhận yêu cầu mới như quy tắc đã chốt (mục 4.2b).
+- **[Đã chốt]** Khi yêu cầu ở **Không liên lạc được** và khách gửi lại toàn bộ thông tin giống nhau trong cùng phạm vi: không tạo yêu cầu mới, trạng thái giữ nguyên, trang tiếp nhận hiện "Khách vừa gửi lại — cần gọi lại" kèm thời điểm; nhân viên bắt đầu liên hệ thì chuyển Đang liên hệ và xóa dấu nhắc. Thông tin khác thì tiếp nhận yêu cầu mới như quy tắc đã chốt (mục 4.2b).
 - **Giới hạn cần ghi rõ:** số điện thoại **chưa được xác minh quyền sở hữu**. Chưa có quy trình được duyệt cho đăng ký nhầm, tranh chấp số, quên mật khẩu.
 
 ---
@@ -201,14 +202,14 @@ Nhân viên thấy A và B. Khách chỉ thấy B trong tài khoản.
 
 **Đã xác nhận chỉ nghĩa là đã chốt lịch.** Không có trạng thái "đã đến", "đã khám", "hoàn thành" hay bệnh án trong bản đầu; không thêm qua quyết định này. Giao diện và thông báo không được dùng từ ngụ ý khách đã được khám.
 
-Ví dụ (dữ liệu giả, khách Lan đặt khám cho mèo Miu ngày 20/10): gửi form → Chờ xác nhận; lễ tân bắt đầu liên hệ → Đang liên hệ; thống nhất 09:00 ngày 20/10 → Đã xác nhận; gọi không nghe → Không liên lạc được, gọi lại được; khách báo không đến → Đã hủy; bệnh viện không có dịch vụ yêu cầu → Từ chối, ghi lý do.
+Ví dụ (dữ liệu giả, khách Lan đặt khám cho mèo Miu ngày 20/10): gửi form → Chờ xác nhận; người tiếp nhận bắt đầu liên hệ → Đang liên hệ; thống nhất 09:00 ngày 20/10 → Đã xác nhận; gọi không nghe → Không liên lạc được, gọi lại được; khách báo không đến → Đã hủy; bệnh viện không có dịch vụ yêu cầu → Từ chối, ghi lý do.
 
 **Ba mốc thời gian phải tách riêng [Đã chốt về nguyên tắc, Đề xuất về tên trường]:**
 1. **Ngày khách mong muốn:** khách nhập khi gửi, nằm trong bản chụp, không bao giờ bị nhân viên sửa đè.
 2. **Ngày và giờ hẹn đã thống nhất:** nhân viên nhập khi chuyển sang Đã xác nhận, **bắt buộc đủ cả ngày lẫn giờ**. Có thể khác ngày khách mong muốn.
 3. **Thời điểm nhân viên thực hiện xác nhận:** hệ thống tự ghi, cùng người thực hiện. Không nhập tay.
 
-**Lịch sử thay đổi trạng thái [Đề xuất theo yêu cầu của chủ dự án]:** chỉ ghi thêm, không sửa. Mỗi lần đổi ghi: người thực hiện, thời điểm, trạng thái cũ, trạng thái mới, lý do (**bắt buộc khi chuyển sang Đã hủy hoặc Từ chối**). Chống hai lễ tân ghi đè nhau: kiểm tra số phiên bản khi lưu; người đến sau nhận thông báo tải lại.
+**Lịch sử thay đổi trạng thái [Đề xuất theo yêu cầu của chủ dự án]:** chỉ ghi thêm, không sửa. Mỗi lần đổi ghi: người thực hiện, thời điểm, trạng thái cũ, trạng thái mới, lý do (**bắt buộc khi chuyển sang Đã hủy hoặc Từ chối**). Chống hai người tiếp nhận ghi đè nhau: kiểm tra số phiên bản khi lưu; người đến sau nhận thông báo tải lại.
 
 **[Cần chốt]** lý do hủy/từ chối là văn bản tự do, danh mục có sẵn, hay cả hai; có hiện lý do cho khách không.
 
@@ -226,13 +227,13 @@ Chủ dự án nêu rõ quyết định trạng thái không tự duyệt các m
   | Đã xác nhận | Đã hủy |
   | Đã hủy, Từ chối | (trạng thái cuối trong bản đầu) |
 
-  Chuyển ngược từ Đã xác nhận và mở lại yêu cầu đã hủy hoặc từ chối: **[Cần chốt]**, kèm quyền thực hiện (lễ tân hay quản lý).
+  Chuyển ngược từ Đã xác nhận và mở lại yêu cầu đã hủy hoặc từ chối: **[Cần chốt]**, kèm quyền thực hiện (người tiếp nhận hay quản lý).
 - **Trạng thái nào còn giữ khóa chống trùng** (trong cùng phạm vi). Riêng **Không liên lạc được đã chốt ở mục 4.2b**; các trạng thái còn lại dưới đây vẫn là đề xuất để duyệt, phù hợp đề xuất ban đầu của Codex:
   - **Giữ khóa** (gửi lại giống hệt thì không tạo thêm): Chờ xác nhận, Đang liên hệ, Đã xác nhận.
   - **Giải phóng khóa** (gửi lại giống hệt thì tạo yêu cầu mới): Đã hủy, Từ chối.
   - **Không liên lạc được: [Đã chốt] giữ khóa kèm dấu nhắc cần gọi lại** (mục 4.2b).
   - Nếu cho phép mở lại yêu cầu đã giải phóng khóa, có thể xung đột khi khóa đã bị yêu cầu mới chiếm; cần quy tắc xử lý khi mở lại.
-- **Thời gian gọi lại, số lần liên hệ tối đa, người dự phòng** khi lễ tân vắng: **[Cần chốt]**.
+- **Thời gian gọi lại, số lần liên hệ tối đa, người dự phòng** khi người tiếp nhận vắng: **[Cần chốt]**.
 
 ### 4.2b. Khách gửi lại khi yêu cầu ở Không liên lạc được **[Đã chốt: giữ một yêu cầu, hiện dấu nhắc cần gọi lại]**
 
@@ -241,7 +242,7 @@ Chủ dự án chọn kết hợp: **không tạo yêu cầu mới, nhưng đán
 **Quy tắc [Đã chốt].** Yêu cầu đang ở **Không liên lạc được**, khách gửi lại toàn bộ thông tin giống nhau sau chuẩn hóa, **trong cùng phạm vi chống trùng**:
 1. Giữ đúng một yêu cầu; không tạo thêm bản ghi đặt lịch.
 2. Trạng thái vẫn là **Không liên lạc được**.
-3. Trang lễ tân hiện **"Khách vừa gửi lại — cần gọi lại"** cùng **thời điểm gửi lại**.
+3. Trang tiếp nhận hiện **"Khách vừa gửi lại — cần gọi lại"** cùng **thời điểm gửi lại**.
 4. Khi nhân viên bắt đầu liên hệ, yêu cầu chuyển sang **Đang liên hệ** và **dấu nhắc đang hiển thị được xóa**.
 5. Lịch sử đã ghi **không bị xóa** khi xóa dấu nhắc.
 6. Thông tin khác (ngày, dịch vụ, thú cưng…) thì tiếp nhận yêu cầu mới theo quy tắc đã chốt.
@@ -252,9 +253,9 @@ Chủ dự án chọn kết hợp: **không tạo yêu cầu mới, nhưng đán
 
 | Bước | Sự kiện | Kết quả |
 |---|---|---|
-| 1 | Lan gửi form; lễ tân gọi nhưng không gặp | Yêu cầu chuyển sang Không liên lạc được |
+| 1 | Lan gửi form; người tiếp nhận gọi nhưng không gặp | Yêu cầu chuyển sang Không liên lạc được |
 | 2 | Lan gửi lại nội dung giống hệt, cùng phạm vi | Không tạo yêu cầu mới; yêu cầu cũ có dấu "Khách vừa gửi lại — cần gọi lại" và thời điểm gửi lại |
-| 3 | Lễ tân bắt đầu gọi | Chuyển Đang liên hệ; xóa dấu nhắc đang hiển thị |
+| 3 | Người tiếp nhận bắt đầu gọi | Chuyển Đang liên hệ; xóa dấu nhắc đang hiển thị |
 | 4 | Hai bên thống nhất giờ | Chuyển Đã xác nhận; lưu ngày giờ hẹn |
 
 Nếu Lan đổi ngày hoặc dịch vụ thì tạo yêu cầu mới. Nếu Lan chuyển từ vãng lai sang đăng nhập, hai lần gửi thuộc hai phạm vi khác nhau nên vẫn có thể có hai yêu cầu theo ngoại lệ ở mục 4.2.
@@ -262,12 +263,12 @@ Nếu Lan đổi ngày hoặc dịch vụ thì tạo yêu cầu mới. Nếu Lan
 **Đề xuất kỹ thuật của Claude (chưa coi là đã duyệt, Codex phản biện):**
 - **Dữ liệu tối thiểu:** một dấu nhắc kèm thời điểm gửi lại trên yêu cầu. Chưa cần bộ đếm số lần gửi, chưa cần dịch vụ hàng đợi. Dấu nhắc chỉ có thể tồn tại khi trạng thái là Không liên lạc được; nên ép bằng ràng buộc ở cơ sở dữ liệu.
 - **Xóa dấu nhắc chỉ qua chuyển trạng thái:** không có thao tác "xóa nhắc" độc lập. Mọi chuyển khỏi Không liên lạc được (không chỉ sang Đang liên hệ) phải xóa dấu nhắc trong cùng thao tác, để dấu nhắc không bao giờ lệch trạng thái.
-- **Cập nhật nguyên tử, có điều kiện:** lần gửi lại đặt dấu nhắc bằng một câu lệnh cập nhật chỉ khớp khi yêu cầu vẫn đang ở Không liên lạc được. Nếu lễ tân đã chuyển trạng thái trước đó thì không có dòng nào bị đổi, nên không ghi đè trạng thái và không dựng lại dấu nhắc không phù hợp; khách vẫn nhận phản hồi chung như thường.
-- **Hai thứ tự đồng thời đều đúng:** gửi lại trước rồi lễ tân chuyển → dấu nhắc được đặt rồi bị xóa theo quy tắc (nhân viên đang bắt đầu gọi); lễ tân chuyển trước rồi gửi lại → không đặt dấu nhắc.
-- **Màn hình cũ của lễ tân [Đề xuất của Claude và Codex thống nhất, chưa duyệt chủ dự án]:** dùng số phiên bản của yêu cầu, đã có trong mô hình chống ghi đè. Khi đặt dấu nhắc **lần đầu của chu kỳ**, tăng phiên bản. Chuyển trạng thái chỉ thành công nếu phiên bản đang lưu bằng phiên bản trên màn hình; nếu khác thì báo "đã được cập nhật, hãy tải lại". Không cần dịch vụ trả phí. Ví dụ giả lập: lễ tân mở yêu cầu Lan/Miu ở phiên bản 4; Lan gửi lại, hệ thống đặt dấu nhắc và tăng lên 5; lễ tân bấm lưu từ màn hình phiên bản 4 thì không ghi đè, tải lại để thấy phiên bản 5 rồi bắt đầu liên hệ. Lần gửi lại vẫn nằm trong lịch sử dù dấu nhắc sau đó bị xóa, nên không mất dữ liệu.
+- **Cập nhật nguyên tử, có điều kiện:** lần gửi lại đặt dấu nhắc bằng một câu lệnh cập nhật chỉ khớp khi yêu cầu vẫn đang ở Không liên lạc được. Nếu người tiếp nhận đã chuyển trạng thái trước đó thì không có dòng nào bị đổi, nên không ghi đè trạng thái và không dựng lại dấu nhắc không phù hợp; khách vẫn nhận phản hồi chung như thường.
+- **Hai thứ tự đồng thời đều đúng:** gửi lại trước rồi người tiếp nhận chuyển → dấu nhắc được đặt rồi bị xóa theo quy tắc (nhân viên đang bắt đầu gọi); người tiếp nhận chuyển trước rồi gửi lại → không đặt dấu nhắc.
+- **Màn hình cũ của người tiếp nhận [Đề xuất của Claude và Codex thống nhất, chưa duyệt chủ dự án]:** dùng số phiên bản của yêu cầu, đã có trong mô hình chống ghi đè. Khi đặt dấu nhắc **lần đầu của chu kỳ**, tăng phiên bản. Chuyển trạng thái chỉ thành công nếu phiên bản đang lưu bằng phiên bản trên màn hình; nếu khác thì báo "đã được cập nhật, hãy tải lại". Không cần dịch vụ trả phí. Ví dụ giả lập: người tiếp nhận mở yêu cầu Lan/Miu ở phiên bản 4; Lan gửi lại, hệ thống đặt dấu nhắc và tăng lên 5; người tiếp nhận bấm lưu từ màn hình phiên bản 4 thì không ghi đè, tải lại để thấy phiên bản 5 rồi bắt đầu liên hệ. Lần gửi lại vẫn nằm trong lịch sử dù dấu nhắc sau đó bị xóa, nên không mất dữ liệu.
 - **Tránh bấm nhiều lần tạo lịch sử hoặc thông báo liên tục [Đề xuất của Claude và Codex thống nhất, chưa duyệt chủ dự án]:** khi dấu nhắc đang hiển thị, các lần gửi lại giống hệt tiếp theo **không ghi thêm sự kiện, không tăng phiên bản và không đổi thời điểm**. Mỗi chu kỳ nhắc tối đa một sự kiện lịch sử; thời điểm hiển thị là lần gửi lại đầu của chu kỳ (ví dụ gửi 10:00, bấm lại 10:01 và 10:02 vẫn giữ 10:00). Sau khi dấu nhắc bị xóa, lần gửi lại mới sẽ đặt dấu mới. Cách này tránh danh sách dao động khi khách bấm liên tục. Nếu chủ dự án muốn thời điểm theo lần gần nhất thì đổi lại.
 - **Giới hạn tần suất là lớp riêng:** vẫn áp dụng giới hạn theo địa chỉ mạng, số điện thoại và phạm vi để chống bot. **Chưa có ngưỡng được chốt.**
-- **Email:** quyết định hiện tại chỉ yêu cầu hiển thị nhắc trên trang lễ tân. **Chưa chốt** có gửi thêm email khi khách gửi lại hay không. Nếu sau này thêm, không đưa dữ liệu cá nhân vào thư và không gửi mỗi lần bấm.
+- **Email:** quyết định hiện tại chỉ yêu cầu hiển thị nhắc trên trang tiếp nhận. **Chưa chốt** có gửi thêm email khi khách gửi lại hay không. Nếu sau này thêm, không đưa dữ liệu cá nhân vào thư và không gửi mỗi lần bấm.
 - **Phản hồi công khai** giống hệt mọi trường hợp: tạo mới, trùng, hay trùng kèm đặt dấu nhắc. Không tiết lộ yêu cầu cũ, trạng thái hay chủ tài khoản. Thời gian phản hồi giữa các nhánh nên gần nhau.
 
 **Giới hạn cần ghi rõ (theo lưu ý của chủ dự án):**
@@ -300,14 +301,14 @@ Cơ sở dữ liệu là nơi phân xử, không phải đoạn kiểm tra trong
 - Kiểm tra dữ liệu phía máy chủ: độ dài, định dạng, danh sách giá trị cho loài và dịch vụ.
 - Ghi nhận đồng ý xử lý dữ liệu cá nhân (phiên bản nội dung, thời điểm).
 - **Hồ sơ tài khoản và thú cưng [Đã chốt về chức năng]:** hồ sơ có tên và số liên hệ để tự điền form; danh sách thú cưng thuộc tài khoản; chọn thú cưng đã có hoặc thêm và lưu thú cưng mới từ form. **Kiểm tra quyền phía máy chủ:** không chọn được thú cưng của tài khoản khác. Yêu cầu giữ bản chụp thông tin tại thời điểm gửi, nên sửa thông tin thú cưng sau này **không sửa ngược** yêu cầu đã gửi. Ví dụ: Lan đăng nhập, chọn Miu đã lưu hoặc thêm chó Bông; sau này sửa Miu không đổi yêu cầu cũ. Không mở rộng sang bệnh án hay nhập GPet.
-- **Độ tin cậy của email báo nhân viên [Đề xuất của Codex, Claude đồng ý]:** lưu yêu cầu và bản ghi thông báo chờ gửi **trong cùng một giao dịch**, gửi email sau; có thử lại, giới hạn số lần thử, và hiển thị hoặc cảnh báo khi lỗi. Chưa cần mua dịch vụ hàng đợi riêng. Ví dụ: Lan gửi form lúc dịch vụ email lỗi thì yêu cầu vẫn lưu và hiện cho lễ tân, hệ thống thử lại, Lan không phải gửi lại; nếu cơ sở dữ liệu lỗi thì không báo đã nhận. Sao lưu và giám sát **không thay** cho cơ chế này. Email cho yêu cầu mới và email khi khách gửi lại là hai quyết định khác nhau; email khi gửi lại **chưa chốt**.
+- **Độ tin cậy của email báo nhân viên [Đề xuất của Codex, Claude đồng ý]:** lưu yêu cầu và bản ghi thông báo chờ gửi **trong cùng một giao dịch**, gửi email sau; có thử lại, giới hạn số lần thử, và hiển thị hoặc cảnh báo khi lỗi. Chưa cần mua dịch vụ hàng đợi riêng. Ví dụ: Lan gửi form lúc dịch vụ email lỗi thì yêu cầu vẫn lưu và hiện cho người tiếp nhận, hệ thống thử lại, Lan không phải gửi lại; nếu cơ sở dữ liệu lỗi thì không báo đã nhận. Sao lưu và giám sát **không thay** cho cơ chế này. Email cho yêu cầu mới và email khi khách gửi lại là hai quyết định khác nhau; email khi gửi lại **chưa chốt**.
 - Chống spam là lớp riêng với chống trùng: giới hạn tần suất theo địa chỉ mạng, số điện thoại và tài khoản; chống bot. Ngưỡng và cách xử lý khi vượt: **[Cần chốt]**.
 
 ---
 
 ## 5. Hỗ trợ tài khoản tối thiểu [Đề xuất, chưa duyệt]
 
-Phạm vi thu hẹp: **không mở form hỗ trợ riêng**. Khách liên hệ bệnh viện qua thông tin liên hệ sẵn có (điện thoại, tại quầy); quản lý xử lý và ghi nhận trên trang quản trị. Cần quản lý và lễ tân duyệt quy trình này.
+Phạm vi thu hẹp: **không mở form hỗ trợ riêng**. Khách liên hệ bệnh viện qua thông tin liên hệ sẵn có (điện thoại, tại quầy); quản lý xử lý và ghi nhận trên trang quản trị. Cần quản lý và người tiếp nhận duyệt quy trình này.
 
 ### 5.1. Ba việc phải tách riêng
 
@@ -340,11 +341,20 @@ Xóa mềm: giải phóng số và tên đăng nhập, giữ yêu cầu đã g�
 
 ## 6. Phân quyền [Đề xuất]
 
+**Cơ cấu nhân sự [Đã chốt, chủ dự án 14/10]:** bệnh viện **không có lễ tân riêng**. Quản lý kiêm tiếp nhận khách hàng và điều hành; bác sĩ kiêm nhân viên khám, điều trị và chăm sóc; nhân viên Spa theo nhiệm vụ được phân công. Các tài liệu dùng "**người tiếp nhận**" để chỉ **khả năng** xử lý yêu cầu đặt lịch, không phải một chức danh hay một người riêng.
+
+**Phân quyền theo khả năng kiêm nhiệm [Đề xuất]:**
+- Quyền gắn với **khả năng**, không gắn mỗi vai trò với một nhân sự. Một người giữ nhiều khả năng; mỗi người một tài khoản cá nhân (không dùng chung).
+- Khả năng gợi ý cho giai đoạn 1 (chưa duyệt): xem và xử lý yêu cầu đặt lịch (tiếp nhận); quản lý nội dung website; quản lý tài khoản nhân viên và gán khả năng; thao tác nhạy cảm trên tài khoản khách; cấu hình hệ thống. "Quản lý", "bác sĩ", "nhân viên Spa" chỉ là **bộ khả năng soạn sẵn**, chỉnh được. Phân hệ sau thêm khả năng mới mà không đổi cấu trúc (xem [định hướng sản phẩm](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/dinh-huong-san-pham.md), mục 2).
+- Quản lý vừa tiếp nhận vừa giữ quyền thao tác nhạy cảm nghĩa là **không có người thứ hai kiểm tra**; giảm bằng nhật ký thao tác. **[Cần chốt]** ai ngoài quản lý giữ khả năng tiếp nhận, ai dự phòng, ai được thao tác nhạy cảm.
+- Khả năng và phân quyền lưu ở nơi người dùng không tự sửa được, kiểm tra ở máy chủ cho mọi thao tác.
+
+**Quy tắc kỹ thuật:**
 - Khách chỉ đọc và thêm dữ liệu thuộc tài khoản mình; không bao giờ sửa trạng thái hay trường của nhân viên.
 - Khả năng truy cập dữ liệu qua API của Supabase phụ thuộc **cả hai**: schema nào được đưa ra qua API, quyền đã cấp cho từng vai trò, và chính sách RLS. Kiểm tra cả quyền lẫn RLS cho từng bảng, không dựa vào riêng một lớp.
 - Khóa có quyền cao có thể bỏ qua RLS; chỉ dùng ở máy chủ, không có trong biến môi trường công khai, và **mọi thao tác dùng khóa này phải kiểm tra người dùng và vai trò ở máy chủ**.
 - Vai trò nhân viên lưu ở nơi người dùng không tự sửa được. Tài khoản nhân viên do quản lý tạo; khách tự đăng ký không bao giờ có vai trò nhân viên.
-- Thao tác nhạy cảm (đặt lại mật khẩu, giải phóng số, khóa tài khoản) qua máy chủ, kiểm tra vai trò, ghi nhật ký. **[Cần chốt]** lễ tân được làm gì; quản lý chỉ một người nên cần phương án dự phòng.
+- Thao tác nhạy cảm (đặt lại mật khẩu, giải phóng số, khóa tài khoản) qua máy chủ, kiểm tra vai trò, ghi nhật ký. **[Cần chốt]** ai giữ khả năng thao tác nhạy cảm; quản lý chỉ một người nên cần phương án dự phòng.
 - Quản lý bật xác thực hai bước không dùng SMS [chờ kiểm chứng cách Supabase hỗ trợ].
 - Môi trường thử dùng dữ liệu giả, tách khỏi dữ liệu thật.
 
@@ -393,7 +403,7 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 
 **Đã chốt, không còn trong danh sách:** phạm vi chống trùng (mục 4.2); sáu trạng thái và luồng chính (mục 4.2a); xử lý khách gửi lại khi Không liên lạc được (mục 4.2b).
 
-**Chủ dự án:** (1) bảng chuyển trạng thái hợp lệ và quyền thực hiện; mở lại yêu cầu đã hủy/từ chối; chuyển ngược từ Đã xác nhận; trạng thái nào còn giữ khóa chống trùng; danh mục lý do hủy/từ chối và có hiện cho khách không (mục 4.2a); (2) bằng chứng nào đủ để khôi phục tài khoản cũ, và ai quyết định; (3) lễ tân được làm thao tác nhạy cảm nào, ai dự phòng quản lý; (4) có nhận số cố định không; (5) thời gian gọi lại, số lần liên hệ và người dự phòng; có gửi thêm email khi khách gửi lại không (mục 4.2b); (6) khách có sửa số liên hệ trong yêu cầu không; (7) ngưỡng giới hạn tần suất; (8) chính sách lưu trữ, xóa và nội dung đồng ý; (9) dự án thử đã tạo; **bản 9: chủ dự án đã tự chạy công cụ kiểm chứng A và gửi file kết quả, nên cơ chế xác thực Management API cho lần thử này đã được giải quyết** (không gửi mã bí mật qua chat hoặc GitHub; cấu hình đã hoàn nguyên). Nếu cần chạy thêm, vẫn theo cách đó. **Cần duyệt riêng:** có chọn A làm hướng triển khai chính không (đề xuất của Codex), và chạy các điểm kiểm tra theo nền tảng/gói đã chốt (Cloudflare Workers Paid + Supabase Free) ở mục 0, dòng Bản 9. Đề xuất của Claude [Đề xuất]: ưu tiên cách để chủ dự án giữ mã bí mật, ví dụ chủ dự án tự chạy đúng lệnh Codex soạn trên dự án thử, hoặc cấp mã tạm thời có thể thu hồi ngay sau khi thử; chủ dự án chọn.
+**Chủ dự án:** (1) bảng chuyển trạng thái hợp lệ và quyền thực hiện; mở lại yêu cầu đã hủy/từ chối; chuyển ngược từ Đã xác nhận; trạng thái nào còn giữ khóa chống trùng; danh mục lý do hủy/từ chối và có hiện cho khách không (mục 4.2a); (2) bằng chứng nào đủ để khôi phục tài khoản cũ, và ai quyết định; (3) người tiếp nhận được làm thao tác nhạy cảm nào, ai dự phòng quản lý; (4) có nhận số cố định không; (5) thời gian gọi lại, số lần liên hệ và người dự phòng; có gửi thêm email khi khách gửi lại không (mục 4.2b); (6) khách có sửa số liên hệ trong yêu cầu không; (7) ngưỡng giới hạn tần suất; (8) chính sách lưu trữ, xóa và nội dung đồng ý; (9) dự án thử đã tạo; **bản 9: chủ dự án đã tự chạy công cụ kiểm chứng A và gửi file kết quả, nên cơ chế xác thực Management API cho lần thử này đã được giải quyết** (không gửi mã bí mật qua chat hoặc GitHub; cấu hình đã hoàn nguyên). Nếu cần chạy thêm, vẫn theo cách đó. **Cần duyệt riêng:** có chọn A làm hướng triển khai chính không (đề xuất của Codex), và chạy các điểm kiểm tra theo nền tảng/gói đã chốt (Cloudflare Workers Paid + Supabase Free) ở mục 0, dòng Bản 9. Đề xuất của Claude [Đề xuất]: ưu tiên cách để chủ dự án giữ mã bí mật, ví dụ chủ dự án tự chạy đúng lệnh Codex soạn trên dự án thử, hoặc cấp mã tạm thời có thể thu hồi ngay sau khi thử; chủ dự án chọn.
 
 **Codex (bản 10):** (10c) kiểm thử chuyển IP khách trên Cloudflare khi có môi trường thử; (10d) công cụ và phạm vi xuất sao lưu (có gồm Auth không), thử khôi phục tách biệt; (10e) cảnh báo khi dự án bị tạm dừng; (10f) bộ đếm trong PostgreSQL. **Codex:** (10) tiếp tục kiểm chứng hosted mục 3.3 trên dự án thử `leson-test` (không gửi khóa bí mật hay mật khẩu trong chat): **phần Management API, tạo tài khoản và đăng nhập với số giả đã đạt (bản 9); không yêu cầu chủ dự án chạy lại**; còn lại là các kiểm thử chưa chạy ở mục 2 (dòng "Còn chưa kiểm chứng sau bản 9"); nếu A không đáp ứng thì mới thử B; (11) xác minh tài liệu đã xong, còn kiểm thử API thật cho các mục ở mục 2; (12) chọn cách đặt lại mật khẩu (mật khẩu tạm hay quyền đặt lại dùng một lần) sau khi thử, và báo công sức; (12b) kiểm tra giới hạn theo IP khi đăng nhập qua máy chủ.
 
@@ -422,24 +432,24 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 | 10e | Nhân viên xem trang quản trị | Thấy cả A và B, không tự gộp hay chuyển chủ |
 | 10f | Trình duyệt gửi kèm mã tài khoản hoặc cờ chủ thể giả | Bỏ qua; chủ thể lấy từ phiên đã kiểm tra phía máy chủ |
 | 16 | Gửi form hợp lệ | Yêu cầu tạo ở **Chờ xác nhận**; khách thấy "Chờ nhân viên xác nhận", không thấy chữ ngụ ý đã có lịch |
-| 17 | Lễ tân bắt đầu liên hệ | Chuyển sang **Đang liên hệ**; lịch sử ghi người, thời điểm, cũ/mới |
+| 17 | Người tiếp nhận bắt đầu liên hệ | Chuyển sang **Đang liên hệ**; lịch sử ghi người, thời điểm, cũ/mới |
 | 18 | Chuyển sang **Đã xác nhận** thiếu ngày hoặc thiếu giờ hẹn | Từ chối thao tác |
 | 19 | Chuyển sang Đã xác nhận với đủ ngày và giờ (ví dụ 09:00 ngày 20/10) | Lưu ngày giờ hẹn; hệ thống tự ghi thời điểm và người xác nhận; **ngày khách mong muốn không đổi** |
 | 20 | Ngày giờ hẹn khác ngày khách mong muốn | Ba mốc thời gian vẫn là ba giá trị riêng |
 | 21 | Đang liên hệ → Không liên lạc được → Đang liên hệ (gọi lại) → Đã xác nhận | Hợp lệ; lịch sử ghi đủ từng bước |
 | 22 | Chuyển sang **Đã hủy** hoặc **Từ chối** không nhập lý do | Từ chối thao tác; có lý do thì lưu và ghi lịch sử |
-| 23 | Hai lễ tân đổi trạng thái cùng một yêu cầu đồng thời | Một thành công; người kia nhận thông báo tải lại, không ghi đè |
+| 23 | Hai người tiếp nhận đổi trạng thái cùng một yêu cầu đồng thời | Một thành công; người kia nhận thông báo tải lại, không ghi đè |
 | 24 | Khách (đã đăng nhập hay vãng lai) cố đặt trạng thái hoặc ngày giờ hẹn qua dữ liệu gửi lên | Bị bỏ qua hoặc từ chối; khách không đổi được trạng thái |
 | 25 | Chuyển trạng thái ngoài bảng hợp lệ (áp dụng **sau khi** chủ dự án duyệt bảng ở 4.2a) | Bị từ chối |
 | 26 | Gửi lại giống hệt (cùng phạm vi) khi yêu cầu ở Chờ xác nhận, Đang liên hệ hoặc Đã xác nhận (theo nhóm giữ khóa được duyệt) | Không tạo thêm |
 | 27 | Gửi lại giống hệt khi yêu cầu cũ ở Đã hủy hoặc Từ chối (theo nhóm được duyệt) | Tạo yêu cầu mới |
-| 28 | Gửi lại giống hệt, cùng phạm vi, khi yêu cầu cũ ở **Không liên lạc được** | Vẫn **một** yêu cầu, trạng thái giữ nguyên; trang lễ tân hiện "Khách vừa gửi lại — cần gọi lại" và thời điểm gửi lại; khách nhận phản hồi chung |
+| 28 | Gửi lại giống hệt, cùng phạm vi, khi yêu cầu cũ ở **Không liên lạc được** | Vẫn **một** yêu cầu, trạng thái giữ nguyên; trang tiếp nhận hiện "Khách vừa gửi lại — cần gọi lại" và thời điểm gửi lại; khách nhận phản hồi chung |
 | 28a | Nhân viên chuyển yêu cầu đó sang Đang liên hệ | Dấu nhắc bị xóa; lịch sử của lần gửi lại và các thay đổi trước đó vẫn còn |
 | 28b | Gửi lại khác thông tin (đổi ngày hoặc dịch vụ) khi có yêu cầu ở Không liên lạc được | Tạo yêu cầu mới; yêu cầu cũ không bị đặt dấu nhắc |
 | 28c | Bấm gửi lại giống hệt nhiều lần liên tiếp khi dấu nhắc đang hiển thị | Không ghi thêm sự kiện lịch sử, không tạo thông báo liên tục; thời điểm hiển thị giữ lần gửi lại đầu của chu kỳ (**theo đề xuất kỹ thuật ở 4.2b, chưa duyệt**; kỳ vọng này chỉ áp dụng sau khi chủ dự án hoặc Codex chốt cách giữ thời điểm). Ví dụ giả lập: Lan gửi lại 10:00 đặt dấu nhắc; bấm lại 10:01, 10:02 vẫn một yêu cầu, một dấu nhắc, thời điểm giữ 10:00 |
-| 28d | Lễ tân chuyển sang Đang liên hệ **ngay trước** khi lần gửi lại được xử lý | Không dựng lại dấu nhắc, không ghi đè trạng thái; khách nhận phản hồi chung |
-| 28e | Lần gửi lại đến **ngay trước** khi lễ tân chuyển trạng thái | Dấu nhắc được đặt rồi bị xóa theo chuyển trạng thái; lần gửi lại vẫn có trong lịch sử |
-| 28f | Lễ tân thao tác trên màn hình cũ (chưa thấy dấu nhắc mới) | Không mất lần gửi lại; thao tác báo cập nhật hoặc xử lý an toàn theo cách xử lý màn hình cũ mà Codex chọn (đề xuất ở 4.2b, chưa duyệt) |
+| 28d | Người tiếp nhận chuyển sang Đang liên hệ **ngay trước** khi lần gửi lại được xử lý | Không dựng lại dấu nhắc, không ghi đè trạng thái; khách nhận phản hồi chung |
+| 28e | Lần gửi lại đến **ngay trước** khi người tiếp nhận chuyển trạng thái | Dấu nhắc được đặt rồi bị xóa theo chuyển trạng thái; lần gửi lại vẫn có trong lịch sử |
+| 28f | Người tiếp nhận thao tác trên màn hình cũ (chưa thấy dấu nhắc mới) | Không mất lần gửi lại; thao tác báo cập nhật hoặc xử lý an toàn theo cách xử lý màn hình cũ mà Codex chọn (đề xuất ở 4.2b, chưa duyệt) |
 | 28g | Khách vãng lai gửi lại nội dung giống yêu cầu của một tài khoản ở Không liên lạc được | Không đặt dấu nhắc cho yêu cầu của tài khoản (khác phạm vi); không lộ, không gắn chéo |
 | 28h | So sánh phản hồi công khai giữa gửi mới, gửi trùng thường và gửi trùng có đặt dấu nhắc | Cùng nội dung thông báo, không phân biệt được |
 | 28i | Dùng dấu nhắc để khôi phục tài khoản hoặc đánh dấu số đã xác minh | Không có chức năng nào như vậy |
@@ -447,7 +457,7 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 | 30 | Nhiều khách khác nhau đăng nhập qua máy chủ Next.js (dự án thử, tài khoản giả) | Ghi nhận Auth thấy IP nào; giới hạn theo IP có chặn nhầm khách thật hoặc bị làm cạn chung không |
 | 31 | Gọi endpoint token trực tiếp vượt ngưỡng (dự án thử, tài khoản giả) | Ghi nhận ngưỡng thực tế và phản hồi; so với mặc định Codex nêu (150 yêu cầu/5 phút/IP) và cấu hình dự án |
 | 32 | Dùng token truy cập cũ còn hạn sau khi đăng xuất hoặc đổi mật khẩu | Thao tác cần bảo đảm mạnh bị từ chối nhờ kiểm tra phiên; thao tác thường: ghi nhận hành vi thật, không giả định mất hiệu lực ngay |
-| 33 | Lễ tân lưu từ màn hình phiên bản 4 sau khi lần gửi lại đặt dấu nhắc (phiên bản 5) | Không ghi đè; báo tải lại; thấy dấu nhắc rồi mới bắt đầu liên hệ (đề xuất 4.2b) |
+| 33 | Người tiếp nhận lưu từ màn hình phiên bản 4 sau khi lần gửi lại đặt dấu nhắc (phiên bản 5) | Không ghi đè; báo tải lại; thấy dấu nhắc rồi mới bắt đầu liên hệ (đề xuất 4.2b) |
 | 34 | Khách bấm gửi lại lần hai, ba khi dấu nhắc đang bật | Không tăng phiên bản, không thêm sự kiện, thời điểm vẫn là lần đầu (đề xuất 4.2b, chưa duyệt) |
 | 35 | Quản lý đăng nhập có bật TOTP | Thao tác nhạy cảm yêu cầu bước xác thực hai; không có SMS nào được gửi |
 | 36 | Cấu hình Phone không SMS qua Management API (dự án thử, tài khoản giả) | **Đã thực hiện (14/10, số giả): API chấp nhận; tạo tài khoản, đăng ký và đăng nhập bằng điện thoại + mật khẩu đạt; không gửi SMS nào.** Chưa lặp với số di động Việt Nam |
@@ -461,7 +471,7 @@ Gộp yêu cầu; đặt hộ (sửa số liên hệ trong từng yêu cầu); f
 | 37d | Bản sao lưu có đủ dữ liệu Auth, hồ sơ, thú cưng, yêu cầu và lịch sử | Đối chiếu đủ các bảng. Bản sao **có thể chứa mật khẩu đã băm và dữ liệu cá nhân** nên được mã hóa và giới hạn quyền; **không** chứa mã truy cập, khóa quyền cao hay mật khẩu dạng rõ; không đưa vào GitHub hay nhật ký. Ảnh trong Storage (nếu dùng) sao lưu riêng |
 | 37e | Chọn hoặc thêm thú cưng khi gửi form | Chỉ chọn được thú cưng của chính tài khoản; thử chọn thú cưng của tài khoản khác bị chặn |
 | 37f | Sửa hoặc xóa thú cưng sau khi đã gửi yêu cầu | Bản chụp trong yêu cầu cũ không đổi |
-| 37g | Dịch vụ email lỗi khi khách gửi form | Yêu cầu vẫn được lưu và hiện cho lễ tân; hệ thống thử lại email có giới hạn số lần; khách không phải gửi lại; có cảnh báo cho người vận hành khi hết lần thử |
+| 37g | Dịch vụ email lỗi khi khách gửi form | Yêu cầu vẫn được lưu và hiện cho người tiếp nhận; hệ thống thử lại email có giới hạn số lần; khách không phải gửi lại; có cảnh báo cho người vận hành khi hết lần thử |
 | 37h | Cơ sở dữ liệu lỗi khi khách gửi form | Không báo "đã nhận"; hiện thông báo thử lại hoặc gọi bệnh viện |
 | 37 | Cấu hình A (nếu chạy được) có bền qua các thao tác thông thường trên dashboard | Ghi nhận cấu hình không bị ghi đè hay báo lỗi; dùng để đánh giá mức hỗ trợ ổn định của A |
 | 11 | Khách đọc yêu cầu của tài khoản khác hoặc yêu cầu vãng lai | Bị chặn ở tầng cơ sở dữ liệu |
