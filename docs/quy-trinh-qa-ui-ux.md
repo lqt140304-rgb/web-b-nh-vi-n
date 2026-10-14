@@ -38,6 +38,12 @@ Nhận xét thẩm mỹ chủ quan **tách riêng** khỏi lỗi đã xác minh,
 - Gom lỗi một đợt, không sửa từng lỗi nhỏ riêng lẻ.
 - Phân biệt lỗi đã xác minh với nhận xét thẩm mỹ.
 
+## 4a. Chọn model cho Claude QA (chủ dự án quyết định 14/10)
+
+- **Lượt kiểm đầu** của mỗi trang mới (bắt đầu với Services V1): dùng **Opus** để tìm lỗi chưa ai nghĩ tới (logic, id sai giữa các tệp, bàn phím, trình đọc màn hình, nghiệp vụ).
+- **Các lượt rà soát sau** (kiểm lại danh sách FIX): dùng **Sonnet**, kiểm đúng các mục "Đạt khi".
+- Mỗi báo cáo ghi rõ **phạm vi đã kiểm và phần chưa kiểm**, để kết luận "PASS" không bị hiểu rộng hơn thực tế.
+
 ## 5. Giới hạn bắt buộc
 
 Không tự thay đổi thiết kế đã phê duyệt; không merge main; không deploy production khi chưa được chủ dự án cho phép.
