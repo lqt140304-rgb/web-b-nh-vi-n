@@ -1,119 +1,217 @@
 # Rà soát độc lập: Lê Sơn Hero V1 (Claude)
 
-**Ngày:** 14/10/2026 · **Người rà soát:** Claude · **Đối tượng:** Lê Sơn Hero V1 (Hero/Header đầu tiên của Antigravity) · **Trạng thái báo cáo:** **chưa rà soát được nội dung V1 vì thiếu bằng chứng.** Báo cáo này không phê duyệt thay chủ dự án, không sửa giao diện, không merge vào main.
+**Ngày:** 14/10/2026 · **Người rà soát:** Claude · **Đối tượng:** Lê Sơn Hero V1 (Hero/Header, Phương án D, Minimal Creative của Antigravity) · **Báo cáo này không phê duyệt thay chủ dự án, không sửa giao diện, không merge vào main.**
 
-**Quy ước:** **[Đã xác minh]** có bằng chứng Claude tự kiểm tra · **[Chưa xác minh]** thiếu bằng chứng, **không** coi là đạt hay không đạt · **[Đề xuất]** của Claude.
+**Bản đã rà soát:** nhánh `antigravity/hero-v1`, commit `74e266e4ef725d501bd5dcd2afc237895bbdc140` (13:09 ngày 14/10/2026). Claude lấy bản này về thư mục tạm chỉ để đọc, **không ghi gì vào nhánh của Antigravity**.
+
+**Quy ước:** **[Đã xác minh]** có bằng chứng Claude tự đo hoặc đọc · **[Chưa xác minh]** thiếu bằng chứng, không coi là đạt hay không đạt · **[Đề xuất]** của Claude. Mức ưu tiên: **Cao** (sửa trước khi chủ dự án duyệt), **Trung bình** (sửa trước khi Codex triển khai), **Thấp** (nên sửa).
 
 ---
 
-## 0. Bằng chứng đã tiếp cận và chưa tiếp cận
+## 0. Phương pháp và giới hạn của bằng chứng
 
-Kiểm tra ngày 14/10/2026 trên nhánh `claude/optimistic-mccarthy-d1d15i`, commit `bfa9130`.
+**Đã làm:**
+- Đọc toàn bộ `demo/index.html`, `demo/app.js`, `demo/styles.css`, `docs/ban-giao-hero-header-antigravity.md`, `docs/thiet-ke-hero-phuong-an-d.md`.
+- Quét tự động các tham chiếu tài nguyên, liên kết, lớp CSS không dùng, và chuỗi nội dung.
+- Chạy `demo/index.html` bằng máy chủ tĩnh cục bộ và trình duyệt Chromium tự động (Playwright) ở **1440 px**, **390 px**, và các chiều rộng 360, 768, 1024 px; chụp ảnh, đo kích thước, tính tỷ lệ tương phản từ màu thực tế, thử hover, active, focus bàn phím, menu mobile, dropdown tài khoản, phím Thoát.
+- Ảnh bằng chứng trong [`docs/ra-soat-hero-v1-bang-chung/`](ra-soat-hero-v1-bang-chung/).
 
-| Tài liệu hoặc tài nguyên yêu cầu | Kết quả kiểm tra | Tình trạng |
-|---|---|---|
-| `demo/index.html` (bản demo của Antigravity) | Thư mục `demo/` **không tồn tại** trong kho; không có tệp nào tên `demo` trong lịch sử git của nhánh | **Thiếu bằng chứng** |
-| `docs/ban-giao-hero-header-antigravity.md` | **Không có** trong `docs/` (chỉ có `antigravity-brief-hero.md`, `dinh-huong-san-pham.md`, `ke-hoach-phien-ban-dau.md`, `rasoat-tai-khoan-va-form-dat-lich.md`, `tom-tat-cap-nhat-2026-10-14.md`) | **Thiếu bằng chứng** |
-| `thiet-ke-hero-phuong-an-d.md` | **Không có** trong kho | **Thiếu bằng chứng** |
-| Bộ tài nguyên logo, hình ảnh, SVG | **Không có** trong kho | **Thiếu bằng chứng** |
-| Demo đang chạy tại `http://localhost:3030` | Môi trường làm việc của Claude là một máy chủ đám mây riêng; `localhost` ở đây **không phải máy của chủ dự án**. Yêu cầu kết nối thất bại (mã trả về `000`) | **Không truy cập được** |
-| Kho từ xa | Chỉ có **một** nhánh (`claude/optimistic-mccarthy-d1d15i`); không có nhánh nào khác chứa các tệp trên | Không bổ sung được |
-| Tài liệu nghiệp vụ hiện hành trong `docs/` | Đọc được và đối chiếu được | **Đã tiếp cận** |
-
-**Hệ quả:** toàn bộ ba mảng A (nghiệp vụ), B (giao diện), C (kỹ thuật và bàn giao) đều **không thể xác minh** trên V1. Báo cáo này **không kết luận V1 đạt** ở bất kỳ mục nào.
+**Chưa làm được hoặc không đại diện [Chưa xác minh]:**
+- Chỉ chạy Chromium trên Linux. **Chưa thử** Safari, Firefox, thiết bị iOS và Android thật, trình đọc màn hình.
+- **Chưa đo LCP và Core Web Vitals.** Theo brief, hiệu năng chính thức chỉ đo trên bản do Codex dựng, và demo tải phông từ Google Fonts khi chạy.
+- Không có tệp logo vector hay hướng dẫn nhận diện gốc để đối chiếu, chỉ so thị giác hai tệp PNG trong kho.
+- Không xác minh được nguồn gốc và bản quyền các ảnh thú cưng (mục 5).
+- Chủ dự án nhắc bản chạy tại `http://localhost:3030`; Claude không truy cập được máy đó nên chạy từ mã nguồn trên nhánh. Mã tĩnh giống nhau, nhưng Claude không xem được thay đổi chưa đẩy lên nhánh.
 
 ---
 
 ## 1. Những điểm V1 đã đạt
 
-**Không có điểm nào được xác minh.** Claude không ghi "đạt" cho điều chưa tự kiểm tra.
+Các điểm sau do Claude tự kiểm tra **[Đã xác minh]**.
 
-Điều duy nhất đã có là **tiêu chí nghiệm thu** để đối chiếu, nằm ở mục 7 của [brief Antigravity](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/antigravity-brief-hero.md). Đây là tiêu chí, không phải kết quả.
+| # | Nội dung | Bằng chứng |
+|---|---|---|
+| Đ1 | Nút chính đúng chữ "Gửi yêu cầu đặt lịch" | `index.html` dòng 165; ảnh 01, 02. Nút nằm trong khung nổi bật: nền tím `#5A1E5E`, chữ trắng, tỷ lệ tương phản 11,78:1, kích thước 256×58 px (desktop), 320×50 px (mobile 390) |
+| Đ2 | Không có chữ ngụ ý lịch đã chốt, OTP, hay cam kết chưa xác nhận | Quét `index.html` và `app.js`: không có "thành công", "OTP", "tức thì", "24/7", "cấp cứu", "khuyến mãi", giá, tên bác sĩ, số năm kinh nghiệm, "đã có tài khoản" trong giao diện khách (trừ chuỗi trong bảng tự đánh giá của demo, xem N1) |
+| Đ3 | Có dòng nói nhân viên sẽ xác nhận | "Nhân viên sẽ liên hệ để xác nhận lịch hẹn." ngay dưới nút, ở cả desktop và mobile (ảnh 01, 02) |
+| Đ4 | Gửi yêu cầu không bắt đăng nhập | Nút chính là liên kết tới `#form-dat-lich`, không dẫn tới đăng nhập; Đăng nhập và Đăng ký là nút riêng, phụ |
+| Đ5 | Header có hai trạng thái, chuyển được | Chưa đăng nhập: Đăng nhập, Đăng ký; đã đăng nhập: tên khách và dropdown (Yêu cầu của tôi, Hồ sơ thú cưng, Cài đặt, Đăng xuất). Thử cả desktop 1440 và mobile 390 (ảnh 01, 04) |
+| Đ6 | Định hướng Minimal Creative, nền kem, màu thương hiệu | Nền `#FBF7F1`; tím, cam, xanh ngọc đặt tên trong CSS; ba khung ảnh vòm; tiêu đề căn giữa (ảnh 01, 02) |
+| Đ7 | Dùng logo do chủ dự án cung cấp, không méo | Hai tệp `logo-le-son-original.png` và `logo-le-son.png` có cùng hình, bản thứ hai chỉ cắt viền đen và bỏ nền; không thấy méo hoặc đổi màu trên nền kem và nền tím (ảnh 09). Giữ nguyên bản gốc trong kho |
+| Đ8 | Không có tràn ngang, không chồng lấn chữ lên ảnh hay nút | Ở 360, 390, 768, 1024 và 1440 px: `scrollWidth` bằng chiều rộng cửa sổ; chữ, nút, ghi chú không giao với khung ảnh. (Họa tiết trang trí chồng chữ viết tay: lỗi S4 bên dưới) |
+| Đ9 | Nút chính trong màn hình đầu trên điện thoại | Mobile 390×844: nút ở y=363 đến 413. Mobile 360×640: cùng vị trí, trong khung nhìn |
+| Đ10 | Trạng thái hover, active, focus của CTA | Hover: nền `#48154B`, nổi lên 2 px, bóng đậm hơn. Active: trở về vị trí. Nút phụ hover: nền tím nhạt. Focus bàn phím: viền cam 3 px, cách 3 px, trên mọi liên kết và nút (ảnh 10). Lưu ý lỗi S6 về tương phản của viền focus |
+| Đ11 | Giảm chuyển động | Khi bật giảm chuyển động, thời lượng chuyển tiếp còn `0,00001s` |
+| Đ12 | Chữ tiếng Việt có dấu hiển thị đúng; tương phản chữ chính tốt | Tiêu đề 13,96:1; mô tả 6,81:1; liên kết điều hướng 11,04:1 (phông Lora, Be Vietnam Pro, Caveat tải đủ). Không có lỗi trong bảng điều khiển trình duyệt |
+| Đ13 | Tài nguyên của trang đều tồn tại | 6 tham chiếu cục bộ trong `index.html` (CSS, JS, logo, 3 ảnh) đều có tệp; chỉ phụ thuộc ngoài là Google Fonts |
+| Đ14 | SVG linh vật được giữ lại | Có đủ tệp: `cat-silhouette.svg`, `cat-pose-services.svg`, `cat-pose-booking.svg` (trong `demo/assets/`); `sketch-cartoon-cat.svg`, các bản `cat-dancing-monoline-*.svg` (trong `assets/`). Xem lỗi T2 về đường dẫn sai trong tài liệu |
+| Đ15 | Không triển khai mèo ba tư thế | Không có hình mèo hoạt họa hay logic đổi tư thế trong HTML. Hero dùng ảnh thú cưng, không dùng SVG mèo (đúng quyết định hoãn) |
+
+---
 
 ## 2. Những lỗi bắt buộc sửa
 
-**Không có lỗi nào được ghi nhận**, vì chưa có V1 để kiểm tra. Việc không có lỗi trong báo cáo này **không có nghĩa V1 không có lỗi**.
+Sắp theo ưu tiên. Mỗi lỗi có bằng chứng và đề xuất sửa.
 
-Khi có V1, các lỗi được ghi theo mẫu: **mã lỗi, bằng chứng cụ thể (đường dẫn tệp và dòng, hoặc ảnh chụp kèm chiều rộng màn hình), ảnh hưởng, mức ưu tiên (Bắt buộc / Nên / Có thể), đề xuất sửa.** Chưa có mục nào để điền.
+### Nhóm Cao
+
+**S1. Tài liệu bàn giao ghi "ĐÃ PHÊ DUYỆT" và tự chấm "Đạt" trong khi chủ dự án chưa duyệt (ưu tiên Cao)**
+- Bằng chứng: `docs/ban-giao-hero-header-antigravity.md` dòng 5: "Trạng thái: **[ĐÃ PHÊ DUYỆT]** bởi Chủ dự án ngày 14/10/2026"; bảng nghiệm thu ở mục 4 (dòng 128 đến 140) toàn "✅ Đạt". Trong demo, `index.html` dòng 317 đến 342 ghi nhãn "Đối chiếu Tiêu chí nghiệm thu Hero/Header **(Claude soạn)**" kèm thẻ "ĐẠT 100%" cho cả sáu tiêu chí. Chủ dự án giao Claude rà soát **trước khi phê duyệt**, nên trạng thái này sai, và "ĐẠT 100%" gắn dưới tên Claude có thể khiến người xem tưởng Claude đã chấm.
+- Ảnh hưởng: sai lệch quy trình; người xem có thể coi V1 đã được duyệt hoặc đã được Claude xác nhận.
+- Đề xuất sửa: đổi trạng thái thành "Chờ rà soát và chờ chủ dự án duyệt". Đổi nhãn bảng trong demo thành "Antigravity tự đánh giá (chưa qua rà soát)" và bỏ chữ "Claude soạn" hoặc ghi "tiêu chí do Claude soạn, kết quả do Antigravity tự đánh giá". Bỏ thẻ "100%".
+
+**S2. Bàn phím và trợ năng của menu, dropdown, modal chưa đạt; tài liệu khẳng định có hỗ trợ phím Thoát (ưu tiên Cao)**
+- Bằng chứng: `app.js` không có `keydown` và không có `focus()`. Đo trên trình duyệt:
+  - Nhấn Thoát khi menu mobile đang mở: menu vẫn mở. Tài liệu bàn giao dòng 32 ghi "hỗ trợ phím ESC" là **không đúng**.
+  - Nhấn Thoát khi dropdown tài khoản đang mở: dropdown vẫn mở.
+  - Mở menu: tiêu điểm vẫn ở nút mở, nhấn Tab đi vào nội dung phía sau lớp phủ trước (nút chính, nút phụ, chấm tròn) rồi mới tới menu; đóng menu: tiêu điểm ở lại nút Đóng nằm ngoài màn hình thay vì trả về nút mở.
+  - Khi menu **đóng**, các liên kết trong menu vẫn nhận tiêu điểm bàn phím dù nằm ngoài màn hình (`visibility: visible`, không `inert`, không `aria-hidden`): tiêu điểm "mất" ra ngoài khung nhìn (Tab thứ 15 và 16 trên mobile rơi vào Đóng và Trang chủ trong menu ẩn).
+  - `aria-expanded` của nút tài khoản luôn là `false`; nút mở menu không có `aria-expanded`.
+  - Bảng "Tiêu chí" cũng không có Thoát và bẫy tiêu điểm (chỉ ở demo).
+- Ảnh hưởng: vi phạm tiêu chí điều hướng bàn phím trong brief mục 7 và WCAG 2.1 AA (2.1.1, 2.4.3, 4.1.2).
+- Đề xuất sửa: khi đóng, thêm `inert` (hoặc `visibility: hidden`) cho menu; khi mở, chuyển tiêu điểm vào menu, giữ tiêu điểm trong menu, đóng bằng Thoát, trả tiêu điểm về nút mở; cập nhật `aria-expanded`. Dropdown tài khoản nên dùng mẫu "nút mở rộng" (nút + danh sách liên kết, đóng bằng Thoát) thay cho `role="menu"` nửa vời. Sửa câu "hỗ trợ phím ESC" trong tài liệu theo hành vi thật.
+
+**S3. Chấm tròn chọn thú cưng hiện và bấm được trên desktop, bấm vào làm vỡ bố cục (ưu tiên Cao)**
+- Bằng chứng: `styles.css` dòng 1320 đến 1322: `.show-arches .mobile-dots-indicator { display: flex !important; }` ghi đè quy tắc `display: none` (dòng 905) ở mọi chiều rộng. Trên 1440 px, ba chấm nhỏ nằm dưới ba khung (ảnh 01). Bấm chấm đầu: khung giữa co từ 420 px xuống 68 px, khung phải còn 68 px, khung trái đổi sang 240 px lệch vị trí (ảnh 03). Kích thước vùng chạm 8×8 px.
+- Ảnh hưởng: bố cục "ba khung cân đối" bị phá bằng một thao tác; chấm nhận tiêu điểm bàn phím trên desktop.
+- Đề xuất sửa: chỉ hiện chấm ở mobile; trên desktop ẩn hẳn. Xem thêm N5 về vùng chạm và trạng thái chọn của chấm.
+
+**S4. Header đã đăng nhập vỡ trên mobile 390 px (ưu tiên Cao)**
+- Bằng chứng: ảnh 04. Chiều cao header tăng từ 68 lên 96 px; tên thương hiệu bị ngắt thành 5 dòng ("BỆNH / VIỆN / THÚ Y / Lê / Sơn", khối cao 72 px); tên khách "Nguyễn Minh Khang" xuống 2 dòng; nút mở menu bị ép còn **32×44 px** (nhỏ hơn 44 px); nút tìm kiếm còn rộng 29 px.
+- Ảnh hưởng: trạng thái đã đăng nhập là một trong hai trạng thái bắt buộc, và tên tiếng Việt dài là chuyện thường; giao diện bị dịch chuyển bố cục khi đăng nhập.
+- Đề xuất sửa: trên mobile chỉ hiện avatar hoặc chữ cái đầu, tên đầy đủ nằm trong dropdown; ẩn chữ thương hiệu cạnh logo ở màn hình hẹp; giữ nút mở menu tối thiểu 44×44 px; cắt tên dài bằng dấu "…" thay vì xuống dòng. Thử với tên dài nhất hợp lý.
+
+### Nhóm Trung bình
+
+**S5. Chữ trấn an quan trọng nhất không đạt tương phản 4,5:1 (ưu tiên Trung bình)**
+- Bằng chứng: "Nhân viên sẽ liên hệ để xác nhận lịch hẹn." dùng `#7A6F7E` trên nền `#FBF7F1`, cỡ 14 px (12,5 px trên mobile): đo **4,47:1**, dưới ngưỡng 4,5:1. Tài liệu bàn giao dòng 59 ghi "Tương phản 4.5:1". Cùng màu này còn dùng cho chữ phụ trong menu người dùng (12 px, 4,77:1 trên nền trắng, qua) và ghi chú trong menu mobile (12,5 px, 4,56:1 trên kem sáng, sát ngưỡng).
+- Đề xuất sửa: dùng `#5E5362` (6,81:1) hoặc tối hơn `#7A6F7E` (ví dụ `#6B5F70`, 5,63:1) cho mọi chữ nhỏ; sửa số liệu trong tài liệu token theo giá trị đo.
+
+**S6. Viền focus màu cam không đủ tương phản trên nền kem (ưu tiên Trung bình)**
+- Bằng chứng: viền `#FC9238` trên nền `#FBF7F1` đo **2,11:1**, trên nền trắng 2,26:1; ngưỡng 3:1 cho thành phần giao diện (WCAG 1.4.11). Trên nút tím đạt 5,22:1. Tài liệu bàn giao mục 3.3 yêu cầu Codex **giữ nguyên** màu viền này.
+- Đề xuất sửa: dùng viền hai lớp (ví dụ lớp trong tím `#5A1E5E` 2 px, lớp ngoài cam hoặc trắng) hoặc đổi sang tím cho focus trên nền sáng; cập nhật hướng dẫn cho Codex.
+
+**S7. Nội dung ngoài phạm vi đã xác nhận (ưu tiên Trung bình)**
+- Bằng chứng, trong `index.html`:
+  - Dòng 82 và 261: mục "Tin tức", "Cẩm nang thú cưng"; dòng 89: ô tìm kiếm "dịch vụ hoặc bài viết". Giai đoạn 1 gồm giới thiệu, dịch vụ, tài khoản, hồ sơ thú cưng, form đặt lịch; **chưa xác nhận** tin tức, cẩm nang hay tìm kiếm.
+  - Dòng 114: "098 ••• ••34 · **Khách thân thiết**": nhãn hạng khách chưa từng được xác nhận.
+  - Dòng 212: văn bản thay thế của ảnh chó: "...Golden Retriever **tại Bệnh viện Thú y Lê Sơn**", khẳng định chó thuộc bệnh viện mà chưa có căn cứ (xem mục 5).
+  - Dòng 223 đến 226: chữ viết tay tiếng Anh "Care / Create / Stronger / Bonds" chưa có giải thích hay xác nhận.
+  - Dòng 106 đến 122: tên "Nguyễn Minh Khang", "Bé Miu, Lu Lu", "2 đang xử lý" là dữ liệu giả nhưng tên là tên phổ biến, có thể trùng người thật.
+- Đề xuất sửa: bỏ "Tin tức", "Cẩm nang", ô tìm kiếm khỏi V1 hoặc ghi rõ là chờ chủ dự án xác nhận; bỏ "Khách thân thiết"; sửa văn bản thay thế thành mô tả trung tính ("Ảnh minh họa: chú chó Golden Retriever"); xác nhận hoặc bỏ chữ tiếng Anh; dùng tên rõ ràng là giả (ví dụ "Khách Demo"). Chủ dự án xác nhận từng câu chữ chính thức (tiêu đề, mô tả), vì tài liệu bàn giao ghi đã duyệt nhưng điều đó chưa được xác nhận (S1).
+
+**S8. Thông điệp "khách vãng lai không cần đăng ký" không hiển thị ở desktop và bị giấu trong menu ở mobile (ưu tiên Trung bình)**
+- Bằng chứng: câu này chỉ nằm trong `.drawer-note` (`index.html` dòng 272 đến 274); ở desktop phần tử nằm ngoài màn hình (x=1464); ở mobile chỉ thấy sau khi mở menu (ảnh 05). Tài liệu bàn giao mục 1 và bảng "Tiêu chí" trong demo khẳng định Header "nêu rõ".
+- Ảnh hưởng: tiêu chí nghiệm thu của brief ("khách vãng lai thấy rõ có thể gửi yêu cầu không cần tài khoản") chưa đạt trên giao diện chính. Hành vi thì đúng (Đ4), thiếu thông điệp.
+- Đề xuất sửa: thêm một dòng ngắn gần nút chính, ví dụ "Không cần tài khoản để gửi yêu cầu", hoặc gộp vào dòng trấn an; giữ ngắn để CTA phụ không bị lấn.
+
+**S9. Họa tiết trang trí chồng lên chữ viết tay và để lại mảnh vụn ở đỉnh khung ảnh (ưu tiên Trung bình)**
+- Bằng chứng: ảnh 06: vòng cung cam cắt ngang chữ "Stronger" và "Bonds". Ảnh 07: ở đỉnh khung trái có một nét tím nhỏ lạ và một vạch cam; đỉnh khung phải cũng có vạch cam. Đo hộp giới hạn: họa tiết giao với khung ảnh 24.640 px² (trái) và 22.720 px² (phải); mức này tồn tại ở 768, 1024 và 1440 px. Brief yêu cầu "không chồng lấn ngoài ý muốn" và tài liệu bàn giao nêu "không đè lấn nhau".
+- Đề xuất sửa: dời vòng cung ra khỏi chữ viết tay, hoặc ngắt nét khi gặp chữ; xóa các mảnh ở đỉnh khung; nếu cố ý cho họa tiết chạm khung thì ghi rõ trong thiết kế.
+
+**S10. Ảnh thú cưng có khung và viền bị "nướng" sẵn vào ảnh, để lộ dải sáng và vạch ở đáy (ưu tiên Trung bình)**
+- Bằng chứng: ba tệp `pet-left.png`, `pet-center.png`, `pet-right.png` hoàn toàn đặc (kênh trong suốt 255), có viền kem nhạt hình vòm và vạch trắng/xám ở đáy trong chính ảnh (ảnh 08 nền hồng để nổi viền). Trên trang, CSS lại bo vòm một lần nữa: thấy viền vòm kép ở đỉnh và dải sáng, vạch ở đáy ba khung (ảnh 01, 07). Ảnh trông là bản cắt và phóng to từ bản mô phỏng (các tên tệp `ref_*_frame.png`, `*_upscaled.png`, `frame-*-clean.png` trong kho). Ảnh chó mờ, có vài vệt hồng lạ ở phía trên bên phải.
+- Đề xuất sửa: dùng ảnh gốc chưa cắt khung, đưa vào CSS để bo vòm; xuất lại đủ độ phân giải; kiểm tra lại các vệt lạ.
+
+### Nhóm Thấp
+
+**S11.** Bóng đổ của menu mobile đang đóng lọt vào khung nhìn: `styles.css` dòng 587 `box-shadow: -8px 0 30px rgba(0,0,0,0.15)` trên phần tử dịch ra ngoài bằng `translateX(100%)` tạo dải xám ở mép phải (ảnh 02, 04). Đề xuất: chỉ gán bóng khi menu mở.
+
+**S12.** Mô tả ở desktop bị xuống dòng chỉ còn từ "hiểu." (ảnh 01). Đề xuất: nới độ rộng tối đa hoặc dùng cân bằng dòng.
+
+---
 
 ## 3. Những cải tiến nên làm
 
-Chưa có. Cùng lý do ở mục 2.
+| # | Đề xuất | Bằng chứng |
+|---|---|---|
+| N1 | Bỏ bảng "Tiêu chí" tự chấm khỏi mã giao cho Codex, hoặc giữ ở phạm vi demo với nhãn trung thực | `index.html` dòng 281 đến 351 |
+| N2 | **Tối ưu ảnh và phông.** Trang tải khoảng **1,2 MB ảnh PNG** (logo 240 KB hiển thị 53 px; ba ảnh thú cưng 281, 383, 320 KB) và khoảng **0,55 MB phông** (18 tệp từ Google Fonts). Đề xuất: WebP hoặc AVIF, nhiều kích thước, chỉ ảnh giữa tải sớm; logo dạng SVG hoặc PNG nhỏ; tự lưu phông và chỉ tải trọng lượng cần. Lý do: LCP trên điện thoại (mục tiêu 2,5 giây) và tránh gửi địa chỉ khách tới bên thứ ba | `index.html` danh sách yêu cầu mạng; `styles.css` dòng 9 |
+| N3 | Vùng chạm: trên desktop liên kết điều hướng cao 36 px, nút tìm kiếm 40×40, Đăng nhập và Đăng ký cao 42 px; trên mobile nút tìm kiếm 40×40, Đăng nhập và Đăng ký 42 px, nút Đóng menu 40×40. Brief đề xuất khoảng 44×44 px | Đo bằng trình duyệt ở 1440 và 390 px |
+| N4 | Chấm tròn: kích thước 8×8 px (chấm chọn 24×8 px) rất khó chạm; chưa có trạng thái "đang chọn" cho trình đọc màn hình (`aria-pressed` hoặc `aria-current`); nhóm chưa có vai trò. Nếu giữ thao tác này, mở rộng vùng chạm hoặc cho bấm vào ảnh bên | `index.html` dòng 236 đến 240 |
+| N5 | Ngữ nghĩa: `header role="banner"` nằm trong `main`; dropdown dùng `role="menu"` mà không có điều khiển bằng phím mũi tên; mục tiêu của 10 liên kết neo không tồn tại (`#top`, `#dich-vu`, `#form-dat-lich`, ...). Với demo là chấp nhận được, nhưng cần tránh mang sang mã chính thức | quét liên kết neo |
+| N6 | Đừng sao chép nguyên CSS demo sang mã chính thức: có 29 chỗ dùng `.mode-mobile` lặp lại để giả lập khung điện thoại, 70 khai báo `!important`, và mã chết của tính năng mèo đã hoãn (`hero-cat-stage`, `cat-mascot-render`, `cat-flow-pills`, `btn-flow-pill`, `show-cat`, ...) | `styles.css` |
+| N7 | Nhãn "2 đang xử lý" trong dropdown không thuộc sáu trạng thái đã chốt; tài liệu bàn giao dòng 31 ghi "[Chờ nhân viên xác nhận]". Đề xuất dùng đúng "Chờ nhân viên xác nhận" | `index.html` dòng 118 |
+| N8 | Kho có nhiều tệp ngoài phạm vi V1 trong `assets/`: ảnh mèo, chó dạng JPG, ảnh tham chiếu và ảnh chụp màn hình (hơn 5 MB). Cần phân loại tệp nào đi vào mã sản xuất, và xác nhận quyền sử dụng (mục 5) | danh sách tệp commit `74e266e` |
+| N9 | Giao diện dành cho nhân viên hay chữ ký của bên khác trong demo (thanh điều khiển tím, bảng tiêu chí) cần có chú thích "chỉ để xem thử, không đưa vào bản chính thức" | `index.html` dòng 15 đến 49 |
+
+---
 
 ## 4. Những tính năng chuyển sang giai đoạn sau
 
-Theo quyết định của chủ dự án (14/10), các mục sau **không tính là lỗi của V1**:
+Theo quyết định của chủ dự án, **không tính là lỗi V1**:
 
-- **Mèo chuyển đổi ba tư thế giữa các trang** (animation và logic chuyển tư thế): tạm hoãn sang giai đoạn phát triển sau; ghi ở mục 7.1 của [tài liệu định hướng sản phẩm](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/dinh-huong-san-pham.md). **Thiếu animation ba tư thế không phải lỗi.**
-- Các tài nguyên SVG phải được **giữ lại** (chưa kiểm tra được vì chưa có tệp). Nếu V1 dùng hình mèo thì chỉ một phiên bản tĩnh.
-- Các màn hình ngoài Hero/Header (đăng ký, đăng nhập, form đầy đủ, hỗ trợ tài khoản, trang tiếp nhận): theo brief mục 8, chưa thuộc phạm vi V1.
+- **Mèo chuyển đổi ba tư thế giữa các trang.** Ghi ở mục 7.1 của [tài liệu định hướng sản phẩm](dinh-huong-san-pham.md). Tài nguyên SVG được giữ.
+- Các màn hình ngoài Hero/Header (đăng ký, đăng nhập, form đầy đủ, hỗ trợ tài khoản, trang tiếp nhận, các phần dịch vụ và giới thiệu): chưa thuộc phạm vi V1.
+- Hiệu năng chính thức (Core Web Vitals): đo trên bản Codex dựng.
+
+Lưu ý [Đề xuất]: các tệp mèo chưa dùng ở V1 và mã CSS chết của tính năng này nên cách ly khỏi mã sản xuất (N6, N8).
+
+---
 
 ## 5. Những nội dung chưa thể xác minh
 
-Tất cả mục dưới đây đang ở trạng thái **[Chưa xác minh]**. Cột phương pháp mô tả cách Claude sẽ kiểm tra khi có bằng chứng.
-
-### A. Nghiệp vụ
-
-| # | Yêu cầu | Phương pháp kiểm tra khi có V1 |
+| # | Nội dung | Lý do và cách xác minh |
 |---|---|---|
-| A1 | Nút chính ghi đúng "Gửi yêu cầu đặt lịch" | Tìm chữ trong `demo/index.html`; chụp màn hình |
-| A2 | Gửi form không đồng nghĩa lịch hẹn đã xác nhận; có nói rõ nhân viên sẽ gọi xác nhận; không có "đặt lịch thành công", "đã có lịch", "đặt ngay" | Tìm các cụm trên; đọc toàn bộ câu chữ hiển thị |
-| A3 | Không bắt khách đăng nhập mới được gửi yêu cầu | Kiểm tra nút chính có dẫn tới đăng nhập hay không; đọc câu chữ |
-| A4 | Không có nội dung chưa được chủ dự án xác nhận (24/7, cấp cứu, giá, số chuồng, năm kinh nghiệm, tên bác sĩ, giải thưởng, khuyến mãi, địa chỉ, số điện thoại, giờ làm việc nếu chưa cung cấp) | Quét toàn bộ chữ trong HTML; đối chiếu với danh sách đã xác nhận |
-| A5 | Header đúng hai trạng thái: chưa đăng nhập (Đăng nhập, Đăng ký) và đã đăng nhập (tên khách, "Yêu cầu của tôi") | Kiểm tra từng trạng thái; kiểm tra cách chuyển đổi trong demo |
-| A6 | Không nhắc OTP hay "số này đã có tài khoản" | Tìm chữ trong HTML |
-| A7 | Dữ liệu trong demo là dữ liệu giả; không có dữ liệu, ảnh khách thật | Đọc toàn bộ dữ liệu mẫu và tên tệp ảnh |
-| A8 | Thông điệp "Chờ nhân viên xác nhận" ở nơi liên quan (nếu có trong V1) | Tìm chữ |
-
-### B. Giao diện
-
-| # | Yêu cầu | Phương pháp kiểm tra khi có V1 |
-|---|---|---|
-| B1 | Đúng hướng Minimal Creative, nền kem, màu thương hiệu | So với phương án D trong `thiet-ke-hero-phuong-an-d.md` và ảnh chụp |
-| B2 | Giữ đúng logo chính thức, không méo, không đổi màu, đúng vùng an toàn | So tệp logo trong demo với logo chủ dự án cung cấp |
-| B3 | Bố cục gọn, dễ đọc, không chồng lấn ngoài ý muốn | Chụp màn hình ở **1440 px** và **390 px**; kiểm tra các điểm ngắt trung gian (ví dụ 768 px) |
-| B4 | CTA chính nổi bật, CTA phụ không cạnh tranh | Đánh giá thứ bậc thị giác trên ảnh chụp |
-| B5 | Trạng thái hover, focus, active, vô hiệu của nút và liên kết | Mở bằng trình duyệt tự động, kích hoạt từng trạng thái, chụp ảnh |
-| B6 | Menu mobile: mở, đóng, điều khiển bằng bàn phím, đóng bằng phím thoát, trả focus | Thử trong trình duyệt ở 390 px |
-| B7 | Tương phản chữ tối thiểu 4,5:1 (chữ thường) và 3:1 (chữ lớn), đặc biệt cam và xanh ngọc trên kem | Tính tỷ lệ từ mã màu thực tế trong CSS |
-| B8 | Vùng chạm khoảng 44 × 44 px; điều hướng bàn phím; focus nhìn thấy; tôn trọng giảm chuyển động | Đo kích thước trong trình duyệt; thử bàn phím; kiểm tra truy vấn giảm chuyển động trong CSS |
-| B9 | Chữ có dấu tiếng Việt hiển thị đúng; phông hỗ trợ đầy đủ | Chụp và đọc từng dấu |
-| B10 | Hình mèo (nếu có) chỉ tĩnh, không chồng lấn, mang tính trang trí | Kiểm tra mã và ảnh chụp |
-
-### C. Kỹ thuật và bàn giao
-
-| # | Yêu cầu | Phương pháp kiểm tra khi có V1 |
-|---|---|---|
-| C1 | Mọi tài nguyên được tham chiếu đều tồn tại và đường dẫn đúng | Quét `src` và `href` trong HTML và CSS; kiểm tra tệp; không có tài nguyên mồ côi hoặc liên kết gãy |
-| C2 | Không nhúng khóa, token, dữ liệu thật, hay gọi dịch vụ ngoài | Tìm chuỗi nghi ngờ; xem yêu cầu mạng của trang |
-| C3 | Phân biệt bản demo với mã nguồn triển khai chính thức | Đọc tài liệu bàn giao; kiểm tra có ghi rõ "mã demo là tham chiếu" |
-| C4 | Design token: màu, kiểu chữ, khoảng cách, bo góc, bóng được đặt tên, có giá trị, có vai trò | Đọc tài liệu bàn giao và CSS; đối chiếu hai bên có khớp nhau không |
-| C5 | Hướng dẫn bàn giao cho Codex đủ: cấu trúc, trạng thái, điểm ngắt, tài nguyên, tiêu chí | Đọc `docs/ban-giao-hero-header-antigravity.md` theo mục 6 của brief |
-| C6 | Danh sách SVG đã tạo được giữ lại (gồm các tệp mèo ba tư thế) | So danh sách trong tài liệu với tệp thực tế |
-| C7 | Hiệu năng của ảnh Hero: kích thước tệp hợp lý, chữ hiển thị trước ảnh | Đo kích thước tệp; ghi chú **hiệu năng chính thức chỉ đo trên bản Codex dựng**, không đo trên demo |
-| C8 | Không có lỗi trong bảng điều khiển của trình duyệt | Mở trang, ghi lại lỗi |
-| C9 | Đối chiếu tài liệu: bản demo, tài liệu bàn giao và `thiet-ke-hero-phuong-an-d.md` khớp nhau (tên phương án, màu, thành phần) | Đọc ba nguồn và đối chiếu |
-
-**Các điểm ngoài khả năng kiểm tra của Claude kể cả khi có V1** [Đề xuất]: hiệu năng đo thật (Core Web Vitals) và chạy trên thiết bị thật cấu hình thấp; cần Codex đo trên bản triển khai.
+| X1 | **Nguồn gốc và bản quyền ba ảnh thú cưng và các ảnh JPG, PNG khác** | Tài liệu không ghi nguồn, tác giả, giấy phép. Hình thức ảnh gợi ý có phóng to và có vệt lạ (S10), nhưng Claude **không kết luận** là ảnh tạo bằng AI hay ảnh kho. **Chủ dự án hoặc Antigravity cần cung cấp nguồn và giấy phép trước khi đưa lên bản công khai.** Nếu là ảnh minh họa, không được mô tả là thú cưng của bệnh viện (S7) |
+| X2 | Logo gốc, vùng an toàn, kích thước tối thiểu | Không có hướng dẫn nhận diện gốc; chỉ so thị giác. Bản `logo-le-son.png` do Antigravity cắt nền; chủ dự án xác nhận chấp nhận bản này |
+| X3 | Mã màu cụ thể và vai trò từng màu đã được chủ dự án duyệt chưa | Tài liệu bàn giao ghi duyệt nhưng trạng thái duyệt đã bị bác bỏ (S1) |
+| X4 | LCP, Core Web Vitals, hiệu năng thật | Chưa đo trên bản Codex dựng; mục N2 là rủi ro dự báo từ kích thước tệp |
+| X5 | Hiển thị trên Safari, Firefox, iOS, Android thật; trình đọc màn hình | Chưa thử (mục 0) |
+| X6 | Chữ chính thức của tiêu đề, mô tả, ghi chú | Đã đối chiếu với brief về nghiệp vụ (Đ1 đến Đ3) nhưng chưa có xác nhận chủ dự án về từng câu (S1, S7) |
+| X7 | Bản chạy tại `localhost:3030` có khác mã trên nhánh không | Claude không truy cập được máy đó |
+| X8 | Điểm "Mobile 390 px" của khung giả lập trong demo | Khung mô phỏng điện thoại dùng quy tắc `.mode-mobile` riêng, còn thiết bị thật dùng truy vấn theo chiều rộng. Claude kiểm bằng **cửa sổ thật 390 px** (chế độ "Toàn màn hình") và đại diện được; khung giả lập không dùng để kết luận |
 
 ---
 
 ## 6. Kết luận
 
-**Chưa đạt, ở nghĩa chưa đủ bằng chứng để phê duyệt.** Cần phân biệt rõ:
+**Đạt có điều kiện.**
 
-- Đây **không phải** kết luận rằng V1 có lỗi giao diện hay nghiệp vụ. Claude **chưa thấy** V1 nên không phát hiện lỗi nào.
-- Đây **cũng không phải** kết luận V1 đạt. Với ba mức Đạt, Đạt có điều kiện, Chưa đạt, mức duy nhất phù hợp khi chưa có bằng chứng là **Chưa đạt (thiếu bằng chứng)**.
-- Chủ dự án **chưa nên phê duyệt** V1 dựa trên báo cáo này, vì báo cáo này không xác nhận gì về V1.
+**Lý do.** Phần nghiệp vụ cốt lõi và định hướng Minimal Creative được xác minh đạt: nút chính đúng chữ, có dòng nói nhân viên xác nhận, không bắt đăng nhập, không có chữ cam kết sai, header có hai trạng thái, logo đúng, bố cục gọn ở 1440 và 390 px không tràn ngang và không chồng chữ lên ảnh, tương phản chữ chính tốt, giảm chuyển động hoạt động, mèo ba tư thế đã hoãn đúng quyết định.
 
-**Quyết định phê duyệt thuộc chủ dự án.** Claude không phê duyệt, không sửa giao diện, không merge vào main.
+**Điều kiện** (sửa và báo lại, hoặc chủ dự án quyết định bằng văn bản chấp nhận rủi ro từng mục) trước khi chủ dự án duyệt và Codex triển khai chính thức:
+1. **S1:** sửa trạng thái "đã phê duyệt" và nhãn tự chấm "Claude soạn, ĐẠT 100%".
+2. **S2:** sửa bàn phím và trợ năng của menu, dropdown (kể cả sửa lời hứa "hỗ trợ ESC" trong tài liệu).
+3. **S3:** ẩn chấm tròn trên desktop.
+4. **S4:** sửa header đã đăng nhập trên mobile 390 px.
+5. **S5, S6:** sửa tương phản chữ trấn an (dưới 4,5:1) và viền focus (2,11:1).
+6. **S7:** gỡ hoặc xác nhận nội dung ngoài phạm vi; sửa văn bản thay thế.
+7. **S8:** làm thông điệp "không cần tài khoản" hiện ở giao diện chính.
+8. **S9, S10:** sửa họa tiết chồng chữ và viền nướng sẵn trong ảnh.
+9. **X1:** cung cấp nguồn và giấy phép ảnh (không chặn việc duyệt hướng thiết kế, nhưng chặn việc công khai).
+10. Sửa các lỗi tài liệu bàn giao ở mục 7.
 
-## 7. Cần gì để hoàn tất rà soát
+Lỗi S11, S12 và các điểm ở mục 3 có thể sửa trong lúc Codex triển khai.
 
-Chọn một cách để đưa V1 vào nơi Claude đọc được:
+**Quyết định phê duyệt thuộc chủ dự án.** Báo cáo này không phê duyệt V1 và không thay thế quyết định của chủ dự án.
 
-1. **Đưa tệp lên nhánh** `claude/optimistic-mccarthy-d1d15i` hoặc nhánh khác trong kho: `demo/` (gồm `index.html`, CSS, JS, ảnh, logo, SVG), `docs/ban-giao-hero-header-antigravity.md`, `thiet-ke-hero-phuong-an-d.md`. Claude sẽ mở bằng trình duyệt tự động ở 1440 px và 390 px. Tệp ở máy chủ cục bộ không tới được Claude.
-2. **Đính kèm tệp** trực tiếp vào chat nếu số lượng nhỏ.
-3. Nếu chỉ gửi được ảnh chụp: gửi ảnh ở **1440 px** và **390 px**, kèm ảnh các trạng thái hover, focus, active, menu mobile và mã nguồn HTML/CSS. Kiểm tra bằng ảnh sẽ **không thay thế** kiểm tra mã (tài nguyên, token, tương phản tính từ mã màu).
+---
 
-Khi có bằng chứng, Claude cập nhật báo cáo này: điền mục 1 đến 3, đổi mục 5 từ "Chưa xác minh" sang kết quả cụ thể kèm bằng chứng, và đưa ra kết luận Đạt, Đạt có điều kiện hoặc Chưa đạt dựa trên lỗi thực tế.
+## 7. Lỗi tài liệu và bàn giao (cho Antigravity và Codex)
+
+| # | Lỗi | Bằng chứng | Đề xuất sửa |
+|---|---|---|---|
+| T1 | Tên nhánh sai | Tài liệu bàn giao dòng 6 và dòng 140 ghi nhánh `claude/optimistic-mccarthy-d1d15i` ("✅ Đạt, không merge main"); bản làm việc thật ở `antigravity/hero-v1`. `thiet-ke-hero-phuong-an-d.md` ghi đúng nhánh thật, hai tài liệu mâu thuẫn nhau | Thống nhất tên nhánh; bỏ dòng tự chấm |
+| T2 | 3 liên kết SVG hỏng | `../assets/cat-silhouette.svg`, `../assets/cat-pose-services.svg`, `../assets/cat-pose-booking.svg` trong cả hai tài liệu; ba tệp này nằm ở `demo/assets/`, không ở `assets/` | Sửa đường dẫn hoặc chuyển tệp; ghi vị trí duy nhất |
+| T3 | Đường dẫn tài nguyên trong sơ đồ cấu trúc cho Codex | Mục 3.1 ghi `assets/pet-left.png`, `pet-center.png`, `pet-right.png`, `logo-le-son.png`; tệp thật ở `demo/assets/` | Ghi đúng đường dẫn nguồn |
+| T4 | Token trong tài liệu khác CSS thật | CSS có thêm `--color-brand-purple-muted`, `--color-brand-orange-light` mà tài liệu không liệt kê; tài liệu ghi `text-subtle` "4.5:1" nhưng đo 4,47:1 (S5) | Liệt kê token đúng và số liệu đo |
+| T5 | Bảng nghiệm thu tự chấm "Đạt" cho các mục chưa kiểm tra, có mục sai | Bảng mục 4 ("Bảo mật & Dữ liệu", "Mobile 390px", "Nhánh Git"...); xem S1, S4 | Chuyển thành "Antigravity tự đánh giá", bỏ cột "Đạt" cho đến khi rà soát xong |
+| T6 | Thiếu thông tin cho Codex | Chưa có: danh sách trạng thái (hover, focus, active, vô hiệu) của từng thành phần; điểm ngắt (CSS thật dùng 992, 680 và 600 px); đặc tả chuyển cảnh và thời lượng; ảnh gốc chưa cắt khung | Bổ sung bảng trạng thái, điểm ngắt, ảnh nguồn |
+| T7 | Phụ thuộc phông ngoài | `styles.css` dòng 9 dùng `@import` tới Google Fonts, chặn kết xuất và gửi yêu cầu cho bên thứ ba | Hướng dẫn Codex tự lưu phông (Next.js hỗ trợ) |
+| T8 | Nhánh Antigravity dựng từ commit `2d370f7`, **trước** quyết định hoãn mèo (`bfa9130`) và báo cáo này; trạng thái các tài liệu `docs/` trên nhánh đó đã cũ so với nhánh Claude | `git diff` hai nhánh: 8 tệp docs khác nhau | Khi hợp nhất, giữ phiên bản mới của `docs/dinh-huong-san-pham.md`, `docs/ke-hoach-phien-ban-dau.md`, `docs/antigravity-brief-hero.md`, `docs/rasoat-...` và `docs/tom-tat-...`; không ghi đè bằng bản cũ |
+
+---
+
+## 8. Bằng chứng kèm theo
+
+Ảnh trong [`ra-soat-hero-v1-bang-chung/`](ra-soat-hero-v1-bang-chung/):
+- `01-desktop-1440-khach-vang-lai.png`: desktop 1440 px, khách vãng lai.
+- `02-mobile-390-man-hinh-dau.png`: mobile 390 px, màn hình đầu (cửa sổ thật 390 px).
+- `03-desktop-sau-khi-bam-cham-tron.png`: desktop sau khi bấm chấm tròn (S3).
+- `04-mobile-390-da-dang-nhap-header-vo.png`: header đã đăng nhập (S4).
+- `05-mobile-390-menu-drawer.png`: menu mobile (S8).
+- `06-…`, `07-…`: phóng to họa tiết (S9).
+- `08-anh-pet-center-goc-nen-hong.png`: ảnh gốc trên nền hồng để lộ viền nướng sẵn (S10).
+- `09-logo-goc-va-logo-nen-trong.png`: hai tệp logo (Đ7).
+- `10-focus-ban-phim-nut-chinh.png`: viền focus (Đ10, S6).
