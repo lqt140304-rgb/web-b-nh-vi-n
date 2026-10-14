@@ -2,6 +2,8 @@
 
 **Ngày:** 14/10/2026 · **Người rà soát:** Claude · **Đối tượng:** Lê Sơn Hero V1 (Hero/Header, Phương án D, Minimal Creative của Antigravity) · **Báo cáo này không phê duyệt thay chủ dự án, không sửa giao diện, không merge vào main.**
 
+**Quyết định của chủ dự án (14/10/2026):** yêu cầu Antigravity sửa các lỗi. Danh sách việc sửa, mặc định cho các câu hỏi nội dung và điều kiện "đạt khi" nằm ở [`yeu-cau-sua-hero-v1-antigravity.md`](yeu-cau-sua-hero-v1-antigravity.md). Claude sẽ rà soát lại sau khi có commit mới.
+
 **Bản đã rà soát:** nhánh `antigravity/hero-v1`, commit `74e266e4ef725d501bd5dcd2afc237895bbdc140` (13:09 ngày 14/10/2026). Claude lấy bản này về thư mục tạm chỉ để đọc, **không ghi gì vào nhánh của Antigravity**.
 
 **Quy ước:** **[Đã xác minh]** có bằng chứng Claude tự đo hoặc đọc · **[Chưa xác minh]** thiếu bằng chứng, không coi là đạt hay không đạt · **[Đề xuất]** của Claude. Mức ưu tiên: **Cao** (sửa trước khi chủ dự án duyệt), **Trung bình** (sửa trước khi Codex triển khai), **Thấp** (nên sửa).
