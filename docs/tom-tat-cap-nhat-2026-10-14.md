@@ -53,6 +53,11 @@ Chỉ những điều chủ dự án mới quyết định được. Chi tiết 
 
 Brief mới: `antigravity-brief-hero.md` (thay `gemini-brief-hero.md`). Tiêu chí nghiệm thu Hero/Header nằm ở mục 7 của brief.
 
+## 3d. Phạm vi thiết kế Hero/Header (14/10)
+
+- **Hoãn** tính năng mèo chuyển đổi ba tư thế giữa các trang sang giai đoạn phát triển sau; ghi vào `dinh-huong-san-pham.md` mục 7. Giữ toàn bộ tài nguyên SVG; nếu cần hình mèo chỉ dùng bản tĩnh.
+- Ưu tiên hoàn thiện hướng **Minimal Creative** đã chọn: bố cục gọn, không chồng lấn, responsive, trải nghiệm. Tiêu chí nghiệm thu cập nhật ở mục 7 của brief Antigravity.
+
 ## 4. Việc Codex làm tiếp khi được duyệt (không cần thêm vòng duyệt)
 
 - Chạy Next.js trên Vercel Hobby trong phát triển; kiểm thử chuyển IP khách trên Vercel; đánh giá điều khoản và gói cho vận hành thương mại khi đến cổng.

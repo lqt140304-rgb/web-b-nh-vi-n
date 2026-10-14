@@ -1,4 +1,4 @@
-# Kế hoạch đề xuất: giai đoạn 1 website Bệnh viện thú y Lê Sơn (bản 5)
+# Kế hoạch đề xuất: giai đoạn 1 website Bệnh viện thú y Lê Sơn (bản 6)
 
 **Ngày:** 14/10/2026 · **Người soạn:** Claude, đã chỉnh theo phản biện của Codex và rà soát của chủ dự án · **Trạng thái:** **bản nháp đề xuất**. Chủ dự án đã chấp nhận sáu nội dung chỉnh sửa của bản 2 nhưng **chưa phê duyệt toàn bộ kế hoạch để bắt đầu lập trình**. Chưa có mã, chưa mua dịch vụ nào, **chưa merge vào main**, không bắt đầu triển khai chính thức khi chủ dự án chưa phê duyệt.
 
@@ -7,6 +7,8 @@
 **Quy ước nhãn:** **[Đã chốt]** chủ dự án quyết định · **[Đề xuất]** của Claude hoặc Codex, cần phản biện · **[Giả định]** chưa xác nhận · **[Cần chốt]** quyết định còn thiếu · **[Chờ kiểm chứng]** chưa có bằng chứng.
 
 Nguồn chi tiết: [tài liệu rà soát](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/rasoat-tai-khoan-va-form-dat-lich.md) (số mục dẫn bên dưới là mục của tài liệu đó) và [brief Hero/Header cho Antigravity](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/antigravity-brief-hero.md).
+
+**Thay đổi bản 6 (quyết định phạm vi thiết kế của chủ dự án, 14/10):** tạm hoãn tính năng **mèo chuyển đổi ba tư thế giữa các trang** sang giai đoạn phát triển sau; không triển khai animation hay logic chuyển tư thế trong Hero/Header phiên bản đầu; giữ lại toàn bộ tài nguyên SVG đã tạo; nếu cần hình mèo thì chỉ dùng phiên bản tĩnh; ưu tiên hoàn thiện giao diện **Minimal Creative** đã chọn (bố cục gọn, không chồng lấn, responsive, trải nghiệm); tính năng này không được làm chậm Hero/Header. Ghi vào danh sách phát triển sau của tài liệu định hướng sản phẩm.
 
 **Thay đổi bản 5 (quyết định phân công của chủ dự án, 14/10):** **Google Antigravity thay Gemini** đảm nhiệm thiết kế UI/UX và dựng giao diện trực quan (responsive, hiệu ứng, bản demo với dữ liệu giả). Claude: phân tích nghiệp vụ, tài liệu, tiêu chí nghiệm thu, rà soát. Codex: lập trình chính thức, tích hợp Supabase, kiểm thử, triển khai Vercel. ChatGPT: hỗ trợ điều phối và đánh giá phương án. Antigravity dùng logo Lê Sơn do chủ dự án cung cấp và kế thừa nhận diện tím, kem, cam, xanh ngọc; ưu tiên Hero/Header; chủ dự án duyệt giao diện trước khi Codex triển khai chính thức. Các quyết định nghiệp vụ đã chốt không đổi.
 
@@ -22,7 +24,7 @@ Nguồn chi tiết: [tài liệu rà soát](https://github.com/lqt140304-rgb/web
 
 **[Đã chốt] Giai đoạn 1 gồm:** website giới thiệu bệnh viện và dịch vụ; tài khoản khách hàng; hồ sơ thú cưng; form yêu cầu đặt lịch; trang quản trị cho nhân viên xử lý yêu cầu; email báo nhân viên.
 
-**[Đã chốt] Chưa triển khai trong giai đoạn 1** (không phải bị loại bỏ vĩnh viễn): nhập hoặc đồng bộ dữ liệu GPet; bệnh án, nội trú, chăm sóc, điều trị, video, quản lý công việc, kho, bán hàng, thanh toán, hóa đơn điện tử và các phân hệ khác; trạng thái "đã đến/đã khám". GPet vẫn là hệ thống vận hành chính trong giai đoạn 1. Yêu cầu của hệ thống tổng thể được lưu trong [định hướng sản phẩm](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/dinh-huong-san-pham.md).
+**[Đã chốt] Chưa triển khai trong giai đoạn 1** (không phải bị loại bỏ vĩnh viễn): nhập hoặc đồng bộ dữ liệu GPet; bệnh án, nội trú, chăm sóc, điều trị, video, quản lý công việc, kho, bán hàng, thanh toán, hóa đơn điện tử và các phân hệ khác; trạng thái "đã đến/đã khám"; tính năng mèo chuyển đổi ba tư thế giữa các trang (giao diện, tạm hoãn ngày 14/10, xem danh sách phát triển sau trong tài liệu định hướng sản phẩm). GPet vẫn là hệ thống vận hành chính trong giai đoạn 1. Yêu cầu của hệ thống tổng thể được lưu trong [định hướng sản phẩm](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/dinh-huong-san-pham.md).
 
 **[Đã chốt] Quy tắc đã khóa:**
 - **Môi trường phát triển:** Vercel Hobby + Supabase Free, ưu tiên Next.js; chưa mua Vercel Pro hay nâng Supabase; dữ liệu giả. **Môi trường vận hành thương mại** tách riêng, chọn gói phù hợp điều khoản trước khi hoạt động (mục 6). Không tự nâng cấp hay phát sinh chi phí khi chưa được chủ dự án đồng ý. Không OTP cho khách.
@@ -42,7 +44,7 @@ Nguồn chi tiết: [tài liệu rà soát](https://github.com/lqt140304-rgb/web
 | Bên | Việc chính |
 |---|---|
 | Chủ dự án | Quyết định nghiệp vụ; cung cấp logo và nội dung chính thức; **duyệt giao diện trước khi Codex triển khai chính thức**; duyệt thiết kế và kế hoạch; chạy công cụ cần quyền bí mật trên dự án thử |
-| **Antigravity** (Google Antigravity, thay Gemini) | Thiết kế UI/UX, responsive, hiệu ứng, bản demo giao diện **với dữ liệu giả**. Dùng logo Lê Sơn do chủ dự án cung cấp; kế thừa nhận diện tím, kem, cam, xanh ngọc. Ưu tiên Hero/Header (có [brief](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/antigravity-brief-hero.md)); chưa có bản được duyệt. Không tích hợp dữ liệu khách thật |
+| **Antigravity** (Google Antigravity, thay Gemini) | Thiết kế UI/UX, responsive, hiệu ứng, bản demo giao diện **với dữ liệu giả**. Dùng logo Lê Sơn do chủ dự án cung cấp; kế thừa nhận diện tím, kem, cam, xanh ngọc. Ưu tiên Hero/Header (có [brief](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/claude/optimistic-mccarthy-d1d15i/docs/antigravity-brief-hero.md)); hướng đã chọn **Minimal Creative**, bản hoàn thiện chưa được duyệt; ưu tiên bố cục gọn, không chồng lấn, responsive, trải nghiệm; **không** triển khai mèo ba tư thế (hoãn), nếu cần hình mèo chỉ dùng bản tĩnh. Không tích hợp dữ liệu khách thật |
 | Claude | Phân tích nghiệp vụ, tài liệu, **tiêu chí nghiệm thu**, rà soát (nghiệp vụ, mô hình dữ liệu, phân quyền, chất lượng mã); soạn kịch bản kiểm thử |
 | Codex | Lập trình chính thức, tích hợp Supabase, kiểm thử, triển khai Vercel; kiểm chứng kỹ thuật trên môi trường thử |
 | ChatGPT | Hỗ trợ điều phối và đánh giá phương án |

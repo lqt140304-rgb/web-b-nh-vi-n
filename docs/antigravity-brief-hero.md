@@ -2,6 +2,12 @@
 
 **Ngày:** 14/10/2026 · **Người soạn:** Claude · **Trạng thái:** brief khởi động, chưa phải thiết kế được duyệt. Bản này thay brief trước dành cho Gemini, sau quyết định của chủ dự án giao thiết kế UI/UX cho **Google Antigravity**.
 
+**Cập nhật phạm vi (14/10, chủ dự án) [Đã chốt]:**
+- **Tạm hoãn** tính năng mèo chuyển đổi **ba tư thế** giữa các trang sang giai đoạn phát triển sau. **Không triển khai animation hay logic chuyển đổi tư thế mèo** trong Hero/Header phiên bản đầu.
+- **Giữ lại toàn bộ tài nguyên SVG đã tạo** để dùng trong tương lai: không xóa, không gộp mất bản gốc. Antigravity bàn giao **danh sách các tệp SVG đã tạo** (tên tệp, nội dung, nơi lưu) cùng bản thiết kế; Claude chưa nhận các tệp này.
+- Nếu Hero hiện tại cần hình mèo, **chỉ dùng một phiên bản tĩnh**, không chuyển động, không đổi tư thế.
+- **Ưu tiên hoàn thiện giao diện Minimal Creative đã chọn:** bố cục gọn gàng, **không chồng lấn**, responsive, trải nghiệm người dùng. Tính năng mèo **không được làm chậm** tiến độ hoàn thiện Hero/Header.
+
 **Phạm vi:** chỉ phần **Hero và Header** (thanh đầu trang chứa Hero). Chưa thiết kế các phần khác, chưa tích hợp dịch vụ nào. **Chỉ dựng bản demo giao diện với dữ liệu giả.** Codex lập trình chính thức **sau khi chủ dự án duyệt giao diện**.
 
 **Quy ước nhãn** (xin giữ khi trả lời): **[Đã chốt]** chủ dự án quyết định · **[Giả định]** chưa xác nhận · **[Đề xuất]** của Antigravity hoặc Claude, cần phản biện · **[Còn thiếu]** cần nội dung hoặc quyết định. Đề xuất của riêng bạn không phải quyết định chung.
@@ -68,7 +74,7 @@ Gợi ý khung quy trình ba bước dưới nút chính [Đề xuất, khớp l
 ## 6. Nên trả về những gì
 
 Xin trả về **một tệp `.md`** mô tả thiết kế, kèm **bản demo giao diện** (dữ liệu giả) và hình minh họa nếu công cụ tạo được. Nội dung:
-1. **Hai đến ba hướng Hero/Header** khác nhau về bố cục hoặc cảm xúc, mỗi hướng có lý do chọn và đánh đổi. Nêu hướng bạn nghiêng về và vì sao, nhưng để chủ dự án chọn.
+1. **Hướng đã chọn: Minimal Creative [Đã chốt].** Hoàn thiện hướng này; không cần đề xuất thêm hướng khác trừ khi chủ dự án yêu cầu. Nêu rõ các lựa chọn nhỏ còn lại (nếu có) và lý do.
 2. Bố cục **mobile, máy tính bảng và máy tính** của từng hướng: thứ tự từ trên xuống, kích thước vùng chạm, vị trí nút, các **điểm ngắt responsive**.
 3. **Header ở hai trạng thái** (mục 3, điểm 7) và cách xử lý trên màn hình nhỏ (ví dụ menu thu gọn).
 4. Cách xử lý **khi chưa có ảnh**: Hero vẫn đẹp và rõ chỉ bằng logo, chữ, màu, hình khối.
@@ -90,6 +96,13 @@ Dùng để Claude rà soát và Codex kiểm tra khi triển khai chính thức
 - Khách vãng lai thấy rõ có thể gửi yêu cầu **không cần tài khoản**.
 - Header đúng hai trạng thái chưa đăng nhập và đã đăng nhập.
 - Không có dữ liệu, tên hay ảnh khách thật; mọi dữ liệu hiển thị trong demo là giả.
+
+**Phạm vi mèo (cập nhật 14/10)**
+- Không có animation hay logic chuyển đổi tư thế mèo trong Hero/Header; nếu có hình mèo thì chỉ **một phiên bản tĩnh**.
+- Hình mèo (nếu có) **không chồng lấn** lên chữ, nút, logo hay nhau ở mọi chiều rộng đại diện, và không che nút chính.
+- Hình mèo mang tính trang trí: có thuộc tính bỏ qua với trình đọc màn hình (hoặc văn bản thay thế phù hợp nếu mang thông tin); không phải điều kiện để hiểu nội dung.
+- Hình mèo tĩnh **nhẹ**, không làm chậm hiển thị chữ và nút chính.
+- Toàn bộ tài nguyên SVG đã tạo được **giữ lại** và có danh sách bàn giao; không bị xóa hay làm mất bản gốc.
 
 **Nhận diện**
 - Dùng đúng logo do chủ dự án cung cấp, không méo, không đổi màu, đúng quy tắc vùng an toàn và kích thước tối thiểu đã ghi.
@@ -117,6 +130,7 @@ Dùng để Claude rà soát và Codex kiểm tra khi triển khai chính thức
 
 - Các phần khác của trang (dịch vụ, giới thiệu, form đặt lịch đầy đủ, chân trang).
 - Màn hình đăng ký, đăng nhập, khôi phục mật khẩu, hỗ trợ tài khoản, trang tiếp nhận. Một số quy trình tài khoản **chưa được duyệt**; chưa vẽ.
+- **Tính năng mèo chuyển đổi ba tư thế giữa các trang** (animation và logic chuyển tư thế): tạm hoãn sang giai đoạn phát triển sau; tài nguyên SVG được giữ lại.
 - Tích hợp dữ liệu hay dịch vụ thật; mã chính thức; chọn công nghệ.
 - Mua ảnh, phông chữ hay dịch vụ; quyết định nhận diện cuối cùng.
 

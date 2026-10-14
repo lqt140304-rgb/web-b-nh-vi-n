@@ -105,3 +105,18 @@ Giai đoạn 1 vẫn giữ nguyên các quyết định đã chốt (đặt lị
 - Nền tảng và chi phí cho video, bệnh án, kho, thanh toán.
 - Mức pháp lý và đồng ý liên quan tới video, hồ sơ sức khỏe và dữ liệu nhân viên.
 - Cách xác minh mạnh để liên kết tài khoản web với hồ sơ khách hàng.
+
+---
+
+## 7. Danh sách phát triển sau (giao diện)
+
+Các mục dưới đây **tạm hoãn, chưa triển khai trong giai đoạn 1**; không bị loại bỏ vĩnh viễn.
+
+### 7.1. Mèo chuyển đổi ba tư thế giữa các trang
+
+- **Trạng thái [Đã chốt, chủ dự án 14/10]:** tạm hoãn sang giai đoạn phát triển sau. Không triển khai animation hay logic chuyển đổi tư thế mèo trong Hero/Header phiên bản đầu.
+- **Tài nguyên:** toàn bộ tài nguyên SVG đã tạo được **giữ lại** để dùng trong tương lai. Hình mèo nếu cần trong Hero hiện tại chỉ dùng **phiên bản tĩnh**.
+- **Ưu tiên hiện tại:** hoàn thiện giao diện **Minimal Creative** đã chọn (bố cục gọn, không chồng lấn, responsive, trải nghiệm người dùng). Tính năng này không được làm chậm tiến độ Hero/Header.
+- **Khi xem xét lại [Đề xuất của Claude, chưa duyệt]:** nên sau khi Hero/Header được duyệt và phiên bản đầu ổn định; cần cân nhắc hiệu năng (không ảnh hưởng thời gian hiển thị nội dung chính), tùy chọn giảm chuyển động của người dùng, tiếp cận (hình trang trí, không truyền tải thông tin cần thiết), kiểm thử trên điện thoại cấu hình thấp, và cách giữ trạng thái tư thế khi chuyển giữa các trang (phụ thuộc kiến trúc ứng dụng).
+- **Cần chốt khi đến lúc:** thứ tự ưu tiên so với các hạng mục khác; ba tư thế tương ứng với những trang hay sự kiện nào.
+
