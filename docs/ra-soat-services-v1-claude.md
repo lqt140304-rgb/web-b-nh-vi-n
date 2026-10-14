@@ -115,3 +115,53 @@ Không có mục bắt buộc. Tùy chọn: Safari và iPhone thật, chạy axe
 Không bắt buộc. Tùy chọn sau khi sửa: Safari và iPhone thật.
 
 Ảnh bằng chứng lượt 2: 06 đến 09 trong `ra-soat-services-v1-bang-chung/`.
+
+---
+
+# LƯỢT 3 — Kiểm tra đợt sửa cuối (Services `41995ca`, Hero `c52d475`) và đối chiếu Codex
+
+**Ngày:** 14/10/2026 · **Người rà soát:** Claude (Sonnet) · Không sửa nhánh Antigravity, không duyệt thay chủ dự án.
+
+**Phạm vi đã kiểm:** 9 mục của [yêu cầu sửa đợt cuối](yeu-cau-sua-services-v1-lan-2-antigravity.md) và các mục Codex giao Antigravity ([QA bổ sung của Codex](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/codex/qa-services-v1/docs/qa-services-v1-bo-sung-codex.md)); đo ở 1440, 1280, 1024, 768, 390, 360 px; bàn phím; ba cửa sổ chi tiết; menu điện thoại của Dịch vụ và Hero; chế độ xem thử Mobile của Hero; lỗi JavaScript. **Chưa kiểm:** trình gọi điện trên điện thoại thật, trình đọc màn hình, Safari.
+
+## Kết luận lượt 3: **PASS** cho Services V1 và hai lỗi nhỏ của Hero. Chờ chủ dự án duyệt giao diện.
+
+## A. Đối chiếu 9 mục đợt cuối
+
+| # | Mục | Nhãn | Bằng chứng |
+|---|---|---|---|
+| 1 | Bỏ nút "Tìm hiểu thêm & Chỉ đường" của Cấp cứu, xóa mã Cấp cứu | **PASS** | Không còn nút nào mở cửa sổ ở thẻ Cấp cứu; không còn dữ liệu `capcuu` trong mã; không còn chữ "tức thì", "tất cả các ngày trong tuần" |
+| 2 | Số điện thoại không bị ngắt | **PASS** | "097 355 51 05" nằm trọn một dòng ở 1440, 1280, 1024, 768, 390, 360 px (nút hai dòng: "Gọi cấp cứu 24/24:" rồi số) |
+| 3 | Đường cong cam không chạm chữ H1 | **PASS** | Họa tiết nằm ngoài khung tiêu đề ở 1440, 1280, 1024 (cách ≥ 100 px); ẩn ở ≤ 768. Ảnh 10 |
+| 4 | Sửa 105 thành 101 | **PASS** | Không còn chuỗi "105 Khuất" trong mã và tài liệu |
+| 5 | Bỏ nút Maps/Facebook ở header | **PASS** | Header chỉ còn logo, menu, Đăng nhập/Đăng ký; không tràn; đăng nhập với tên dài vẫn 64 px ở 390 |
+| 6 | Khối liên hệ trong menu điện thoại | **PASS** | Địa chỉ 101…, hotline `tel:`, Chỉ đường, Facebook không kèm `?locale`, `rel="noopener noreferrer"`; Tab quay vòng, Escape trả tiêu điểm. Ảnh 13 |
+| 7 | Bỏ Maps/Facebook trong cửa sổ ba dịch vụ | **PASS** | Cửa sổ Khám, Spa & Grooming, Nội trú chỉ có chữ giữ chỗ và nút "Gửi yêu cầu đặt lịch". Ảnh 12 |
+| 8 | Tài liệu thông tin bệnh viện | **PASS** | Chỉ còn thông tin chủ dự án đã cung cấp; có mục "Thông tin chưa xác nhận — không dùng" nêu rõ thiết bị, camera, giờ làm việc, ảnh Facebook/Maps |
+| 9 | Hero: `inert` khi mở menu; menu trong chế độ xem thử | **PASS** | Mở menu bằng bàn phím: phần Hero và header đều `inert`; ở chế độ Mobile (390px) menu nằm trong khung điện thoại; hộp Tiêu chí của Hero cũng khóa nền và đóng đúng |
+
+Không lỗi JavaScript khi bấm qua các chế độ; thẻ cùng hàng cao bằng nhau; không tràn ngang ở mọi cỡ.
+
+## B. Đối chiếu với Codex (Claude nhận phần bỏ sót)
+
+Codex đã đọc mã và phát hiện hai điều **Claude đã bỏ sót ở lượt 1 và 2**:
+
+| Mục Codex | Claude ghi nhận | Kiểm tra |
+|---|---|---|
+| **P1:** nút "Gọi cấp cứu" bị chặn: mã mở cửa sổ cho mọi `.btn-card-learn` và gọi `preventDefault`, nên bấm không gọi được | **Claude bỏ sót.** Lượt 2 chỉ đo nút "Tìm hiểu thêm", ghi PASS nút gọi vì thấy `href="tel:"`, không bấm thử | **Đã sửa, PASS:** mã chỉ gắn sự kiện cho `.btn-card-learn[data-service]`; Claude phát sự kiện bấm lên nút gọi: **không bị `preventDefault`**, không mở cửa sổ. Trình gọi thực tế trên điện thoại **chưa xác minh** (Codex và Antigravity cũng ghi như vậy) |
+| **P2:** `index.html` chưa có `id="form-dat-lich"`: liên kết đặt lịch trỏ tới chỗ chưa tồn tại | **Claude ghi PASS F4 quá rộng.** Claude đã thấy đích này thiếu từ lúc đo Hero nhưng không đưa vào kết luận | **Chấp nhận hoãn:** tài liệu bàn giao ghi rõ "điểm đến đặt lịch chưa triển khai", form thuộc giai đoạn làm form. Mọi nút đặt lịch dùng cùng một đích `index.html#form-dat-lich` |
+| **P2:** cửa sổ chi tiết dịch vụ chưa khóa nền (`inert`) dù có `aria-modal` | **Claude chưa đo khóa nền** (chỉ đo Tab quay vòng) | **Đã sửa, PASS:** mở cửa sổ thì header và nội dung trang `inert`, đóng thì mở lại; tiêu điểm trả về đúng nút. Trình đọc màn hình thật chưa kiểm |
+
+Bài học ghi vào quy trình: với nút có thể bấm, Claude **bấm thử và xem kết quả**, không chỉ đọc `href`; với cửa sổ, **đo cả khóa nền**.
+
+## C. Ghi nhận, không chặn
+
+- Đích `#form-dat-lich` chưa có (hoãn có ghi nhận).
+- Phông Google tải từ ngoài; ảnh minh họa là ảnh tạm không dùng công khai; liên kết "Giới thiệu", "Liên hệ", menu tài khoản chưa có trang; Safari và điện thoại thật chưa kiểm: đều đã xếp vào mục bỏ qua ở [phân loại lỗi](phan-loai-loi-theo-giai-doan.md).
+- Ý kiến thẩm mỹ: khối "Bạn cần đặt lịch" có khoảng trống thừa ở đáy thẻ (ảnh 10); chữ số điện thoại trên nút Cấp cứu hơi nhỏ so với nút. Không bắt buộc.
+
+## D. NEED CODEX (tùy chọn)
+
+Thử `tel:` trên điện thoại có SIM; trình đọc màn hình (VoiceOver/TalkBack) cho cửa sổ chi tiết và menu; Safari.
+
+Ảnh bằng chứng lượt 3: 10 đến 13.
