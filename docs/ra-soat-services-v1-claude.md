@@ -183,3 +183,24 @@ Bài học ghi vào quy trình: với nút có thể bấm, Claude **bấm thử
 | **Tim ở nhãn đầu trang đập mãi không dừng** (`eyebrowHeartbeat infinite`) trên cả Hero và Dịch vụ | **FIX (Thấp)** | Chuyển động tự chạy quá 5 giây, không có cách dừng (WCAG 2.2.2), dễ gây phân tâm. **Đạt khi:** đập 2–3 lần rồi dừng, hoặc chỉ đập khi rê chuột |
 | Hiệu ứng rê chuột trên điện thoại | **Ghi nhận** | Giả lập không thấy "kẹt" hiệu ứng sau khi chạm; iPhone thật chưa kiểm. Nên bọc các hiệu ứng rê chuột trong `@media (hover: hover)` khi Codex làm thật |
 | Màu cam đậm `#B8530B` của icon Khám không nằm trong bảng màu đã chốt | **Ý kiến** | Chủ dự án quyết định có chấp nhận không |
+
+---
+
+# LƯỢT 5 — Bộ icon đã chốt (Services `f20a7e4`, Hero `a70b7db`)
+
+**Ngày:** 15/10/2026 · Claude (Sonnet). Căn cứ: [chốt icon của Codex](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/codex/review-claude-qa/docs/chot-icon-services-v1.md). **Đã kiểm:** hình, màu, cỡ, nét, tương phản, hiệu ứng, bố cục 1024/390/360, nút gọi và ba cửa sổ, lỗi JS. **Chưa kiểm:** đối chiếu với **ảnh bộ icon chủ dự án chọn** (Claude không có ảnh đó), điện thoại thật.
+
+## Kết luận: **PASS** về hình và chức năng; **1 FIX nhỏ** về hiệu ứng lặp
+
+| Mục chốt | Nhãn | Bằng chứng |
+|---|---|---|
+| Hình đúng bộ chốt: ống nghe, kéo, nhà viền + dấu chân, tim viền + nhịp ECG | **PASS** | Ảnh 15 (phóng to 3×): bốn icon rõ, nét không dính, dấu chân và đường nhịp đọc được |
+| Nền pastel đậm hơn: cam đào, mint, lilac, hồng rose | **PASS** | `#FCDCC7`, `#C8ECEE`, `#E8CEEC`, `#F8C8D2` |
+| Icon tím đậm, nét đồng đều | **PASS** | Cả bốn icon `#421247`, nét 2 px; không còn nét 2,5 của Cấp cứu |
+| Huy hiệu 52 px, icon 26 px, không che chữ | **PASS** | Đo ở 1440, 1024, 390, 360: huy hiệu 52 px, không đè tiêu đề |
+| Tương phản icon trên nền | **PASS** | 10,1 đến 11,8:1 |
+| Không đổi logo, ảnh, bố cục, luồng đã QA | **PASS** | Nút gọi cấp cứu không bị chặn, không mở cửa sổ; Khám, Spa & Grooming, Nội trú mở/đóng đúng, trả tiêu điểm; không lỗi JS; không tràn ngang. Hero dùng chung CSS |
+| "**Không thêm hiệu ứng rung/nhấp nháy lặp**" | **FIX (Thấp)** | Vẫn còn hiệu ứng **lặp vô hạn**: bốn icon khi rê chuột (thở, kẹp, nhà nhún, tim ECG), icon điện thoại **rung** khi rê chuột vào nút Cấp cứu, và **trái tim ở nhãn đầu trang đập liên tục** (Hero và Dịch vụ, đã báo ở lượt 4). **Đạt khi:** mỗi hiệu ứng chạy 1 lần (`animation-iteration-count: 1`) hoặc bỏ; tim đầu trang đập 2–3 lần rồi dừng |
+| Nền Cấp cứu nay là hồng rose, không còn đỏ | **Ý kiến** | Đúng quyết định chủ dự án; chỉ lưu ý nút "Gọi cấp cứu" bên dưới vẫn đỏ đậm nên vẫn nổi bật |
+
+**Cần chủ dự án tự xem:** so ảnh 15 với ảnh bộ icon anh/chị đã chọn (dấu chân, đường nhịp, độ dày nét có đúng ý không). Claude kiểm được kỹ thuật, không kiểm được "giống ý".
