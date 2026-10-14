@@ -28,4 +28,4 @@ Mô tả ảnh "bác sĩ"; nguồn bản quyền ảnh tạm (vẫn ghi "ảnh m
 
 ## 4. Báo cáo lại
 
-Antigravity ghi commit mới và một bảng ngắn: mục 1–9, "đã làm / chưa làm". Không kèm báo cáo dài hay tự đánh giá nhiều vvòng. Claude (Sonnet) kiểm lại đúng các mục này.
+Antigravity ghi commit mới và một bảng ngắn: mục 1–9, "đã làm / chưa làm". Không kèm báo cáo dài hay tự đánh giá nhiều vòng. Claude (Sonnet) kiểm lại đúng các mục này.
