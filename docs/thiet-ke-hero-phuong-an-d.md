@@ -35,16 +35,19 @@ Theo các quyết định đã thống nhất cùng nhóm AI và Chủ dự án:
    - **Hero:** Eyebrow trang trọng `♥ BỆNH VIỆN THÚ Y LÊ SƠN`, tiêu đề chính H1 `Khoảng an toàn nhỏ / cho những người bạn lớn` căn giữa thanh lịch. Dòng mô tả áp dụng `text-wrap: balance` tránh rớt chữ đơn lẻ.
    - **CTA Group:** Nút chính `Gửi yêu cầu đặt lịch →` bo góc êm ái, nút phụ `Xem dịch vụ`.
    - **Cụm chú thích bảo đảm & không cần tài khoản:** Nêu rõ `📞 Nhân viên sẽ liên hệ để xác nhận lịch hẹn.` và `👤 Không cần tài khoản để gửi yêu cầu.` ngay trên màn hình đầu tiên, không bắt buộc người dùng phải mở menu.
-2. **Ba khung ảnh vòm chạm đáy (Three Arched Frames):**
+3. **Ba khung ảnh vòm chạm đáy (Three Arched Frames):**
    - Sử dụng ảnh gốc chất lượng cao, hình chữ nhật chưa cắt khung từ Unsplash, để CSS bo vòm tự nhiên, không có viền kem nướng sẵn hay vệt sáng đáy:
-     - Khung 1 (Trái): Chú mèo mướp vui tươi đeo khăn vàng (`demo/assets/pet-left.png`).
-     - Khung 2 (Giữa - Trọng tâm): Chú chó Golden Retriever ngậm hoa tulip (`demo/assets/pet-center.png`, độ phân giải thật 960×845 px).
-     - Khung 3 (Phải): Bé mèo mướp mắt xanh ngước nhìn (`demo/assets/pet-right.png`).
-   - Họa tiết trang trí: Vòng cung cam mỏng (`#FC9238`) đối xứng hai bên, dấu chân tím nhỏ tinh tế, không cắt ngang chữ hay khung hình.
-3. **Trải nghiệm di động chuẩn Mobile-First (390px & 360px):**
-   - Không ép 3 ảnh nhỏ vào một hàng gây rối mắt. Khung ảnh trung tâm nổi bật, hai ảnh bên thu gọn nhẹ nhàng kèm bộ chuyển đổi chấm tròn tương tác 1 chạm. Trên Desktop, bộ chấm tròn ẩn hoàn toàn.
+     - Khung 1 (Trái): Chú chó Corgi ngước nhìn vui tươi (`demo/assets/pet-left.png`).
+     - Khung 2 (Giữa - Trọng tâm): Chú mèo lông ngắn mắt to ngơ ngác (`demo/assets/pet-center.png`, độ phân giải thật 960×845 px).
+     - Khung 3 (Phải): Bé mèo vằn con mắt tròn ngước nhìn (`demo/assets/pet-right.png`).
+   - *Ghi chú bản quyền ảnh:* Toàn bộ 3 ảnh thú cưng là ảnh minh họa giai đoạn demo UI/UX từ Unsplash, chưa xác nhận bản quyền thương mại chính thức, không dùng cho mục đích xuất bản công khai thương mại. Khi đưa vào vận hành thực tế sẽ thay bằng ảnh chụp thực tế tại Bệnh viện Thú y Lê Sơn hoặc ảnh có bản quyền đã mua.
+   - Họa tiết trang trí: Vòng cung cam mỏng (`#FC9238`) đối xứng hai bên thanh mảnh, sạch sẽ, không chạm hoặc cắt ngang chữ hay khung hình (đã loại bỏ dấu chân tím đứng rời).
+4. **Trải nghiệm di động chuẩn Mobile-First (390px & 360px):**
+   - **Ba ảnh luôn nằm trong một hàng ở mọi kích thước:** Cả ba ảnh nhìn thấy trọn vẹn trong khung nhìn mà không cần cuộn hay chuyển ảnh. Ở 360px và 390px, mỗi ảnh đều có chiều rộng ≥ 90px (360px: 96px - 136px - 96px; 390px: 106px - 148px - 106px), `scrollWidth` bằng chính xác chiều rộng màn hình (không tràn ngang). Khung ảnh trung tâm cao hơn 30–35px, nổi bật hơn nhẹ so với hai bên.
+   - **Xóa bỏ dải chấm tròn:** Theo quyết định của Chủ dự án và form gốc Phương án D, dải chấm tròn và các nút bấm nhỏ dưới ảnh đã được loại bỏ hoàn toàn.
+   - **Chạm đáy bố cục:** Ba khung ảnh vòm chạm sát đáy sàn của Hero section, không để lại khoảng trắng thừa.
    - Chiều cao Header đồng nhất ở cả trạng thái Khách vãng lai và Đã đăng nhập (64px, độ lệch 0px). Tên người dùng dài được ẩn chữ trên mobile để hiển thị avatar gọn gàng, nút bấm luôn đạt tối thiểu 44×44px.
-   - Menu Drawer mở êm ái, bẫy tiêu điểm phím Tab, hỗ trợ đóng bằng phím Escape và hoàn trả tiêu điểm chuẩn WCAG 2.1 AA.
+   - Menu Drawer mở êm ái, ngay khi mở tiêu điểm tự động chuyển vào nút đóng, bẫy tiêu điểm phím Tab/Shift+Tab, hỗ trợ đóng bằng phím Escape và hoàn trả tiêu điểm về nút menu chuẩn WCAG 2.1 AA.
 
 ---
 

@@ -23,14 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const drawerOverlay = document.getElementById('drawerOverlay');
   const btnCloseDrawer = document.getElementById('btnCloseDrawer');
 
+  const siteHeader = document.getElementById('siteHeader');
+  const heroMain = document.getElementById('heroMain');
+
   const btnOpenSpecs = document.getElementById('btnOpenSpecs');
   const specsModal = document.getElementById('specsModal');
   const btnCloseSpecs = document.getElementById('btnCloseSpecs');
-
-  const petDots = document.querySelectorAll('.dot-btn');
-  const petArchLeft = document.getElementById('petArchLeft');
-  const petArchCenter = document.getElementById('petArchCenter');
-  const petArchRight = document.getElementById('petArchRight');
 
   // Helper: Lấy danh sách phần tử có thể nhận tiêu điểm
   function getFocusableElements(container) {
@@ -147,6 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileDrawer.removeAttribute('inert');
     mobileDrawer.classList.add('open');
     drawerOverlay.classList.add('open');
+    if (siteHeader) siteHeader.setAttribute('inert', '');
+    if (heroMain) heroMain.setAttribute('inert', '');
     btnMobileMenu.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
 
@@ -154,6 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(() => {
       if (btnCloseDrawer) btnCloseDrawer.focus();
     });
+    setTimeout(() => {
+      if (btnCloseDrawer && document.activeElement !== btnCloseDrawer) {
+        btnCloseDrawer.focus();
+      }
+    }, 40);
   }
 
   function closeMobileDrawer(returnFocus = true) {
@@ -162,6 +167,8 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileDrawer.setAttribute('inert', '');
     mobileDrawer.classList.remove('open');
     drawerOverlay.classList.remove('open');
+    if (siteHeader) siteHeader.removeAttribute('inert');
+    if (heroMain) heroMain.removeAttribute('inert');
     btnMobileMenu.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
 
@@ -170,7 +177,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  if (btnMobileMenu) btnMobileMenu.addEventListener('click', openMobileDrawer);
+  if (btnMobileMenu) {
+    btnMobileMenu.addEventListener('click', openMobileDrawer);
+    btnMobileMenu.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openMobileDrawer();
+      }
+    });
+  }
   if (btnCloseDrawer) btnCloseDrawer.addEventListener('click', () => closeMobileDrawer(true));
   if (drawerOverlay) drawerOverlay.addEventListener('click', () => closeMobileDrawer(true));
 
@@ -197,67 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
         firstEl.focus();
       }
     }
-  });
-
-  // 5. Mobile Pet Gallery Dots Interaction (chỉ hoạt động trên màn hình hẹp)
-  petDots.forEach((dot) => {
-    dot.addEventListener('click', () => {
-      const target = dot.getAttribute('data-target');
-      petDots.forEach(d => d.classList.remove('active'));
-      dot.classList.add('active');
-
-      if (target === 'left') {
-        petArchLeft.style.width = '240px';
-        petArchLeft.style.height = '220px';
-        petArchLeft.style.opacity = '1';
-        petArchLeft.style.zIndex = '4';
-        petArchLeft.style.transform = 'scale(1)';
-
-        petArchCenter.style.width = '68px';
-        petArchCenter.style.height = '180px';
-        petArchCenter.style.opacity = '0.8';
-        petArchCenter.style.zIndex = '2';
-
-        petArchRight.style.width = '68px';
-        petArchRight.style.height = '180px';
-        petArchRight.style.opacity = '0.8';
-        petArchRight.style.zIndex = '2';
-      } else if (target === 'center') {
-        petArchCenter.style.width = '240px';
-        petArchCenter.style.height = '220px';
-        petArchCenter.style.opacity = '1';
-        petArchCenter.style.zIndex = '4';
-        petArchCenter.style.transform = 'scale(1)';
-
-        petArchLeft.style.width = '68px';
-        petArchLeft.style.height = '180px';
-        petArchLeft.style.opacity = '0.85';
-        petArchLeft.style.zIndex = '2';
-        petArchLeft.style.transform = 'translateX(12px) scale(0.92)';
-
-        petArchRight.style.width = '68px';
-        petArchRight.style.height = '180px';
-        petArchRight.style.opacity = '0.85';
-        petArchRight.style.zIndex = '2';
-        petArchRight.style.transform = 'translateX(-12px) scale(0.92)';
-      } else if (target === 'right') {
-        petArchRight.style.width = '240px';
-        petArchRight.style.height = '220px';
-        petArchRight.style.opacity = '1';
-        petArchRight.style.zIndex = '4';
-        petArchRight.style.transform = 'scale(1)';
-
-        petArchCenter.style.width = '68px';
-        petArchCenter.style.height = '180px';
-        petArchCenter.style.opacity = '0.8';
-        petArchCenter.style.zIndex = '2';
-
-        petArchLeft.style.width = '68px';
-        petArchLeft.style.height = '180px';
-        petArchLeft.style.opacity = '0.8';
-        petArchLeft.style.zIndex = '2';
-      }
-    });
   });
 
   // 6. Modal Tiêu chí nghiệm thu & Design Tokens (WCAG AA: inert khi đóng, bẫy tiêu điểm, phím Escape)

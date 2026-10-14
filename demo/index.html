@@ -64,7 +64,7 @@
       <!-- ==========================================================================
            HEADER WEBSITE
            ========================================================================== -->
-      <header class="site-header" role="banner">
+      <header class="site-header" id="siteHeader" role="banner">
         <!-- Logo chính thức Lê Sơn -->
         <a href="#top" class="brand-link" aria-label="Bệnh viện Thú y Lê Sơn – Về trang chủ">
           <img src="assets/logo-le-son.png" alt="Logo Bệnh viện Thú y Lê Sơn" class="brand-logo-img">
@@ -188,15 +188,8 @@
              ========================================================================== -->
         <div class="hero-arches-stage" role="region" aria-label="Hình ảnh thú cưng minh họa">
 
-          <!-- Họa tiết trang trí bên trái: Vòng cung cam mỏng + Dấu chân tím -->
+          <!-- Họa tiết trang trí bên trái: Vòng cung cam mỏng -->
           <div class="decor-group-left" aria-hidden="true">
-            <svg class="decor-paw" viewBox="0 0 24 24">
-              <circle cx="7" cy="5" r="2.2"/>
-              <circle cx="12" cy="3.5" r="2.2"/>
-              <circle cx="17" cy="5" r="2.2"/>
-              <circle cx="4" cy="9.5" r="2"/>
-              <path d="M12 9c-3.2 0-5.8 2.2-5.8 5 0 2.3 2 4.2 4.5 4.5.8.1 1.8.1 2.6 0 2.5-.3 4.5-2.2 4.5-4.5 0-2.8-2.6-5-5.8-5z"/>
-            </svg>
             <svg class="decor-arc-svg" viewBox="0 0 160 220" fill="none">
               <path d="M15 220C15 100 60 20 150 15" stroke="#FC9238" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
@@ -224,13 +217,6 @@
             </svg>
           </div>
 
-        </div>
-
-        <!-- Dải chấm tròn chuyển đổi trên mobile cho 3 ảnh -->
-        <div class="mobile-dots-indicator" id="mobileDotsIndicator" aria-label="Chọn bé thú cưng hiển thị">
-          <button type="button" class="dot-btn" data-target="left" aria-label="Xem bé mèo vàng"></button>
-          <button type="button" class="dot-btn active" data-target="center" aria-label="Xem chú chó Golden"></button>
-          <button type="button" class="dot-btn" data-target="right" aria-label="Xem bé mèo vằn"></button>
         </div>
 
       </section>
@@ -289,12 +275,12 @@
           <div class="specs-card">
             <div class="specs-card-name">Tím thương hiệu (Primary)</div>
             <div class="specs-card-val" style="color: #5A1E5E;">#5A1E5E / #421247</div>
-            <div class="specs-card-desc">Dùng cho tiêu đề H1, nút CTA chính, viền logo. Tương phản 14.8:1 trên nền kem.</div>
+            <div class="specs-card-desc">Dùng cho tiêu đề H1 (#421247: 13.96:1), nút CTA chính (#5A1E5E: 11.04:1 trên nền kem).</div>
           </div>
           <div class="specs-card">
             <div class="specs-card-name">Tím thứ cấp (Muted / Soft)</div>
             <div class="specs-card-val" style="color: #824787;">#824787 / #F5EDF6</div>
-            <div class="specs-card-desc">Dùng cho viền, trạng thái hover, badge nhẹ.</div>
+            <div class="specs-card-desc">Dùng cho viền, trạng thái hover, badge nhẹ (6.15:1 trên nền kem).</div>
           </div>
           <div class="specs-card">
             <div class="specs-card-name">Cam điểm nhấn (Accent)</div>
@@ -314,7 +300,7 @@
           <div class="specs-card">
             <div class="specs-card-name">Thang màu chữ (Typography)</div>
             <div class="specs-card-val">#231627 / #5E5362</div>
-            <div class="specs-card-desc">Chữ chính (14.8:1), chữ phụ và chú thích (6.81:1), đạt chuẩn WCAG AA (≥ 4.5:1).</div>
+            <div class="specs-card-desc">Chữ chính #231627 (16.19:1), chữ phụ và chú thích #5E5362 (6.81:1), đạt chuẩn WCAG AA (≥ 4.5:1).</div>
           </div>
         </div>
 
