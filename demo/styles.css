@@ -397,6 +397,38 @@ img {
   gap: 14px;
 }
 
+/* Liên kết mạng xã hội & bản đồ trên Header Desktop */
+.header-social-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 4px;
+}
+.header-social-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand-purple-dark);
+  background: rgba(90, 30, 94, 0.05);
+  border: 1px solid rgba(90, 30, 94, 0.12);
+  text-decoration: none;
+  transition: all var(--transition-smooth);
+}
+.header-social-btn:hover {
+  background: var(--color-brand-purple);
+  color: #FFFFFF;
+  border-color: var(--color-brand-purple);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(90, 30, 94, 0.18);
+}
+.header-social-btn:focus-visible {
+  outline: 2px solid var(--color-brand-purple-dark);
+  outline-offset: 2px;
+}
+
 /* Nút tìm kiếm */
 .btn-icon-search {
   width: 40px;
@@ -601,13 +633,15 @@ img {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 310px;
-  max-width: 85vw;
+  width: 320px;
+  max-width: 88vw;
   background: var(--color-bg-cream-pure);
   z-index: 999;
-  padding: 24px;
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   transform: translateX(100%);
   transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms ease;
   box-shadow: none;
@@ -669,6 +703,132 @@ img {
   color: var(--color-text-subtle);
   text-align: center;
   line-height: 1.4;
+}
+
+/* Khối thông tin liên hệ phòng khám trong Mobile Drawer */
+.drawer-contact-card {
+  margin: 6px 0 16px;
+  padding: 14px;
+  background: var(--color-brand-purple-soft);
+  border: 1px solid rgba(90, 30, 94, 0.12);
+  border-radius: 14px;
+}
+.drawer-contact-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-brand-purple);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.drawer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--color-text-main);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.drawer-contact-item:last-of-type {
+  margin-bottom: 10px;
+}
+.drawer-contact-item a {
+  color: var(--color-brand-purple-dark);
+  font-weight: 600;
+  text-decoration: none;
+}
+.drawer-contact-item a:hover {
+  text-decoration: underline;
+}
+.drawer-contact-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+.drawer-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  min-height: 38px;
+  transition: all var(--transition-smooth);
+}
+.drawer-btn-maps {
+  background: #FFFFFF;
+  color: #C04E00;
+  border: 1px solid rgba(234, 122, 36, 0.35);
+}
+.drawer-btn-maps:hover {
+  background: var(--color-brand-orange);
+  color: #FFFFFF;
+  border-color: var(--color-brand-orange);
+}
+.drawer-btn-fb {
+  background: #FFFFFF;
+  color: #1877F2;
+  border: 1px solid rgba(24, 119, 242, 0.35);
+}
+.drawer-btn-fb:hover {
+  background: #1877F2;
+  color: #FFFFFF;
+  border-color: #1877F2;
+}
+
+/* Nút liên kết MXH & Maps trong Modal chi tiết dịch vụ */
+.modal-contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #ECE2EF;
+}
+.modal-contact-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.modal-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all var(--transition-smooth);
+}
+.modal-link-fb {
+  background: rgba(24, 119, 242, 0.08);
+  color: #1877F2;
+  border: 1px solid rgba(24, 119, 242, 0.2);
+}
+.modal-link-fb:hover {
+  background: #1877F2;
+  color: #FFFFFF;
+}
+.modal-link-maps {
+  background: rgba(234, 122, 36, 0.08);
+  color: #C04E00;
+  border: 1px solid rgba(234, 122, 36, 0.2);
+}
+.modal-link-maps:hover {
+  background: var(--color-brand-orange);
+  color: #FFFFFF;
 }
 
 /* ==========================================================================
@@ -1107,6 +1267,9 @@ img {
 .viewport-outer.mode-mobile .auth-guest-group {
   display: none !important;
 }
+.viewport-outer.mode-mobile .header-social-links {
+  display: none !important;
+}
 .viewport-outer.mode-mobile .btn-mobile-menu {
   display: inline-flex !important;
   width: 44px !important;
@@ -1249,6 +1412,7 @@ img {
 @media (max-width: 992px) {
   .nav-menu { display: none !important; }
   .auth-guest-group { display: none !important; }
+  .header-social-links { display: none !important; }
   .btn-mobile-menu { display: inline-flex !important; }
   .site-header { padding: 14px 20px; }
   .brand-logo-img { height: 40px; }
@@ -1552,3 +1716,346 @@ img {
     transform: scale(1);
   }
 }
+
+/* ==========================================================================
+   TRANG DỊCH VỤ — PHƯƠNG ÁN C (CREATIVE ARCH CARDS)
+   Chuẩn mực Design Tokens, Không chồng lấn, Chuẩn Mobile-First & WCAG AA
+   ========================================================================== */
+.services-creative-arch {
+  position: relative;
+  width: 100%;
+  padding: 32px 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Khối giới thiệu tiêu đề Dịch vụ */
+.services-header-stage {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto 36px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.services-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-brand-purple-muted);
+  margin-bottom: 16px;
+  background: rgba(90, 30, 94, 0.05);
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+}
+
+.services-title {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  color: var(--color-brand-purple-dark);
+  font-weight: 600;
+  max-width: 820px;
+  margin: 0 auto 16px;
+  text-wrap: balance;
+}
+
+.services-description {
+  font-family: var(--font-body);
+  font-size: 17.5px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 660px;
+  margin: 0 auto;
+  text-wrap: balance;
+}
+
+/* Họa tiết trang trí điểm xuyết (không đè lên chữ) */
+.services-decor-curve-left {
+  position: absolute;
+  left: 20px;
+  top: 60px;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.services-decor-curve-right {
+  position: absolute;
+  right: 24px;
+  top: 40px;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.services-decor-paw {
+  position: absolute;
+  left: 56px;
+  top: 10px;
+  width: 32px;
+  height: 32px;
+  fill: var(--color-brand-purple);
+  opacity: 0.25;
+  pointer-events: none;
+  transform: rotate(-18deg);
+}
+
+/* Lưới 4 Thẻ Dịch vụ — Bố cục cân đối 4 cột Desktop */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* Thẻ Dịch vụ Vòm Cong Sáng Tạo */
+.service-card {
+  background: var(--color-white);
+  border: 1px solid #ECE2EF;
+  border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(60, 20, 65, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 320ms ease, border-color 320ms ease;
+  will-change: transform;
+  position: relative;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(60, 20, 65, 0.12);
+  border-color: #DBCBDD;
+}
+
+/* Khung vòm ảnh đại diện */
+.card-arch-frame {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  border-radius: 120px 120px 0 0;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 12px 12px 0;
+  width: calc(100% - 24px);
+  transition: background-color var(--transition-smooth);
+}
+.card-arch-frame.theme-kham {
+  background: #FDF2E8; /* Cam phấn nhạt */
+}
+.card-arch-frame.theme-grooming {
+  background: #EDF6F7; /* Xanh pastel nhạt */
+}
+.card-arch-frame.theme-noitru {
+  background: #F7EFF5; /* Kem tím phấn nhạt */
+}
+.card-arch-frame.theme-capcuu {
+  background: #F8ECF3; /* Tím hồng phấn nhạt */
+}
+
+.card-arch-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.service-card:hover .card-arch-img {
+  transform: scale(1.05);
+}
+
+/* Huy hiệu Icon Dịch vụ */
+.card-icon-badge {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 3px solid var(--color-white);
+  box-shadow: 0 4px 14px rgba(60, 20, 65, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -26px 0 12px 24px;
+  z-index: 3;
+  color: var(--color-brand-purple);
+  transition: transform var(--transition-smooth), background-color var(--transition-smooth);
+}
+.card-icon-badge svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--color-brand-purple);
+}
+.service-card:hover .card-icon-badge {
+  transform: scale(1.08);
+  background: var(--color-brand-purple-soft);
+}
+
+/* Thân nội dung thẻ */
+.card-body {
+  padding: 0 22px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--color-brand-purple-dark);
+  margin: 0 0 14px;
+}
+
+/* Danh sách 3 điểm nổi bật ngắn */
+.card-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.card-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
+.feature-bullet {
+  color: var(--color-brand-purple);
+  font-size: 14px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* Nút Tìm hiểu thêm dạng pill */
+.btn-card-learn {
+  width: 100%;
+  padding: 11px 20px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-brand-purple);
+  background: transparent;
+  color: var(--color-brand-purple);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.btn-card-learn:hover {
+  background: var(--color-brand-purple);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(90, 30, 94, 0.2);
+}
+
+.btn-card-learn:active {
+  transform: translateY(0);
+}
+
+.btn-card-learn:focus-visible {
+  outline: 3px solid var(--color-brand-purple-dark) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 2px var(--color-white) !important;
+}
+
+.btn-card-learn svg {
+  transition: transform var(--transition-smooth);
+}
+.btn-card-learn:hover svg {
+  transform: translateX(4px);
+}
+
+/* Responsive Tablet & Mobile cho Trang Dịch Vụ */
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 680px) {
+  .services-creative-arch {
+    padding: 20px 0 40px;
+  }
+  .services-header-stage {
+    margin-bottom: 24px;
+    padding: 0 16px;
+  }
+  .services-eyebrow {
+    font-size: 11.5px;
+    padding: 5px 12px;
+    margin-bottom: 12px;
+  }
+  .services-title {
+    font-size: 27px;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .services-description {
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .services-decor-curve-left,
+  .services-decor-curve-right,
+  .services-decor-paw {
+    display: none !important;
+  }
+  /* Mobile: xếp dọc 1 cột trọn vẹn, không ép hẹp */
+  .services-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    padding: 0 16px !important;
+    max-width: 440px !important;
+  }
+  .card-arch-frame {
+    height: 200px;
+  }
+  .btn-card-learn {
+    min-height: 46px;
+    font-size: 14.5px;
+  }
+}
+
+/* Áp dụng cho chế độ mô phỏng iPhone 390px */
+.viewport-outer.mode-mobile .services-grid {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  padding: 0 16px !important;
+  max-width: 390px !important;
+}
+.viewport-outer.mode-mobile .services-decor-curve-left,
+.viewport-outer.mode-mobile .services-decor-curve-right,
+.viewport-outer.mode-mobile .services-decor-paw {
+  display: none !important;
+}
+.viewport-outer.mode-mobile .services-title {
+  font-size: 26px !important;
+}
+.viewport-outer.mode-mobile .services-description {
+  font-size: 14px !important;
+}
+

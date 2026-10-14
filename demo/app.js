@@ -214,6 +214,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  if (urlParams.get('drawer') === 'open') {
+    openMobileDrawer();
+  }
+
   // 6. Modal Tiêu chí nghiệm thu & Design Tokens (WCAG AA: inert khi đóng, bẫy tiêu điểm, phím Escape)
   specsModal.setAttribute('inert', '');
 
