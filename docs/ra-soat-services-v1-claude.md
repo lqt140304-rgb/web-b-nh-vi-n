@@ -165,3 +165,21 @@ Bài học ghi vào quy trình: với nút có thể bấm, Claude **bấm thử
 ~~Thử `tel:` trên điện thoại có SIM~~ → **chủ dự án tự kiểm sau (14/10)**, chưa xác minh, giữ trạng thái "chưa xác minh trình gọi thực tế" cho đến khi có kết quả; trình đọc màn hình (VoiceOver/TalkBack) cho cửa sổ chi tiết và menu; Safari.
 
 Ảnh bằng chứng lượt 3: 10 đến 13.
+
+---
+
+# LƯỢT 4 — Icon và hiệu ứng mới (Services `5e5b442`, Hero `6165c39`)
+
+**Ngày:** 14/10/2026 · Claude (Opus). **Đã kiểm:** thay đổi CSS/HTML so với `41995ca`/`c52d475`, bốn icon khi rê chuột, chuyển động liên tục, chế độ giảm chuyển động, bố cục, lỗi JavaScript, chạm trên điện thoại giả lập. **Chưa kiểm:** iPhone/Android thật.
+
+**Kết luận: PASS, kèm 1 FIX nhỏ.**
+
+| Mục | Nhãn | Bằng chứng |
+|---|---|---|
+| Icon bốn dịch vụ có màu riêng (cam đậm, xanh ngọc, tím, đỏ) | **PASS** | Tương phản icon trên nền huy hiệu 4,63 đến 8,68:1 (≥ 3:1). Ảnh 14. Lưu ý: **hình vẽ icon không đổi**, chỉ đổi màu và thêm chuyển động |
+| Hiệu ứng khi rê chuột (ống nghe đập, kéo cắt, nhà nổi, chữ thập phát sáng, điện thoại rung, mũi tên, nút đóng xoay) | **PASS** | Chỉ chạy khi rê chuột; không làm xô bố cục (chiều cao thẻ trước/sau như nhau) |
+| Chế độ giảm chuyển động | **PASS** | Bật `prefers-reduced-motion`: mọi chuyển động chạy 1 lần trong 0,01 ms |
+| Lỗi JavaScript, Hero và Services đồng bộ | **PASS** | Không lỗi; CSS hai nhánh giống nhau |
+| **Tim ở nhãn đầu trang đập mãi không dừng** (`eyebrowHeartbeat infinite`) trên cả Hero và Dịch vụ | **FIX (Thấp)** | Chuyển động tự chạy quá 5 giây, không có cách dừng (WCAG 2.2.2), dễ gây phân tâm. **Đạt khi:** đập 2–3 lần rồi dừng, hoặc chỉ đập khi rê chuột |
+| Hiệu ứng rê chuột trên điện thoại | **Ghi nhận** | Giả lập không thấy "kẹt" hiệu ứng sau khi chạm; iPhone thật chưa kiểm. Nên bọc các hiệu ứng rê chuột trong `@media (hover: hover)` khi Codex làm thật |
+| Màu cam đậm `#B8530B` của icon Khám không nằm trong bảng màu đã chốt | **Ý kiến** | Chủ dự án quyết định có chấp nhận không |
