@@ -299,7 +299,7 @@ Claude kiểm tra: tên nhánh và commit trong tài liệu bàn giao đã đún
 | 8 | Dấu chân rời cạnh cung trái | **PASS** (mức Thấp, không còn đáng kể) | Không còn lỗi chồng chữ; chỉ là trang trí |
 | 9 | Tài liệu khớp mã (ngưỡng chấm) | **PASS** | Không còn mục chấm tròn |
 
-Kiểm tra thêm, không phát hiện lỗi mới: header khách và đã đăng nhập cùng 64 px ở 390 kể cả tên dài, không tràn ngang; chỉ dùng phông hệ thống/không còn tải ngoài; alt ảnh trung tính; ghi chú "Không cần tài khoản" hiện sẵn.
+Kiểm tra thêm, không phát hiện lỗi mới: header khách và đã đăng nhập cùng 64 px ở 390 kể cả tên dài, không tràn ngang; [**Đính chính 14/10:** câu "không còn tải ngoài" sai, Hero vẫn `@import` Google Fonts; xem `ra-soat-services-v1-claude.md` mục E]; alt ảnh trung tính; ghi chú "Không cần tài khoản" hiện sẵn.
 
 Ghi nhận (không chặn): ở 320 px ảnh trái bị lệch ra mép (x = −10), nằm dưới mức tối thiểu 360 px của dự án; ảnh PNG tổng khoảng 2,5 MB (Codex nén khi làm thật); liên kết `#dich-vu`, `#gioi-thieu`, `#lien-he`, `#form-dat-lich` chưa có đích (demo).
 
