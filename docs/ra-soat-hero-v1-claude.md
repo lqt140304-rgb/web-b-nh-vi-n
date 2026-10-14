@@ -234,7 +234,7 @@ Phần lớn lỗi đã sửa đúng và có bằng chứng. Còn lỗi thật �
 
 > Bỏ phần nút nhỏ (chấm tròn) ở dưới phần ảnh; mặc định theo form gốc.
 
-Claude hiểu là: **bỏ dải chấm tròn chuyển ảnh** (`#mobileDotsIndicator`, ba nút `.dot-btn`) ở mọi kích thước, hiển thị ba ảnh mặc định như bố cục gốc Phương án D. **[Chưa rõ]** "form gốc" trên mobile là ba ảnh trong một hàng hay chú chó giữa với hai ảnh hé hai bên (như bản hiện tại, bỏ chấm); cần chủ dự án hoặc Antigravity xác nhận. Việc bỏ chấm cũng giải quyết lỗi S3 bên dưới. Claude chưa sửa gì; việc này giao Antigravity.
+Claude hiểu là: **bỏ dải chấm tròn chuyển ảnh** (`#mobileDotsIndicator`, ba nút `.dot-btn`) ở mọi kích thước, hiển thị ba ảnh mặc định như bố cục gốc Phương án D. **[Đã xác nhận bởi chủ dự án]** ba ảnh luôn nằm trong một hàng ở mọi kích thước, bỏ chấm. Yêu cầu sửa lần 2: [`yeu-cau-sua-hero-v1-lan-2-antigravity.md`](yeu-cau-sua-hero-v1-lan-2-antigravity.md). Việc bỏ chấm cũng giải quyết lỗi S3 bên dưới. Claude chưa sửa gì; việc này giao Antigravity.
 
 ## B. Đối chiếu S1–S12
 
