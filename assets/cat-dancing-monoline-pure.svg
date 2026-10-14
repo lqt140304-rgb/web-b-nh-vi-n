@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 720" width="100%" height="100%">
+  <defs>
+    <style>
+      .canvas-bg { fill: #FFFDF9; }
+      .stroke-monoline {
+        stroke: #522158;
+        stroke-width: 9;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      .stroke-accent {
+        stroke: #522158;
+        stroke-width: 7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      .stroke-whisker {
+        stroke: #522158;
+        stroke-width: 4.5;
+        stroke-linecap: round;
+        fill: none;
+      }
+      .solid-purple {
+        fill: #522158;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="560" height="720" rx="32" class="canvas-bg" />
+  <rect x="22" y="22" width="516" height="676" rx="22" fill="none" stroke="#632568" stroke-opacity="0.12" stroke-width="2" stroke-dasharray="8 8" />
+
+  <!-- DANCING MONOLINE CAT -->
+  <g id="dancing-cat" transform="translate(45, 20)">
+
+    <!-- 1. TAIL (Curves down gracefully behind the left hip, tip curls up) -->
+    <path class="stroke-monoline" d="
+      M 160 435
+      C 130 465, 96 505, 92 558
+      C 88 600, 108 625, 126 615
+      C 138 605, 136 575, 128 555
+      C 120 530, 122 495, 142 465
+    " />
+
+    <!-- 2. LOWER OUTSTRETCHED ARM (Extends right, bends down at elbow, drooping paw) -->
+    <path class="stroke-monoline" d="
+      M 285 308
+      C 312 305, 342 312, 365 325
+      C 378 332, 385 348, 376 364
+      C 368 378, 350 378, 342 364
+      C 334 350, 318 344, 290 348
+    " />
+
+    <!-- 3. MAIN BODY OUTLINE (Chin -> Potbelly -> Left Standing Leg -> Groin -> Stepping Leg -> Hip -> Flank) -->
+    <path class="stroke-monoline" d="
+      M 172 240
+      C 148 278, 142 338, 148 405
+      C 154 460, 176 495, 186 522
+      L 182 602
+      C 182 617, 204 617, 206 602
+      L 216 530
+      C 230 516, 250 516, 262 528
+      C 270 544, 282 572, 294 590
+      C 304 605, 326 596, 328 578
+      C 330 558, 316 528, 306 506
+      C 330 472, 324 418, 314 376
+      C 306 348, 296 342, 290 348
+    " />
+
+    <!-- Stepping leg knee fold accent -->
+    <path class="stroke-accent" d="
+      M 280 485
+      C 298 495, 312 515, 308 535
+    " />
+
+    <!-- 4. UPPER RAISED DANCING ARM (Arches gracefully up alongside head, paw curls inward) -->
+    <path class="stroke-monoline" d="
+      M 265 240
+      C 285 205, 315 165, 338 128
+      C 350 110, 352 92, 340 82
+      C 324 70, 302 75, 285 88
+      C 274 96, 268 108, 274 118
+      C 280 126, 292 124, 298 116
+      C 308 104, 322 105, 328 118
+      C 334 132, 315 168, 292 205
+      C 278 228, 270 248, 268 262
+    " />
+
+    <!-- 5. HEAD & EARS (Facing front-left, tilted cute, clean contour) -->
+    <path class="stroke-monoline" d="
+      M 172 240
+      C 154 218, 148 185, 166 158
+      L 158 105
+      C 156 96, 170 96, 180 108
+      L 208 140
+      C 224 136, 246 136, 262 140
+      L 286 110
+      C 295 100, 308 102, 304 114
+      L 294 160
+      C 304 182, 300 212, 284 235
+      C 268 255, 240 260, 216 258
+      C 194 256, 180 248, 172 240
+    " />
+
+    <!-- Ear interior line (Right image monoline style) -->
+    <path class="stroke-accent" d="
+      M 180 118
+      C 186 136, 192 154, 196 166
+    " />
+    <path class="stroke-accent" d="
+      M 292 124
+      C 286 142, 280 158, 278 172
+    " />
+
+    <!-- 6. MINIMALIST FACE (Solid dot eyes + solid inverted triangle nose) -->
+    <circle cx="202" cy="186" r="6.5" class="solid-purple" />
+    <circle cx="252" cy="190" r="6.5" class="solid-purple" />
+    <polygon points="228,198 220,210 236,210" class="solid-purple" />
+
+    <!-- Whiskers (Minimal, 2 on each side like reference 1) -->
+    <line x1="150" y1="192" x2="178" y2="196" class="stroke-whisker" />
+    <line x1="148" y1="205" x2="176" y2="203" class="stroke-whisker" />
+    <line x1="272" y1="198" x2="300" y2="195" class="stroke-whisker" />
+    <line x1="270" y1="208" x2="298" y2="211" class="stroke-whisker" />
+
+  </g>
+
+  <!-- Title Caption -->
+  <text x="280" y="685" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#632568" letter-spacing="0.5">
+    PHƯƠNG ÁN 1: MONOLINE THUẦN KHIẾT (PHONG CÁCH ẢNH PHẢI • DÁNG ẢNH TRÁI)
+  </text>
+</svg>

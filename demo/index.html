@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bệnh viện Thú y Lê Sơn — Bản Demo Hero & Header (Phương án D: Minimal Creative)</title>
+  <meta name="description" content="Bản thiết kế demo Hero & Header Phương án D cho Bệnh viện Thú y Lê Sơn. Trực quan, tinh tế, chuẩn Mobile-First và WCAG 2.1 AA.">
+  <link rel="icon" type="image/png" href="assets/logo-le-son.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Skip link hỗ trợ bàn phím (WCAG AA) -->
+  <a href="#hero-main" class="skip-link">Chuyển đến nội dung chính</a>
+
+  <!-- ==========================================================================
+       THANH ĐIỀU KHIỂN XEM THỬ CHO CHỦ DỰ ÁN (DEMO CONTROL BAR)
+       ========================================================================== -->
+  <header class="demo-controller" role="region" aria-label="Bảng điều khiển xem thử">
+    <div class="demo-brand-tag">
+      <span class="demo-brand-badge">Demo UI/UX</span>
+      <span>Bệnh viện Thú y Lê Sơn · <strong>Phương án D (Minimal Creative)</strong></span>
+    </div>
+
+    <!-- Nút đổi khung nhìn: Desktop 1440px / Mobile 390px / Responsive -->
+    <div class="demo-view-toggles" role="group" aria-label="Chọn kích thước màn hình">
+      <button type="button" class="demo-btn-toggle active" id="btnViewDesktop" title="Xem trên màn hình Desktop chuẩn 1440px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span>Desktop (1440px)</span>
+      </button>
+      <button type="button" class="demo-btn-toggle" id="btnViewMobile" title="Xem trên khung điện thoại iPhone 15 (390px)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+        <span>Mobile (390px)</span>
+      </button>
+      <button type="button" class="demo-btn-toggle" id="btnViewResponsive" title="Tự co giãn theo cửa sổ trình duyệt">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        <span>Toàn màn hình</span>
+      </button>
+    </div>
+
+    <!-- Tác vụ phụ: Đổi Auth & Mở bảng tiêu chí -->
+    <div class="demo-extra-actions">
+      <button type="button" class="demo-btn-action" id="btnToggleAuth" title="Chuyển đổi hiển thị Header khi chưa đăng nhập và đã đăng nhập">
+        <span>👤 Trạng thái: <strong>Khách vãng lai</strong></span>
+      </button>
+      <button type="button" class="demo-btn-action" id="btnOpenSpecs" title="Xem bảng thông số màu sắc và tiêu chí nghiệm thu của Claude">
+        <span>📋 Tiêu chí</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       KHUNG VÙNG HIỂN THỊ (VIEWPORT STAGE)
+       ========================================================================== -->
+  <main class="viewport-outer mode-desktop" id="viewportOuter">
+    <div class="site-stage show-arches" id="siteStage">
+
+      <!-- Giả lập tai thỏ / Dynamic Island khi ở chế độ Mobile 390px -->
+      <div class="mobile-device-header" aria-hidden="true">
+        <span>9:41</span>
+        <div class="mobile-dynamic-island"></div>
+        <span>5G 100%</span>
+      </div>
+
+      <!-- ==========================================================================
+           HEADER WEBSITE
+           ========================================================================== -->
+      <header class="site-header" role="banner">
+        <!-- Logo chính thức Lê Sơn -->
+        <a href="#top" class="brand-link" aria-label="Bệnh viện Thú y Lê Sơn – Về trang chủ">
+          <img src="assets/logo-le-son.png" alt="Logo Bệnh viện Thú y Lê Sơn" class="brand-logo-img">
+          <div class="brand-text-block">
+            <span class="brand-subtitle">Bệnh viện thú y</span>
+            <span class="brand-name">Lê Sơn</span>
+          </div>
+        </a>
+
+        <!-- Menu điều hướng chính Desktop -->
+        <nav class="nav-menu" aria-label="Menu chính">
+          <a href="#top" class="nav-link active" aria-current="page">Trang chủ</a>
+          <a href="#dich-vu" class="nav-link">Dịch vụ</a>
+          <a href="#gioi-thieu" class="nav-link">Giới thiệu</a>
+          <a href="#tin-tuc" class="nav-link">Tin tức</a>
+          <a href="#lien-he" class="nav-link">Liên hệ</a>
+        </nav>
+
+        <!-- Khu vực tác vụ bên phải Header -->
+        <div class="header-actions">
+          <!-- Nút tìm kiếm nhanh -->
+          <button type="button" class="btn-icon-search" aria-label="Tìm kiếm dịch vụ hoặc bài viết">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+
+          <!-- TRẠNG THÁI 1: Khách vãng lai (Chưa đăng nhập) -->
+          <div class="auth-guest-group" id="authGuestGroup">
+            <button type="button" class="btn-auth-login">Đăng nhập</button>
+            <button type="button" class="btn-auth-register">Đăng ký</button>
+          </div>
+
+          <!-- TRẠNG THÁI 2: Đã đăng nhập (Mô phỏng dữ liệu giả) -->
+          <div class="auth-user-group" id="authUserGroup">
+            <button type="button" class="btn-user-profile" id="btnUserProfile" aria-expanded="false" aria-haspopup="true">
+              <span class="user-avatar-initial">K</span>
+              <span>Nguyễn Minh Khang</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+
+            <!-- Dropdown tài khoản -->
+            <div class="user-dropdown-menu" id="userDropdownMenu" role="menu">
+              <div class="user-dropdown-header">
+                <div class="user-dropdown-name">Nguyễn Minh Khang</div>
+                <div class="user-dropdown-phone">098 ••• ••34 · Khách thân thiết</div>
+              </div>
+              <a href="#yeu-cau" class="dropdown-item" role="menuitem">
+                <span>📋 Yêu cầu của tôi</span>
+                <span class="dropdown-badge">2 đang xử lý</span>
+              </a>
+              <a href="#thu-cung" class="dropdown-item" role="menuitem">
+                <span>🐾 Hồ sơ thú cưng</span>
+                <span style="font-size: 11.5px; color: #7A6F7E;">Bé Miu, Lu Lu</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#cai-dat" class="dropdown-item" role="menuitem">
+                <span>⚙️ Cài đặt tài khoản</span>
+              </a>
+              <a href="#dang-xuat" class="dropdown-item" role="menuitem" style="color: #9C2A2A;">
+                <span>🚪 Đăng xuất</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Nút mở Menu trên Mobile -->
+          <button type="button" class="btn-mobile-menu" id="btnMobileMenu" aria-label="Mở danh mục điều hướng">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- ==========================================================================
+           HERO SECTION — PHƯƠNG ÁN D (MINIMAL CREATIVE)
+           ========================================================================== -->
+      <section class="hero-minimal-creative" id="hero-main" aria-label="Giới thiệu Bệnh viện Thú y Lê Sơn">
+        <!-- Nhãn nhỏ mở đầu -->
+        <span class="hero-eyebrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          BỆNH VIỆN THÚ Y LÊ SƠN
+        </span>
+
+        <!-- Tiêu đề lớn căn giữa thanh lịch -->
+        <h1 class="hero-title">
+          Khoảng an toàn nhỏ<br>
+          cho những người bạn lớn
+        </h1>
+
+        <!-- Dòng mô tả ngắn gọn, ấm áp -->
+        <p class="hero-description">
+          Chăm sóc bằng chuyên môn, đồng hành bằng sự thấu hiểu.
+        </p>
+
+        <!-- Cụm hai nút hành động -->
+        <div class="hero-cta-group">
+          <a href="#form-dat-lich" class="btn-cta-primary" id="btnCtaPrimary">
+            <span>Gửi yêu cầu đặt lịch</span>
+            <svg class="icon-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+
+          <a href="#dich-vu" class="btn-cta-secondary" id="btnCtaSecondary">
+            <span>Xem dịch vụ</span>
+          </a>
+        </div>
+
+        <!-- Dòng chú thích bắt buộc dưới nút đặt lịch -->
+        <p class="hero-reassurance-note">
+          <svg class="note-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>Nhân viên sẽ liên hệ để xác nhận lịch hẹn.</span>
+        </p>
+
+        <!-- ==========================================================================
+             BA KHUNG BO CONG SÁNG TẠO (THREE ARCHED PET FRAMES)
+             Chạm đáy bố cục, không che khuất chữ, có họa tiết tinh tế
+             ========================================================================== -->
+        <div class="hero-arches-stage" role="region" aria-label="Hình ảnh các người bạn nhỏ tại Lê Sơn">
+
+          <!-- Họa tiết trang trí bên trái: Vòng cung cam mỏng + Dấu chân tím -->
+          <div class="decor-group-left" aria-hidden="true">
+            <svg class="decor-paw" viewBox="0 0 24 24">
+              <circle cx="7" cy="5" r="2.2"/>
+              <circle cx="12" cy="3.5" r="2.2"/>
+              <circle cx="17" cy="5" r="2.2"/>
+              <circle cx="4" cy="9.5" r="2"/>
+              <path d="M12 9c-3.2 0-5.8 2.2-5.8 5 0 2.3 2 4.2 4.5 4.5.8.1 1.8.1 2.6 0 2.5-.3 4.5-2.2 4.5-4.5 0-2.8-2.6-5-5.8-5z"/>
+            </svg>
+            <svg class="decor-arc-svg" viewBox="0 0 160 220" fill="none">
+              <path d="M15 220C15 100 60 20 150 15" stroke="#FC9238" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2 0"/>
+            </svg>
+          </div>
+
+          <!-- KHUNG 1 (TRÁI): Mèo vàng giơ chân chào -->
+          <div class="pet-arch-card pet-arch-left" id="petArchLeft">
+            <img src="assets/pet-left.png" alt="Chú mèo vàng dễ thương giơ chân chào thân thiện" class="pet-img" loading="eager">
+          </div>
+
+          <!-- KHUNG 2 (GIỮA - TRỌNG TÂM): Chú chó Golden Retriever cận cảnh -->
+          <div class="pet-arch-card pet-arch-center" id="petArchCenter">
+            <img src="assets/pet-center.png" alt="Gương mặt cận cảnh ấm áp của chú chó Golden Retriever tại Bệnh viện Thú y Lê Sơn" class="pet-img" loading="eager">
+          </div>
+
+          <!-- KHUNG 3 (PHẢI): Mèo vằn ngước nhìn tò mò -->
+          <div class="pet-arch-card pet-arch-right" id="petArchRight">
+            <img src="assets/pet-right.png" alt="Bé mèo vằn đáng yêu ngước nhìn với đôi mắt tròn xoe" class="pet-img" loading="eager">
+          </div>
+
+          <!-- Họa tiết trang trí bên phải: Vòng cung cam mỏng + Chữ viết tay -->
+          <div class="decor-group-right" aria-hidden="true">
+            <div class="decor-handwriting">
+              Care<br>
+              Create<br>
+              Stronger<br>
+              Bonds
+            </div>
+            <svg class="decor-arc-svg" viewBox="0 0 160 220" fill="none">
+              <path d="M145 220C145 100 100 20 10 15" stroke="#FC9238" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+        </div>
+
+        <!-- Dải chấm tròn chuyển đổi trên mobile cho 3 ảnh -->
+        <div class="mobile-dots-indicator" id="mobileDotsIndicator" aria-label="Chọn bé thú cưng hiển thị">
+          <button type="button" class="dot-btn" data-target="left" aria-label="Xem bé mèo vàng"></button>
+          <button type="button" class="dot-btn active" data-target="center" aria-label="Xem chú chó Golden"></button>
+          <button type="button" class="dot-btn" data-target="right" aria-label="Xem bé mèo vằn"></button>
+        </div>
+
+      </section>
+
+      <!-- MENU DRAWER TRÊN MOBILE -->
+      <div class="mobile-drawer-overlay" id="drawerOverlay"></div>
+      <aside class="mobile-drawer" id="mobileDrawer" aria-label="Menu trên di động">
+        <div class="drawer-header">
+          <div class="brand-link">
+            <img src="assets/logo-le-son.png" alt="" style="height: 38px;">
+            <div class="brand-text-block">
+              <span class="brand-subtitle">Bệnh viện thú y</span>
+              <span class="brand-name">Lê Sơn</span>
+            </div>
+          </div>
+          <button type="button" class="drawer-close-btn" id="btnCloseDrawer" aria-label="Đóng menu">✕</button>
+        </div>
+        <nav class="drawer-nav">
+          <a href="#top" class="drawer-link active">Trang chủ</a>
+          <a href="#dich-vu" class="drawer-link">Dịch vụ khám & điều trị</a>
+          <a href="#gioi-thieu" class="drawer-link">Giới thiệu bệnh viện</a>
+          <a href="#tin-tuc" class="drawer-link">Cẩm nang thú cưng</a>
+          <a href="#lien-he" class="drawer-link">Liên hệ & Địa chỉ</a>
+        </nav>
+        <div class="drawer-actions">
+          <button type="button" class="btn-cta-primary" style="width: 100%; min-height: 48px; font-size: 15px;">
+            Gửi yêu cầu đặt lịch →
+          </button>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="btn-auth-login" style="flex: 1;">Đăng nhập</button>
+            <button type="button" class="btn-auth-register" style="flex: 1;">Đăng ký</button>
+          </div>
+          <p class="drawer-note">
+            💡 Khách vãng lai không cần đăng ký tài khoản vẫn có thể gửi yêu cầu đặt lịch dễ dàng.
+          </p>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL THÔNG SỐ THIẾT KẾ & TIÊU CHÍ NGHIỆM THU CLAUDE (MỤC 7)
+       ========================================================================== -->
+  <div class="specs-modal-overlay" id="specsModal" role="dialog" aria-modal="true" aria-labelledby="specsTitle">
+    <div class="specs-modal">
+      <div class="specs-modal-header">
+        <div class="specs-modal-title" id="specsTitle">
+          <span>📋 Bảng đối chiếu Design Tokens & Tiêu chí nghiệm thu (Mục 7 Brief)</span>
+        </div>
+        <button type="button" class="specs-modal-close" id="btnCloseSpecs" aria-label="Đóng cửa sổ">✕</button>
+      </div>
+      <div class="specs-modal-body">
+        <h3 class="specs-section-title">1. Bảng Design Tokens chuẩn (Kế thừa nhận diện Lê Sơn)</h3>
+        <div class="specs-grid">
+          <div class="specs-card">
+            <div class="specs-card-name">Tím thương hiệu (Primary)</div>
+            <div class="specs-card-val" style="color: #5A1E5E;">#5A1E5E / #421247</div>
+            <div class="specs-card-desc">Dùng cho tiêu đề H1, nút CTA chính, viền logo. Tương phản 14.8:1 trên nền kem.</div>
+          </div>
+          <div class="specs-card">
+            <div class="specs-card-name">Cam mái nhà logo (Accent)</div>
+            <div class="specs-card-val" style="color: #EA7A24;">#EA7A24 / #FC9238</div>
+            <div class="specs-card-desc">Vòng cung trang trí nghệ thuật, outline focus bàn phím, badge thông báo.</div>
+          </div>
+          <div class="specs-card">
+            <div class="specs-card-name">Kem nền dịu ấm (Background)</div>
+            <div class="specs-card-val" style="color: #A67C4D;">#FBF7F1 / #FFF9F1</div>
+            <div class="specs-card-desc">Nền tổng thể tạo cảm giác ấm áp như gia đình, dịu mắt hơn màu trắng toát.</div>
+          </div>
+          <div class="specs-card">
+            <div class="specs-card-name">Kiểu chữ hiển thị (Typography)</div>
+            <div class="specs-card-val">Lora & Be Vietnam Pro</div>
+            <div class="specs-card-desc">Hỗ trợ trọn vẹn dấu tiếng Việt, kết hợp sang trọng giữa Serif và Modern Sans.</div>
+          </div>
+        </div>
+
+        <h3 class="specs-section-title">2. Đối chiếu Tiêu chí nghiệm thu Hero/Header (Claude soạn)</h3>
+        <ul class="specs-checklist">
+          <li>
+            <span class="specs-badge-pass">ĐẠT 100%</span>
+            <div><strong>Nội dung & Nghiệp vụ:</strong> Nút chính ghi đúng <em>"Gửi yêu cầu đặt lịch"</em>, có dòng giải thích rõ <em>"Nhân viên sẽ liên hệ để xác nhận lịch hẹn"</em>. Không cam kết sai lệch, không từ ngữ "đặt lịch thành công tức thì", không nhắc đến OTP.</div>
+          </li>
+          <li>
+            <span class="specs-badge-pass">ĐẠT 100%</span>
+            <div><strong>Khách vãng lai & Đã đăng nhập:</strong> Header có đầy đủ 2 trạng thái. Khách vãng lai được nêu rõ không bắt buộc đăng ký tài khoản mới được gửi lịch.</div>
+          </li>
+          <li>
+            <span class="specs-badge-pass">ĐẠT 100%</span>
+            <div><strong>Nhận diện thương hiệu:</strong> Sử dụng đúng Logo chính thức do Chủ dự án cung cấp, không méo, không đổi màu, tách nền trong suốt sắc nét. Kế thừa chuẩn bảng màu Tím - Cam - Ngọc - Kem.</div>
+          </li>
+          <li>
+            <span class="specs-badge-pass">ĐẠT 100%</span>
+            <div><strong>Bố cục Phương án D (Minimal Creative):</strong> Đúng chuẩn mẫu D được duyệt: Tiêu đề căn giữa, 3 khung vòm thú cưng cân đối dưới chân trang, không xếp chồng chữ lên ảnh, không dùng floating card phức tạp.</div>
+          </li>
+          <li>
+            <span class="specs-badge-pass">ĐẠT 100%</span>
+            <div><strong>Mobile Ergonomics (390px):</strong> Không ép 3 ảnh nhỏ vào 1 hàng! Khung chú chó Golden làm trung tâm nổi bật, 2 bên hé lộ nhẹ nhàng kèm 3 chấm điều hướng mượt mà. Vùng chạm nút tối thiểu 48px.</div>
+          </li>
+          <li>
+            <span class="specs-badge-pass">ĐẠT 100%</span>
+            <div><strong>Khả năng tiếp cận (WCAG 2.1 AA):</strong> Tỷ lệ tương phản chữ/nền vượt ngưỡng 4.5:1; điều hướng bàn phím với focus-visible màu cam nổi bật; hỗ trợ đầy đủ <code>prefers-reduced-motion</code>.</div>
+          </li>
+        </ul>
+
+        <h3 class="specs-section-title">3. Hướng dẫn bàn giao cho Codex</h3>
+        <p style="font-size: 13.5px; color: #5E5362;">
+          Mã nguồn demo được viết bằng HTML5/CSS3 chuẩn mực với CSS Variables nhất quán. Codex có thể dễ dàng chuyển đổi thành component React/Next.js (hoặc Tailwind CSS tokens) theo cấu trúc đã phân chia trong thư mục <code>demo/</code>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 680" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #FFFBF5; }
+      .brand-purple {
+        stroke: #522158;
+        stroke-width: 9.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      .brand-purple-thin {
+        stroke: #522158;
+        stroke-width: 7.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      .brand-whisker {
+        stroke: #522158;
+        stroke-width: 5;
+        stroke-linecap: round;
+        fill: none;
+      }
+      .brand-solid {
+        fill: #522158;
+      }
+      .cat-body-fill {
+        fill: #FFFFFF;
+      }
+      .cat-belly-tint {
+        fill: #FFF9F1;
+      }
+    </style>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="540" height="680" rx="28" class="bg" />
+  <rect x="18" y="18" width="504" height="644" rx="20" fill="none" stroke="#632568" stroke-opacity="0.1" stroke-width="2" stroke-dasharray="8 8" />
+
+  <!-- DANCING CAT GROUP -->
+  <g id="dancing-cat" transform="translate(40, 25)">
+
+    <!-- 1. TAIL (Flows gracefully down left side, curving up at bottom) -->
+    <path class="brand-purple" d="
+      M 165 415
+      C 135 440, 100 480, 95 535
+      C 90 580, 108 605, 126 595
+      C 138 585, 136 555, 128 535
+      C 120 510, 122 475, 142 445
+    " />
+
+    <!-- 2. MAIN BODY OUTLINE (Continuous monoline flow) -->
+    <!-- Starts at left neck -> plump belly -> left leg -> groin -> right leg (dancing step) -> hip -> right flank -->
+    <path class="brand-purple" d="
+      M 172 235
+      C 152 265, 140 310, 145 365
+      C 150 415, 170 455, 180 480
+      L 175 565
+      C 175 580, 195 580, 198 565
+      L 208 495
+      C 220 480, 240 480, 252 492
+      L 258 522
+      C 264 542, 290 555, 305 536
+      C 316 520, 310 495, 294 476
+      C 322 448, 320 395, 312 355
+    " />
+
+    <!-- 3. LOWER OUTSTRETCHED ARM (Reaches out right, elbow bent, paw drooping down) -->
+    <path class="brand-purple" d="
+      M 302 300
+      C 325 298, 355 305, 385 315
+      C 402 322, 412 336, 404 352
+      C 396 364, 380 364, 366 355
+      C 344 342, 325 336, 306 338
+    " />
+
+    <!-- 4. UPPER RAISED DANCING ARM (Curves up high over head, paw curled inward) -->
+    <path class="brand-purple" d="
+      M 252 238
+      C 270 215, 295 185, 325 162
+      C 345 146, 368 142, 372 156
+      C 376 170, 360 180, 340 192
+      C 312 210, 285 238, 268 265
+    " />
+
+    <!-- Armpit/chest connecting contour -->
+    <path class="brand-purple-thin" d="
+      M 268 265
+      C 278 285, 292 295, 302 300
+    " />
+
+    <!-- 5. CHUBBY HEAD & EARS (Facing viewer, tilted cute) -->
+    <path class="brand-purple" d="
+      M 160 220
+      C 146 195, 145 165, 162 145
+      L 155 98
+      C 154 90, 166 90, 176 102
+      L 202 132
+      C 218 128, 240 128, 255 132
+      L 280 105
+      C 290 94, 302 96, 298 106
+      L 288 150
+      C 300 170, 298 200, 282 222
+      C 264 245, 230 252, 198 245
+      C 178 240, 166 232, 160 220
+    " />
+
+    <!-- Left Ear Inner Line (Clean monoline detail like reference 2) -->
+    <path class="brand-purple-thin" d="
+      M 176 112
+      C 184 130, 190 148, 192 160
+    " />
+
+    <!-- Right Ear Inner Line -->
+    <path class="brand-purple-thin" d="
+      M 284 116
+      C 278 132, 274 148, 272 160
+    " />
+
+    <!-- 6. MINIMALIST FACE (Solid dot eyes + solid inverted triangle nose) -->
+    <!-- Eyes: bold solid dots, expressive and friendly -->
+    <circle cx="196" cy="178" r="6.5" class="brand-solid" />
+    <circle cx="248" cy="182" r="6.5" class="brand-solid" />
+
+    <!-- Inverted Triangle Nose -->
+    <polygon points="222,192 214,204 230,204" class="brand-solid" />
+
+    <!-- Cute Whiskers (Minimal, 2 on each side like reference 1) -->
+    <line x1="148" y1="184" x2="175" y2="188" class="brand-whisker" />
+    <line x1="146" y1="198" x2="173" y2="196" class="brand-whisker" />
+    <line x1="270" y1="192" x2="298" y2="190" class="brand-whisker" />
+    <line x1="268" y1="202" x2="295" y2="204" class="brand-whisker" />
+
+    <!-- 7. CHEST / BELLY CONTOUR ACCENT (Subtle line indicating tummy depth) -->
+    <path class="brand-purple-thin" d="
+      M 198 245
+      C 220 258, 240 255, 255 242
+    " />
+    <path class="brand-purple-thin" d="
+      M 188 350
+      C 205 385, 230 410, 260 415
+    " stroke-dasharray="4 8" stroke-opacity="0.5" />
+
+  </g>
+
+  <!-- Caption text -->
+  <text x="270" y="650" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#632568" letter-spacing="0.5">
+    PHÁC THẢO MÈO LÊ SƠN — DÁNG DANCING CAT • PHONG CÁCH MONOLINE
+  </text>
+</svg>

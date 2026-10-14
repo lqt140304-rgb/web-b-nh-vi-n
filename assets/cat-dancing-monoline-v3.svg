@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 700" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #FFFDF9; }
+      .stroke-main {
+        stroke: #522158;
+        stroke-width: 9.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      .stroke-detail {
+        stroke: #522158;
+        stroke-width: 7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      .stroke-whisker {
+        stroke: #522158;
+        stroke-width: 5;
+        stroke-linecap: round;
+        fill: none;
+      }
+      .fill-solid {
+        fill: #522158;
+      }
+      .fill-belly {
+        fill: #FFF9F1;
+      }
+    </style>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="560" height="700" rx="32" class="bg" />
+  <rect x="20" y="20" width="520" height="660" rx="24" fill="none" stroke="#632568" stroke-opacity="0.12" stroke-width="2" stroke-dasharray="8 8" />
+
+  <!-- DANCING CAT -->
+  <g id="dancing-cat" transform="translate(35, 10)">
+
+    <!-- 1. TAIL (Curves down along the left flank, tips up gracefully) -->
+    <path class="stroke-main" d="
+      M 160 410
+      C 130 440, 95 480, 90 535
+      C 86 580, 105 605, 122 595
+      C 134 585, 132 555, 125 535
+      C 118 510, 120 475, 138 445
+    " />
+
+    <!-- 2. BELLY BACKGROUND (Soft Cream Patch) -->
+    <path class="fill-belly" d="
+      M 185 240
+      C 155 280, 145 340, 155 400
+      C 162 440, 180 470, 195 490
+      C 225 485, 255 480, 275 460
+      C 305 430, 310 380, 305 340
+      C 290 290, 270 250, 240 240
+      Z
+    " />
+
+    <!-- 3. MAIN BODY & LEGS (Single flowing contour) -->
+    <!-- Left neck -> plump round potbelly -> left leg -> groin -> right stepping leg -> hip -> waist -->
+    <path class="stroke-main" d="
+      M 175 235
+      C 150 270, 142 325, 148 385
+      C 154 435, 175 470, 184 495
+      L 180 575
+      C 180 590, 202 590, 205 575
+      L 214 505
+      C 228 492, 245 492, 258 502
+      C 264 515, 275 540, 285 558
+      C 294 572, 316 565, 318 548
+      C 320 530, 308 505, 298 485
+      C 324 455, 322 405, 315 365
+    " />
+
+    <!-- 4. RIGHT LOWER ARM (Outstretched with bent elbow & drooping paw) -->
+    <!-- Comes from torso -> elbows out -> paw hangs down softly -->
+    <path class="stroke-main" d="
+      M 305 315
+      C 325 312, 355 318, 385 330
+      C 400 338, 412 352, 406 368
+      C 400 382, 382 384, 370 372
+      C 355 358, 335 350, 308 355
+    " />
+
+    <!-- 5. UPPER RAISED DANCING ARM (Arches high overhead towards the head) -->
+    <!-- Originates at upper chest -> sweeps UP and CURVES OVER head -> curled paw -->
+    <path class="stroke-main" d="
+      M 260 230
+      C 285 200, 315 160, 345 130
+      C 365 110, 390 102, 396 118
+      C 402 135, 382 152, 360 168
+      C 330 190, 295 225, 275 260
+    " />
+
+    <!-- Inner armpit crease / chest line -->
+    <path class="stroke-detail" d="
+      M 275 260
+      C 288 285, 298 302, 305 315
+    " />
+
+    <!-- 6. HEAD & EARS (Facing viewer, adorable tilt, seamless jaw) -->
+    <path class="stroke-main" d="
+      M 165 215
+      C 150 190, 150 160, 168 138
+      L 160 88
+      C 158 80, 172 80, 182 92
+      L 210 126
+      C 226 122, 250 122, 268 126
+      L 294 95
+      C 305 84, 318 86, 314 98
+      L 302 145
+      C 316 168, 312 202, 295 226
+      C 275 250, 235 256, 198 248
+      C 180 242, 170 232, 165 215
+    " />
+
+    <!-- Ear interior line (Right image monoline style) -->
+    <path class="stroke-detail" d="
+      M 182 102
+      C 190 122, 198 142, 202 155
+    " />
+    <path class="stroke-detail" d="
+      M 298 108
+      C 292 126, 286 144, 284 158
+    " />
+
+    <!-- 7. MINIMALIST FACE (Solid dot eyes + solid inverted triangle nose) -->
+    <circle cx="204" cy="174" r="6.5" class="fill-solid" />
+    <circle cx="258" cy="178" r="6.5" class="fill-solid" />
+    <polygon points="231,188 223,200 239,200" class="fill-solid" />
+
+    <!-- Whiskers (Minimalist, charming) -->
+    <line x1="152" y1="180" x2="182" y2="184" class="stroke-whisker" />
+    <line x1="150" y1="194" x2="180" y2="192" class="stroke-whisker" />
+    <line x1="280" y1="188" x2="310" y2="185" class="stroke-whisker" />
+    <line x1="278" y1="198" x2="306" y2="201" class="stroke-whisker" />
+
+    <!-- 8. CHEST / NECK CONTOUR -->
+    <path class="stroke-detail" d="
+      M 200 248
+      C 225 260, 248 258, 265 242
+    " />
+
+  </g>
+
+  <!-- Title Caption -->
+  <text x="280" y="665" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#632568" letter-spacing="0.5">
+    PHÁC THẢO MÈO LÊ SƠN — DÁNG DANCING CAT • PHONG CÁCH MONOLINE TỐI GIẢN
+  </text>
+</svg>
