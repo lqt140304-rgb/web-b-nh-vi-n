@@ -89,11 +89,13 @@ Giai đoạn 1 vẫn giữ nguyên các quyết định đã chốt (đặt lị
 
 ## 5. Kiến trúc và chi phí: phạm vi áp dụng
 
-**[Đã chốt]** Cloudflare Workers Paid + Supabase Free và mục tiêu dự toán khoảng **300.000 đồng mỗi tháng** là phương án cho **website giai đoạn 1**.
+**[Đã chốt, cập nhật 14/10]** Trong phát triển và kiểm thử nội bộ của **website giai đoạn 1** dùng **Vercel Hobby + Supabase Free**, ưu tiên **Next.js**. Chưa mua Vercel Pro hay nâng Supabase khi đang phát triển; **không tự nâng cấp hay phát sinh chi phí khi chưa được chủ dự án đồng ý.** Phương án Cloudflare Workers Paid ở bản trước **đã được thay**.
 
 - Con số này **không được suy rộng** thành chi phí vận hành toàn bộ phần mềm bệnh viện. Nền tảng, gói dịch vụ và chi phí của các phân hệ sau (bệnh án, nội trú, video, kho, thanh toán…) **chưa được ước lượng** và sẽ cần quyết định riêng.
 - Phạm vi dự toán 300.000 đồng: dịch vụ vận hành web (hosting, phần cơ sở dữ liệu và email còn trong hạn mức, tên miền phân bổ theo năm, dự phòng nhỏ). Chưa gồm công phát triển, bảo trì, phí AI. Là mục tiêu, không phải trần hóa đơn.
-- **Trước khi khóa kiến trúc** phải kiểm chứng tính tương thích **Next.js/OpenNext trên Cloudflare Workers** (Codex nêu; Claude chưa xác minh). Cho đến khi đạt, kiến trúc **chưa được khóa**.
+- **Môi trường phát triển khác môi trường vận hành thương mại.** Trước khi đưa website vào hoạt động thương mại phải đánh giá và chọn gói triển khai phù hợp điều khoản sử dụng (Codex nêu Vercel Hobby dành cho mục đích cá nhân, phi thương mại; Claude chưa tự đọc điều khoản). Khi website hoàn thiện, căn cứ lượng truy cập, mức dùng tài nguyên, chi phí và yêu cầu ổn định để đề xuất nâng cấp.
+- **Mục tiêu 300.000 đồng mỗi tháng** được đặt khi nền tảng là Cloudflare Workers Paid; **cần xác nhận lại cho vận hành thương mại** vì gói trả phí của Vercel và Supabase có thể cao hơn nhiều (ước tính của Codex, Claude chưa kiểm chứng).
+- Kiểm chứng OpenNext/Cloudflare **không còn bắt buộc**; chỉ cần nếu sau này cân nhắc chuyển nền tảng.
 
 ---
 

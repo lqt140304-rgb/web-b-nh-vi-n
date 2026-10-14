@@ -11,7 +11,7 @@ Tài liệu: [kế hoạch bản 3](https://github.com/lqt140304-rgb/web-b-nh-vi
 | Làm rõ phạm vi | Giai đoạn 1 = website giới thiệu, tài khoản khách, hồ sơ thú cưng, form yêu cầu đặt lịch. Hệ thống tổng thể (bệnh án, nội trú, chăm sóc, điều trị, video, quản lý công việc, kho, thanh toán…) ghi là **chưa triển khai trong giai đoạn này, không loại bỏ vĩnh viễn**. Có bảng ở `dinh-huong-san-pham.md` mục 1 |
 | Cơ cấu nhân sự | Không có lễ tân riêng. Phân quyền theo **khả năng kiêm nhiệm**: một người giữ nhiều khả năng, mỗi người một tài khoản cá nhân; "quản lý/bác sĩ/nhân viên Spa" chỉ là bộ khả năng soạn sẵn. Đổi thuật ngữ "lễ tân" thành "người tiếp nhận" (là khả năng, không phải chức danh) trong ba tài liệu hiện có |
 | Yêu cầu hệ thống tổng thể | Lưu đầy đủ ở `dinh-huong-san-pham.md` mục 3: phía khách (hồ sơ thú cưng, lịch sử mua sắm, báo cáo sức khỏe được chia sẻ, lịch hẹn, nhật ký nội trú, tình trạng chăm sóc chung, video; **không** xem tên thuốc, liều, giờ tiêm, y lệnh); phía nhân viên và quản lý (lịch điều trị, thuốc, giờ thực hiện, y lệnh tiếp theo, giao nhiệm vụ, lịch làm việc, lịch trực, bảng công việc, checklist, cảnh báo, bàn giao ca); video nội trú mặc định bỏ âm thanh và tự xóa sau 60 ngày; không quét QR chuồng |
-| Kiến trúc và chi phí | Cloudflare Workers Paid + Supabase Free và khoảng 300.000 đồng/tháng ghi là **chỉ cho website giai đoạn 1**, không suy rộng ra toàn bộ phần mềm bệnh viện. **Cổng 2** của kế hoạch yêu cầu kiểm chứng Next.js/OpenNext trên Cloudflare Workers; đến lúc đó kiến trúc chưa khóa |
+| Kiến trúc và chi phí | **Bản cập nhật hạ tầng (14/10, quyết định sau):** Vercel Hobby + Supabase Free trong phát triển và kiểm thử nội bộ, ưu tiên Next.js; chưa mua Vercel Pro hay nâng Supabase; trước hoạt động thương mại phải đánh giá và chọn gói phù hợp điều khoản; không tự phát sinh chi phí. Thay hướng Cloudflare Workers Paid. **Bỏ yêu cầu bắt buộc kiểm chứng OpenNext/Cloudflare.** Giữ Supabase Free kèm sao lưu, khôi phục, bảo mật. Phân biệt rõ môi trường phát triển miễn phí và vận hành thương mại (kế hoạch mục 6; rà soát mục 6b) |
 | Trước khi viết mã | Kế hoạch ghi rõ chưa được phê duyệt để lập trình; còn quyết định nghiệp vụ, thiết kế giao diện, mô hình dữ liệu. Không merge main |
 
 ## 2. Ba lưu ý mới của Claude (không chặn giai đoạn 1, là đề xuất)
@@ -36,8 +36,13 @@ Chỉ những điều chủ dự án mới quyết định được. Chi tiết 
 10. **Chấp nhận rủi ro gói Free:** dự án có thể bị tạm dừng khi ít dùng; mất tối đa dữ liệu từ lần sao lưu cuối khi có sự cố.
 11. **Nội dung chính thức** cho website: nhận diện, ảnh, liên hệ, danh sách dịch vụ, có hiển thị bảng giá công khai không.
 
+## 3b. Quyết định mới cần chủ dự án (từ cập nhật hạ tầng)
+
+12. **Định nghĩa "hoạt động thương mại"** để áp dụng cổng chọn gói (đề xuất: khi công khai cho khách thật hoặc nhận dữ liệu khách thật).
+13. **Mục tiêu chi phí vận hành thương mại:** 300.000 đồng/tháng được đặt khi nền tảng là Cloudflare. Ước tính trước đó của Codex cho gói trả phí Vercel và Supabase cao hơn nhiều (Claude chưa kiểm chứng). Cần xác nhận lại mục tiêu hoặc chấp nhận mức cao hơn khi đến cổng; không cần quyết định ngay.
+
 ## 4. Việc Codex làm tiếp khi được duyệt (không cần thêm vòng duyệt)
 
-- Probe tương thích Next.js/OpenNext trên Cloudflare Workers.
+- Chạy Next.js trên Vercel Hobby trong phát triển; kiểm thử chuyển IP khách trên Vercel; đánh giá điều khoản và gói cho vận hành thương mại khi đến cổng.
 - Các kiểm chứng kỹ thuật còn lại ở mục 2 và 10 của tài liệu rà soát (số di động Việt Nam, tên đăng nhập qua tra cứu, chuyển IP khách, quyền dữ liệu, thử xuất và khôi phục).
 - Cùng Claude hoàn thiện mô hình dữ liệu và phân quyền theo khả năng; Gemini hoàn thiện thiết kế giao diện, bắt đầu từ Hero/Header.
