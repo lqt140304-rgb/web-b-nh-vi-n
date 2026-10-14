@@ -903,15 +903,11 @@ img {
   color: var(--color-brand-orange);
   display: inline-block;
   transform-origin: center;
-  animation: eyebrowHeartbeat 2.8s ease-in-out infinite;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-
-@keyframes eyebrowHeartbeat {
-  0%, 100% { transform: scale(1); }
-  14% { transform: scale(1.22); }
-  28% { transform: scale(1); }
-  42% { transform: scale(1.15); }
-  70% { transform: scale(1); }
+.hero-eyebrow:hover svg,
+.services-eyebrow:hover svg {
+  transform: scale(1.18);
 }
 
 /* Tiêu đề chính lớn (H1) */
@@ -1968,86 +1964,49 @@ img {
   transform: scale(1.08) translateY(-3px);
 }
 
-/* Biến thể màu nền pastel đậm hơn, đủ rõ & Hiệu ứng vi tương tác từng Icon */
+/* Biến thể màu nền pastel đậm hơn, đủ rõ (Chốt 15/10/2026, không dùng hiệu ứng lặp vô hạn) */
 /* 1. Khám & Điều trị: Ống nghe bo tròn nét mảnh, nền Cam đào */
 .card-icon-badge.badge-kham {
-  background: #FCDCC7;
+  background: #FCD0B4;
   box-shadow: 0 4px 14px rgba(184, 83, 11, 0.18);
 }
 .service-card:hover .badge-kham {
-  background: #F8CAA8;
+  background: #F7BFA0;
   box-shadow: 0 8px 22px rgba(184, 83, 11, 0.28);
-}
-.service-card:hover .badge-kham svg {
-  animation: iconStethoscopeBreath 2.2s ease-in-out infinite;
-}
-
-@keyframes iconStethoscopeBreath {
-  0%, 100% { transform: scale(1); }
-  15% { transform: scale(1.12); }
-  30% { transform: scale(1.01); }
-  45% { transform: scale(1.08); }
-  65% { transform: scale(1); }
 }
 
 /* 2. Spa & Grooming: Cây kéo tỉa lông đơn giản, nền Xanh mint */
 .card-icon-badge.badge-grooming {
-  background: #C8ECEE;
+  background: #BEE4E6;
   box-shadow: 0 4px 14px rgba(14, 116, 127, 0.18);
 }
 .service-card:hover .badge-grooming {
-  background: #B2E1E4;
+  background: #A8D7DA;
   box-shadow: 0 8px 22px rgba(14, 116, 127, 0.28);
-}
-.service-card:hover .badge-grooming svg {
-  animation: iconScissorSnip 1.8s ease-in-out infinite;
-}
-
-@keyframes iconScissorSnip {
-  0%, 100% { transform: rotate(0deg); }
-  18% { transform: rotate(-10deg); }
-  36% { transform: rotate(7deg); }
-  54% { transform: rotate(-4deg); }
-  72% { transform: rotate(0deg); }
 }
 
 /* 3. Nội trú: Ngôi nhà viền với dấu chân thú cưng ở giữa, nền Tím lilac */
 .card-icon-badge.badge-noitru {
-  background: #E8CEEC;
+  background: #E4C4E8;
   box-shadow: 0 4px 14px rgba(90, 30, 94, 0.18);
 }
 .service-card:hover .badge-noitru {
-  background: #DDBDE2;
+  background: #D6B0DC;
   box-shadow: 0 8px 22px rgba(90, 30, 94, 0.28);
-}
-.service-card:hover .badge-noitru svg {
-  animation: iconHomeCozy 2.4s ease-in-out infinite;
-}
-
-@keyframes iconHomeCozy {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px) scale(1.05); }
 }
 
 /* 4. Cấp cứu 24/24: Trái tim nét viền có đường nhịp ECG, nền Hồng rose */
 .card-icon-badge.badge-capcuu {
-  background: #F8C8D2;
+  background: #F6BBC6;
   box-shadow: 0 4px 14px rgba(194, 37, 72, 0.18);
 }
 .service-card:hover .badge-capcuu {
-  background: #F2B2BF;
+  background: #EFA6B4;
   box-shadow: 0 8px 22px rgba(194, 37, 72, 0.28);
 }
-.service-card:hover .badge-capcuu svg {
-  animation: iconHeartECG 1.8s ease-in-out infinite;
-}
 
-@keyframes iconHeartECG {
-  0%, 100% { transform: scale(1); }
-  14% { transform: scale(1.14); }
-  28% { transform: scale(1.02); }
-  42% { transform: scale(1.10); }
-  60% { transform: scale(1); }
+.service-card:hover .card-icon-badge svg {
+  transform: scale(1.06);
 }
 
 /* Thân nội dung thẻ */
@@ -2172,18 +2131,10 @@ img {
 .btn-card-emergency svg {
   display: inline-block;
   transform-origin: center;
-  transition: transform 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .btn-card-emergency:hover svg {
-  animation: iconPhoneRing 0.55s ease-in-out infinite;
-}
-
-@keyframes iconPhoneRing {
-  0%, 100% { transform: rotate(0); }
-  20% { transform: rotate(-14deg) scale(1.12); }
-  40% { transform: rotate(14deg) scale(1.12); }
-  60% { transform: rotate(-10deg) scale(1.12); }
-  80% { transform: rotate(10deg) scale(1.12); }
+  transform: scale(1.12);
 }
 
 .btn-card-emergency .emergency-btn-label {
