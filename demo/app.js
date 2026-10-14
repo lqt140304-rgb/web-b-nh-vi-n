@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCloseDrawer = document.getElementById('btnCloseDrawer');
 
   const siteHeader = document.getElementById('siteHeader');
-  const heroMain = document.getElementById('heroMain');
+  const heroMain = document.getElementById('hero-main');
 
   const btnOpenSpecs = document.getElementById('btnOpenSpecs');
   const specsModal = document.getElementById('specsModal');
