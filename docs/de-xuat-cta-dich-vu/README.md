@@ -1,3 +1,5 @@
+> **Đã bị thay thế (15/10/2026):** chủ dự án chốt hướng CTA khác (nền kem pha tím nhẹ, không minh họa lớn, không cún). Yêu cầu chính thức: [shared/requirements/docs/yeu-cau-cta-dich-vu-2026-10-15.md](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/yeu-cau-cta-dich-vu-2026-10-15.md). Ảnh minh họa theo yêu cầu chốt: [cta-chot-15-10.png](cta-chot-15-10.png) ([HTML](cta-chot-15-10.html)). Phần dưới chỉ là lịch sử, **không triển khai**.
+
 # Đề xuất CTA mới cho trang Dịch vụ (Claude, 15/10/2026, bản 4)
 
 **Trạng thái:** đề xuất, **chờ chủ dự án duyệt**; chưa là yêu cầu cho Antigravity. Thay khối cũ "Bạn cần đặt lịch chăm sóc cho thú cưng?" ở cuối trang Dịch vụ. Xem [ảnh](cta-moi.png) và [bản HTML chạy được](cta-moi.html).
