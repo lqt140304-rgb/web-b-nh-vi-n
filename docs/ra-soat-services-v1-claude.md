@@ -56,3 +56,62 @@ Bản 3 của Hero ghi "không còn tải tài nguyên ngoài". **Sai**: `styles
 Không có mục bắt buộc. Tùy chọn: Safari và iPhone thật, chạy axe tự động sau khi sửa F1–F5.
 
 Ảnh bằng chứng: `ra-soat-services-v1-bang-chung/` (01 đến 05).
+
+---
+
+# LƯỢT 2 — Kiểm tra bản sửa (commit `843504e`)
+
+**Ngày:** 14/10/2026 · **Người rà soát:** Claude (Sonnet, lượt sau theo [quy trình QA](quy-trinh-qa-ui-ux.md)) · Không sửa nhánh Antigravity, không duyệt thay chủ dự án.
+
+**Phạm vi đã kiểm:** đối chiếu từng mục trong [yêu cầu sửa](yeu-cau-sua-services-v1-antigravity.md); đo ở 1440, 1280, 1024, 900, 768, 681, 600, 390, 360 px; bàn phím; bốn cửa sổ chi tiết; menu điện thoại; header đã đăng nhập; liên kết; mạng ngoài; trang Hero (liên kết sang Dịch vụ). **Chưa kiểm:** Safari, thiết bị thật, trình đọc màn hình thật, và liên kết Google Maps/Facebook có mở đúng trang (mạng ngoài bị chặn).
+
+## Kết luận lượt 2: **FIX (nhẹ hơn lượt 1)** — 1 lỗi Cao, 4 Trung bình, còn lại nhỏ
+
+## A. Đối chiếu yêu cầu sửa
+
+| # | Mục | Nhãn | Bằng chứng |
+|---|---|---|---|
+| 1 | Ảnh sạch (F1) | **PASS một phần** | Bốn ảnh mới là ảnh thật, không còn mép thẻ khác hay icon nướng sẵn; rộng 1000 px (đủ nét). Nhưng **ảnh Cấp cứu cắt mất đầu con chó** (chỉ thấy thân, ảnh 06, 07) → xem B2. Nguồn và bản quyền từng ảnh: chưa thấy ghi trong tài liệu bàn giao, **chưa xác nhận** |
+| 2 | Chữ giữ chỗ (F2) | **PASS** | Ba dòng mỗi thẻ và toàn bộ phần mô tả trong cửa sổ đều là "[Nội dung mẫu — chờ bệnh viện cung cấp]"; không còn lời hứa kết quả; H1 bỏ chữ "toàn diện". Một câu ngoài phạm vi, xem B7 |
+| 3 | Cấp cứu: gọi điện (F3) | **PASS một phần** | Thẻ có "Cấp cứu 24/24", nút `tel:+84973555105`, không có nút gửi yêu cầu. Nhưng nút "Tìm hiểu thêm & Chỉ đường" không mở được (B1) và số điện thoại bị ngắt dòng (B3) |
+| 4 | Đường đặt lịch (F4) | **PASS** | Có khối "Gửi yêu cầu đặt lịch" kèm "Nhân viên sẽ liên hệ để xác nhận lịch hẹn" và "Không cần tài khoản"; mọi nút trỏ `index.html#form-dat-lich`, chữ đúng |
+| 5 | Menu điện thoại giống Hero (F5) | **PASS** | Có logo, nút đặt lịch, ghi chú khách vãng lai; Enter mở và tiêu điểm vào nút đóng, Tab quay vòng, Escape trả về nút menu; nội dung phía sau `inert`. Ảnh 08 |
+| 6 | Nối Hero sang Dịch vụ (F6) | **PASS** | Cả ba liên kết "Dịch vụ", "Xem dịch vụ" trên `index.html` trỏ `services.html` |
+| 7 | Đổi "Spa & Grooming" | **PASS** | Hiển thị đúng ở thẻ, mô tả ảnh, cửa sổ; một dòng ở 360 px |
+| 8 | Phông chữ tải một lần (F7) | **PASS** | Một liên kết Google Fonts, đã bỏ Caveat (vẫn tải từ Google, xem ghi nhận) |
+| 9 | Icon Cấp cứu (F8) | **PASS** | Đổi sang dấu cộng trong vòng tròn |
+| 10 | Ghi chú `server.js` (F9) | **Chưa thấy** | Không tìm thấy ghi chú trong tài liệu bàn giao mới (mức Thấp) |
+| 11 | Lỗi nhỏ Hero | **PASS** | Hero không còn chấm tròn; menu "Dịch vụ" đã nối |
+
+Đạt thêm: bốn thẻ vẫn một hàng ở ≥ 1280, 2×2 ở 681–1024, một cột ≤ 680, không tràn ngang ở mọi cỡ; header 64 và 60 px ở 390 và 360 kể cả tên dài; cửa sổ chi tiết của Khám, Spa & Grooming, Nội trú: tiêu điểm vào nút đóng, Tab quay vòng, Escape trả đúng nút; không lỗi JavaScript.
+
+## B. FIX
+
+| # | Ưu tiên | Lỗi | Bằng chứng | Đạt khi |
+|---|---|---|---|---|
+| B1 | **Cao** | **Nút "Tìm hiểu thêm & Chỉ đường" của thẻ Cấp cứu không hoạt động.** Bấm xong cửa sổ hiện tiêu đề mặc định "Chi tiết Dịch vụ", **nội dung trống**, tiêu điểm không vào cửa sổ, Tab không bị giữ, Escape không trả về nút. Nguyên nhân khả dĩ: mã gắn sự kiện chỉ cho lớp `.btn-card-learn`, nút này dùng lớp `.btn-card-sublink`. Như vậy nội dung Cấp cứu (cảnh báo gọi trực tiếp, nút chỉ đường) **không bao giờ hiển thị** | Ảnh 09; đo bằng kịch bản | Bấm nút mở cửa sổ Cấp cứu có đủ cảnh báo, nút gọi, nút chỉ đường; tiêu điểm, Tab, Escape như ba cửa sổ kia |
+| B2 | Trung bình | **Ảnh Cấp cứu cắt mất đầu chú chó**, chỉ thấy thân; lỗi này lặp ở mọi cỡ màn hình | Ảnh 06, 07 | Ảnh thấy rõ mặt/đầu con vật (đổi ảnh hoặc chỉnh vùng cắt) |
+| B3 | Trung bình | **Số điện thoại bị ngắt làm đôi** trên nút Cấp cứu ở desktop: "Gọi cấp cứu: 097 355 / 51 05" | Ảnh 06 | Số điện thoại không bị ngắt (không dùng "Gọi cấp cứu:" trước số, hoặc ngăn ngắt giữa số, ví dụ `white-space: nowrap` cho số) |
+| B4 | Trung bình | **Đường cong cam đè lên tiêu đề**: do H1 nay một dòng dài, đường cong trái cắt chữ "D" của "Dịch", đường cong phải chạm chữ "bạn" ở 1440 px (lặp lỗi chồng họa tiết lên chữ đã sửa ở Hero) | Ảnh 06 | Họa tiết không chạm hay cắt chữ ở 1440, 1280, 1024 px |
+| B5 | Trung bình | **Sai địa chỉ trong chú thích**: `title` của nút bản đồ trên header ghi "**105** Khuất Duy Tiến" (trên `services.html` và `index.html`); địa chỉ đúng là **101** | Đọc mã | Sửa 105 thành 101 ở mọi nơi; tìm lại toàn bộ mã |
+| B6 | Trung bình | **Thêm ngoài yêu cầu**: nút Google Maps và Facebook trên header, khối "BỆNH VIỆN THÚ Y LÊ SƠN / địa chỉ / hotline / Chỉ đường / Facebook" trong menu điện thoại, nút Maps/Facebook trong cửa sổ các dịch vụ. Yêu cầu chỉ nói liên kết Maps tùy chọn trong thẻ Cấp cứu và **Facebook để dành về sau**. Header đã duyệt ở Hero nay thay đổi, và liên kết Facebook ở header còn kèm `?locale=vi_VN` (đã dặn bỏ) | Ảnh 06, 08; đọc mã | Chủ dự án quyết định giữ hay bỏ (xem Q4). Nếu giữ: bỏ `?locale=vi_VN`, ghi rõ trong tài liệu bàn giao là phần bổ sung |
+| B7 | Trung bình | **Tài liệu `thong-tin-benh-vien-le-son.md` ghi thông tin chưa xác nhận** như sự thật: "phòng mổ vô trùng, máy gây mê kèm thở", "máy siêu âm Doppler màu, X-quang kỹ thuật số", "máy xét nghiệm huyết học, sinh hóa", "chuồng inox y tế cao cấp, khu cách ly", "camera theo dõi", "trục đường vành đai 3", cùng tọa độ và kế hoạch "trích xuất ảnh từ Fanpage và Google Maps". Chủ dự án chưa cung cấp các thông tin này; ảnh trên Facebook/Maps thuộc người chụp, chưa có cho phép | Đọc tài liệu | Gỡ các mục chưa xác nhận hoặc ghi rõ "chưa xác nhận, không dùng"; không dùng ảnh Facebook/Maps khi chưa có xác nhận của chủ dự án. Nếu có tọa độ, ghi rõ nguồn |
+| B8 | Thấp | Cửa sổ Cấp cứu ghi "hỗ trợ **tức thì**" và "**tất cả các ngày trong tuần**": lời hứa mạnh hơn "24/24" chủ dự án xác nhận | Đọc mã | Dùng đúng "Cấp cứu 24/24" |
+| B9 | Thấp | Mô tả ảnh Khám ghi "**Bác sĩ** thú y thăm khám" cho một người trong ảnh minh họa chưa rõ là bác sĩ | Đọc mô tả | Mô tả trung tính ("người chăm sóc vuốt ve bé mèo") |
+| B10 | Thấp | Mã có tham số `?drawer=open` thêm vào để chụp xem thử; không có trong yêu cầu | Đọc mã | Ghi chú là công cụ xem thử, Codex không tái sử dụng |
+
+## C. Ghi nhận (không chặn)
+
+- Hai trang vẫn tải phông từ Google (Codex tự lưu trữ khi làm thật).
+- Tài liệu bàn giao chưa nêu nguồn và giấy phép từng ảnh dịch vụ như đã yêu cầu ở mục 1 (đã ghi ở A1).
+- Chấp nhận được ở demo: liên kết "Giới thiệu", "Liên hệ" và các mục trong menu tài khoản vẫn chưa có đích.
+
+## D. Câu hỏi cho chủ dự án
+
+- **Q4:** Giữ hay bỏ nút Google Maps và Facebook ở header, và khối liên hệ trong menu điện thoại? Claude đề xuất: **giữ khối liên hệ ở menu điện thoại** (hữu ích), **bỏ hai nút trên header** (header đã duyệt ở Hero cần gọn, để về chân trang), Facebook chuyển sang chân trang hoặc trang Liên hệ sau.
+
+## E. NEED CODEX
+
+Không bắt buộc. Tùy chọn sau khi sửa: Safari và iPhone thật.
+
+Ảnh bằng chứng lượt 2: 06 đến 09 trong `ra-soat-services-v1-bang-chung/`.
