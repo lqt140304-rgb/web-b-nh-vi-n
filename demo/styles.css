@@ -1072,38 +1072,38 @@ img {
 }
 
 /* Họa tiết trang trí Hero chuẩn chốt 15/10/2026 (Tĩnh, nhẹ nhàng, không lặp) */
-/* Góc trên phải: Nét cong ngắn và 2 chấm tím nhạt */
+/* Góc trên phải: Nét cong ngắn và 2 chấm tím nhạt (x ≈ 90–96% ngay dưới nút Đăng ký) */
 .hero-decor-top-right {
   position: absolute;
   top: 18px;
-  right: calc(50% - 460px);
+  right: 5%;
   z-index: 1;
   pointer-events: none;
 }
 
-/* Bên trái: Cuộn len tím nhạt với sợi nối cong hướng xuống ảnh mèo trái */
+/* Bên trái: Cuộn len ở x ≈ 15%, sợi cong nhẹ xuống chạm đúng đỉnh ảnh mèo trái */
 .hero-decor-yarn {
   position: absolute;
-  top: 36px;
-  left: calc(50% - 420px);
+  top: 50px;
+  left: calc(50% - 530px);
   z-index: 1;
   pointer-events: none;
 }
 
-/* Bên phải: Ba dấu chân tím nhạt nhỏ dần hướng lên trên */
+/* Bên phải: Ba dấu chân tím nhạt nhỏ dần lên trên (x ≈ 83–89%, cách chữ ≥ 40px) */
 .hero-decor-paws {
   position: absolute;
-  top: 80px;
-  right: calc(50% - 390px);
+  top: 75px;
+  right: 11%;
   z-index: 1;
   pointer-events: none;
 }
 
-/* Góc dưới trái: Quả bóng nhỏ nét tím nhạt */
+/* Góc dưới trái: Quả bóng nhỏ ở x ≈ 6%, ngoài hẳn cung cam và ảnh trái, gần đáy ảnh */
 .hero-decor-ball {
   position: absolute;
-  bottom: 70px;
-  left: calc(50% - 560px);
+  bottom: 40px;
+  left: 6%;
   z-index: 5;
   pointer-events: none;
 }
@@ -1116,22 +1116,22 @@ img {
   justify-content: center;
 }
 
-/* Hai cung cam mảnh ôm ngoài hai ảnh bên, chừa khe đều, không đè ảnh/chữ */
+/* Hai cung cam mảnh ôm ngoài hai ảnh bên, khe hở đều 20px, đầu cung nhô lên trên đỉnh ảnh */
 .pet-arch-halo {
   position: absolute;
   pointer-events: none;
   z-index: 1;
 }
 .pet-arch-halo-left {
-  width: 320px;
-  height: 280px;
-  left: -16px;
+  width: 350px;
+  height: 300px;
+  left: -30px;
   bottom: 0;
 }
 .pet-arch-halo-right {
-  width: 320px;
-  height: 280px;
-  right: -16px;
+  width: 350px;
+  height: 300px;
+  right: -30px;
   bottom: 0;
 }
 
@@ -1534,9 +1534,9 @@ img {
   .hero-decor-yarn { left: 20px; transform: scale(0.85); transform-origin: top left; }
   .hero-decor-paws { right: 20px; transform: scale(0.85); transform-origin: top right; }
   .hero-decor-top-right { right: 20px; }
-  .hero-decor-ball { left: 20px; }
-  .pet-arch-halo-left { width: 220px; height: 210px; left: -10px; }
-  .pet-arch-halo-right { width: 220px; height: 210px; right: -10px; }
+  .hero-decor-ball { left: 24px; bottom: 30px; }
+  .pet-arch-halo-left { width: 240px; height: 225px; left: -20px; }
+  .pet-arch-halo-right { width: 240px; height: 225px; right: -20px; }
 }
 
 @media (max-width: 680px) {

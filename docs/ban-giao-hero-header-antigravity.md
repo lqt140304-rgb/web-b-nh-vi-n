@@ -171,15 +171,15 @@ web-benh-vien/
 | Hạng mục | Tiêu chuẩn kỹ thuật | Antigravity tự đánh giá | Ghi chú & Kết quả đo |
 |---|---|:---:|---|
 | **Logo nhận diện** | Logo chính thức Lê Sơn, nền trong suốt, không méo | Tự đánh giá: Đạt | Sử dụng logo gốc từ tệp PNG tách nền trong suốt |
-| **Tiêu đề Hero** | "Khoảng an toàn nhỏ cho những người bạn lớn" | Tự đánh giá: Đạt | Đúng câu chữ Mẫu D, hỗ trợ trọn vẹn dấu tiếng Việt |
+| **Tiêu đề Hero** | "Không gian lớn cho những người bạn nhỏ" *(thay thế câu cũ theo quyết định 15/10/2026)* | Tự đánh giá: Đạt | Đúng câu chữ Chủ dự án chốt, hỗ trợ trọn vẹn dấu tiếng Việt |
 | **Nút chính CTA** | "Gửi yêu cầu đặt lịch" | Tự đánh giá: Đạt | Không dùng "Đặt lịch ngay", tránh cam kết sai |
-| **Dòng chú thích** | Dòng trấn an & Thông điệp không cần tài khoản | Tự đánh giá: Đạt | Cả 2 dòng hiển thị ngay trang chủ, tương phản 6.81:1 |
+| **Dòng chú thích** | Đã bỏ 2 dòng ghi chú dưới nút theo duyệt 15/10/2026 *(lịch sử đợt 1 có 2 dòng)* | Tự đánh giá: Đạt | Đã gỡ bỏ khỏi Hero, giải thích lịch chuyển vào form/menu |
 | **Hình ảnh thú cưng** | 3 Khung vòm trong 1 hàng ở mọi kích thước, chạm đáy | Tự đánh giá: Đạt | 3 ảnh hiển thị đồng thời, chạm sát đáy sàn, mỗi ảnh ≥ 90px |
 | **Mobile 390px & 360px** | Header đồng đều, không tràn ngang, nút ≥ 44px | Tự đánh giá: Đạt | Header cao 64px cả 2 trạng thái, `scrollWidth` = chiều rộng màn hình |
 | **Desktop 1440px** | Bố cục căn giữa thanh lịch, không dải chấm tròn | Tự đánh giá: Đạt | 3 khung ảnh vòm đối xứng, đã xóa bỏ dải chấm tròn |
 | **Trợ năng bàn phím** | Tiêu điểm vào nút đóng khi mở drawer, bẫy tiêu điểm | Tự đánh giá: Đạt | Enter mở menu đưa ngay tiêu điểm vào nút đóng, ESC hoàn trả |
 | **Tương phản WCAG AA** | Chữ nhỏ ≥ 4.5:1; Focus ring ≥ 3:1 | Tự đánh giá: Đạt | Chữ chính 16.19:1, chữ nhỏ 6.81:1, viền focus 13.96:1 |
-| **Nhánh Git làm việc** | Nhánh riêng `antigravity/hero-v1`, không merge main | Tự đánh giá: Đạt | Toàn bộ commit lưu trên nhánh `antigravity/hero-v1` |
+| **Nhánh Git làm việc** | Nhánh thống nhất `antigravity/design` *(lịch sử: `antigravity/hero-v1`)* | Tự đánh giá: Đạt | Toàn bộ commit mới lưu trên nhánh `antigravity/design` |
 
 ---
 
@@ -207,12 +207,12 @@ Toàn bộ tài nguyên vector SVG đã được bảo tồn nguyên vẹn tại
 | **S5** | Trung bình | Thay đổi toàn bộ chữ nhỏ từ `#7A6F7E` sang `#5E5362` (đạt tỷ lệ tương phản 6.81:1 trên nền kem `#FBF7F1`, vượt ngưỡng 4.5:1 của WCAG AA). | Đo tương phản màu bằng công thức WCAG: `#5E5362` trên `#FBF7F1` = 6.81:1 (Đạt chuẩn AA); tài liệu token cập nhật số liệu thật. |
 | **S6** | Trung bình | Đổi kiểu focus visible: Sử dụng viền tím đậm `#5A1E5E` 3px (11.04:1 trên nền kem); đối với các nút nền tím đậm thì dùng viền tím sẫm `#421247` 3px có vòng đệm trắng `#FFF` 2px (13.96:1 trên kem, ≥ 3:1 với nền nút). | Đo tương phản viền tiêu điểm so với nền liền kề ở nút chính, nút phụ, link menu, nút tài khoản: tất cả đều ≥ 3:1 (vượt tiêu chuẩn của SC 1.4.11). |
 | **S7** | Trung bình | Bỏ "Tin tức", "Cẩm nang thú cưng" và ô tìm kiếm; bỏ nhãn "Khách thân thiết"; đổi tên giả thành "Khách Demo" và nhãn "Chờ nhân viên xác nhận"; cập nhật văn bản thay thế (`alt`) của 3 ảnh sang mô tả trung tính, bỏ nhận định thú cưng bệnh viện; bỏ chữ tiếng Anh "Care / Create / Stronger / Bonds". | Quét toàn bộ HTML/CSS: Không còn các từ ngữ ngoài phạm vi; dữ liệu demo thể hiện rõ ràng là dữ liệu giả lập. |
-| **S8** | Trung bình | Thêm thông điệp "Không cần tài khoản để gửi yêu cầu." nằm cạnh dòng trấn an trong Hero, hiển thị trên giao diện chính mà không cần mở menu. | Tại 1440px và 390px, thông điệp hiển thị ngay trong màn hình đầu tiên khi tải trang, không chồng lấn, đạt tương phản 6.81:1. |
+| **S8** | Trung bình | Thêm thông điệp "Không cần tài khoản để gửi yêu cầu." nằm cạnh dòng trấn an trong Hero *(lịch sử đợt 1; đến ngày 15/10/2026 Chủ dự án đã chốt bỏ cả 2 dòng ghi chú khỏi Hero để thoáng sạch giao diện)*. | Tại 1440px và 390px, thông điệp hiển thị ngay trong màn hình đầu tiên khi tải trang, không chồng lấn, đạt tương phản 6.81:1. |
 | **S9** | Trung bình | Bỏ chữ viết tay cắt ngang họa tiết; chuẩn hóa 2 vòng cung cam hai bên thanh mảnh, đối xứng, không chạm hoặc cắt ngang chữ hay khung ảnh; loại bỏ toàn bộ mảnh vụn và vệt màu lạ. | Kiểm tra ảnh chụp ở 768px, 1024px, 1440px: Không có nét cắt ngang chữ; đỉnh hai khung ảnh sạch sẽ, thanh thoát. |
 | **S10** | Trung bình | Thay thế 3 ảnh thú cưng bằng ảnh gốc chất lượng cao hình chữ nhật (không có khung kem nướng sẵn, không có vạch đáy); ảnh giữa đạt độ phân giải thật 960×845 px (> 840 px); ghi rõ nguồn Unsplash và giấy phép Unsplash License trong tài liệu bàn giao. | Tại 1440px, kiểm tra phóng to ảnh không còn dải sáng đáy hay viền kép ở đỉnh; ảnh sắc nét và CSS tự bo vòm. |
 | **S11** | Thấp | Bổ sung quy tắc: Chỉ áp dụng `box-shadow` cho `.mobile-drawer` khi có class `.open`; khi menu đóng thì `box-shadow: none` và `visibility: hidden`. | Kiểm tra mép phải màn hình ở 390px khi menu đóng: Hoàn toàn không còn vệt bóng xám lọt vào khung nhìn. |
 | **S12** | Thấp | Bổ sung thuộc tính `text-wrap: balance` và giới hạn `max-width: 580px` cho `.hero-description`. | Kiểm tra tại 1024px và 1440px: Dòng mô tả hiển thị trọn vẹn, không còn hiện tượng rớt một từ "hiểu." xuống dòng riêng lẻ. |
-| **T1** | Tài liệu | Thống nhất tên nhánh làm việc là `antigravity/hero-v1`; bỏ dòng "Nhánh Git ✅ Đạt" ghi sai. | Cả hai tài liệu bàn giao đều ghi đúng nhánh `antigravity/hero-v1`. |
+| **T1** | Tài liệu | Thống nhất tên nhánh làm việc là `antigravity/design` *(lịch sử: `antigravity/hero-v1`)*. | Cả hai tài liệu bàn giao đều ghi đúng nhánh `antigravity/design`. |
 | **T2** | Tài liệu | Sửa toàn bộ liên kết SVG: Đồng bộ các tệp vector linh vật ở cả `demo/assets/` và `assets/`, sửa đường dẫn tương đối để mở được trực tiếp từ tài liệu. | Nhấp thử toàn bộ liên kết vector trong tài liệu: 100% tệp mở thành công. |
 | **T3** | Tài liệu | Cập nhật sơ đồ cây thư mục thành phần và tài nguyên khớp chính xác với cấu trúc thực tế của repo. | Kiểm tra đối chiếu: Mọi đường dẫn trong mục 3.1 đều tồn tại thật. |
 | **T4** | Tài liệu | Bổ sung các token còn thiếu vào bảng Design Tokens (`--color-brand-purple-muted`, `--color-brand-orange-light`), cập nhật số liệu đo tương phản thật. | Khớp từng biến trong bảng token với tệp `demo/styles.css`. |

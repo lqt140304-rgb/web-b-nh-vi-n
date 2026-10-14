@@ -3,7 +3,7 @@
 **Đơn vị thực hiện:** Antigravity (UI/UX Specialist)  
 **Phối hợp:** Claude, Codex, ChatGPT & Chủ dự án  
 **Trạng thái:** **Chờ rà soát và chờ chủ dự án duyệt**  
-**Nhánh làm việc:** `antigravity/hero-v1`  
+**Nhánh làm việc:** `antigravity/design` *(nhánh thống nhất từ 15/10/2026; lịch sử khởi tạo: `antigravity/hero-v1`)*  
 **Phiên bản:** V1.1 (Cập nhật sau đợt rà soát đầu kỳ)
 
 ---

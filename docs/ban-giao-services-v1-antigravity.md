@@ -2,7 +2,7 @@
 
 **Dự án:** Bệnh viện Thú y Lê Sơn  
 **Đơn vị thực hiện:** Antigravity (UI/UX Specialist)  
-**Nhánh làm việc:** `antigravity/services-v1`  
+**Nhánh làm việc:** `antigravity/design` *(nhánh thống nhất từ 15/10/2026; lịch sử khởi tạo: `antigravity/services-v1`)*  
 **Phiên bản:** Services V1.2 (Đợt sửa cuối cùng theo duyệt của Chủ dự án ngày 14/10/2026)  
 **Trạng thái:** **Đã hoàn thành 9/9 mục — Sẵn sàng để Claude QA & Chủ dự án nghiệm thu**  
 **Quy trình áp dụng:** Antigravity bàn giao → Claude QA → Chủ dự án duyệt  
