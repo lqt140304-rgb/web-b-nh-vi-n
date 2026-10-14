@@ -37,46 +37,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let lastActiveTrigger = null;
 
-  // Dữ liệu mô phỏng giả lập cho 4 dịch vụ (Không tự thêm giá, không cam kết 24/7)
+  // Dữ liệu mô phỏng giả lập cho 4 dịch vụ (Tuân thủ F2 & F3)
   const serviceData = {
     kham: {
       title: 'Khám và điều trị',
-      badge: 'Thăm khám & Điều trị tổng quát',
-      desc: 'Dịch vụ khám sàng lọc toàn diện cho chó, mèo và thú cảnh nhỏ. Bác sĩ thực hiện kiểm tra lâm sàng cẩn thận, chẩn đoán dựa trên triệu chứng và thiết lập phác đồ điều trị an toàn, phù hợp với thể trạng của từng bé thú cưng.',
+      badge: '[Nội dung mẫu — chờ bệnh viện xác nhận]',
+      desc: '[Nội dung mẫu — chờ bệnh viện cung cấp mô tả chi tiết quy trình khám và điều trị].',
       features: [
-        'Kiểm tra tai, mắt, răng miệng và tim phổi tổng quát',
-        'Xét nghiệm lâm sàng và chẩn đoán hình ảnh chuyên sâu khi cần thiết',
-        'Tư vấn chế độ dinh dưỡng và phòng ngừa bệnh theo độ tuổi'
+        '[Nội dung mẫu 1 — chờ bệnh viện cung cấp]',
+        '[Nội dung mẫu 2 — chờ bệnh viện cung cấp]',
+        '[Nội dung mẫu 3 — chờ bệnh viện cung cấp]'
       ]
     },
     grooming: {
-      title: 'Grooming — Spa & Cắt tỉa lông',
-      badge: 'Chăm sóc vệ sinh & Thẩm mỹ',
-      desc: 'Quy trình tắm vệ sinh và cắt tỉa lông tạo kiểu chuyên nghiệp với sản phẩm dầu tắm dịu nhẹ, an toàn cho da thú cưng. Giúp các bé giữ được bộ lông mượt mà, thơm tho và giảm thiểu tình trạng rụng lông trong nhà.',
+      title: 'Spa & Grooming',
+      badge: '[Nội dung mẫu — chờ bệnh viện xác nhận]',
+      desc: '[Nội dung mẫu — chờ bệnh viện cung cấp mô tả chi tiết dịch vụ tắm, cắt tỉa và làm đẹp].',
       features: [
-        'Tắm dưỡng lông, sấy khô và chải tơi chuyên dụng',
-        'Vệ sinh tai, cắt móng và vắt tuyến hôi định kỳ',
-        'Cắt tỉa tạo kiểu theo yêu cầu của chủ nuôi'
+        '[Nội dung mẫu 1 — chờ bệnh viện cung cấp]',
+        '[Nội dung mẫu 2 — chờ bệnh viện cung cấp]',
+        '[Nội dung mẫu 3 — chờ bệnh viện cung cấp]'
       ]
     },
     noitru: {
-      title: 'Nội trú — Lưu trú an toàn',
-      badge: 'Chăm sóc & Theo dõi sức khỏe',
-      desc: 'Khu vực nội trú riêng biệt, sạch sẽ, thoáng mát và khử trùng thường xuyên. Dành cho các bé thú cưng cần theo dõi sau phẫu thuật, trong quá trình điều trị tích cực hoặc lưu trú tạm thời khi gia đình có việc bận.',
+      title: 'Nội trú',
+      badge: '[Nội dung mẫu — chờ bệnh viện xác nhận]',
+      desc: '[Nội dung mẫu — chờ bệnh viện cung cấp mô tả quy định và tiện ích lưu trú thú cưng].',
       features: [
-        'Phân khu cách ly riêng biệt giữa chó và mèo, tránh gây căng thẳng',
-        'Đội ngũ điều dưỡng theo dõi sức khỏe và ghi chép nhật ký hàng ngày',
-        'Chế độ ăn uống dinh dưỡng phù hợp theo chỉ định của bác sĩ'
+        '[Nội dung mẫu 1 — chờ bệnh viện cung cấp]',
+        '[Nội dung mẫu 2 — chờ bệnh viện cung cấp]',
+        '[Nội dung mẫu 3 — chờ bệnh viện cung cấp]'
       ]
     },
     capcuu: {
-      title: 'Cấp cứu thú y',
-      badge: 'Tiếp nhận khẩn cấp & Xử lý kịp thời',
-      desc: 'Quy trình tiếp nhận khẩn cấp các ca tai nạn, ngộ độc, khó thở hoặc chuyển dạ khó. Đội ngũ y tế luôn trong tư thế sẵn sàng với các trang thiết bị trợ thở, cầm máu và hồi sức cấp cứu hiện đại.',
+      title: 'Cấp cứu 24/24',
+      badge: 'Cấp cứu 24/24 [Đã xác nhận]',
+      desc: 'Bệnh viện Thú y Lê Sơn tiếp nhận cấp cứu 24/24. Trong trường hợp khẩn cấp, quý khách vui lòng liên hệ trực tiếp hotline để được hỗ trợ tức thì, không gửi yêu cầu qua web.',
       features: [
-        'Ưu tiên tiếp nhận và đánh giá nhanh mức độ nguy kịch',
-        'Trang thiết bị thở oxy và truyền dịch hỗ trợ chuyên sâu',
-        'Phối hợp chẩn đoán nhanh để đưa ra hướng can thiệp kịp thời'
+        'Tiếp nhận cấp cứu thú y 24/24 tất cả các ngày trong tuần',
+        '[Nội dung mẫu 1 — chờ bệnh viện cung cấp]',
+        '[Nội dung mẫu 2 — chờ bệnh viện cung cấp]'
       ]
     }
   };
@@ -265,6 +265,41 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     serviceDetailTitle.textContent = data.title;
+    let actionsHtml = '';
+    if (serviceKey === 'capcuu') {
+      actionsHtml = `
+        <div style="background: #FDF2E8; border-left: 4px solid #EA7A24; padding: 12px 14px; border-radius: 8px; margin-bottom: 16px; font-size: 13.5px; color: #A34803; line-height: 1.5;">
+          <strong>⚠️ Ca khẩn cấp vui lòng gọi trực tiếp:</strong> Để thú cưng được tiếp nhận kịp thời nhất, xin vui lòng gọi hotline cấp cứu, không gửi yêu cầu qua web.
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a href="tel:+84973555105" class="btn-card-learn btn-card-emergency" style="font-size: 15px; padding: 13px 20px; text-decoration: none; display: inline-flex; justify-content: center; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>Gọi cấp cứu ngay: 097 355 51 05</span>
+          </a>
+          <a href="https://maps.app.goo.gl/xFbQ4BjKtGVa3rp86" target="_blank" rel="noopener noreferrer" class="drawer-contact-btn drawer-btn-maps" style="width: 100%; font-size: 13px; min-height: 42px; box-sizing: border-box;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Chỉ đường tới bệnh viện (101 Khuất Duy Tiến, Hà Nội)</span>
+          </a>
+        </div>
+      `;
+    } else {
+      actionsHtml = `
+        <div class="modal-contact-row">
+          <div class="modal-contact-group">
+            <a href="https://maps.app.goo.gl/xFbQ4BjKtGVa3rp86" target="_blank" rel="noopener noreferrer" class="modal-contact-link modal-link-maps" title="101 Khuất Duy Tiến, Thanh Xuân, Hà Nội" aria-label="Xem vị trí bệnh viện trên Google Maps (mở tab mới)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Chỉ đường Maps</span>
+            </a>
+            <a href="https://www.facebook.com/benhvienthuyleson" target="_blank" rel="noopener noreferrer" class="modal-contact-link modal-link-fb" title="Nhắn tin qua Fanpage Facebook" aria-label="Tư vấn qua Facebook Fanpage (mở tab mới)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <span>Tư vấn Facebook</span>
+            </a>
+          </div>
+          <a href="index.html#form-dat-lich" class="btn-cta-primary" style="font-size: 13.5px; padding: 10px 20px; text-decoration: none;">Gửi yêu cầu đặt lịch →</a>
+        </div>
+      `;
+    }
+
     let html = `
       <div style="margin-bottom: 14px;">
         <span style="display: inline-block; font-size: 12px; font-weight: 700; color: #824787; background: #F5EDF6; padding: 4px 12px; border-radius: 9999px; margin-bottom: 12px;">${data.badge}</span>
@@ -276,19 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ${data.features.map(f => `<li>${f}</li>`).join('')}
         </ul>
       </div>
-      <div class="modal-contact-row">
-        <div class="modal-contact-group">
-          <a href="https://maps.app.goo.gl/xFbQ4BjKtGVa3rp86" target="_blank" rel="noopener noreferrer" class="modal-contact-link modal-link-maps" title="105 Khuất Duy Tiến, Thanh Xuân, Hà Nội" aria-label="Xem vị trí bệnh viện trên Google Maps (mở tab mới)">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Chỉ đường Maps</span>
-          </a>
-          <a href="https://www.facebook.com/benhvienthuyleson?locale=vi_VN" target="_blank" rel="noopener noreferrer" class="modal-contact-link modal-link-fb" title="Nhắn tin qua Fanpage Facebook" aria-label="Tư vấn qua Facebook Fanpage (mở tab mới)">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            <span>Tư vấn Facebook</span>
-          </a>
-        </div>
-        <a href="index.html#dat-lich" class="btn-cta-primary" style="font-size: 13.5px; padding: 9px 18px; text-decoration: none;">Gửi yêu cầu đặt hẹn →</a>
-      </div>
+      ${actionsHtml}
     `;
     serviceDetailBody.innerHTML = html;
 

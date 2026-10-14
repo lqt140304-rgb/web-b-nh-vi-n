@@ -5,9 +5,7 @@
    Chuẩn: Mobile-First, WCAG 2.1 AA, Responsive 390px / 768px / 1440px
    ========================================================================== */
 
-/* ---------- Google Fonts & Base Reset ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Caveat:wght@600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,400&display=swap');
-
+/* ---------- Base Reset & Custom Properties ---------- */
 :root {
   /* Bảng màu nhận diện Lê Sơn kế thừa */
   --color-brand-purple: #5A1E5E;        /* Tím đậm thương hiệu, uy tín */
@@ -1988,6 +1986,72 @@ img {
   transform: translateX(4px);
 }
 
+/* Nút gọi cấp cứu đặc biệt trên thẻ Cấp cứu 24/24 (F3) */
+.btn-card-emergency {
+  background: #9C2A2A !important;
+  border-color: #9C2A2A !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+.btn-card-emergency:hover {
+  background: #7B1F1F !important;
+  border-color: #7B1F1F !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(156, 42, 42, 0.3) !important;
+}
+.btn-card-sublink {
+  background: transparent;
+  border: none;
+  color: var(--color-brand-purple-muted);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  padding: 4px;
+  text-decoration: underline;
+  text-align: center;
+  transition: color var(--transition-smooth);
+}
+.btn-card-sublink:hover {
+  color: var(--color-brand-purple-dark);
+}
+
+/* Khối CTA đặt lịch ngoài cửa sổ (F4) */
+.services-booking-cta {
+  width: 100%;
+  max-width: 900px;
+  margin: 48px auto 0;
+  padding: 36px 24px;
+  background: var(--color-brand-purple-soft);
+  border: 1.5px solid rgba(90, 30, 94, 0.12);
+  border-radius: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.booking-cta-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--color-brand-purple-dark);
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+.booking-cta-desc {
+  font-size: 15.5px;
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin: 0 0 24px;
+  line-height: 1.55;
+}
+.btn-cta-booking-page {
+  padding: 13px 32px;
+  font-size: 16px;
+  text-decoration: none;
+  min-height: 48px;
+}
+
 /* Responsive Tablet & Mobile cho Trang Dịch Vụ */
 @media (max-width: 1024px) {
   .services-grid {
@@ -2038,6 +2102,24 @@ img {
     min-height: 46px;
     font-size: 14.5px;
   }
+  .services-booking-cta {
+    margin-top: 32px;
+    padding: 24px 16px;
+    border-radius: 18px;
+  }
+  .booking-cta-title {
+    font-size: 22px;
+  }
+  .booking-cta-desc {
+    font-size: 14px;
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 380px) {
+  .card-title {
+    font-size: 19px !important;
+  }
 }
 
 /* Áp dụng cho chế độ mô phỏng iPhone 390px */
@@ -2057,5 +2139,19 @@ img {
 }
 .viewport-outer.mode-mobile .services-description {
   font-size: 14px !important;
+}
+.viewport-outer.mode-mobile .card-title {
+  font-size: 19.5px !important;
+}
+.viewport-outer.mode-mobile .services-booking-cta {
+  margin-top: 32px !important;
+  padding: 24px 16px !important;
+  border-radius: 18px !important;
+}
+.viewport-outer.mode-mobile .booking-cta-title {
+  font-size: 21px !important;
+}
+.viewport-outer.mode-mobile .booking-cta-desc {
+  font-size: 13.5px !important;
 }
 
