@@ -7,7 +7,7 @@
 - **Cấp cứu: bệnh viện nhận cấp cứu 24/24** [Đã xác nhận]. Được ghi "Cấp cứu 24/24" trên thẻ và cửa sổ Cấp cứu. Lưu ý: chỉ áp dụng cho Cấp cứu, các dịch vụ khác vẫn không ghi 24/24.
 - **Nội dung chi tiết dịch vụ:** chủ dự án cung cấp sau. **Trước mắt chỉ làm phần nhìn**: dùng chữ giữ chỗ có nhãn.
 - **Tên "Grooming" đổi thành "Spa & Grooming"** [Đã chốt].
-- **Số cấp cứu: 097 355 51 05** [Đã xác nhận]; liên kết gọi: `tel:+84973555105`.
+- **Số điện thoại: 097 355 51 05** [Đã xác nhận], là số chung của bệnh viện (tư vấn, đặt lịch, cấp cứu); liên kết gọi: `tel:+84973555105`. Cấp cứu 24/24 vẫn chỉ ghi ở thẻ Cấp cứu.
 - **Liên kết Facebook và Google Maps** chủ dự án cung cấp để dùng khi cần; xem [`thong-tin-lien-he.md`](thong-tin-lien-he.md).
 
 ## 2. Danh sách sửa
