@@ -276,6 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     serviceDetailBody.innerHTML = html;
 
+    if (siteHeader) siteHeader.setAttribute('inert', '');
+    if (servicesMain) servicesMain.setAttribute('inert', '');
     serviceDetailModal.removeAttribute('inert');
     serviceDetailModal.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -289,6 +291,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!serviceDetailModal.classList.contains('open')) return;
     serviceDetailModal.setAttribute('inert', '');
     serviceDetailModal.classList.remove('open');
+    if (siteHeader) siteHeader.removeAttribute('inert');
+    if (servicesMain) servicesMain.removeAttribute('inert');
     document.body.style.overflow = '';
 
     if (lastActiveTrigger) {
@@ -297,13 +301,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Gắn sự kiện cho các nút "Tìm hiểu thêm"
-  const learnBtns = document.querySelectorAll('.btn-card-learn');
+  // Gắn sự kiện cho các nút "Tìm hiểu thêm" (chỉ nút có data-service, P1)
+  const learnBtns = document.querySelectorAll('.btn-card-learn[data-service]');
   learnBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const serviceKey = btn.getAttribute('data-service');
-      openServiceModal(serviceKey, btn);
+      if (serviceKey) {
+        openServiceModal(serviceKey, btn);
+      }
     });
   });
 
@@ -337,6 +343,8 @@ document.addEventListener('DOMContentLoaded', () => {
   specsModal.setAttribute('inert', '');
 
   function openSpecsModal() {
+    if (siteHeader) siteHeader.setAttribute('inert', '');
+    if (servicesMain) servicesMain.setAttribute('inert', '');
     specsModal.removeAttribute('inert');
     specsModal.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -350,6 +358,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!specsModal.classList.contains('open')) return;
     specsModal.setAttribute('inert', '');
     specsModal.classList.remove('open');
+    if (siteHeader) siteHeader.removeAttribute('inert');
+    if (servicesMain) servicesMain.removeAttribute('inert');
     document.body.style.overflow = '';
 
     if (btnOpenSpecs) btnOpenSpecs.focus();

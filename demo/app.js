@@ -222,6 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
   specsModal.setAttribute('inert', '');
 
   function openSpecsModal() {
+    if (siteHeader) siteHeader.setAttribute('inert', '');
+    if (heroMain) heroMain.setAttribute('inert', '');
     specsModal.removeAttribute('inert');
     specsModal.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -236,6 +238,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     specsModal.setAttribute('inert', '');
     specsModal.classList.remove('open');
+    if (siteHeader) siteHeader.removeAttribute('inert');
+    if (heroMain) heroMain.removeAttribute('inert');
     document.body.style.overflow = '';
 
     if (returnFocus && btnOpenSpecs) {

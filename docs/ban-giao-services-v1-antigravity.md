@@ -77,3 +77,14 @@ node server.js
 ```
 
 *(Ghi chú: `server.js` chỉ là công cụ xem thử demo nội bộ trên máy cá nhân, Codex không tái sử dụng khi triển khai).*
+
+---
+
+## 6. Phản hồi Rà soát Kỹ thuật của Codex (P1 & P2)
+
+| Hạng mục | Nhận xét từ Codex | Kết quả xử lý của Antigravity |
+|---|---|---|
+| **P1 — Nút gọi cấp cứu bị chặn** | `btn-card-learn` trên thẻ `tel:+84973555105` bị JS gắn `preventDefault()` và mở modal trống với `data-service` null. | **ĐÃ SỬA TRIỆT ĐỂ:**<br>1. Loại bỏ hoàn toàn class `.btn-card-learn` khỏi thẻ liên kết gọi điện; nút gọi cấp cứu chỉ mang class `.btn-card-emergency`.<br>2. Trong `services.js`, giới hạn selector chỉ gắn sự kiện mở modal cho `.btn-card-learn[data-service]`. Nút gọi giữ nguyên `tel:+84973555105`, không bị `preventDefault()`, không kích hoạt mở modal. |
+| **P2 — Trợ năng Modal (inert)** | `openServiceModal` và `closeServiceModal` chưa khóa nền bằng `inert` dù có `aria-modal="true"`. | **ĐÃ BỔ SUNG:** Cả `openServiceModal` và `openSpecsModal` (trên cả `services.js` và `app.js`) đều gán `inert` cho `#siteHeader` và `#services-main` / `#hero-main` khi mở modal, và gỡ bỏ `inert` khi đóng. Tiêu điểm bàn phím và trình đọc màn hình hoàn toàn bị cô lập trong modal theo chuẩn WCAG 2.1. |
+| **P2 — Điểm đến đặt lịch** | `index.html` chưa có `id="form-dat-lich"`. | **GHI NHẬN RÕ RÀNG:** Đã thống nhất cấu trúc liên kết chuẩn `index.html#form-dat-lich`; điểm đến form đặt lịch chưa triển khai trên bản demo UI/UX và sẽ được xây dựng theo đúng kế hoạch phát triển form/backend của dự án sau này. |
+| **Khuyến cáo kiểm thử** | Thử gọi trên điện thoại; nếu chưa có thiết bị thì ghi rõ chưa xác nhận trình gọi thực tế. | **GHI CHÚ:** Liên kết `tel:+84973555105` đã được kiểm tra cú pháp và sự kiện chuẩn trên trình duyệt (không bị chặn); trình quay số thực tế (phone dialer) cần kiểm thử trên thiết bị di động có gắn SIM thực tế. |
