@@ -1,3 +1,5 @@
+> **Đã bị thay thế (15/10/2026):** chủ dự án chốt Hero khác làm Hero chính. Xem [yeu-cau-hero-chinh-khung-anh-bay-vong-2026-10-15.md](yeu-cau-hero-chinh-khung-anh-bay-vong-2026-10-15.md). Không làm tiếp 4 việc dưới đây.
+
 # Yêu cầu sửa Hero: làm giống ảnh demo (gửi Antigravity)
 
 **Người soạn:** Claude · **Ngày:** 15/10/2026 · **Căn cứ:** [QA Hero của Claude](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/qa-review/docs/ra-soat-hero-chot-15-10-claude.md) (commit `252ad9d` trên `antigravity/design`) và quyết định của chủ dự án 15/10/2026: **Hero phải làm giống ảnh demo** ([ảnh](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/assets/design/hero-chot-2026-10-15.jpg), [mô tả chốt](thiet-ke-hero-chot-2026-10-15.md)). Sửa trên nhánh `antigravity/design`, chỉ trong phạm vi Hero (`demo/index.html`, `demo/styles.css`); báo commit mới và "đã làm / chưa làm".
