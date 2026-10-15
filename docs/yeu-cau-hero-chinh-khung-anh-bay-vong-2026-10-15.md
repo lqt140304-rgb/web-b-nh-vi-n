@@ -2,6 +2,10 @@
 
 **Ghi bởi:** Claude, chép quyết định của chủ dự án ngày 15/10/2026 ("oke đây sẽ là hero chính của website") và thêm mục "Đạt khi" để QA. **Thay thế** Hero hiện tại trên `antigravity/design` và mọi yêu cầu sửa Hero cũ, gồm [yeu-cau-sua-hero-giong-anh-demo-antigravity.md](yeu-cau-sua-hero-giong-anh-demo-antigravity.md). Chưa merge `main`, chưa xuất bản.
 
+## Người làm: Codex (chủ dự án giao 15/10/2026)
+
+Chủ dự án giao **Codex** đưa Hero này vào `demo/` của `antigravity/design` (thay vì Antigravity tự làm lại). Nội dung các mục dưới đây áp dụng cho Codex. Claude đã làm thử một bản tích hợp để Codex tham khảo (patch áp được vào `8bb446f`, kèm ghi chú những gì đã và chưa kiểm): [ban-tich-hop-demo-tham-khao](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/qa-review/docs/de-xuat-hero-quy-dao/ban-tich-hop-demo-tham-khao) trên `shared/qa-review` @ `5b15b37`. Codex được dùng, sửa hoặc bỏ. Sau khi Codex báo xong, Claude kiểm theo mục "Đạt khi" (lượt đầu dùng Opus).
+
 ## Nguồn tham chiếu (bản duyệt)
 
 Thư mục [docs/de-xuat-hero-quy-dao/](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/qa-review/docs/de-xuat-hero-quy-dao) trên nhánh `shared/qa-review`, commit `f58c2d7`:
