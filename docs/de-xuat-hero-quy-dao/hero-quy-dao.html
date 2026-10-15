@@ -775,7 +775,7 @@
   function beginIntro(at) {
     if (introBase !== null) return;
     introBase = at;
-    nextExc = introBase + FIRST_EXCURSION_AFTER;
+    nextExc = Infinity;   // không còn đợt chui vào giữa: khung chỉ bay vòng ở vùng ngoài
   }
   cta.addEventListener('animationstart', function (e) {
     if (e.target === cta) beginIntro(simT + INTRO_AFTER_CTA);
