@@ -1,3 +1,7 @@
+# Bản gộp mới: Antigravity 40aa56d + Hero chính 2efb96b
+
+Xem [báo cáo gộp, xử lý xung đột và ảnh mới 1440/390](gop-antigravity-40aa56d/README.md). Header và bộ mô phỏng Hero giữ nguyên; CTA Services nhận từ Antigravity. Các mục bên dưới là lịch sử kiểm các bản trước.
+
 # Cập nhật đợt sửa 1 — kiểm lại header sau QA 2a1fd96
 
 Nhánh: `codex/hero-chinh-quy-dao`. Bản trước: `6aaabc84d1daa133e45f378a84287ae013fc291d`. Phiên bản sửa là commit chứa phần cập nhật này. Không merge, không deploy.
