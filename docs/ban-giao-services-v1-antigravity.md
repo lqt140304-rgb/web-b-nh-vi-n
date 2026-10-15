@@ -88,3 +88,24 @@ node server.js
 | **P2 — Trợ năng Modal (inert)** | `openServiceModal` và `closeServiceModal` chưa khóa nền bằng `inert` dù có `aria-modal="true"`. | **ĐÃ BỔ SUNG:** Cả `openServiceModal` và `openSpecsModal` (trên cả `services.js` và `app.js`) đều gán `inert` cho `#siteHeader` và `#services-main` / `#hero-main` khi mở modal, và gỡ bỏ `inert` khi đóng. Tiêu điểm bàn phím và trình đọc màn hình hoàn toàn bị cô lập trong modal theo chuẩn WCAG 2.1. |
 | **P2 — Điểm đến đặt lịch** | `index.html` chưa có `id="form-dat-lich"`. | **GHI NHẬN RÕ RÀNG:** Đã thống nhất cấu trúc liên kết chuẩn `index.html#form-dat-lich`; điểm đến form đặt lịch chưa triển khai trên bản demo UI/UX và sẽ được xây dựng theo đúng kế hoạch phát triển form/backend của dự án sau này. |
 | **Khuyến cáo kiểm thử** | Thử gọi trên điện thoại; nếu chưa có thiết bị thì ghi rõ chưa xác nhận trình gọi thực tế. | **GHI CHÚ:** Liên kết `tel:+84973555105` đã được kiểm tra cú pháp và sự kiện chuẩn trên trình duyệt (không bị chặn); trình quay số thực tế (phone dialer) cần kiểm thử trên thiết bị di động có gắn SIM thực tế. |
+
+---
+
+### 5. Cập nhật khối CTA Đặt lịch (Chốt 15/10/2026 theo yêu cầu Claude QA & Chủ dự án)
+
+**Nhánh thực hiện thống nhất:** `antigravity/design`  
+**Tài liệu yêu cầu gốc:** `docs/yeu-cau-cta-dich-vu-2026-10-15.md`
+
+| # | Tiêu chí nghiệm thu | Kết quả thực hiện |
+|---|---|---|
+| **1** | Câu chữ chuẩn 1:1, không còn ghi chú "Không cần tài khoản", có nút gọi "097 355 51 05" | **ĐẠT:** Tiêu đề: *"Đặt lịch chăm sóc cho người bạn nhỏ"*; Mô tả: *"Gửi yêu cầu, nhân viên sẽ liên hệ xác nhận lịch hẹn."*; Nút chính: *"Gửi yêu cầu đặt lịch →"*; Nút phụ: `tel:+84973555105` với nhãn *"097 355 51 05"*. Đã xóa bỏ hoàn toàn 2 dòng ghi chú cũ. Không có ảnh cún trong khối. |
+| **2** | Thiết kế nền kem pha tím nhạt, viền tím mảnh, bo 24px, không bóng đổ nặng | **ĐẠT:** Nền `rgba(90, 30, 94, 0.035)`, viền `1.5px solid rgba(90, 30, 94, 0.12)`, bo góc `24px`, bóng đổ nhẹ `0 4px 20px rgba(50, 15, 55, 0.03)`. |
+| **3** | Desktop 1440: Chữ trái, 2 nút phải cạnh nhau. Tablet 1024 (681–1100px): 2 nút xếp dọc (đặt lịch trên, gọi dưới rộng 236px), tiêu đề 1 dòng, khối cao ≤ 180px | **ĐẠT:** Căn layout flexbox chính xác, kiểm thử trực quan trên cả 1440px và 1024px đạt chuẩn không tràn ngang, chiều cao khối < 180px. |
+| **4** | Mobile 390/360: Xếp dọc toàn bộ, 2 nút cao ≥ 48px rộng 100% | **ĐẠT:** 100% full-width, nút cao 48px, không tràn ngang ở 390px và 360px. |
+| **5** | Tiêu đề font serif Lora, màu tím mận, tương phản ≥ 4.5:1 | **ĐẠT:** Font `var(--font-display)` (Lora), màu `#421247` (tương phản 13.96:1 trên nền kem). |
+| **6** | Nút đặt lịch tím đậm trỏ `index.html#form-dat-lich`; nút gọi viền tím, không preventDefault | **ĐẠT:** Nút đặt lịch tím đậm; nút gọi nền trong suốt, viền tím `1.5px solid #5A1E5E`, liên kết `tel:` hoạt động chuẩn. |
+| **7** | Không hiệu ứng lặp/rung/nhấp nháy, hover bọc `@media (hover: hover)` | **ĐẠT:** Không animation lặp, hover bọc chuẩn Media Query. |
+| **8** | Họa tiết góc tĩnh, tím nhạt/cam nhạt, không chạm chữ/nút, ẩn trên mobile | **ĐẠT:** Họa tiết vector góc trên phải tĩnh, ẩn trên màn hình di động. |
+| **9** | Kiểm soát hồi quy: Thẻ, icon, modal, nút cấp cứu, Hero, header không đổi | **ĐẠT:** 100% giữ nguyên cấu trúc và logic các thành phần khác. |
+| **10** | Tài liệu bàn giao ghi nhánh `antigravity/design` | **ĐẠT:** Đã cập nhật đầy đủ trong tài liệu này trên nhánh `antigravity/design`. |
+
