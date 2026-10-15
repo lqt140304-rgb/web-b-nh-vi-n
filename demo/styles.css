@@ -2550,3 +2550,28 @@ img {
   .site-header .brand-subtitle { font-size: 8px; letter-spacing: 0; }
   .site-header .brand-link { flex-shrink: 0; gap: 4px; }
 }
+
+/* ==========================================================================
+   CTA Dịch vụ — sửa 2 điểm (Claude, 15/10/2026, theo docs/phan-quyen-thiet-ke-giao-claude-2026-10-15.md)
+   1) Họa tiết góc không được chạm chữ/nút: thu nhỏ vào góc trống trên cùng bên phải (cách nút ≥ 6px);
+      từ tablet trở xuống ẩn hẳn (vì nút xếp dọc chiếm sát góc).
+   2) Hai nút cùng chiều cao: cùng border và `height` cố định thay vì phụ thuộc padding + dòng chữ.
+   Không đổi câu chữ, số điện thoại, liên kết, màu, bố cục.
+   ========================================================================== */
+.booking-cta-decor { top: 8px; right: 10px; }
+.booking-cta-decor svg { display: block; width: 24px; height: 24px; }
+@media (max-width: 1100px) {
+  .booking-cta-decor { display: none; }
+}
+.booking-cta-actions .btn-cta-booking-page,
+.booking-cta-actions .btn-cta-call {
+  box-sizing: border-box;
+  height: 52px;
+  min-height: 52px;
+  padding-block: 0;
+  border: 1.5px solid var(--color-brand-purple);
+}
+@media (max-width: 1100px) and (min-width: 681px) {
+  .booking-cta-actions .btn-cta-booking-page,
+  .booking-cta-actions .btn-cta-call { height: 48px; min-height: 48px; padding-block: 0; }
+}
