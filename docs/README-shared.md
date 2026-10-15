@@ -11,3 +11,4 @@
 [Quy ước hai nhánh](QUY-UOC-NHANH-CHUNG.md)
 
 [Nhánh yêu cầu](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/requirements/docs) · [Nhánh QA](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/qa-review/docs)
+- [Giao Antigravity: header mobile/menu xổ xuống theo ảnh chủ dự án (15/10)](yeu-cau-header-mobile-antigravity-2026-10-15.md)
