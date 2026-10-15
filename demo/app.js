@@ -150,15 +150,17 @@ document.addEventListener('DOMContentLoaded', () => {
     btnMobileMenu.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
 
-    // Chuyển tiêu điểm vào nút đóng đầu tiên trong drawer
-    requestAnimationFrame(() => {
-      if (btnCloseDrawer) btnCloseDrawer.focus();
-    });
-    setTimeout(() => {
-      if (btnCloseDrawer && document.activeElement !== btnCloseDrawer) {
+    // Drawer vừa bỏ inert có thể còn visibility:hidden ở lượt render đầu.
+    // Chỉ chuyển focus khi nút đã hiện; dừng nếu menu đóng trước đó.
+    function focusDrawerWhenVisible() {
+      if (!mobileDrawer.classList.contains('open')) return;
+      if (btnCloseDrawer && getComputedStyle(btnCloseDrawer).visibility === 'visible') {
         btnCloseDrawer.focus();
+      } else {
+        requestAnimationFrame(focusDrawerWhenVisible);
       }
-    }, 40);
+    }
+    requestAnimationFrame(focusDrawerWhenVisible);
   }
 
   function closeMobileDrawer(returnFocus = true) {

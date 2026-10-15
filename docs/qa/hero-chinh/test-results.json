@@ -1,0 +1,105 @@
+[
+  {
+    "width": 1440,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 1440,
+    "stage": 1440,
+    "frames": 9,
+    "hidden": true,
+    "register": 107.34375,
+    "login": 124.71875
+  },
+  {
+    "width": 1280,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 1280,
+    "stage": 1280,
+    "frames": 9,
+    "hidden": true,
+    "register": 107.34375,
+    "login": 124.71875
+  },
+  {
+    "width": 1024,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 1024,
+    "stage": 1024,
+    "frames": 9,
+    "hidden": true,
+    "register": 107.34375,
+    "login": 124.71875
+  },
+  {
+    "width": 992,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 992,
+    "stage": 992,
+    "frames": 9,
+    "hidden": true,
+    "register": 107.34375,
+    "login": 124.71875
+  },
+  {
+    "width": 768,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 768,
+    "stage": 768,
+    "frames": 9,
+    "hidden": true,
+    "register": 107.34375,
+    "login": 124.71875
+  },
+  {
+    "width": 390,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 390,
+    "stage": 390,
+    "frames": 9,
+    "hidden": true,
+    "register": 87.34375,
+    "login": 0
+  },
+  {
+    "width": 360,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 360,
+    "stage": 360,
+    "frames": 9,
+    "hidden": true,
+    "register": 87.34375,
+    "login": 0
+  },
+  {
+    "width": 1440,
+    "pauseKeyboardAndCTA": "PASS"
+  },
+  {
+    "width": 390,
+    "pauseKeyboardAndCTA": "PASS"
+  },
+  {
+    "width": 1440,
+    "services": "PASS"
+  },
+  {
+    "width": 390,
+    "services": "PASS"
+  },
+  {
+    "width": 1440,
+    "samples": 600,
+    "periodMs": 100,
+    "textAABBIntersections": 386,
+    "maxPairAABBOverlap": 0.13091506130181338
+  },
+  {
+    "width": 390,
+    "samples": 600,
+    "periodMs": 100,
+    "textAABBIntersections": 2754,
+    "maxPairAABBOverlap": 0.15246727615773378
+  },
+  {
+    "consoleErrors": []
+  }
+]

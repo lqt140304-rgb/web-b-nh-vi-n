@@ -1366,9 +1366,6 @@ img {
 .viewport-outer.mode-mobile .nav-menu {
   display: none !important;
 }
-.viewport-outer.mode-mobile .auth-guest-group {
-  display: none !important;
-}
 .viewport-outer.mode-mobile .header-social-links {
   display: none !important;
 }
@@ -1516,7 +1513,6 @@ img {
 /* 2. Áp dụng cho thiết bị thật qua Media Query */
 @media (max-width: 992px) {
   .nav-menu { display: none !important; }
-  .auth-guest-group { display: none !important; }
   .header-social-links { display: none !important; }
   .btn-mobile-menu { display: inline-flex !important; }
   .site-header { padding: 14px 20px; }
@@ -2385,3 +2381,12 @@ img {
   font-size: 13.5px !important;
 }
 
+
+/* Header chung: giữ Đăng ký trên điện thoại như bản Hero đã duyệt. */
+.btn-auth-login, .btn-auth-register { text-decoration: none; }
+.viewport-outer.mode-mobile .site-header .btn-auth-login { display: none; }
+.viewport-outer.mode-mobile .site-header .btn-auth-register { padding-inline: 14px; }
+@media (max-width: 420px) {
+  .site-header .btn-auth-login { display: none; }
+  .site-header .btn-auth-register { padding-inline: 14px; }
+}
