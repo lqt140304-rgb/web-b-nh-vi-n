@@ -300,7 +300,7 @@
     content: "";
     position: absolute; z-index: -2;
     inset: -14% -10%;
-    background: radial-gradient(closest-side, rgba(var(--cream-rgb), .8) 0%, rgba(var(--cream-rgb), .6) 50%, rgba(var(--cream-rgb), 0) 100%);
+    background: radial-gradient(closest-side, rgba(var(--cream-rgb), .52) 0%, rgba(var(--cream-rgb), .38) 50%, rgba(var(--cream-rgb), 0) 100%);
     pointer-events: none;
   }
   .burst {
@@ -764,7 +764,7 @@
   var last = null, raf = 0, running = false;
   var reduced = mqReduce.matches;
   var userPaused = false, inView = true;
-  var excActive = null, nextExc = Infinity;
+  var excList = [], excQueue = [], nextExc = Infinity, settleUntil = 0;   // dòng khung đang lướt qua chữ + hàng đợi khung sắp đi theo
   var introSkipped = reduced;
   var introBase = null;      // thời điểm (đồng hồ mô phỏng) khung đầu tiên bay ra
   var readyAt = null;        // thời điểm chữ bắt đầu mở màn (sau khi có phông)
@@ -930,7 +930,7 @@
     if (countChanged) {
       assignPhases();
       frames.forEach(function (f) { f.exc = null; });
-      excActive = null;
+      excList = []; excQueue = [];
     }
 
     // Biến cho trang trí bám theo tiêu đề
@@ -1154,18 +1154,56 @@
     }
     return best;
   }
+  // Hai "dòng" khung đổi chỗ cho nhau: K khung ở mép trái nối đuôi nhau lướt qua sau chữ sang phải,
+  // đồng thời K khung ở mép phải lướt ngược sang trái. Mỗi cặp hoán đổi đúng vị trí nên đội hình luôn cân.
+  function pickStreams(leader, t) {
+    var K = G.mobile ? 2 : 3, la = angleOf(leader, t);
+    var A = frames.filter(function (f) { return f !== leader && f.active; })
+      .map(function (f) { return { f: f, d: mod(la - angleOf(f, t), TAU) }; })
+      .sort(function (x, y) { return x.d - y.d; })
+      .slice(0, K - 1).map(function (c) { return c.f; });
+    A = [leader].concat(A);
+    var used = A.slice(), pairs = [];
+    A.forEach(function (fa) {
+      var want = angleOf(fa, t) + Math.PI, best = null, bs = Infinity;
+      frames.forEach(function (fb) {
+        if (!fb.active || used.indexOf(fb) >= 0) return;
+        var sc = angDist(angleOf(fb, t), want) + (fb.ring === fa.ring ? 0 : 0.5);
+        if (sc < bs) { bs = sc; best = fb; }
+      });
+      if (!best) return;
+      used.push(best);
+      var da = mod(angleOf(best, t) - angleOf(fa, t), TAU);
+      pairs.push({ a: fa, b: best, da: da, db: TAU - da });
+    });
+    return pairs;
+  }
   function updateExcursions(t) {
-    if (excActive && t >= excActive.start + excActive.dur) {
-      excActive.f.phase += excActive.delta;   // nhập lại quỹ đạo ở phía đối diện, liền mạch
-      excActive.f.exc = null;
-      excActive = null;
+    for (var i = excList.length - 1; i >= 0; i--) {
+      var e = excList[i];
+      if (t >= e.start + e.dur) {
+        e.f.phase += e.delta;               // nhập lại quỹ đạo ở phía đối diện, liền mạch
+        e.f.exc = null;
+        excList.splice(i, 1);
+        settleUntil = t + 3;                // sau đợt lướt: đội hình tự giãn lại nhanh hơn một lúc
+      }
     }
-    if (!excActive && t > introEnd() && t >= nextExc) {
-      var f = pickExcursionFrame(t);
-      if (f) {
-        excActive = { f: f, start: t, dur: G.mobile ? 3.0 : 3.6, delta: chooseDelta(f, t) };
-        f.exc = excActive;
-        nextExc = t + 7 + rand() * 5;           // 7–12 giây
+    for (var j = excQueue.length - 1; j >= 0; j--) {
+      var q = excQueue[j];
+      if (t >= q.at) {
+        var ne = { f: q.f, start: t, dur: G.mobile ? 3.0 : 3.6, delta: q.delta };
+        q.f.exc = ne; excList.push(ne); excQueue.splice(j, 1);
+      }
+    }
+    if (!excList.length && !excQueue.length && t > introEnd() && t >= nextExc) {
+      var lead = pickExcursionFrame(t);
+      if (lead) {
+        var lag = G.mobile ? 0.7 : 0.9;
+        pickStreams(lead, t).forEach(function (pr, k) {
+          excQueue.push({ f: pr.a, at: t + k * lag, delta: pr.da });                 // dòng trái → phải
+          excQueue.push({ f: pr.b, at: t + k * lag + lag * 0.5, delta: pr.db });     // dòng phải → trái, lệch nửa nhịp
+        });
+        nextExc = t + 10 + rand() * 3;      // mỗi đợt dài khoảng 6 giây, nghỉ rồi lại có đợt sau
       } else {
         nextExc = t + 0.4;
       }
@@ -1178,10 +1216,11 @@
     var list = frames.filter(function (f) { return f.active; });
     var n = list.length;
     if (n < 2) return;
-    var ex = excActive;
+    var anch = excList.concat(excQueue), ex = anch.length > 0 || t < settleUntil;
     var cur = list.map(function (f) {
-      var isA = !!(ex && ex.f === f);
-      return { f: f, a: isA, s: mod(f.phase + G.speed * t + (isA ? ex.delta : 0), TAU) };
+      var ea = null;
+      for (var k = 0; k < anch.length; k++) if (anch[k].f === f) { ea = anch[k]; break; }
+      return { f: f, a: !!ea, s: mod(f.phase + G.speed * t + (ea ? ea.delta : 0), TAU) };
     }).sort(function (a, b) { return a.s - b.s; });
     var step = TAU / n, base, jA = -1;
     cur.forEach(function (c, j) { if (c.a) jA = j; });
@@ -1198,6 +1237,17 @@
       var d = wrapPi(base + j * step - c.s);
       c.f.phase += clamp(d * gain * dt, -lo, hi);
     });
+    // Chống chồng khung: hai khung kề nhau trên vòng không bao giờ được gần nhau hơn ~65% khoảng đều.
+    var minGap = step * 0.65, push = 0.6 * dt;
+    for (var j2 = 0; j2 < cur.length; j2++) {
+      var A = cur[j2], B = cur[(j2 + 1) % cur.length];
+      if (A === B) continue;
+      var g = mod(B.s - A.s, TAU);
+      if (g >= minGap) continue;
+      var m = Math.min(push, (minGap - g) * 0.5);
+      if (!A.a) A.f.phase -= m;
+      if (!B.a) B.f.phase += m;
+    }
   }
 
   /* ---------- Vòng lặp ---------- */
@@ -1237,7 +1287,7 @@
       stop();
       introSkipped = true;
       frames.forEach(function (f) { f.exc = null; });
-      excActive = null;
+      excList = []; excQueue = [];
       render(simT);               // bố cục tĩnh chọn sẵn: khung nằm trên quỹ đạo, hai khung lớn hai bên tiêu đề
     } else {
       if (introSkipped) beginIntro(simT);   // bật lại chuyển động: không phát lại intro
