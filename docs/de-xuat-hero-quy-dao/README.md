@@ -8,6 +8,7 @@
 - Ảnh động 16 giây: [xem-truoc-chuyen-dong.webp](xem-truoc-chuyen-dong.webp).
 - Ảnh tĩnh: [Desktop 1440](01-desktop-1440.png) · [Desktop 1440, lúc khác](02-desktop-1440-bay-vong.png) · [Mobile 390, 3 thời điểm](03-mobile-390-3-thoi-diem.png) · [Chế độ giảm chuyển động](04-desktop-1440-giam-chuyen-dong.png).
 - Bản chạy được: [hero-quy-dao.html](hero-quy-dao.html). Tải cả thư mục về rồi mở file này; cần mạng để tải font Google.
+- Bản tích hợp thử vào `demo/` (tham khảo cho Codex): [ban-tich-hop-demo-tham-khao/](ban-tich-hop-demo-tham-khao/README.md).
 - Ảnh tham khảo của chủ dự án: [anh-tham-khao-chu-du-an.webp](anh-tham-khao-chu-du-an.webp).
 
 ## Ý tưởng chủ dự án đưa ra (15/10)
