@@ -11,7 +11,7 @@ Theo quyết định chủ dự án, Claude và Codex dùng chung hai nơi:
 3. QA phải ghi nhánh/commit đã kiểm, bằng chứng, giới hạn kiểm tra. PASS kỹ thuật không đồng nghĩa chủ dự án đã duyệt.
 4. Đề xuất trong QA chưa được duyệt không tự trở thành yêu cầu. Khi chủ dự án chốt, ghi danh sách triển khai vào requirements.
 5. Liên kết giữa hai loại tài liệu dùng URL có tên nhánh rõ ràng, không dựa vào bản sao lịch sử trong cùng nhánh.
-6. Antigravity lấy yêu cầu ở requirements, sửa trên nhánh thiết kế của mình, báo commit. Claude/Codex ghi kết quả vào qa-review.
+6. Claude phụ trách thiết kế; Antigravity chỉ triển khai bản đã chốt theo đặc tả và nhiệm vụ được giao, không tự thay đổi thiết kế. Xem [quyết định phân quyền hiện hành](phan-quyen-thiet-ke-giao-claude-2026-10-15.md). Claude/Codex ghi kết quả kiểm tra vào qa-review.
 7. Nhánh claude/optimistic-mccarthy-d1d15i, codex/review-claude-qa và codex/qa-services-v1 chỉ giữ lịch sử, không dùng làm nơi đăng tài liệu mới sau quyết định này.
 8. Không merge code thiết kế/main chỉ vì tạo hai nhánh tài liệu.
 

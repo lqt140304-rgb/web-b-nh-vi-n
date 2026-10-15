@@ -1,5 +1,7 @@
 # Website Bệnh viện Thú y Lê Sơn
 
+> **Quy định thiết kế mới (15/10/2026):** Claude phụ trách thiết kế, Antigravity chỉ triển khai bản đã chốt theo việc được giao. Xem [phân quyền và việc giao Claude](docs/phan-quyen-thiet-ke-giao-claude-2026-10-15.md); nội dung này thay thế mô tả vai trò cũ nếu có xung đột.
+
 ## Ba nhánh làm việc chính thức
 
 | Nhánh | Nội dung | Người cập nhật |
