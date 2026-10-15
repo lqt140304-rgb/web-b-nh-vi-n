@@ -33,7 +33,7 @@ Thư mục [docs/de-xuat-hero-quy-dao/](https://github.com/lqt140304-rgb/web-b-n
 
 ## Lưu ý khi đưa vào `demo/`
 
-- Giữ nguyên hành vi và bố cục của bản duyệt; đổi cách tổ chức mã cho khớp `demo/` thì được, nhưng không đổi nhịp chuyển động, kích thước khung, màu, chữ.
+- **Chép nguyên mã của bản duyệt, không viết lại.** Phần chuyển động là bộ mô phỏng quỹ đạo dài gần 1.000 dòng JavaScript, viết lại từ ảnh hoặc từ mô tả gần như chắc chắn ra khác (nhịp bay ra, khoảng cách khung, độ sâu, tránh chồng khung). Cách làm: copy `<style>` và `<script>` của `hero-quy-dao.html` vào `demo/` (tách thành file CSS/JS riêng thì được), giữ nguyên số liệu, tên lớp CSS và logic; chỉ chỉnh những chỗ bắt buộc để khớp header/footer dùng chung. Không đổi nhịp chuyển động, kích thước khung, màu, chữ. Nếu phải đổi bất kỳ thông số nào, ghi rõ đổi gì và vì sao.
 - Header, menu ☰ và chân trang phải dùng chung với trang Dịch vụ; không để hai trang có menu khác nhau.
 - `hero-quy-dao.html` còn mã không dùng của các bản chuyển động trước (đợt khung chui vào giữa: `SNAKE`, `conv`, `startSnake`, `relax`, `pickExcursionFrame`, `chooseDelta`). Được phép xóa nếu hành vi không đổi.
 - Phông chữ: bản duyệt tải Google Fonts (Lora, Be Vietnam Pro) như Hero hiện tại. Nếu Codex quyết định tự host phông thì làm ở bước sau, không thuộc yêu cầu này.
@@ -55,4 +55,4 @@ Thư mục [docs/de-xuat-hero-quy-dao/](https://github.com/lqt140304-rgb/web-b-n
 
 ## Cách tự kiểm (đủ, không cần báo cáo dài)
 
-Báo branch và SHA đầy đủ, "đã làm / chưa làm" cho 6 mục "Chủ dự án đã chốt", và ảnh chụp 1440 và 390. Claude kiểm theo mục "Đạt khi".
+So ảnh chụp của mình với `01-desktop-1440.png` và `03-mobile-390-3-thoi-diem.png` trong thư mục bản duyệt (cùng cỡ màn hình, khoảng giây thứ 5). Báo branch và SHA đầy đủ, "đã làm / chưa làm" cho 6 mục "Chủ dự án đã chốt", và ảnh chụp 1440 và 390. Claude kiểm theo mục "Đạt khi".
