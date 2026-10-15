@@ -9,6 +9,7 @@
 - [QA lại lần 2: sửa header của Codex (Claude, 2efb96b, PASS)](ra-soat-hero-chinh-codex-2efb96b-claude.md)
 - [Điều phối gộp nhánh Hero chính (đề xuất, chờ chủ dự án)](dieu-phoi-gop-nhanh-hero-chinh-2026-10-15.md)
 - [QA bản gộp 0873d12 và CTA Dịch vụ; sửa CTA của Claude (229cf79)](ra-soat-gop-nhanh-0873d12-va-cta-dich-vu-claude.md)
+- [Đặc tả header mobile và menu xổ xuống (Claude, đề xuất chờ duyệt)](de-xuat-header-mobile/README.md)
 - [Codex rà soát QA Services của Claude](ra-soat-qa-claude-services-v1-codex.md)
 - [Codex rà soát QA bộ icon của Claude](ra-soat-qa-claude-icon-services-v1.md)
 - [Đề xuất Hero "khung ảnh bay vòng" theo ý tưởng chủ dự án (bản xem thử, chờ duyệt)](de-xuat-hero-quy-dao/README.md)
