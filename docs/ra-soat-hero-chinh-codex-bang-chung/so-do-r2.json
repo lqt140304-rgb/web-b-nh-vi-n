@@ -1,0 +1,47 @@
+{
+ "intro_codex": {
+  "ctaFullMs": 2327,
+  "firstFrameMs": 2511,
+  "allFramesMs": 3058
+ },
+ "intro_ref": {
+  "ctaFullMs": 1786,
+  "firstFrameMs": 1906,
+  "allFramesMs": 2394
+ },
+ "reduced": {
+  "toggleHidden": true,
+  "frames": 9,
+  "textOpacity": 1,
+  "anims": 0
+ },
+ "cta1": {
+  "href": "index.html#form-dat-lich",
+  "box": {
+   "x": 511.8125,
+   "y": 611.484375,
+   "width": 243.703125,
+   "height": 52
+  },
+  "urlAfter": "index.html?mode=responsive"
+ },
+ "cta2": {
+  "urlAfter": "services.html"
+ },
+ "svc_base_1440": {
+  "errs": 0,
+  "sw": 1440
+ },
+ "svc_codex_1440": {
+  "errs": 0,
+  "sw": 1440
+ },
+ "svc_base_390": {
+  "errs": 0,
+  "sw": 390
+ },
+ "svc_codex_390": {
+  "errs": 0,
+  "sw": 390
+ }
+}
