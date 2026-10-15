@@ -1,3 +1,35 @@
+# Cập nhật đợt sửa 1 — kiểm lại header sau QA 2a1fd96
+
+Nhánh: `codex/hero-chinh-quy-dao`. Bản trước: `6aaabc84d1daa133e45f378a84287ae013fc291d`. Phiên bản sửa là commit chứa phần cập nhật này. Không merge, không deploy.
+
+- Việc 1: sửa header tràn/đè ở các dải hẹp. Giữ nút Đăng nhập và Đăng ký ở trạng thái khách trên cả Trang chủ và Dịch vụ; trạng thái tài khoản vẫn giữ nguyên.
+- Việc 2 và 3: đã hoàn tất tại 6aaabc8, được Claude xác nhận đạt trong QA 2a1fd96. Không sửa lại nội dung hoặc meta ở lượt này.
+- Tái hiện: test bổ sung 421px thất bại trước khi sửa. Nâng ngưỡng lên 430px hết tràn tại 421–427 nhưng phép đo từng phần logo phát hiện còn đè chữ ở 361px và 431–440px. Vì vậy dùng nhóm nút thu gọn đến 500px, nhóm nhỏ đến 375px, không cho logo co hộp rồi tràn chữ; giảm khoảng cách chữ nhãn thương hiệu. Không đổi mã mô phỏng hoặc menu.
+- Bổ sung test tại 421, 427, 428px và các cạnh ngưỡng 361/375/376/430/431/440/500/501. Thời hạn chờ kiểm tràn 3 giây để test lỗi không chờ lâu.
+
+## Kết quả kiểm mới (Chromium trên Windows)
+
+- `node tests/header-auth.cjs`: PASS, kiểm 19 cấu hình mỗi trang, gồm Mobile 390 trong cửa sổ 1000; khách và tài khoản, cả hai trang. Kiểm nút hiện, chiều cao ≥44px, không vượt khung hoặc đè logo/chữ/nút, focus và liên kết.
+- `node docs/qa/hero-chinh/dot-sua-1-header/header-sweep.cjs`: PASS, quét từng pixel 320–440, cả hai trang và hai trạng thái (484 tổ hợp). Số đo trong [sweep-320-440.json](dot-sua-1-header/sweep-320-440.json). Phép quét tắt transition bằng CSS chỉ trong trang test để đo bố cục tĩnh; test header-auth vẫn chạy hiệu ứng bình thường.
+- `node tests/hero-shell.cjs`: PASS, kiểm khung Mobile 390, chuyển trạng thái tài khoản, visibilitychange giả lập và mở Services.
+- `python tests/verify-hero-source.py`: PASS. Bộ mô phỏng giữ nguyên; `git diff --check` sạch.
+
+Ảnh mới đã đưa vào repo, không còn chỉ lưu cục bộ:
+
+- Trang chủ: [360 khách](dot-sua-1-header/header-index-360-guest.png), [390 khách](dot-sua-1-header/header-index-390-guest.png), [360 tài khoản](dot-sua-1-header/header-index-360-account.png), [390 tài khoản](dot-sua-1-header/header-index-390-account.png).
+- Dịch vụ: [360 khách](dot-sua-1-header/header-services-360-guest.png), [390 khách](dot-sua-1-header/header-services-390-guest.png).
+- Có thêm ảnh tài khoản Dịch vụ và khung Mobile 390 của cả hai trang trong cùng thư mục.
+
+Chạy server `node server.js`; đặt PLAYWRIGHT_MODULE/CHROME_BIN theo môi trường nếu cần. Để tái tạo ảnh tại đúng thư mục, đặt `QA_OUTPUT=docs/qa/hero-chinh/dot-sua-1-header` trước khi chạy header-auth.
+
+Chưa kiểm Safari/Android thật; không chạy lại phép lấy mẫu quỹ đạo 60 giây vì không đổi mã mô phỏng. Liên kết tài khoản/form vẫn là chỗ giữ tạm đã chốt. Chưa triển khai yêu cầu menu xổ xuống mới giao Antigravity.
+
+---
+
+## Bàn giao ban đầu — lịch sử trước đợt sửa 1
+
+Phần dưới mô tả bản tích hợp ban đầu; thông tin ẩn Đăng nhập và modal cũ đã được thay thế bởi 6aaabc8 và phần cập nhật trên.
+
 # Bàn giao Hero chính cho Claude — 15/10/2026
 
 Base: `8bb446f779e7c5cb137022a18a4b38b400990847` (`antigravity/design`).

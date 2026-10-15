@@ -4,10 +4,10 @@ const output=process.env.QA_OUTPUT || 'docs/qa/hero-chinh';fs.mkdirSync(output,{
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROME_BIN,headless:true});
  try {
-  for(const file of ['index','services'])for(const width of [320,360,390,420,768,1024,1440,1000]){
+  for(const file of ['index','services'])for(const width of [320,360,361,375,376,390,420,421,427,428,430,431,440,500,501,768,1024,1440,1000]){
    const mode=width===1000?'mobile':'responsive';
    const p=await browser.newPage({viewport:{width,height:900}});
-   await p.goto(`http://127.0.0.1:3030/${file}.html?mode=${mode}`);await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(350);await p.waitForFunction(()=>document.documentElement.scrollWidth<=innerWidth);
+   await p.goto(`http://127.0.0.1:3030/${file}.html?mode=${mode}`);await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(350);await p.waitForFunction(()=>document.documentElement.scrollWidth<=innerWidth,null,{timeout:3000});
    for(const loggedIn of [false,true]){
     if(loggedIn)await p.locator('#btnToggleAuth').click();
     const selectors=['.brand-logo-img','.brand-text-block',...(loggedIn?['.btn-user-profile']:['.btn-auth-login','.btn-auth-register']),...(width<=992||mode==='mobile'?['.btn-mobile-menu']:[])];

@@ -2390,12 +2390,13 @@ img {
 .viewport-outer.mode-mobile .site-header .btn-auth-register { padding-inline: 8px; font-size: 12px; }
 .viewport-outer.mode-mobile .site-header .brand-link { gap: 6px; flex-shrink: 0; }
 .viewport-outer.mode-mobile .site-header .brand-subtitle { letter-spacing: 0; }
-@media (max-width: 420px) {
+@media (max-width: 500px) {
   .header-actions, .auth-guest-group { gap: 6px; }
   .site-header .btn-auth-login, .site-header .btn-auth-register { padding-inline: 8px; font-size: 12px; }
-  .brand-link { gap: 6px; }
+  .site-header .brand-link { gap: 6px; flex-shrink: 0; }
+  .site-header .brand-subtitle { letter-spacing: 0; }
 }
-@media (max-width: 360px) {
+@media (max-width: 375px) {
   .site-header .btn-auth-login, .site-header .btn-auth-register { padding-inline: 5px; font-size: 11px; }
   .header-actions, .auth-guest-group { gap: 4px; }
   .site-header .brand-subtitle { font-size: 8px; letter-spacing: 0; }
