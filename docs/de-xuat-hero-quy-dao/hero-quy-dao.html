@@ -764,7 +764,7 @@
   var last = null, raf = 0, running = false;
   var reduced = mqReduce.matches;
   var userPaused = false, inView = true;
-  var SNAKE = { GAP: 0.7, V: 0.7, R1: 1.3, R2: 1.2, PRE: 0.15, MARGIN: 0.2, L: 3.0 };
+  var SNAKE = { V: 0.8, R1: 1.3, R2: 1.4, PRE: 0.15, OFF: 0.14, MARGIN: 0.2, L: 3.0, K: 6, K_MOBILE: 4 };
   var conv = null, nextExc = Infinity, settleUntil = 0;   // "con rắn" khung đang lướt qua chữ (null khi không có)
   var introSkipped = reduced;
   var introBase = null;      // thời điểm (đồng hồ mô phỏng) khung đầu tiên bay ra
@@ -871,7 +871,7 @@
     var cy = (cr.top + cr.bottom) / 2 - hr.top;
     var kx = (r - l) / 2, ky = cr.height / 2;
     var headerH = header.offsetHeight;
-    var base = mobile ? clamp(Math.min(W * 0.275, (H - headerH) * 0.16), 84, 118) : (tall ? clamp(W * 0.14, 106, 140) : clamp(Math.min(W * 0.122, (H - headerH) * 0.22), 112, 178));
+    var base = mobile ? clamp(Math.min(W * 0.3, (H - headerH) * 0.175), 92, 130) : (tall ? clamp(W * 0.154, 116, 154) : clamp(Math.min(W * 0.134, (H - headerH) * 0.242), 123, 196));
     var depth = tall ? { sMin: 0.8, sMax: 1.04, oMin: 0.74 } : { sMin: 0.58, sMax: 1.05, oMin: 0.4 };
     var rings;
 
@@ -953,8 +953,8 @@
     var n = list.length || 1;
     // Ba khung đầu (khung 2 dẫn đầu, 1 và 0 theo sau) luôn đi sát nhau thành một "đoàn" để lúc cần thành con rắn;
     // các khung còn lại chia đều phần vòng còn lại.
-    var g = SNAKE.GAP, rest = n > 3 ? (TAU - 2 * g) / (n - 2) : TAU / n, ph = 0.35;
-    if (G.mobile) { g = TAU / n; rest = g; }   // điện thoại: khung to so với vòng, giữ khoảng đều
+    var g = 0, rest = n > 3 ? (TAU - 2 * g) / (n - 2) : TAU / n, ph = 0.35;
+    g = TAU / n; rest = g;                      // tất cả khung cách đều nhau; cả đàn cùng tham gia đợt chuyển động
     list.forEach(function (f, j) {
       f.phase = ph + (f.seed - 0.5) * 0.06;
       ph += j < 2 ? g : rest;
@@ -1045,7 +1045,7 @@
   function place(f, t) {
     var ring = G.rings[f.ring], D = G.depth;
     var still = reduced && f.st;
-    var theta, rad = 1, bump = 0, spin = 0, nFix = null, kR = 1, exU = -1;
+    var theta, rad = 1, bump = 0, spin = 0, nFix = null, kR = 1, exU = -1, exE = 0;
     var ex = f.exc;
     if (still) {
       theta = f.st[0] * DEG; nFix = f.st[1]; kR = f.st[2];
@@ -1055,14 +1055,16 @@
       if (ex) {
         // Đường đi của "con rắn": cả đàn chạy chung một đường — chạy trên quỹ đạo chính tới điểm rẽ,
         // chui vào giữa (phía sau chữ), rồi ra lại quỹ đạo. Khung sau đi đúng vệt của khung đầu.
-        var u = (sPar - ex.phiDep) / ex.L;
+        var sn = f.sn, phd = ex.phiDep + sn.off;
+        var u = (sPar - phd) / ex.L;
         if (u >= 1) {
           sPar += ex.delta - ex.L;
         } else if (u > 0) {
-          sPar = ex.phiDep + ex.delta * smoother(u);
+          sPar = phd + ex.delta * smoother(u);
           bump = Math.sin(Math.PI * u);
           spin = bump * 9 * f.spinDir;
           exU = u;
+          exE = easeIO(u, sn.p);
         }
       }
       theta = warp(ring, sPar);
@@ -1084,11 +1086,11 @@
     var ko;
     if (exU >= 0) {
       // đoạn chui vào giữa: mọi khung đi theo đúng một đường cong mượt (vệt của khung đầu), nối liền với vòng ở hai đầu
-      var B = ex.B, a0 = localAt(f, ex.phiDep), a1 = localAt(f, ex.phiDep + ex.delta);
+      var B = f.sn.B, a0 = B[0], a1 = B[3];
       var m0 = keepOut(a0[0], a0[1], hw, hh), m1 = keepOut(a1[0], a1[1], hw, hh);
-      var w0 = 1 - smoother(exU), w1 = smoother(exU), v = 1 - exU;
-      var bx = v * v * v * B[0][0] + 3 * v * v * exU * B[1][0] + 3 * v * exU * exU * B[2][0] + exU * exU * exU * B[3][0];
-      var by = v * v * v * B[0][1] + 3 * v * v * exU * B[1][1] + 3 * v * exU * exU * B[2][1] + exU * exU * exU * B[3][1];
+      var w0 = 1 - smoother(exU), w1 = smoother(exU), q3 = exE, v = 1 - q3;
+      var bx = v * v * v * B[0][0] + 3 * v * v * q3 * B[1][0] + 3 * v * q3 * q3 * B[2][0] + q3 * q3 * q3 * B[3][0];
+      var by = v * v * v * B[0][1] + 3 * v * v * q3 * B[1][1] + 3 * v * q3 * q3 * B[2][1] + q3 * q3 * q3 * B[3][1];
       ko = [bx + (m0[0] - B[0][0]) * w0 + (m1[0] - B[3][0]) * w1, by + (m0[1] - B[0][1]) * w0 + (m1[1] - B[3][1]) * w1];
     } else {
       ko = keepOut(x, y, hw, hh);
@@ -1194,23 +1196,32 @@
     var ring = G.rings[f.ring], p = shape(ring, warp(ring, sp));
     return toLocal(ring, p[0] * f.rj, p[1] * f.rj);
   }
+  // Làm mượt/đổi nhịp vào-ra của từng khung: p < 1 vào nhanh ra chậm, p > 1 vào chậm ra nhanh (vẫn 0→1, đơn điệu).
+  function easeIO(u, p) { var a = Math.pow(u, p), b = Math.pow(1 - u, p); return a / (a + b); }
   function startSnake(t) {
     var wr = G.speed, S = SNAKE;
-    var members = [2, 1, 0].map(function (i) { return frames[i]; });
-    if (!members.every(function (f) { return f.active; })) return false;
-    var la = angleOf(members[0], t);
-    members = members.map(function (f) { return { f: f, d: mod(la - angleOf(f, t), TAU) }; });
+    var act = frames.filter(function (f) { return f.active; });
+    var lead = frames[2].active ? frames[2] : act[0];
+    var la = angleOf(lead, t);
+    var members = act.map(function (f) { return { f: f, d: mod(la - angleOf(f, t), TAU) }; })
+      .sort(function (x, y) { return x.d - y.d; }).slice(0, Math.min(act.length, G.mobile ? S.K_MOBILE : S.K));
     var dmax = members[members.length - 1].d;
-    var V = S.V, num = S.PRE + S.L + S.MARGIN + dmax + (V - wr) * S.R1 / 2;
+    var V = S.V, num = S.PRE + S.OFF + S.L + S.MARGIN + dmax + (V - wr) * S.R1 / 2;
     var P = Math.max(0, num / V - S.R1);
     var E = (V - wr) * (P + S.R1 / 2 + S.R2 / 2);
     conv = { t0: t, V: V, R1: S.R1, R2: S.R2, P: P, L: S.L, phiDep: la + S.PRE, delta: S.L - E,
-             total: S.R1 + P + S.R2, wr: wr, B: null,
+             total: S.R1 + P + S.R2, wr: wr,
              members: members.map(function (m) { return { f: m.f, p0: m.f.phase }; }) };
-    var P0 = localAt(members[0].f, conv.phiDep), P3 = localAt(members[0].f, conv.phiDep + conv.delta);
-    var cy = -(P0[1] + P3[1]) / 6 - 10;   // điểm cao nhất của đường cong đi qua đúng giữa khối chữ
-    conv.B = [P0, [P0[0] * 0.1, cy], [P3[0] * 0.1, cy], P3];
-    conv.members.forEach(function (m) { m.f.exc = conv; });
+    // Mỗi khung có đường vào riêng, lệch nhau một chút (điểm rẽ, độ cong, độ cao, nhịp vào/ra) cho mượt và tự nhiên.
+    conv.members.forEach(function (m, i) {
+      var f = m.f, r1 = (Math.sin(i * 12.9898 + f.seed * 78.233) + 1) / 2, r2 = (Math.sin(i * 4.1414 + f.seed * 31.7) + 1) / 2;
+      var off = (r1 - 0.5) * 2 * S.OFF;
+      var phd = conv.phiDep + off;
+      var P0 = localAt(f, phd), P3 = localAt(f, phd + conv.delta);
+      var cy = -(P0[1] + P3[1]) / 6 - 10 + (r2 - 0.5) * 90, cx0 = P0[0] * 0.1 + (r1 - 0.5) * 120, cx3 = P3[0] * 0.1 + (r2 - 0.5) * 120;
+      f.sn = { off: off, p: 0.8 + 0.5 * ((r1 + r2) / 2), B: [P0, [cx0, cy], [cx3, cy + (r1 - 0.5) * 50], P3] };
+      f.exc = conv;
+    });
     return true;
   }
   function updateExcursions(t) {
