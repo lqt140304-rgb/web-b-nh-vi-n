@@ -2382,11 +2382,22 @@ img {
 }
 
 
-/* Header chung: giữ Đăng ký trên điện thoại như bản Hero đã duyệt. */
-.btn-auth-login, .btn-auth-register { text-decoration: none; }
-.viewport-outer.mode-mobile .site-header .btn-auth-login { display: none; }
-.viewport-outer.mode-mobile .site-header .btn-auth-register { padding-inline: 14px; }
+/* Header chung: giữ cả hai nút tài khoản, kể cả khung Mobile 390. */
+.btn-auth-login, .btn-auth-register { text-decoration: none; min-height: 44px; white-space: nowrap; }
+.viewport-outer.mode-mobile .header-actions,
+.viewport-outer.mode-mobile .auth-guest-group { gap: 6px; }
+.viewport-outer.mode-mobile .site-header .btn-auth-login,
+.viewport-outer.mode-mobile .site-header .btn-auth-register { padding-inline: 8px; font-size: 12px; }
+.viewport-outer.mode-mobile .site-header .brand-link { gap: 6px; flex-shrink: 0; }
+.viewport-outer.mode-mobile .site-header .brand-subtitle { letter-spacing: 0; }
 @media (max-width: 420px) {
-  .site-header .btn-auth-login { display: none; }
-  .site-header .btn-auth-register { padding-inline: 14px; }
+  .header-actions, .auth-guest-group { gap: 6px; }
+  .site-header .btn-auth-login, .site-header .btn-auth-register { padding-inline: 8px; font-size: 12px; }
+  .brand-link { gap: 6px; }
+}
+@media (max-width: 360px) {
+  .site-header .btn-auth-login, .site-header .btn-auth-register { padding-inline: 5px; font-size: 11px; }
+  .header-actions, .auth-guest-group { gap: 4px; }
+  .site-header .brand-subtitle { font-size: 8px; letter-spacing: 0; }
+  .site-header .brand-link { flex-shrink: 0; gap: 4px; }
 }
