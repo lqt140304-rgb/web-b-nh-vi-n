@@ -1,6 +1,6 @@
 # Đặc tả CHỐT: header mobile và menu xổ xuống (chủ dự án duyệt 15/10/2026)
 
-**Người thiết kế:** Claude. **Chủ dự án đã duyệt** đặc tả đề xuất ngày 15/10/2026 với hai thay đổi: **(1) nút to hơn; (2) đã đăng nhập thì hiện "Đăng xuất" ở cuối menu.** Ghi bởi Claude. **Người triển khai: Codex** (chủ dự án giao 15/10: "codex tích hợp"); Antigravity không làm mục này. Thay thế yêu cầu [header mobile giao Antigravity](yeu-cau-header-mobile-antigravity-2026-10-15.md). Nền thiết kế: ảnh chủ dự án chọn ([header-mobile-chu-du-an.png](anh-mau-header-mobile-2026-10-15/header-mobile-chu-du-an.png)).
+**Người thiết kế:** Claude. **Chủ dự án đã duyệt** đặc tả đề xuất ngày 15/10/2026 với hai thay đổi: **(1) nút to hơn; (2) đã đăng nhập thì hiện "Đăng xuất" ở cuối menu.** **Bổ sung 16/10/2026 (chủ dự án): (3) khi đã đăng nhập hiện tên khách đầy đủ, ít nhất họ và tên; (4) logo lớn hơn ở cả mobile và máy tính.** Các mục (3) và (4) thay các dòng liên quan ở mục 1 và 2 dưới đây. Ghi bởi Claude. **Người triển khai: Codex** (chủ dự án giao 15/10: "codex tích hợp"); Antigravity không làm mục này. Thay thế yêu cầu [header mobile giao Antigravity](yeu-cau-header-mobile-antigravity-2026-10-15.md). Nền thiết kế: ảnh chủ dự án chọn ([header-mobile-chu-du-an.png](anh-mau-header-mobile-2026-10-15/header-mobile-chu-du-an.png)).
 
 **Bản mẫu chạy được (chuẩn):** [dac-ta-header-mobile-mau/header-mobile-mau.html](dac-ta-header-mobile-mau/header-mobile-mau.html) (thêm `?open=1` mở sẵn menu, `?user=1` trạng thái đã đăng nhập). Ảnh: [tổng hợp](dac-ta-header-mobile-mau/anh/00-tong-hop.png). Chép CSS và JS từ bản mẫu; không viết lại màu, cỡ, khoảng cách.
 
@@ -16,17 +16,18 @@ Một hàng: **logo trái; phải: Đăng nhập, Đăng ký, ☰.** Hai nút kh
 | Cao nút | ≥ 44 px; header cao tối thiểu 68 px |
 | Chữ nút | **≥ 13,5 px ở mọi cỡ** (14,5 px từ 501 px; 14 px ở 341–500 px; 13,5 px ở ≤ 340 px) |
 
-**Cách vừa chỗ khi hẹp: thu phần thương hiệu, không thu nút.**
+**Logo lớn hơn (chủ dự án 16/10): ảnh logo rộng ≥ 56 px ở mọi cỡ mobile và 72×65 px ở máy tính** (trước đó 46×42 mobile, 48 đến 60 px cao ở máy tính). Khi hẹp thì thu **chữ thương hiệu bên cạnh logo**, không thu logo và không thu nút.
 
 | Chiều rộng | Logo và chữ thương hiệu | Đệm ngang nút / khoảng cách nút | Lề header |
 |---|---|---|---|
-| ≥ 501 px | Logo 46×42, "BỆNH VIỆN THÚ Y" 9,5 px, "Lê Sơn" 21 px | 18 px / 10 px | 16 px |
-| 411–500 px | như trên | 12 px / 6 px | 12 px |
-| 376–410 px | Logo 42×38 và "Lê Sơn" 20 px; **bỏ dòng "BỆNH VIỆN THÚ Y"** | 12 px / 6 px | 12 px |
-| 341–375 px | **Chỉ còn logo** 46×42 (ảnh logo đã có chữ "Lê Sơn"); giữ tên truy cập (`aria-label`) | 12 px / 6 px | 12 px |
-| 320–340 px | Chỉ logo | 10 px / 5 px | 10 px |
+| ≥ 993 px (máy tính) | Logo **72×65**, "BỆNH VIỆN THÚ Y" 12 px, "Lê Sơn" 28 px; header cao tối thiểu 96 px; nav ngang hiện, không có ☰ | 22 px / 10 px, chữ nút 15 px | 24 px |
+| 501–992 px | Logo **56×51**, "BỆNH VIỆN THÚ Y" 10 px, "Lê Sơn" 22 px | 18 px / 10 px, chữ nút 14,5 px | 16 px |
+| 461–500 px | như trên | 12 px / 6 px, chữ nút 14 px | 12 px |
+| 421–460 px | Logo 56×51 và "Lê Sơn" 21 px; **bỏ dòng "BỆNH VIỆN THÚ Y"** | 12 px / 6 px | 12 px |
+| 341–420 px | **Chỉ còn logo** 56×51 (ảnh logo đã có chữ "Lê Sơn"); giữ tên truy cập (`aria-label`) | 12 px / 6 px | 12 px |
+| 320–340 px | Chỉ logo 56×51 | 9 px / 5 px, chữ nút 13,5 px | 10 px |
 
-Logo giữ nguyên ảnh chính thức, không đổi màu. Đây là chỗ **thay đổi so với bản đề xuất trước** (bản trước thu chữ nút xuống 11,5–12 px).
+Header cao tối thiểu 68 px trên mobile (72 px nếu logo cần). Logo giữ nguyên ảnh chính thức, không đổi màu. Nav ngang ở máy tính giữ như hiện có (Trang chủ, Dịch vụ, Giới thiệu, Liên hệ); chỉ đổi cỡ logo, chữ thương hiệu và chiều cao header. Khi đổi chiều cao header máy tính, kiểm lại Hero (chiều cao khối Hero tính lại theo stage).
 
 ## 2. Menu xổ xuống (☰)
 
@@ -34,7 +35,7 @@ Logo giữ nguyên ảnh chính thức, không đổi màu. Đây là chỗ **th
 - Nền `#FFFFFF`, viền 1 px `rgba(90,30,94,.08)`, bo 22 px, đệm 10 px, bóng `0 24px 50px -20px rgba(66,18,71,.35)`. Rộng `min(318px, 100% − 24px)`, cách mép phải 12 px, chồng lên đáy header 6 px.
 - Liên kết xếp dọc, mỗi dòng cao ≥ 48 px, bo 12 px, chữ 16 px: **Trang chủ, Dịch vụ, Giới thiệu, Liên hệ**. Trang hiện tại (`aria-current="page"`): nền `#F6EFF4`, chữ `#5A1E5E`, đậm 700 (ở trang Dịch vụ thì đánh dấu Dịch vụ). Rê chuột: nền `#F6EFF4`.
 - **Khách:** hàng cuối hộp có Đăng nhập (viền) và Đăng ký (tím) cạnh nhau, rộng bằng nhau, cách 8 px, cao ≥ 44 px.
-- **Đã đăng nhập:** header hiện nút tài khoản có sẵn thay hai nút khách (chỉ avatar ở ≤ 500 px). Hộp giữ bốn liên kết; hàng cuối là **một nút "Đăng xuất" rộng hết hộp**, cao ≥ 44 px, nền trắng, viền 1,5 px `rgba(156,42,42,.3)`, chữ `#9C2A2A`. Không hiện nút dành cho khách. Đích tạm `#dang-xuat` (cùng mục "Đăng xuất" của dropdown tài khoản hiện có; chưa có chức năng thật). Dropdown tài khoản có sẵn giữ nguyên.
+- **Đã đăng nhập:** header hiện nút tài khoản (avatar + **họ và tên đầy đủ**) thay hai nút khách. Tên **luôn hiện đầy đủ ở mọi cỡ, kể cả 320 px**: chữ 13 px, cho xuống tối đa **2 dòng** trong nút (nút cao ≥ 44 px), không rút gọn bằng dấu "…" trừ khi dài hơn 2 dòng (khi đó cắt ở dòng 2 và đặt tên đầy đủ vào `title`/`aria-label`). Avatar lấy chữ cái đầu của **tên** (từ cuối). Bản mẫu thử với "Khách Demo", "Nguyễn Văn An", "Nguyễn Thị Phương Anh" (thêm `?name=...`). Hộp giữ bốn liên kết; hàng cuối là **một nút "Đăng xuất" rộng hết hộp**, cao ≥ 44 px, nền trắng, viền 1,5 px `rgba(156,42,42,.3)`, chữ `#9C2A2A`. Không hiện nút dành cho khách. Đích tạm `#dang-xuat` (cùng mục "Đăng xuất" của dropdown tài khoản hiện có; chưa có chức năng thật). Dropdown tài khoản có sẵn giữ nguyên.
 
 ## 3. Hành vi và hỗ trợ tiếp cận
 
@@ -48,7 +49,7 @@ Logo giữ nguyên ảnh chính thức, không đổi màu. Đây là chỗ **th
 
 ## 4. Đã kiểm trên bản mẫu (Claude, Chromium)
 
-Đo từng px từ 320 đến 600 (281 cỡ), bốn tổ hợp (khách/đã đăng nhập × menu đóng/mở), mã [do-tung-px.js](dac-ta-header-mobile-mau/do-tung-px.js): 0 phép đo có đè nhau, vượt mép, tràn ngang, hộp menu vượt mép, nút thấp hơn 44 px, chữ nút nhỏ hơn 13,5 px, hoặc logo sát nút dưới 4 px. Hành vi: mở bằng ☰, `aria-expanded` đúng, Escape đóng và trả tiêu điểm, bấm ngoài đóng, menu đóng không hiển thị, Tab vào "Trang chủ". **Chưa kiểm:** tích hợp thật (khung Mobile 390, trang Dịch vụ, `app.js`, dropdown tài khoản), máy thật.
+Đo từng px từ 320 đến 620 rồi mỗi 20 px đến 1500, sáu tổ hợp (khách, đã đăng nhập với "Khách Demo", đã đăng nhập với "Nguyễn Thị Phương Anh" × menu đóng/mở), mã [do-tung-px.js](dac-ta-header-mobile-mau/do-tung-px.js): 0 phép đo có đè nhau, vượt mép, tràn ngang, hộp menu vượt mép, nút thấp hơn 44 px, chữ nút nhỏ hơn 13,5 px, logo hẹp hơn 56 px, tên bị cắt chữ, hoặc logo sát nút dưới 4 px. Ảnh: [logo lớn và tên đầy đủ](dac-ta-header-mobile-mau/anh/01-logo-lon-ten-day-du.png). Hành vi: mở bằng ☰, `aria-expanded` đúng, Escape đóng và trả tiêu điểm, bấm ngoài đóng, menu đóng không hiển thị, Tab vào "Trang chủ". **Chưa kiểm:** tích hợp thật (khung Mobile 390, trang Dịch vụ, `app.js`, dropdown tài khoản), máy thật.
 
 ## 5. Giao Codex
 

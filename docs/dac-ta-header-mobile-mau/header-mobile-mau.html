@@ -20,11 +20,11 @@
   .site-header { position: relative; z-index: 50; }
   .site-header__inner { display: flex; align-items: center; gap: 10px; min-height: 68px; padding: 10px 16px; }
   .brand { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; flex-shrink: 0; }
-  .brand img { width: 46px; height: 42px; object-fit: contain; }
+  .brand img { width: 56px; height: 51px; object-fit: contain; }
   .brand__text { display: flex; flex-direction: column; line-height: 1; }
-  .brand__kicker { font-size: 9.5px; font-weight: 700; letter-spacing: .06em; color: var(--plum-700); }
-  .brand__name { margin-top: 3px; font-family: var(--font-serif); font-weight: 600; font-size: 21px; line-height: 1.05; color: var(--plum-900); }
-  .header-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+  .brand__kicker { font-size: 10px; font-weight: 700; letter-spacing: .06em; color: var(--plum-700); }
+  .brand__name { margin-top: 3px; font-family: var(--font-serif); font-weight: 600; font-size: 22px; line-height: 1.05; color: var(--plum-900); }
+  .header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-left: auto; min-width: 0; }
   .pill { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border-radius: 999px; font: 600 14.5px/1 var(--font-sans); text-decoration: none; white-space: nowrap; }
   .pill--outline { color: var(--plum-700); background: rgba(255,255,255,.7); border: 1.5px solid rgba(90,30,94,.2); }
   .pill--filled { color: var(--cream); background: var(--plum-700); border: 1.5px solid var(--plum-700); box-shadow: 0 10px 22px -12px rgba(90,30,94,.7); }
@@ -47,33 +47,47 @@
   .is-user .mobile-menu__auth { display: none; }
 
   /* ===== TÀI KHOẢN (đã đăng nhập): giữ nút tài khoản có sẵn, thay cho hai nút khách ===== */
-  .user-btn { display: none; align-items: center; gap: 8px; min-height: 44px; padding: 0 10px 0 6px; border-radius: 999px; border: 1.5px solid rgba(90,30,94,.2); background: rgba(255,255,255,.7); color: var(--plum-700); font: 600 14px/1 var(--font-sans); cursor: pointer; }
-  .user-btn__ava { width: 32px; height: 32px; border-radius: 50%; background: var(--plum-700); color: var(--cream); display: inline-flex; align-items: center; justify-content: center; font-size: 14px; }
+  .user-btn { display: none; align-items: center; gap: 8px; min-height: 44px; min-width: 0; flex: 0 1 auto; padding: 4px 12px 4px 6px; text-align: left; border-radius: 999px; border: 1.5px solid rgba(90,30,94,.2); background: rgba(255,255,255,.7); color: var(--plum-700); font: 600 14px/1 var(--font-sans); cursor: pointer; }
+  .user-btn__name { min-width: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; line-height: 1.15; overflow-wrap: anywhere; }
+  .user-btn__ava { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--plum-700); color: var(--cream); display: inline-flex; align-items: center; justify-content: center; font-size: 14px; }
   .is-user .guest-only { display: none; }
   .is-user .user-btn { display: inline-flex; }
 
-  /* ===== CÁC MỐC KÍCH THƯỚC (đo từng px từ 320 đến 600). Nút luôn to: chữ >= 13,5 px; khi hẹp thì thu chữ thương hiệu, không thu nút ===== */
+  /* ===== CÁC MỐC KÍCH THƯỚC (đo từng px từ 320 đến 600). Nút luôn to (chữ >= 13,5 px) và logo luôn lớn (>= 56 px rộng);
+     khi hẹp thì thu chữ thương hiệu bên cạnh logo, không thu logo hay nút ===== */
   @media (max-width: 500px) {
     .site-header__inner { padding: 10px 12px; gap: 6px; }
     .header-actions { gap: 6px; }
     .pill { padding: 0 12px; font-size: 14px; }
     .brand { gap: 6px; }
-    .user-btn__name { display: none; }          /* chỉ còn avatar */
-    .user-btn { padding: 0 8px 0 6px; }
+    .user-btn { font-size: 13px; }
   }
-  @media (max-width: 410px) {
+  @media (max-width: 460px) {
     .brand__kicker { display: none; }           /* bỏ dòng nhỏ "BỆNH VIỆN THÚ Y"; logo + "Lê Sơn" giữ */
-    .brand__name { margin-top: 0; font-size: 20px; }
-    .brand img { width: 42px; height: 38px; }
+    .brand__name { margin-top: 0; font-size: 21px; }
   }
-  @media (max-width: 375px) {
+  @media (max-width: 420px) {
     .brand__text { display: none; }             /* chỉ còn logo (ảnh logo đã có chữ Lê Sơn) */
-    .brand img { width: 46px; height: 42px; }
   }
   @media (max-width: 340px) {
-    .pill { font-size: 13.5px; padding: 0 10px; }
+    .pill { font-size: 13.5px; padding: 0 9px; }
     .site-header__inner { padding-inline: 10px; gap: 4px; }
     .header-actions { gap: 5px; }
+  }
+  /* ===== MÁY TÍNH (>= 993 px): logo lớn hơn ===== */
+  .nav { display: none; }
+  @media (min-width: 993px) {
+    .site-header__inner { max-width: 1240px; margin: 0 auto; min-height: 96px; padding: 12px 24px; gap: 20px; }
+    .brand img { width: 72px; height: 65px; }
+    .brand__kicker { font-size: 12px; }
+    .brand__name { font-size: 28px; margin-top: 4px; }
+    .menu-btn { display: none; }
+    .nav { display: flex; flex: 1; justify-content: center; gap: 4px; }
+    .nav a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: 10px; font-size: 15px; font-weight: 500; color: var(--ink-soft); text-decoration: none; }
+    .nav a[aria-current="page"] { color: var(--plum-700); font-weight: 600; }
+    .header-actions { margin-left: 0; }
+    .pill { padding: 0 22px; font-size: 15px; }
+    .mobile-menu { display: none; }
   }
 
   /* nội dung giả bên dưới để thấy menu không đẩy trang */
@@ -88,6 +102,7 @@
       <img src="assets/logo-le-son.png" alt="" width="46" height="42">
       <span class="brand__text"><span class="brand__kicker">BỆNH VIỆN THÚ Y</span><span class="brand__name">Lê Sơn</span></span>
     </a>
+    <nav class="nav" aria-label="Điều hướng chính"><a href="#" aria-current="page">Trang chủ</a><a href="services.html">Dịch vụ</a><a href="#gioi-thieu">Giới thiệu</a><a href="#lien-he">Liên hệ</a></nav>
     <div class="header-actions">
       <a class="pill pill--outline guest-only" href="#dang-nhap">Đăng nhập</a>
       <a class="pill pill--filled guest-only" href="#dang-ky">Đăng ký</a>
@@ -119,6 +134,7 @@
   var btn = document.getElementById('menuBtn'), menu = document.getElementById('mobileMenu');
   var q = new URLSearchParams(location.search);
   if (q.get('user') === '1') document.body.classList.add('is-user');
+  var nm = q.get('name'); if (nm) { document.querySelector('.user-btn__name').textContent = nm; document.querySelector('.user-btn__ava').textContent = nm.trim().split(/\s+/).pop().charAt(0).toUpperCase(); }
   function setOpen(o) { menu.hidden = !o; btn.setAttribute('aria-expanded', String(o)); btn.setAttribute('aria-label', o ? 'Đóng danh mục điều hướng' : 'Mở danh mục điều hướng'); }
   btn.addEventListener('click', function () { setOpen(menu.hidden); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { setOpen(false); btn.focus(); } });
