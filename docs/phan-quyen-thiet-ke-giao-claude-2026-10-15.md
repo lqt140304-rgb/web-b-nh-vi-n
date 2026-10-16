@@ -1,3 +1,5 @@
+> **Quyết định hiện hành — 17/10/2026:** Antigravity đã bị loại khỏi kế hoạch. Claude thay thế hoàn toàn Antigravity về thiết kế, bản mẫu, triển khai giao diện và bàn giao; Codex tích hợp và kiểm chéo. Các phân công Antigravity trong tài liệu cũ chỉ còn là lịch sử. [Quyết định chính thức](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/claude-thay-the-antigravity-2026-10-17.md).
+
 # Phân quyền thiết kế: Claude phụ trách, Antigravity chỉ triển khai bản chốt
 
 **Quyết định chủ dự án ngày 15/10/2026:** “bây giờ hạn chế quyền thiết kế của anti và giao việc đó cho claude”. Codex ghi lại quyết định; có hiệu lực từ commit chứa tài liệu này và thay thế phân công cũ ở những điểm xung đột.

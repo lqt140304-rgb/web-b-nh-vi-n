@@ -1,7 +1,9 @@
+> **Quyết định hiện hành — 17/10/2026:** Antigravity đã bị loại khỏi kế hoạch. Claude thay thế hoàn toàn Antigravity về thiết kế, bản mẫu, triển khai giao diện và bàn giao; Codex tích hợp và kiểm chéo. Các phân công Antigravity trong tài liệu cũ chỉ còn là lịch sử. [Quyết định chính thức](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/claude-thay-the-antigravity-2026-10-17.md).
+
 # Hai nhánh tài liệu dùng chung — 15/10/2026
 
 Theo quyết định chủ dự án, Claude và Codex dùng chung hai nơi:
-- **shared/requirements:** yêu cầu, quyết định đã chốt, ảnh mẫu, hướng dẫn Antigravity triển khai.
+- **shared/requirements:** yêu cầu, quyết định đã chốt, ảnh mẫu, đặc tả và hướng dẫn Claude triển khai.
 - **shared/qa-review:** báo cáo QA, rà soát chéo, bằng chứng kiểm tra, kết luận PASS/FIX/chưa kiểm.
 
 ## Cách làm
@@ -11,7 +13,7 @@ Theo quyết định chủ dự án, Claude và Codex dùng chung hai nơi:
 3. QA phải ghi nhánh/commit đã kiểm, bằng chứng, giới hạn kiểm tra. PASS kỹ thuật không đồng nghĩa chủ dự án đã duyệt.
 4. Đề xuất trong QA chưa được duyệt không tự trở thành yêu cầu. Khi chủ dự án chốt, ghi danh sách triển khai vào requirements.
 5. Liên kết giữa hai loại tài liệu dùng URL có tên nhánh rõ ràng, không dựa vào bản sao lịch sử trong cùng nhánh.
-6. Claude phụ trách thiết kế; Antigravity chỉ triển khai bản đã chốt theo đặc tả và nhiệm vụ được giao, không tự thay đổi thiết kế. Xem [quyết định phân quyền hiện hành](phan-quyen-thiet-ke-giao-claude-2026-10-15.md). Claude/Codex ghi kết quả kiểm tra vào qa-review.
+6. Claude thay thế hoàn toàn Antigravity, phụ trách thiết kế, bản mẫu, triển khai và bàn giao; Codex tích hợp và kiểm chéo. Các nhánh antigravity/* chỉ lưu lịch sử. Xem [quyết định phân quyền hiện hành](phan-quyen-thiet-ke-giao-claude-2026-10-15.md). Claude/Codex ghi kết quả kiểm tra vào qa-review.
 7. Nhánh claude/optimistic-mccarthy-d1d15i, codex/review-claude-qa và codex/qa-services-v1 chỉ giữ lịch sử, không dùng làm nơi đăng tài liệu mới sau quyết định này.
 8. Không merge code thiết kế/main chỉ vì tạo hai nhánh tài liệu.
 
