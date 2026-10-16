@@ -1,0 +1,2172 @@
+{
+  "cases": [
+    {
+      "name": "pc scroll 0: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 7,
+        "errors": [
+          381.75189208984375,
+          591.2645263671875,
+          303.81561279296875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          887,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "pc scroll 0.25: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 2,
+        "errors": [
+          247.7144775390625,
+          304.6038818359375,
+          285.94203186035156
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          552,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "pc scroll 0.5: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          231.06698608398438,
+          151.5382080078125,
+          72.322998046875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          218,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "pc scroll 0.75: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          17.659530639648438,
+          41.10357666015625,
+          109.7625732421875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "pc scroll 0.999: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.416351318359375,
+          0.310302734375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "pc landing matches 3 slots",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.416351318359375,
+          0.310302734375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "pc static images replace moving frames",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "pc sticky position",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "pc reverse restores orbit",
+      "pass": true,
+      "data": {
+        "frames": 7,
+        "errors": [
+          362.641357421875,
+          614.42724609375,
+          326.97833251953125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          887,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "pc about keyboard focus visible",
+      "pass": true,
+      "data": {
+        "text": "097 355 51 05",
+        "inAbout": true,
+        "outline": "3px"
+      }
+    },
+    {
+      "name": "pc keyboard reaches about",
+      "pass": true,
+      "data": [
+        {
+          "text": "097 355 51 05",
+          "inAbout": true,
+          "outline": "3px"
+        }
+      ]
+    },
+    {
+      "name": "pc services keyboard link",
+      "pass": true,
+      "data": "http://127.0.0.1:3035/services.html"
+    },
+    {
+      "name": "pc switch btnViewMobile: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          127.32192993164062,
+          54.0743408203125,
+          71.71859741210938
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 0.999956,
+        "about": [
+          525,
+          228,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "pc switch btnViewMobile: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.43682861328125,
+          0.451263427734375,
+          0.47930908203125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          525,
+          55,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "pc switch btnViewDesktop: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.416351318359375,
+          7.5243682861328125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          16,
+          56,
+          1408,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "pc switch btnViewDesktop: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.416351318359375,
+          0.310302734375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          16,
+          56,
+          1408,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "pc switch btnViewResponsive: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "pc switch btnViewResponsive: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.416351318359375,
+          0.310302734375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "tablet scroll 0: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 7,
+        "errors": [
+          356.85491943359375,
+          574.98828125,
+          290.50421142578125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          894,
+          768,
+          1273
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet scroll 0.25: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          313.6072998046875,
+          275.81005859375,
+          62.785064697265625
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          552,
+          768,
+          1273
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet scroll 0.5: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          110.66241455078125,
+          138.53302001953125,
+          122.12649536132812
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          209,
+          768,
+          1273
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet scroll 0.75: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          12.410995483398438,
+          53.229095458984375,
+          79.56477355957031
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          87,
+          768,
+          1273
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet scroll 0.999: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.32763671875,
+          0.40020751953125,
+          0.399505615234375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          87,
+          768,
+          1273
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet landing matches 3 slots",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.32763671875,
+          0.40020751953125,
+          0.399505615234375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          87,
+          768,
+          1273
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet static images replace moving frames",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          87,
+          768,
+          1273
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet sticky position",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          87,
+          768,
+          1273
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet reverse restores orbit",
+      "pass": true,
+      "data": {
+        "frames": 6,
+        "errors": [
+          352.564208984375,
+          601.7596435546875,
+          317.27557373046875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          894,
+          768,
+          1273
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet about keyboard focus visible",
+      "pass": true,
+      "data": {
+        "text": "097 355 51 05",
+        "inAbout": true,
+        "outline": "3px"
+      }
+    },
+    {
+      "name": "tablet keyboard reaches about",
+      "pass": true,
+      "data": [
+        {
+          "text": "097 355 51 05",
+          "inAbout": true,
+          "outline": "3px"
+        }
+      ]
+    },
+    {
+      "name": "tablet services keyboard link",
+      "pass": true,
+      "data": "http://127.0.0.1:3035/services.html"
+    },
+    {
+      "name": "tablet switch btnViewMobile: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          138.76528930664062,
+          54.381103515625,
+          75.12973022460938
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          189,
+          260,
+          390,
+          1110.921875
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet switch btnViewMobile: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.43682861328125,
+          0.451263427734375,
+          0.47930908203125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          189,
+          87,
+          390,
+          1110.921875
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet switch btnViewDesktop: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.32763671875,
+          0.40020751953125,
+          3.7614288330078125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          16,
+          87,
+          736,
+          1272.265625
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet switch btnViewDesktop: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.32763671875,
+          0.40020751953125,
+          0.399505615234375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          16,
+          87,
+          736,
+          1272.265625
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet switch btnViewResponsive: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          87,
+          768,
+          1273
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "tablet switch btnViewResponsive: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.32763671875,
+          0.40020751953125,
+          0.399505615234375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          87,
+          768,
+          1273
+        ],
+        "sticky": "87px"
+      }
+    },
+    {
+      "name": "mobile scroll 0: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 6,
+        "errors": [
+          257.06304931640625,
+          400.943603515625,
+          236.69793701171875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          816,
+          390,
+          1110.921875
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile scroll 0.25: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          127.226806640625,
+          133.857177734375,
+          58.861053466796875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          527,
+          390,
+          1110.921875
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile scroll 0.5: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          105.47476196289062,
+          58.695396423339844,
+          78.36849975585938
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          239,
+          390,
+          1110.921875
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile scroll 0.75: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          11.818206787109375,
+          15.447952270507812,
+          9.991851806640625
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          105,
+          390,
+          1110.921875
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile scroll 0.999: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.43682861328125,
+          0.451263427734375,
+          0.4792938232421875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          105,
+          390,
+          1110.921875
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile landing matches 3 slots",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.43682861328125,
+          0.451263427734375,
+          0.4792938232421875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          105,
+          390,
+          1110.921875
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile static images replace moving frames",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          105,
+          390,
+          1110.921875
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile sticky position",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          105,
+          390,
+          1110.921875
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile reverse restores orbit",
+      "pass": true,
+      "data": {
+        "frames": 6,
+        "errors": [
+          260.722900390625,
+          404.60345458984375,
+          240.3577880859375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          816,
+          390,
+          1110.921875
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile about keyboard focus visible",
+      "pass": true,
+      "data": {
+        "text": "097 355 51 05",
+        "inAbout": true,
+        "outline": "3px"
+      }
+    },
+    {
+      "name": "mobile keyboard reaches about",
+      "pass": true,
+      "data": [
+        {
+          "text": "097 355 51 05",
+          "inAbout": true,
+          "outline": "3px"
+        }
+      ]
+    },
+    {
+      "name": "mobile services keyboard link",
+      "pass": true,
+      "data": "http://127.0.0.1:3035/services.html"
+    },
+    {
+      "name": "mobile switch btnViewMobile: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          112.8536376953125,
+          60.273765563964844,
+          67.62997436523438
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 0.999995,
+        "about": [
+          16,
+          278,
+          358,
+          1080.453125
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile switch btnViewMobile: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.3743896484375,
+          0.417755126953125,
+          0.4005584716796875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          16,
+          105,
+          358,
+          1080.453125
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile switch btnViewDesktop: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.3743896484375,
+          0.417755126953125,
+          0.4005584716796875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          16,
+          105,
+          358,
+          1080.453125
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile switch btnViewDesktop: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.3743896484375,
+          0.417755126953125,
+          0.2838134765625
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          16,
+          105,
+          358,
+          1080.453125
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile switch btnViewResponsive: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          105,
+          390,
+          1110.921875
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "mobile switch btnViewResponsive: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.43682861328125,
+          0.451263427734375,
+          0.4792938232421875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          105,
+          390,
+          1110.921875
+        ],
+        "sticky": "105px"
+      }
+    },
+    {
+      "name": "small scroll 0: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 6,
+        "errors": [
+          236.960693359375,
+          352.70733642578125,
+          220.584228515625
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          848,
+          320,
+          1068.265625
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small scroll 0.25: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          127.46218585968018,
+          109.180908203125,
+          47.64337158203125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          586,
+          320,
+          1068.265625
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small scroll 0.5: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          95.0870361328125,
+          44.457008361816406,
+          113.1109619140625
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          324,
+          320,
+          1068.265625
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small scroll 0.75: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          13.016845703125,
+          13.87646484375,
+          10.580352783203125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          137,
+          320,
+          1068.265625
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small scroll 0.999: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.3900146484375,
+          0.456146240234375,
+          0.4563751220703125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          137,
+          320,
+          1068.265625
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small landing matches 3 slots",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.3900146484375,
+          0.456146240234375,
+          0.4563751220703125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          137,
+          320,
+          1068.265625
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small static images replace moving frames",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          137,
+          320,
+          1068.265625
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small sticky position",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          137,
+          320,
+          1068.265625
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small reverse restores orbit",
+      "pass": true,
+      "data": {
+        "frames": 6,
+        "errors": [
+          249.74090576171875,
+          365.487548828125,
+          233.36444091796875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          848,
+          320,
+          1068.265625
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small about keyboard focus visible",
+      "pass": true,
+      "data": {
+        "text": "097 355 51 05",
+        "inAbout": true,
+        "outline": "3px"
+      }
+    },
+    {
+      "name": "small keyboard reaches about",
+      "pass": true,
+      "data": [
+        {
+          "text": "097 355 51 05",
+          "inAbout": true,
+          "outline": "3px"
+        }
+      ]
+    },
+    {
+      "name": "small services keyboard link",
+      "pass": true,
+      "data": "http://127.0.0.1:3035/services.html"
+    },
+    {
+      "name": "small switch btnViewMobile: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          88.11367797851562,
+          62.395408630371094,
+          58.659820556640625
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 0.999999,
+        "about": [
+          16,
+          310,
+          288,
+          1061.78125
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small switch btnViewMobile: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.452484130859375,
+          0.279998779296875,
+          0.370025634765625
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          16,
+          137,
+          288,
+          1061.78125
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small switch btnViewDesktop: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.452484130859375,
+          0.279998779296875,
+          0.370025634765625
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          16,
+          137,
+          288,
+          1061.78125
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small switch btnViewDesktop: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.452484130859375,
+          0.279998779296875,
+          0.486724853515625
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          16,
+          137,
+          288,
+          1061.78125
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small switch btnViewResponsive: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          137,
+          320,
+          1068.265625
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "small switch btnViewResponsive: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.3900146484375,
+          0.456146240234375,
+          0.4563751220703125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          137,
+          320,
+          1068.265625
+        ],
+        "sticky": "137px"
+      }
+    },
+    {
+      "name": "preview scroll 0: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 6,
+        "errors": [
+          257.05853271484375,
+          400.9390869140625,
+          236.69342041015625
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          445,
+          828,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "preview scroll 0.25: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          127.18310546875,
+          109.1629638671875,
+          59.0379638671875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          445,
+          508,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "preview scroll 0.5: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          127.61386108398438,
+          58.6654052734375,
+          37.566497802734375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          445,
+          188,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "preview scroll 0.75: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          13.613922119140625,
+          17.25,
+          15.075096130371094
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          445,
+          55,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "preview scroll 0.999: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.43682861328125,
+          0.451263427734375,
+          0.47930908203125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          445,
+          55,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "preview landing matches 3 slots",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.43682861328125,
+          0.451263427734375,
+          0.47930908203125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          445,
+          55,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "preview static images replace moving frames",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          445,
+          55,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "preview sticky position",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          445,
+          55,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "preview reverse restores orbit",
+      "pass": true,
+      "data": {
+        "frames": 6,
+        "errors": [
+          260.72662353515625,
+          404.607177734375,
+          240.36151123046875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          445,
+          828,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "preview about keyboard focus visible",
+      "pass": true,
+      "data": {
+        "text": "097 355 51 05",
+        "inAbout": true,
+        "outline": "3px"
+      }
+    },
+    {
+      "name": "preview keyboard reaches about",
+      "pass": true,
+      "data": [
+        {
+          "text": "097 355 51 05",
+          "inAbout": true,
+          "outline": "3px"
+        }
+      ]
+    },
+    {
+      "name": "preview services keyboard link",
+      "pass": true,
+      "data": "http://127.0.0.1:3035/services.html"
+    },
+    {
+      "name": "preview switch btnViewMobile: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          127.36331176757812,
+          54.07818603515625,
+          71.83853149414062
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 0.999969,
+        "about": [
+          445,
+          228,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "preview switch btnViewMobile: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.43682861328125,
+          0.451263427734375,
+          0.47930908203125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          445,
+          55,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "preview switch btnViewDesktop: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.41632080078125,
+          7.5407257080078125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          16,
+          56,
+          1248,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "preview switch btnViewDesktop: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.41632080078125,
+          0.310302734375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          16,
+          56,
+          1248,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "preview switch btnViewResponsive: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          56,
+          1280,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "preview switch btnViewResponsive: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.416351318359375,
+          0.310302734375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          56,
+          1280,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview scroll 0: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 7,
+        "errors": [
+          383.07708740234375,
+          591.7122802734375,
+          304.26336669921875
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          30,
+          917,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview scroll 0.25: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 2,
+        "errors": [
+          247.77423095703125,
+          299.04376220703125,
+          292.3141326904297
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          30,
+          575,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview scroll 0.5: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          231.29202270507812,
+          145.6141357421875,
+          77.51065063476562
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          30,
+          233,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview scroll 0.75: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          17.485015869140625,
+          42.145843505859375,
+          111.28665161132812
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          30,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview scroll 0.999: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.416351318359375,
+          0.310302734375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          30,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview landing matches 3 slots",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.416351318359375,
+          0.310302734375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          30,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview static images replace moving frames",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          30,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview sticky position",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          30,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview reverse restores orbit",
+      "pass": true,
+      "data": {
+        "frames": 7,
+        "errors": [
+          365.3548583984375,
+          617.1407470703125,
+          329.69183349609375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          30,
+          917,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview about keyboard focus visible",
+      "pass": true,
+      "data": {
+        "text": "097 355 51 05",
+        "inAbout": true,
+        "outline": "3px"
+      }
+    },
+    {
+      "name": "desktop-preview keyboard reaches about",
+      "pass": true,
+      "data": [
+        {
+          "text": "097 355 51 05",
+          "inAbout": true,
+          "outline": "3px"
+        }
+      ]
+    },
+    {
+      "name": "desktop-preview services keyboard link",
+      "pass": true,
+      "data": "http://127.0.0.1:3035/services.html"
+    },
+    {
+      "name": "desktop-preview switch btnViewMobile: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          127.39480590820312,
+          54.11126708984375,
+          71.83853149414062
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 0.99998,
+        "about": [
+          555,
+          228,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "desktop-preview switch btnViewMobile: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.43682861328125,
+          0.451263427734375,
+          0.47930908203125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          555,
+          55,
+          390,
+          1110.921875
+        ],
+        "sticky": "55px"
+      }
+    },
+    {
+      "name": "desktop-preview switch btnViewDesktop: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.416351318359375,
+          7.5143585205078125
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          30,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview switch btnViewDesktop: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.416351318359375,
+          0.310302734375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          30,
+          56,
+          1440,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview switch btnViewResponsive: no overflow",
+      "pass": true,
+      "data": {
+        "frames": 0,
+        "errors": [
+          null,
+          null,
+          null
+        ],
+        "landed": true,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          56,
+          1500,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "desktop-preview switch btnViewResponsive: landing",
+      "pass": true,
+      "data": {
+        "frames": 3,
+        "errors": [
+          0.232421875,
+          0.416351318359375,
+          0.310302734375
+        ],
+        "landed": false,
+        "overflow": 0,
+        "orbits": 1,
+        "about": [
+          0,
+          56,
+          1500,
+          842.640625
+        ],
+        "sticky": "56px"
+      }
+    },
+    {
+      "name": "reduced motion static about",
+      "pass": true,
+      "data": {
+        "static": true,
+        "position": "relative",
+        "space": "none",
+        "visible": true
+      }
+    },
+    {
+      "name": "dynamic reduced-motion change",
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "errors": [],
+  "performance": [
+    {
+      "rate": 1,
+      "samples": 957,
+      "p50": 4.199999999999818,
+      "p95": 4.300000000000182,
+      "max": 8.300000000000182,
+      "over50ms": 0,
+      "longTasks": []
+    },
+    {
+      "rate": 4,
+      "samples": 623,
+      "p50": 8.199999999999818,
+      "p95": 8.400000000001455,
+      "max": 16.80000000000109,
+      "over50ms": 0,
+      "longTasks": []
+    }
+  ],
+  "note": "At progress 1 the moving frames intentionally disappear and the static slot images replace them; compare geometry just before 1.",
+  "browser": "155.0.8059.80"
+}

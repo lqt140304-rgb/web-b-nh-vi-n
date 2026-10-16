@@ -1,0 +1,50 @@
+[
+  {
+    "mode": "mobile390",
+    "stage": 390,
+    "buttons": [
+      {
+        "height": 52,
+        "width": 352
+      },
+      {
+        "height": 52,
+        "width": 352
+      }
+    ],
+    "decor": "none",
+    "docWidth": 1280
+  },
+  {
+    "selector": ".btn-cta-booking-page",
+    "hover5500msStable": true,
+    "first": {
+      "x": 810.40625,
+      "y": 748.3125,
+      "width": 235.546875,
+      "height": 52
+    },
+    "last": {
+      "x": 810.40625,
+      "y": 748.3125,
+      "width": 235.546875,
+      "height": 52
+    }
+  },
+  {
+    "selector": ".btn-cta-call",
+    "hover5500msStable": true,
+    "first": {
+      "x": 1061.953125,
+      "y": 750.3125,
+      "width": 187.046875,
+      "height": 52
+    },
+    "last": {
+      "x": 1061.953125,
+      "y": 750.3125,
+      "width": 187.046875,
+      "height": 52
+    }
+  }
+]

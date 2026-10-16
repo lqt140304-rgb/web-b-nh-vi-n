@@ -1,0 +1,20 @@
+{
+  "aria": "- region \"Bệnh viện Thú y Lê Sơn\":\n  - 'figure \"Gợi ý ảnh: bác sĩ\"'\n  - 'figure \"Gợi ý ảnh: sảnh đón tiếp\"'\n  - 'figure \"Gợi ý ảnh: thú cưng và chủ\"'\n  - paragraph: VỀ LÊ SƠN\n  - heading \"Bệnh viện Thú y Lê Sơn\" [level=2]\n  - paragraph: \"[Đoạn giới thiệu 2–3 câu, chủ dự án cung cấp: bệnh viện là ai, chăm sóc thú cưng thế nào. Chưa dùng câu giới thiệu trên Facebook.]\"\n  - list:\n    - listitem: Nhận cấp cứu 24/24\n    - listitem: 101 Khuất Duy Tiến, Nhân Chính, Thanh Xuân, Hà Nội\n    - listitem:\n      - link \"Gọi 097 355 51 05\":\n        - /url: tel:+84973555105\n        - text: 097 355 51 05\n  - link \"Xem dịch vụ\":\n    - /url: services.html\n  - link \"Chỉ đường\":\n    - /url: https://maps.app.goo.gl/xFbQ4BjKtGVa3rp86",
+  "tel": {
+    "href": "tel:+84973555105",
+    "blocked": false
+  },
+  "maps": {
+    "url": "https://maps.app.goo.gl/xFbQ4BjKtGVa3rp86",
+    "rel": "noopener noreferrer",
+    "opener": true,
+    "note": "Google Maps response stubbed: URL/new tab/keyboard checked, destination content not checked"
+  },
+  "tabSequence": [
+    "097 355 51 05",
+    "Xem dịch vụ →",
+    "Chỉ đường",
+    "BODY (end of tab sequence; not trapped)"
+  ],
+  "actualScreenReader": "NOT TESTED"
+}

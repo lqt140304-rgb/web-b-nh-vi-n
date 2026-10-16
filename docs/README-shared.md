@@ -23,3 +23,5 @@
 [Nhánh yêu cầu](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/requirements/docs) · [Nhánh QA](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/qa-review/docs)
 
 - [Codex rà soát nhánh và phân công QA chính](ra-soat-nhanh-va-vai-tro-2026-10-17.md)
+
+- [Codex QA chính Giới thiệu v3/CTA86565c1 — đạt mục Chrome, còn lỗi Services cũ và môi trường chưa kiểm](qa-gioi-thieu-86565c1-codex/README.md)

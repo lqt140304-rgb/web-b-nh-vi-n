@@ -1,0 +1,31 @@
+transition pc done
+transition tablet done
+transition mobile done
+transition small done
+transition preview done
+transition desktop-preview done
+{
+  "cases": 110,
+  "failures": [],
+  "errors": [],
+  "performance": [
+    {
+      "rate": 1,
+      "samples": 957,
+      "p50": 4.199999999999818,
+      "p95": 4.300000000000182,
+      "max": 8.300000000000182,
+      "over50ms": 0,
+      "longTasks": []
+    },
+    {
+      "rate": 4,
+      "samples": 623,
+      "p50": 8.199999999999818,
+      "p95": 8.400000000001455,
+      "max": 16.80000000000109,
+      "over50ms": 0,
+      "longTasks": []
+    }
+  ]
+}

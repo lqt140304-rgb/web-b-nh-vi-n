@@ -1,0 +1,27 @@
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(await p.locator(mode==='mobile'?'.site-header':'.site-stage').evaluate(e=>e.scrollWidth<=e.clientWidth))
+
+    at C:\Users\Admin\Documents\Codex\2026-10-15\referenced-chatgpt-conversation-this-is-an-2\work\qa-gioi-thieu-86565c1\tests\header-auth.cjs:24:5 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Command failed: D:\node.js\node.exe -e const M=require("module"),m=new M("C:\\Users\\Admin\\Documents\\Codex\\2026-10-15\\referenced-chatgpt-conversation-this-is-an-2\\work\\qa-gioi-thieu-86565c1\\tests\\header-auth.cjs");m.filename="C:\\Users\\Admin\\Documents\\Codex\\2026-10-15\\referenced-chatgpt-conversation-this-is-an-2\\work\\qa-gioi-thieu-86565c1\\tests\\header-auth.cjs";m.paths=module.paths;m._compile("const {chromium}=require(process.env.PLAYWRIGHT_MODULE || 'playwright');\r\nconst assert=require('assert');const fs=require('fs');\r\nconst output=process.env.QA_OUTPUT || 'docs/qa/hero-chinh';fs.mkdirSync(output,{recursive:true});\r\n(async()=>{\r\n const browser=await chromium.launch({executablePath:process.env.CHROME_BIN,headless:true});\r\n try {\r\n  for(const file of ['index','services'])for(const width of [320,360,361,375,376,390,420,421,427,428,430,431,440,500,501,768,993,1024,1440,1000]){\r\n   const mode=width===1000?'mobile':'responsive';\r\n   const p=await browser.newPage({viewport:{width,height:900}});\r\n   await p.goto(`http://127.0.0.1:3035/${file}.html?mode=${mode}`);await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(350);await p.waitForFunction(()=>document.documentElement.scrollWidth<=innerWidth,null,{timeout:3000});\r\n   for(const loggedIn of [false,true]){\r\n    if(loggedIn)await p.locator('#btnToggleAuth').click();\r\n    const selectors=['.brand-logo-img','.brand-text-block',...(loggedIn?['.btn-user-profile']:['.btn-auth-login','.btn-auth-register']),...(width<=992||mode==='mobile'?['.btn-mobile-menu']:[])];\r\n    const boxes=[];\r\n    for(const selector of selectors){\r\n     const item=p.locator(`.site-header ${selector}`);if(selector==='.brand-text-block'&&!(await item.isVisible()))continue;assert(await item.isVisible(),`${file} ${width} ${selector}`);\r\n     const box=await item.boundingBox();assert(box.x>=0&&box.x+box.width<=width);if(selector.startsWith('.btn-'))assert(box.height>=44);\r\n     for(const prior of boxes)assert(box.x>=prior.x+prior.width||prior.x>=box.x+box.width,'header controls overlap');boxes.push(box);\r\n     if(!selector.startsWith('.btn-'))continue;\r\n     await item.focus();await p.keyboard.press('Tab');await p.keyboard.press('Shift+Tab');\r\n     assert(await item.evaluate(e=>document.activeElement===e&&getComputedStyle(e).outlineStyle!=='none'&&parseFloat(getComputedStyle(e).outlineWidth)>=2));\r\n    }\r\n    assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));\r\n    assert(await p.locator(mode==='mobile'?'.site-header':'.site-stage').evaluate(e=>e.scrollWidth<=e.clientWidth));\r\n    if(!loggedIn){for(const name of ['login','register']){\r\n     await p.locator(`.site-header .btn-auth-${name}`).click();assert(p.url().endsWith(name==='login'?'#dang-nhap':'#dang-ky'));\r\n    }}\r\n    if([360,390,1000].includes(width))await p.locator('.site-header').screenshot({path:`${output}/header-${file}-${mode==='mobile'?'mobile-390':width}-${loggedIn?'account':'guest'}.png`});\r\n   }\r\n   console.log(`PASS header ${file} ${width} ${mode}: guest/account, fit, 44px, focus, links`);await p.close();\r\n  }\r\n }finally{await browser.close()}\r\n})().catch(e=>{console.error(e);process.exit(1)});\r\n","C:\\Users\\Admin\\Documents\\Codex\\2026-10-15\\referenced-chatgpt-conversation-this-is-an-2\\work\\qa-gioi-thieu-86565c1\\tests\\header-auth.cjs");
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(await p.locator(mode==='mobile'?'.site-header':'.site-stage').evaluate(e=>e.scrollWidth<=e.clientWidth))
+
+    at C:\Users\Admin\Documents\Codex\2026-10-15\referenced-chatgpt-conversation-this-is-an-2\work\qa-gioi-thieu-86565c1\tests\header-auth.cjs:24:5 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

@@ -1,0 +1,5 @@
+PASS index guest: every px 320–560, closed/open
+PASS index account: every px 320–560, closed/open
+PASS services guest: every px 320–560, closed/open
+PASS services account: every px 320–560, closed/open
+PASS 1928 states; 32 screenshots; keyboard/aria/account/desktop; no console errors

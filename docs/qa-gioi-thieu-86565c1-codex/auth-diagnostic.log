@@ -1,0 +1,70 @@
+CLIP index 320 { scroll: 334, client: 320, overflow: 'clip', left: 0, right: 320 }
+CLIP index 320 { scroll: 334, client: 320, overflow: 'clip', left: 0, right: 320 }
+PASS header index 320 responsive: guest/account, fit, 44px, focus, links
+CLIP index 360 { scroll: 377, client: 360, overflow: 'clip', left: 0, right: 360 }
+CLIP index 360 { scroll: 377, client: 360, overflow: 'clip', left: 0, right: 360 }
+PASS header index 360 responsive: guest/account, fit, 44px, focus, links
+CLIP index 361 { scroll: 378, client: 361, overflow: 'clip', left: 0, right: 361 }
+CLIP index 361 { scroll: 378, client: 361, overflow: 'clip', left: 0, right: 361 }
+PASS header index 361 responsive: guest/account, fit, 44px, focus, links
+CLIP index 375 { scroll: 393, client: 375, overflow: 'clip', left: 0, right: 375 }
+CLIP index 375 { scroll: 393, client: 375, overflow: 'clip', left: 0, right: 375 }
+PASS header index 375 responsive: guest/account, fit, 44px, focus, links
+CLIP index 376 { scroll: 394, client: 376, overflow: 'clip', left: 0, right: 376 }
+CLIP index 376 { scroll: 394, client: 376, overflow: 'clip', left: 0, right: 376 }
+PASS header index 376 responsive: guest/account, fit, 44px, focus, links
+CLIP index 390 { scroll: 410, client: 390, overflow: 'clip', left: 0, right: 390 }
+CLIP index 390 { scroll: 410, client: 390, overflow: 'clip', left: 0, right: 390 }
+PASS header index 390 responsive: guest/account, fit, 44px, focus, links
+CLIP index 420 { scroll: 443, client: 420, overflow: 'clip', left: 0, right: 420 }
+CLIP index 420 { scroll: 443, client: 420, overflow: 'clip', left: 0, right: 420 }
+PASS header index 420 responsive: guest/account, fit, 44px, focus, links
+CLIP index 421 { scroll: 444, client: 421, overflow: 'clip', left: 0, right: 421 }
+CLIP index 421 { scroll: 444, client: 421, overflow: 'clip', left: 0, right: 421 }
+PASS header index 421 responsive: guest/account, fit, 44px, focus, links
+CLIP index 427 { scroll: 451, client: 427, overflow: 'clip', left: 0, right: 427 }
+CLIP index 427 { scroll: 451, client: 427, overflow: 'clip', left: 0, right: 427 }
+PASS header index 427 responsive: guest/account, fit, 44px, focus, links
+CLIP index 428 { scroll: 452, client: 428, overflow: 'clip', left: 0, right: 428 }
+CLIP index 428 { scroll: 452, client: 428, overflow: 'clip', left: 0, right: 428 }
+PASS header index 428 responsive: guest/account, fit, 44px, focus, links
+CLIP index 430 { scroll: 454, client: 430, overflow: 'clip', left: 0, right: 430 }
+CLIP index 430 { scroll: 454, client: 430, overflow: 'clip', left: 0, right: 430 }
+PASS header index 430 responsive: guest/account, fit, 44px, focus, links
+CLIP index 431 { scroll: 455, client: 431, overflow: 'clip', left: 0, right: 431 }
+CLIP index 431 { scroll: 455, client: 431, overflow: 'clip', left: 0, right: 431 }
+PASS header index 431 responsive: guest/account, fit, 44px, focus, links
+CLIP index 440 { scroll: 465, client: 440, overflow: 'clip', left: 0, right: 440 }
+CLIP index 440 { scroll: 465, client: 440, overflow: 'clip', left: 0, right: 440 }
+PASS header index 440 responsive: guest/account, fit, 44px, focus, links
+CLIP index 500 { scroll: 531, client: 500, overflow: 'clip', left: 0, right: 500 }
+CLIP index 500 { scroll: 531, client: 500, overflow: 'clip', left: 0, right: 500 }
+PASS header index 500 responsive: guest/account, fit, 44px, focus, links
+CLIP index 501 { scroll: 532, client: 501, overflow: 'clip', left: 0, right: 501 }
+CLIP index 501 { scroll: 532, client: 501, overflow: 'clip', left: 0, right: 501 }
+PASS header index 501 responsive: guest/account, fit, 44px, focus, links
+PASS header index 768 responsive: guest/account, fit, 44px, focus, links
+PASS header index 993 responsive: guest/account, fit, 44px, focus, links
+PASS header index 1024 responsive: guest/account, fit, 44px, focus, links
+PASS header index 1440 responsive: guest/account, fit, 44px, focus, links
+PASS header index 1000 mobile: guest/account, fit, 44px, focus, links
+PASS header services 320 responsive: guest/account, fit, 44px, focus, links
+PASS header services 360 responsive: guest/account, fit, 44px, focus, links
+PASS header services 361 responsive: guest/account, fit, 44px, focus, links
+PASS header services 375 responsive: guest/account, fit, 44px, focus, links
+PASS header services 376 responsive: guest/account, fit, 44px, focus, links
+PASS header services 390 responsive: guest/account, fit, 44px, focus, links
+PASS header services 420 responsive: guest/account, fit, 44px, focus, links
+PASS header services 421 responsive: guest/account, fit, 44px, focus, links
+PASS header services 427 responsive: guest/account, fit, 44px, focus, links
+PASS header services 428 responsive: guest/account, fit, 44px, focus, links
+PASS header services 430 responsive: guest/account, fit, 44px, focus, links
+PASS header services 431 responsive: guest/account, fit, 44px, focus, links
+PASS header services 440 responsive: guest/account, fit, 44px, focus, links
+PASS header services 500 responsive: guest/account, fit, 44px, focus, links
+PASS header services 501 responsive: guest/account, fit, 44px, focus, links
+PASS header services 768 responsive: guest/account, fit, 44px, focus, links
+PASS header services 993 responsive: guest/account, fit, 44px, focus, links
+PASS header services 1024 responsive: guest/account, fit, 44px, focus, links
+PASS header services 1440 responsive: guest/account, fit, 44px, focus, links
+PASS header services 1000 mobile: guest/account, fit, 44px, focus, links
