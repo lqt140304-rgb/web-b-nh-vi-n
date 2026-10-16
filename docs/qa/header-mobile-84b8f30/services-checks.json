@@ -1,0 +1,141 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "services": "PASS",
+      "layout": {
+        "height": 127.75,
+        "scroll": 1440,
+        "children": [
+          {
+            "text": "Đặt lịch chăm sóc cho người bạn nhỏ",
+            "height": 32.5,
+            "width": 589.40625,
+            "inside": true
+          },
+          {
+            "text": "Gửi yêu cầu, nhân viên sẽ liên hệ xác nhận lịch hẹn.",
+            "height": 23.25,
+            "width": 589.40625,
+            "inside": true
+          },
+          {
+            "text": "Gửi yêu cầu đặt lịch",
+            "height": 50.796875,
+            "width": 233.546875,
+            "inside": true
+          },
+          {
+            "text": "097 355 51 05",
+            "height": 52.796875,
+            "width": 187.046875,
+            "inside": true
+          }
+        ]
+      }
+    },
+    {
+      "width": 1024,
+      "services": "PASS",
+      "layout": {
+        "height": 149.1875,
+        "scroll": 1024,
+        "children": [
+          {
+            "text": "Đặt lịch chăm sóc cho người bạn nhỏ",
+            "height": 27.5,
+            "width": 710,
+            "inside": true
+          },
+          {
+            "text": "Gửi yêu cầu, nhân viên sẽ liên hệ xác nhận lịch hẹn.",
+            "height": 21,
+            "width": 710,
+            "inside": true
+          },
+          {
+            "text": "Gửi yêu cầu đặt lịch",
+            "height": 44,
+            "width": 236,
+            "inside": true
+          },
+          {
+            "text": "097 355 51 05",
+            "height": 45.1875,
+            "width": 236,
+            "inside": true
+          }
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "services": "PASS",
+      "layout": {
+        "height": 232,
+        "scroll": 390,
+        "children": [
+          {
+            "text": "Đặt lịch chăm sóc cho người bạn nhỏ",
+            "height": 25,
+            "width": 352,
+            "inside": true
+          },
+          {
+            "text": "Gửi yêu cầu, nhân viên sẽ liên hệ xác nhận lịch hẹn.",
+            "height": 21,
+            "width": 352,
+            "inside": true
+          },
+          {
+            "text": "Gửi yêu cầu đặt lịch",
+            "height": 50,
+            "width": 352,
+            "inside": true
+          },
+          {
+            "text": "097 355 51 05",
+            "height": 52,
+            "width": 352,
+            "inside": true
+          }
+        ]
+      }
+    },
+    {
+      "width": 360,
+      "services": "PASS",
+      "layout": {
+        "height": 278,
+        "scroll": 360,
+        "children": [
+          {
+            "text": "Đặt lịch chăm sóc cho người bạn nhỏ",
+            "height": 50,
+            "width": 322,
+            "inside": true
+          },
+          {
+            "text": "Gửi yêu cầu, nhân viên sẽ liên hệ xác nhận lịch hẹn.",
+            "height": 42,
+            "width": 322,
+            "inside": true
+          },
+          {
+            "text": "Gửi yêu cầu đặt lịch",
+            "height": 50,
+            "width": 322,
+            "inside": true
+          },
+          {
+            "text": "097 355 51 05",
+            "height": 52,
+            "width": 322,
+            "inside": true
+          }
+        ]
+      }
+    }
+  ],
+  "consoleErrors": []
+}

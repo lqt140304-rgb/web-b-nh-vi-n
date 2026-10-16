@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="header-mobile.css">
 </head>
 <body>
 
@@ -73,12 +74,13 @@
            HEADER WEBSITE (GIỮ NGUYÊN CHUẨN V1 ĐÃ PHÊ DUYỆT)
            ========================================================================== -->
       <header class="site-header" id="siteHeader" role="banner">
+        <div class="site-header__inner">
         <!-- Logo chính thức Lê Sơn -->
-        <a href="index.html" class="brand-link" aria-label="Bệnh viện Thú y Lê Sơn – Về trang chủ">
+        <a href="index.html" class="brand-link brand" aria-label="Bệnh viện Thú y Lê Sơn – Về trang chủ">
           <img src="assets/logo-le-son.png" alt="Logo Bệnh viện Thú y Lê Sơn" class="brand-logo-img">
-          <div class="brand-text-block">
-            <span class="brand-subtitle">Bệnh viện thú y</span>
-            <span class="brand-name">Lê Sơn</span>
+          <div class="brand-text-block brand__text">
+            <span class="brand-subtitle brand__kicker">BỆNH VIỆN THÚ Y</span>
+            <span class="brand-name brand__name">Lê Sơn</span>
           </div>
         </a>
 
@@ -94,15 +96,15 @@
         <div class="header-actions">
           <!-- TRẠNG THÁI 1: Khách vãng lai (Chưa đăng nhập) -->
           <div class="auth-guest-group" id="authGuestGroup">
-            <a href="#dang-nhap" class="btn-auth-login">Đăng nhập</a>
-            <a href="#dang-ky" class="btn-auth-register">Đăng ký</a>
+            <a href="#dang-nhap" class="btn-auth-login pill pill--outline guest-only">Đăng nhập</a>
+            <a href="#dang-ky" class="btn-auth-register pill pill--filled guest-only">Đăng ký</a>
           </div>
 
           <!-- TRẠNG THÁI 2: Đã đăng nhập (Mô phỏng dữ liệu giả) -->
           <div class="auth-user-group" id="authUserGroup">
-            <button type="button" class="btn-user-profile" id="btnUserProfile" aria-expanded="false" aria-haspopup="true" aria-controls="userDropdownMenu" aria-label="Tài khoản cá nhân: Khách Demo">
-              <span class="user-avatar-initial">K</span>
-              <span class="user-profile-name">Khách Demo</span>
+            <button type="button" class="btn-user-profile user-btn" id="btnUserProfile" aria-expanded="false" aria-haspopup="true" aria-controls="userDropdownMenu" aria-label="Tài khoản cá nhân: Khách Demo">
+              <span class="user-avatar-initial user-btn__ava">K</span>
+              <span class="user-profile-name user-btn__name">Khách Demo</span>
               <svg class="user-profile-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
 
@@ -131,10 +133,26 @@
           </div>
 
           <!-- Nút mở Menu trên Mobile -->
-          <button type="button" class="btn-mobile-menu" id="btnMobileMenu" aria-label="Mở danh mục điều hướng" aria-expanded="false" aria-controls="mobileDrawer">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <button type="button" class="btn-mobile-menu menu-btn" id="btnMobileMenu" aria-label="Mở danh mục điều hướng" aria-expanded="false" aria-controls="mobileMenu">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
           </button>
         </div>
+        </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Menu chính" hidden>
+    <ul>
+      <li><a href="index.html">Trang chủ</a></li>
+      <li><a href="services.html" aria-current="page">Dịch vụ</a></li>
+      <li><a href="#gioi-thieu">Giới thiệu</a></li>
+      <li><a href="#lien-he">Liên hệ</a></li>
+    </ul>
+    <div class="mobile-menu__auth guest-only">
+      <a class="pill pill--outline" href="#dang-nhap">Đăng nhập</a>
+      <a class="pill pill--filled" href="#dang-ky">Đăng ký</a>
+    </div>
+    <div class="mobile-menu__logout user-only">
+      <a class="pill pill--logout" href="#dang-xuat">Đăng xuất</a>
+    </div>
+  </nav>
       </header>
 
       <!-- ==========================================================================
@@ -370,63 +388,7 @@
       </section>
 
       <!-- MENU DRAWER TRÊN MOBILE (GIỮ NGUYÊN CHUẨN V1) -->
-      <div class="mobile-drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
-      <aside class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Danh mục điều hướng trên điện thoại">
-        <div class="drawer-header">
-          <div class="brand-link">
-            <img src="assets/logo-le-son.png" alt="Logo Bệnh viện Thú y Lê Sơn" style="height: 38px;">
-            <div class="brand-text-block">
-              <span class="brand-subtitle">Bệnh viện thú y</span>
-              <span class="brand-name">Lê Sơn</span>
-            </div>
-          </div>
-          <button type="button" class="drawer-close-btn" id="btnCloseDrawer" aria-label="Đóng menu">✕</button>
-        </div>
 
-        <nav class="drawer-nav">
-          <a href="index.html" class="drawer-link">Trang chủ</a>
-          <a href="services.html" class="drawer-link active" aria-current="page">Dịch vụ khám & điều trị</a>
-          <a href="#gioi-thieu" class="drawer-link">Giới thiệu bệnh viện</a>
-          <a href="#lien-he" class="drawer-link">Liên hệ & Địa chỉ</a>
-        </nav>
-
-        <!-- THẺ THÔNG TIN LIÊN HỆ & VỊ TRÍ CHÍNH THỨC (Chuẩn 101 Khuất Duy Tiến) -->
-        <div class="drawer-contact-card" role="region" aria-label="Thông tin phòng khám">
-          <div class="drawer-contact-title">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Bệnh viện Thú y Lê Sơn</span>
-          </div>
-          <div class="drawer-contact-item">
-            <span>📍 101 Khuất Duy Tiến, Nhân Chính, Thanh Xuân, Hà Nội</span>
-          </div>
-          <div class="drawer-contact-item">
-            <span>📞 Hotline: <a href="tel:+84973555105">097 355 51 05</a></span>
-          </div>
-          <div class="drawer-contact-actions">
-            <a href="https://maps.app.goo.gl/xFbQ4BjKtGVa3rp86" target="_blank" rel="noopener noreferrer" class="drawer-contact-btn drawer-btn-maps" aria-label="Mở Google Maps chỉ đường (mở tab mới)">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>Chỉ đường</span>
-            </a>
-            <a href="https://www.facebook.com/benhvienthuyleson" target="_blank" rel="noopener noreferrer" class="drawer-contact-btn drawer-btn-fb" aria-label="Mở Facebook Bệnh viện Thú y Lê Sơn (mở tab mới)">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              <span>Facebook</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="drawer-actions">
-          <a href="index.html#form-dat-lich" class="btn-cta-primary" style="width: 100%; min-height: 48px; font-size: 15px; text-decoration: none; display: flex; align-items: center; justify-content: center;">
-            Gửi yêu cầu đặt lịch →
-          </a>
-          <div style="display: flex; gap: 8px;">
-            <a href="#dang-nhap" class="btn-auth-login" style="flex: 1;">Đăng nhập</a>
-            <a href="#dang-ky" class="btn-auth-register" style="flex: 1;">Đăng ký</a>
-          </div>
-          <p class="drawer-note">
-            💡 Khách vãng lai không cần đăng ký tài khoản vẫn có thể gửi yêu cầu đặt lịch dễ dàng.
-          </p>
-        </div>
-      </aside>
 
       <!-- MODAL CHI TIẾT DỊCH VỤ (DEMO TƯƠNG TÁC) -->
       <div class="specs-modal-overlay" id="serviceDetailModal" role="dialog" aria-modal="true" aria-labelledby="serviceDetailTitle">
@@ -482,5 +444,6 @@
   </main>
 
   <script src="services.js"></script>
+  <script src="header-mobile.js"></script>
 </body>
 </html>
