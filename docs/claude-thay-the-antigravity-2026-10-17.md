@@ -1,3 +1,5 @@
+> **Phân công QA hiện hành — 17/10/2026:** Codex là QA chính, phụ trách kiểm yêu cầu, giao diện/hành vi, hồi quy, báo cáo và kiểm lại sau sửa. Claude thiết kế, triển khai, tự kiểm và sửa theo kết quả QA. Chủ dự án duyệt cuối. [Quyết định QA](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/codex-qa-chinh-2026-10-17.md).
+
 # Claude thay thế hoàn toàn Antigravity — 17/10/2026
 
 Chủ dự án quyết định: “antigravity bị loại khỏi kế hoạch này cập nhật lại readme các nhánh; claude sẽ thay thế hoàn toàn antigravity”. Codex ghi nhận theo chỉ đạo trực tiếp. Quyết định này thay thế toàn bộ phân công Antigravity trước đây, kể cả quyền triển khai bản đã chốt tại docs/phan-quyen-thiet-ke-giao-claude-2026-10-15.md.
