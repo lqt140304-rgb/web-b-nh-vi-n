@@ -9,3 +9,7 @@ Chủ dự án chỉ đạo trực tiếp: “codex h bạn là Qa chính cập 
 - Chủ dự án duyệt cuối; PASS kỹ thuật không cho phép tự merge main hoặc deploy. Antigravity không còn nhiệm vụ; các nhánh Antigravity chỉ lưu lịch sử.
 
 Codex cập nhật README/phân công trên các nhánh hiện có, chỉ thay tài liệu. Không đổi mã demo hoặc quyền tài khoản GitHub; việc đăng tài liệu không chứng minh Claude đã đọc.
+
+## Ưu tiên trình duyệt và rà soát nhánh
+
+Chủ dự án chọn ưu tiên Chrome trước: desktop và mobile mô phỏng. Trình duyệt/thiết bị khác kiểm sau và phải ghi CHƯA KIỂM. Danh sách nhánh chỉ là đề xuất, chưa cho phép xóa hoặc đổi default branch: [báo cáo Codex](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/qa-review/docs/ra-soat-nhanh-va-vai-tro-2026-10-17.md).
