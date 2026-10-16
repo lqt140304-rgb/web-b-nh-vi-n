@@ -100,3 +100,20 @@ server.js chỉ phục vụ demo trên máy cá nhân, không dùng cho vận h�
 antigravity/design, antigravity/hero-v1, antigravity/services-v1 và claude/optimistic-mccarthy-d1d15i chỉ giữ lịch sử; không nhận việc mới. Các nhánh codex/qa-services-v1 và codex/review-claude-qa nếu còn bản lưu cũng chỉ dùng tra cứu. Từ 17/10/2026 dùng phân công và các nhánh hiện hành ở trên. Không xóa hoặc merge code lên nhánh mặc định trong việc tổ chức này.
 
 Nhánh thiết kế chung khởi tạo từ Services acc18e7, bổ sung Hero a47f4e2 (dòng tiêu chí mới); mã app.js và styles.css ở hai nhánh nguồn giống nhau tại thời điểm gom.
+
+## Rà soát nhánh và cách QA hiện hành — 17/10/2026
+
+| Nhánh | Trạng thái / đề xuất |
+|---|---|
+| shared/requirements | Giữ: yêu cầu và quyết định chủ dự án |
+| shared/qa-review | Giữ: Codex QA chính; Claude bổ sung tự kiểm/bản mẫu |
+| claude/cta-dich-vu-sua | Giữ: Claude thiết kế/triển khai; có CTA và Giới thiệu chưa QA/tích hợp xong |
+| codex/hero-chinh-quy-dao | Giữ: tích hợp được giao và QA chính, demo hiện hành |
+| antigravity/design | Có thể xóa sau khi chủ dự án chọn; mã 40aa56d đã có trong lịch sử nhánh giữ lại, commit riêng chỉ là cập nhật tài liệu vai trò |
+| antigravity/services-v1 | Có thể xóa sau khi chủ dự án chọn; mã acc18e7 đã có trong lịch sử nhánh giữ lại, commit riêng chỉ là cập nhật tài liệu vai trò |
+| antigravity/hero-v1 | Không dùng tiếp; lưu bản sao/tag trước khi xóa vì còn 8 commit mã riêng chưa nằm trong lịch sử nhánh giữ lại |
+| claude/optimistic-mccarthy-d1d15i | Không dùng tiếp; chưa xóa vì đang là default branch GitHub. Đổi default branch và lưu lịch sử riêng trước |
+
+Codex là QA chính; Claude thiết kế, triển khai và tự kiểm trước bàn giao. Trước mắt ưu tiên Chrome desktop và mobile mô phỏng; Safari, Firefox, Edge và thiết bị thật ghi CHƯA KIỂM khi chưa thực hiện. Nếu Codex tự sửa, phân biệt tự kiểm với QA độc lập.
+
+[Chi tiết, SHA và điều kiện xóa nhánh](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/qa-review/docs/ra-soat-nhanh-va-vai-tro-2026-10-17.md). Đây là danh sách đề xuất, chưa xóa nhánh, đổi default branch, tạo tag hoặc merge mã.

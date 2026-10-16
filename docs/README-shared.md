@@ -21,3 +21,5 @@
 [Quy ước hai nhánh](QUY-UOC-NHANH-CHUNG.md)
 
 [Nhánh yêu cầu](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/requirements/docs) · [Nhánh QA](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/qa-review/docs)
+
+- [Codex rà soát nhánh và phân công QA chính](ra-soat-nhanh-va-vai-tro-2026-10-17.md)
