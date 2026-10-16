@@ -130,7 +130,7 @@
   .hero__frames { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
   .frame {
     position: absolute; left: 0; top: 0;
-    width: var(--w); height: var(--h);
+    width: var(--fw, var(--w)); height: var(--h);
     opacity: 0;
     pointer-events: none;
     will-change: transform, opacity;
@@ -505,24 +505,30 @@
   }
 
   /* ============ GIỚI THIỆU (phần ngay sau Hero) ============ */
+  .about-pin { position: relative; z-index: 1; }
+  /* Phần Giới thiệu đứng yên một nhịp cuộn (--pin-len) để ảnh kịp hạ cánh chậm rãi */
   .about {
-    position: relative; z-index: 1;
+    position: sticky; top: var(--about-top, 0px); z-index: 1;
     background: linear-gradient(180deg, #F7EEE5 0%, #FBF7F1 38%, #FBF7F1 100%);
     padding: 96px 24px 120px;
   }
+  .about-pin__space { height: var(--pin-len, 80vh); }
+  .about-pin.is-static .about { position: relative; top: auto; }
+  .about-pin.is-static .about-pin__space { display: none; }
   .about__inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1.08fr 1fr; gap: 64px; align-items: center; }
-  .about__gallery { display: grid; grid-template-columns: 1.25fr 1fr 1fr; grid-template-rows: auto auto; gap: 18px; align-items: start; }
-  .about__slot { margin: 0; }
-  .about__slot--big { grid-row: 1 / span 2; align-self: center; }
-  .about__slot:nth-child(2) { transform: rotate(-3deg); margin-top: 12px; }
-  .about__slot:nth-child(3) { transform: rotate(4deg); }
-  .about__slot:nth-child(4) { transform: rotate(3deg); }
-  .about__slot:nth-child(5) { transform: rotate(-4deg); margin-top: -8px; }
-  .about__slot--big { transform: rotate(-2deg); }
+  /* 3 khung khác cỡ, xếp so le và chồng nhẹ: dọc (dài) - ngang - vuông */
+  .about__gallery { position: relative; width: 100%; aspect-ratio: 1.1 / 1; margin-bottom: 30px; }
+  .about__slot { position: absolute; margin: 0; }
+  .about__slot--tall { left: 0; top: 7%; width: 47%; transform: rotate(-3deg); z-index: 1; }
+  .about__slot--wide { left: 37%; top: 50%; width: 59%; transform: rotate(-2deg); z-index: 2; }
+  .about__slot--square { left: 58%; top: 0; width: 36%; transform: rotate(4deg); z-index: 1; }
   .slot-frame { position: relative; width: 100%; aspect-ratio: 1 / 1.06; visibility: hidden; }
+  .about__slot--tall figcaption { position: absolute; bottom: 100%; left: 4px; margin: 0 0 6px; text-align: left; white-space: nowrap; }   /* phía dưới bị khung ngang che */
+  .about__slot--tall .slot-frame { aspect-ratio: 3 / 4.3; }
+  .about__slot--wide .slot-frame { aspect-ratio: 4 / 3; }
   .about.is-landed .slot-frame, .about.is-static .slot-frame { visibility: visible; }
   .slot-frame .frame__card { position: absolute; inset: 0; }
-  .about__slot figcaption { margin-top: 8px; font-size: 12px; color: #6B5A6E; text-align: center; opacity: 0; transition: opacity .4s ease; }
+  .about__slot figcaption { white-space: nowrap; margin-top: 8px; font-size: 12px; color: #6B5A6E; text-align: center; opacity: 0; transition: opacity .4s ease; }
   .about.is-landed figcaption, .about.is-static figcaption { opacity: 1; }
   .about__eyebrow { margin: 0 0 14px; font-size: 13px; font-weight: 600; letter-spacing: .32em; color: var(--plum-muted); }
   .about__title { margin: 0 0 18px; font-family: var(--font-serif); font-weight: 700; font-size: clamp(2rem, 1.2rem + 2vw, 2.9rem); line-height: 1.15; color: var(--plum-900); }
@@ -541,10 +547,8 @@
   }
   @media (max-width: 700px) {
     .about { padding: 64px 16px 88px; }
-    .about__gallery { grid-template-columns: 1fr 1fr; gap: 14px; }
-    .about__slot--big { grid-row: auto; }
-    .about__slot:nth-child(5) { display: none; }
     .about__eyebrow { font-size: 11.5px; letter-spacing: .22em; }
+    .about__slot figcaption { font-size: 11px; }
     .about__cta .btn { width: 100%; }
   }
 </style>
@@ -689,14 +693,13 @@
 </div>
 
 <!-- ============ GIỚI THIỆU ============ -->
+<div class="about-pin">
 <section class="about" id="gioi-thieu" aria-labelledby="about-title">
   <div class="about__inner">
     <div class="about__gallery">
-      <figure class="about__slot about__slot--big"><div class="slot-frame" data-slot="0"></div><figcaption>Gợi ý ảnh: sảnh đón tiếp</figcaption></figure>
-      <figure class="about__slot"><div class="slot-frame" data-slot="1"></div><figcaption>Gợi ý ảnh: phòng khám</figcaption></figure>
-      <figure class="about__slot"><div class="slot-frame" data-slot="2"></div><figcaption>Gợi ý ảnh: đội ngũ</figcaption></figure>
-      <figure class="about__slot"><div class="slot-frame" data-slot="3"></div><figcaption>Gợi ý ảnh: khu nội trú</figcaption></figure>
-      <figure class="about__slot"><div class="slot-frame" data-slot="4"></div><figcaption>Gợi ý ảnh: thú cưng và chủ</figcaption></figure>
+      <figure class="about__slot about__slot--tall"><div class="slot-frame" data-slot="0"></div><figcaption>Gợi ý ảnh: bác sĩ</figcaption></figure>
+      <figure class="about__slot about__slot--wide"><div class="slot-frame" data-slot="1"></div><figcaption>Gợi ý ảnh: sảnh đón tiếp</figcaption></figure>
+      <figure class="about__slot about__slot--square"><div class="slot-frame" data-slot="2"></div><figcaption>Gợi ý ảnh: thú cưng và chủ</figcaption></figure>
     </div>
     <div class="about__text">
       <p class="about__eyebrow">VỀ LÊ SƠN</p>
@@ -714,6 +717,8 @@
     </div>
   </div>
 </section>
+<div class="about-pin__space" aria-hidden="true"></div>
+</div>
 <section class="next-stub" id="dich-vu"><p>Phần tiếp theo: Dịch vụ (bốn dịch vụ đã chốt). Chưa thiết kế trong bản xem thử này.</p></section>
 </div>
 
@@ -847,29 +852,46 @@
   var SLOTS = [];          // [{x, y, w, rot}] toạ độ tâm ô ảnh, tính theo góc trên-trái của Hero
   var P = 0;               // tiến độ chuyển cảnh 0..1
   var slotOf = [];         // chỉ số ô ảnh cho từng khung (-1 = không có ô, sẽ mờ dần)
+  var pinWrap = document.querySelector('.about-pin');
+  var PIN_VH = 0.8;        // độ dài nhịp đứng yên của phần Giới thiệu (theo chiều cao màn hình)
+  var END = 1;             // quãng cuộn (px) để hoàn tất chuyển cảnh
   function measureSlots() {
-    var hr = hero.getBoundingClientRect();
+    var vh = window.innerHeight, aH = about.offsetHeight;
+    var top = Math.max(0, Math.round((vh - aH) / 2));
+    var pin = Math.round(vh * PIN_VH);
+    about.style.setProperty('--about-top', top + 'px');
+    pinWrap.style.setProperty('--pin-len', pin + 'px');
+    var pinTop = pinWrap.getBoundingClientRect().top + window.scrollY;
+    END = Math.max(1, pinTop - top + pin * 0.75);
     SLOTS = slotEls.map(function (el) {
       var fig = el.parentNode, st = getComputedStyle(fig);
       if (st.display === 'none') return null;
       var m = new DOMMatrixReadOnly(st.transform === 'none' ? undefined : st.transform);
       var rot = Math.atan2(m.b, m.a) * 180 / Math.PI;
-      var r = el.getBoundingClientRect();     // hộp bao (đã xoay) -> tâm vẫn đúng
-      var w = el.offsetWidth;
-      el.style.setProperty('--w', w + 'px');
+      var w = el.offsetWidth, h = el.offsetHeight;
+      el.style.setProperty('--w', Math.min(w, h) + 'px');
       if (!el.firstChild) el.innerHTML = FRAME_HTML;
-      return { x: r.left + r.width / 2 - hr.left, y: r.top + r.height / 2 - hr.top, w: w, rot: rot };
+      return { el: el, x: 0, y: 0, w: w, h: h, rot: rot };
     });
-    // Gán ô: khung lớn nhất vào ô lớn, rồi lần lượt theo thứ tự khung
+    trackSlots();
+    // Gán ô: khung lớn nhất vào ô đầu (khung dọc), rồi lần lượt
     var act = frames.filter(function (f) { return f.active; });
     var order = act.slice().sort(function (a, b) { return b.spec.size - a.spec.size; });
     slotOf = frames.map(function () { return -1; });
     var free = SLOTS.map(function (s, i) { return s ? i : -1; }).filter(function (i) { return i >= 0; });
     order.forEach(function (f) { if (free.length) slotOf[frames.indexOf(f)] = free.shift(); });
   }
+  // Tâm ô ảnh theo toạ độ Hero; đo lại mỗi lần vẽ vì phần Giới thiệu đứng yên (sticky) trong khi Hero cuộn đi
+  function trackSlots() {
+    var hr = hero.getBoundingClientRect();
+    SLOTS.forEach(function (sl) {
+      if (!sl) return;
+      var r = sl.el.getBoundingClientRect();      // hộp bao (đã xoay) -> tâm vẫn đúng
+      sl.x = r.left + r.width / 2 - hr.left; sl.y = r.top + r.height / 2 - hr.top;
+    });
+  }
   function progress() {
-    var h = hero.offsetHeight || 1;
-    return clamp(window.scrollY / (h * 0.85), 0, 1);
+    return clamp(window.scrollY / END, 0, 1);
   }
   function easeInOut(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
   var introSkipped = reduced;
@@ -1029,7 +1051,8 @@
       f.st = STATIC[key] ? STATIC[key][idx] || null : null;
       var w = Math.round(base * (tall ? f.spec.msize : f.spec.size)), h = Math.round(w * 1.06);
       if (w !== f.w || h !== f.h) {
-        f.w = w; f.h = h;
+        f.w = w; f.h = h; f.mk = null;
+        f.el.style.removeProperty('--fw');
         f.el.style.setProperty('--w', w + 'px');
         f.el.style.setProperty('--h', h + 'px');
       }
@@ -1225,26 +1248,44 @@
         rY *= e; rX *= e;
       }
     }
-    var band = bandFor(n, f.band);
+    var band = bandFor(n, f.band), morph = null;
     // Chuyển cảnh: khung rời quỹ đạo, bay xuống và nằm đúng vào ô ảnh của phần Giới thiệu
     if (P > 0 && !reduced) {
       var idx = frames.indexOf(f), si = slotOf[idx], sl = si >= 0 ? SLOTS[si] : null;
-      var q = clamp((P - (si >= 0 ? si : 0) * 0.07) / 0.72, 0, 1), e2 = easeInOut(q);
-      if (sl) {
+      var q = clamp((P - (si >= 0 ? si : 0) * 0.1) / 0.8, 0, 1), e2 = easeInOut(q);
+      if (sl && e2 > 0) {
         // cung lệch ngang luôn phồng ra phía mép ngoài của ô ảnh (xa cột chữ) để khung đang bay không che đoạn giới thiệu
-        var ts = sl.w / f.w, arcK = Math.sin(Math.PI * e2) * (G.mobile ? 24 : 60) * (sl.x < G.W / 2 ? -1 : 1);
+        var arcK = Math.sin(Math.PI * e2) * (G.mobile ? 24 : 60) * (sl.x < G.W / 2 ? -1 : 1);
         var nx = lerp(X, sl.x, e2) + arcK, ny = lerp(Y, sl.y, e2);
-        X = nx; Y = ny; s = lerp(s, ts, e2); o = lerp(o, 1, e2);
+        // đổi dần hình dạng khung (vuông -> dọc / ngang / vuông) thay vì phóng to, để viền và góc bo không bị méo
+        morph = [lerp(f.w * s, sl.w, e2), lerp(f.h * s, sl.h, e2)];
+        X = nx; Y = ny; s = 1; o = lerp(o, 1, e2);
         rz = lerp(rz, sl.rot, e2); rY *= (1 - e2); rX *= (1 - e2);
         if (e2 > 0.35) band = 0;
         n = Math.max(n, e2);           // bay lên lớp trên cùng khi đang hạ cánh
         if (P >= 1) o = 0;             // đã hạ cánh: ô ảnh tĩnh thay thế (trùng khít)
-      } else {
-        o *= 1 - clamp(P * 1.6, 0, 1); s *= 1 - 0.3 * P;
+      } else if (!sl) {
+        o *= 1 - clamp(P * 2.5, 0, 1); s *= 1 - 0.3 * clamp(P * 2.5, 0, 1);
       }
     }
 
-    var tf = 'translate3d(' + (X - f.w / 2).toFixed(2) + 'px,' + (Y - f.h / 2).toFixed(2) + 'px,0) perspective(900px) rotateY(' +
+    var fw = f.w, fh = f.h;
+    if (morph) {
+      fw = morph[0]; fh = morph[1];
+      var mk = fw.toFixed(1) + 'x' + fh.toFixed(1);
+      if (mk !== f.mk) {
+        f.el.style.setProperty('--fw', fw.toFixed(1) + 'px');
+        f.el.style.setProperty('--h', fh.toFixed(1) + 'px');
+        f.el.style.setProperty('--w', Math.min(fw, fh).toFixed(1) + 'px');
+        f.mk = mk;
+      }
+    } else if (f.mk) {
+      f.el.style.removeProperty('--fw');
+      f.el.style.setProperty('--w', f.w + 'px');
+      f.el.style.setProperty('--h', f.h + 'px');
+      f.mk = null;
+    }
+    var tf = 'translate3d(' + (X - fw / 2).toFixed(2) + 'px,' + (Y - fh / 2).toFixed(2) + 'px,0) perspective(900px) rotateY(' +
       rY.toFixed(2) + 'deg) rotateX(' + rX.toFixed(2) + 'deg) rotate(' + rz.toFixed(2) + 'deg) scale(' + s.toFixed(4) + ')';
     if (tf !== f.lastT) { f.el.style.transform = tf; f.lastT = tf; }
     var oR = Math.round(o * 1000) / 1000;
@@ -1274,6 +1315,7 @@
   function render(t) {
     if (!G) return;
     P = reduced ? 0 : progress();
+    if (P > 0) trackSlots();
     about.classList.toggle('is-landed', P >= 1);
     hero.querySelector('.hero__orbits').style.opacity = (1 - P).toFixed(3);
     for (var i = 0; i < frames.length; i++) if (frames[i].active) place(frames[i], t);
@@ -1491,8 +1533,12 @@
   measureSlots();
   render(0);
   applyReduced();
-  about.classList.toggle('is-static', reduced);
-  if (mqReduce.addEventListener) mqReduce.addEventListener('change', function () { about.classList.toggle('is-static', mqReduce.matches); });
+  function applyStatic(on) {
+    about.classList.toggle('is-static', on); pinWrap.classList.toggle('is-static', on);
+    measureSlots(); render(simT);
+  }
+  applyStatic(reduced);
+  if (mqReduce.addEventListener) mqReduce.addEventListener('change', function () { applyStatic(mqReduce.matches); });
   // Cuộn: vẽ lại ngay cả khi vòng lặp đang dừng (tạm dừng / Hero ra khỏi màn hình)
   var scrollQueued = false;
   window.addEventListener('scroll', function () {

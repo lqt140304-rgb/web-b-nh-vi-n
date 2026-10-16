@@ -7,10 +7,11 @@ const path=require('path');
   const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:1,isMobile:mob,hasTouch:mob});
   const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
   await p.goto(url);await p.waitForTimeout(5000);
-  const heroH=await p.evaluate(()=>document.querySelector('.hero').offsetHeight);
-  const end=heroH*0.85;
-  for(let i=0;i<=8;i++){
-   const y=Math.round(end*i/8);
+  // cùng công thức với measureSlots(): đầu nhịp đứng yên + 75% độ dài nhịp
+  const end=await p.evaluate(()=>{const a=document.querySelector('.about'),w=document.querySelector('.about-pin');const vh=innerHeight,top=Math.max(0,Math.round((vh-a.offsetHeight)/2)),pin=Math.round(vh*0.8);return w.getBoundingClientRect().top+scrollY-top+pin*0.75;});
+  console.log(name,'END',Math.round(end));
+  for(let i=0;i<=10;i++){
+   const y=Math.round(end*i/10);
    await p.evaluate(y=>window.scrollTo(0,y),y);await p.waitForTimeout(450);
    await p.screenshot({path:`shots/${name}-${i}.png`});
   }
@@ -23,7 +24,7 @@ const path=require('path');
   });
   await p.evaluate(y=>window.scrollTo(0,y),Math.round(end*1.3));await p.waitForTimeout(500);
   await p.screenshot({path:`shots/${name}-landed.png`});
-  await p.evaluate(()=>window.scrollTo(0,document.querySelector('.about').offsetTop-40));await p.waitForTimeout(500);
+  await p.evaluate(y=>window.scrollTo(0,y),Math.round(end+h*0.6));await p.waitForTimeout(500);
   await p.screenshot({path:`shots/${name}-about.png`});
   const ov=await p.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth,landed:document.querySelector('.about').classList.contains('is-landed')}));
   console.log(name,JSON.stringify({errs,ov,cmp}));
