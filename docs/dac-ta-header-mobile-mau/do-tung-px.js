@@ -4,7 +4,7 @@ const U = 'file://' + SP + '/hdr/proto/header-mobile-mau.html';
 (async () => {
   const b = await chromium.launch({ proxy: { server: process.env.HTTPS_PROXY } });
   const bad = [];
-  for (const [user, name] of [[0, ''], [1, 'Khách Demo'], [1, 'Nguyễn Thị Phương Anh']]) for (const open of [0, 1]) {
+  for (const [user, name] of [[0, ''], [1, 'Khách Demo'], [1, 'Nguyễn Thị Phương Anh'], [1, 'Trần Nguyễn Thị Phương Anh Thư'], [1, 'Nguyễn Văn An']]) for (const open of [0, 1]) {
     const p = await b.newPage({ viewport: { width: 320, height: 700 } }); await p.goto(`${U}?user=${user}&open=${open}&name=${encodeURIComponent(name)}`); await p.waitForTimeout(1200);
     for (let w = 320; w <= 1500; w += (w < 620 ? 1 : 20)) {
       await p.setViewportSize({ width: w, height: 700 }); await p.waitForTimeout(30);
