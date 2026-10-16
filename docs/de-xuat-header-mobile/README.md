@@ -1,3 +1,5 @@
+> **Đã thay thế (15/10/2026):** chủ dự án duyệt với hai thay đổi (nút to hơn; "Đăng xuất" cuối menu khi đã đăng nhập). Đặc tả chốt: [shared/requirements → dac-ta-header-mobile-2026-10-15.md](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/dac-ta-header-mobile-2026-10-15.md) (`84b8f30`). Bản dưới đây chỉ giữ làm lịch sử.
+
 # Đặc tả header mobile và menu xổ xuống (Claude, 15/10/2026)
 
 **Trạng thái: ĐẶC TẢ ĐỀ XUẤT, chờ chủ dự án duyệt.** Soạn theo [phân quyền `43e4adc`](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/phan-quyen-thiet-ke-giao-claude-2026-10-15.md), việc 2, dựa trên [ảnh chủ dự án chọn](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/anh-mau-header-mobile-2026-10-15/header-mobile-chu-du-an.png) và [yêu cầu cũ](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/yeu-cau-header-mobile-antigravity-2026-10-15.md). Antigravity **chưa** được triển khai cho tới khi chủ dự án duyệt và giao. Không đổi header desktop, Hero, nội dung.
