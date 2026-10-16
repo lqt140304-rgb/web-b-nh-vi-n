@@ -515,13 +515,13 @@
   .about-pin__space { height: var(--pin-len, 80vh); }
   .about-pin.is-static .about { position: relative; top: auto; }
   .about-pin.is-static .about-pin__space { display: none; }
-  .about__inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1.08fr 1fr; gap: 64px; align-items: center; }
+  .about__inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.22fr 1fr; gap: 60px; align-items: center; }
   /* 3 khung khác cỡ, xếp so le và chồng nhẹ: dọc (dài) - ngang - vuông */
-  .about__gallery { position: relative; width: 100%; aspect-ratio: 1.1 / 1; margin-bottom: 30px; }
+  .about__gallery { position: relative; width: 100%; aspect-ratio: 1.05 / 1; margin-bottom: 30px; }
   .about__slot { position: absolute; margin: 0; }
-  .about__slot--tall { left: 0; top: 7%; width: 47%; transform: rotate(-3deg); z-index: 1; }
-  .about__slot--wide { left: 37%; top: 50%; width: 59%; transform: rotate(-2deg); z-index: 2; }
-  .about__slot--square { left: 58%; top: 0; width: 36%; transform: rotate(4deg); z-index: 1; }
+  .about__slot--tall { left: 0; top: 6%; width: 50%; transform: rotate(-3deg); z-index: 1; }
+  .about__slot--wide { left: 36%; top: 48%; width: 62%; transform: rotate(-2deg); z-index: 2; }
+  .about__slot--square { left: 60%; top: 0; width: 37%; transform: rotate(4deg); z-index: 1; }
   .slot-frame { position: relative; width: 100%; aspect-ratio: 1 / 1.06; visibility: hidden; }
   .about__slot--tall figcaption { position: absolute; bottom: 100%; left: 4px; margin: 0 0 6px; text-align: left; white-space: nowrap; }   /* phía dưới bị khung ngang che */
   .about__slot--tall .slot-frame { aspect-ratio: 3 / 4.3; }
@@ -531,7 +531,7 @@
   .about__slot figcaption { white-space: nowrap; margin-top: 8px; font-size: 12px; color: #6B5A6E; text-align: center; opacity: 0; transition: opacity .4s ease; }
   .about.is-landed figcaption, .about.is-static figcaption { opacity: 1; }
   .about__eyebrow { margin: 0 0 14px; font-size: 13px; font-weight: 600; letter-spacing: .32em; color: var(--plum-muted); }
-  .about__title { margin: 0 0 18px; font-family: var(--font-serif); font-weight: 700; font-size: clamp(2rem, 1.2rem + 2vw, 2.9rem); line-height: 1.15; color: var(--plum-900); }
+  .about__title { margin: 0 0 18px; font-family: var(--font-serif); font-weight: 700; font-size: clamp(2rem, 1.2rem + 2vw, 2.9rem); line-height: 1.15; color: var(--plum-900); text-wrap: balance; }
   .about__placeholder { margin: 0 0 26px; padding: 16px 18px; border: 1.5px dashed rgba(90, 30, 94, .28); border-radius: 16px; color: #6B5A6E; font-size: 15px; line-height: 1.6; background: rgba(255, 255, 255, .5); }
   .about__facts { list-style: none; margin: 0 0 30px; padding: 0; display: grid; gap: 12px; }
   .about__facts li { display: flex; align-items: center; gap: 12px; font-size: 16px; color: var(--ink); }
@@ -814,6 +814,8 @@
   var COMET_SPEED = 0.2;     // rad/giây
   var MAX_DT = 1 / 15;       // kẹp delta time
 
+  var FRAME_SCALE = 1.08;   // khung to hơn ~8% so với Hero v5
+
   var FRAME_HTML =
     '<div class="frame__card"><div class="frame__inner">' +
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
@@ -893,7 +895,30 @@
   function progress() {
     return clamp(window.scrollY / END, 0, 1);
   }
-  function easeInOut(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  // Làm mượt: khung "đuổi theo" thanh cuộn với độ trễ mềm (giảm dần theo hàm mũ), nên mỗi nấc lăn chuột
+  // không còn làm khung giật một bước. SMOOTH_K càng nhỏ càng trôi.
+  var SY = 0;
+  var SMOOTH_K = 7, Pt = 0, Ps = 0, lastSm = null, smInit = false, glideRaf = 0;
+  function smoothP() {
+    Pt = reduced ? 0 : progress();
+    var now = performance.now();
+    if (!smInit) { Ps = Pt; smInit = true; }
+    else if (lastSm !== null) {
+      var dt = Math.min((now - lastSm) / 1000, 0.1);
+      Ps += (Pt - Ps) * (1 - Math.exp(-dt * SMOOTH_K));
+    }
+    lastSm = now;
+    if (Math.abs(Pt - Ps) < 0.0008) Ps = Pt;
+    return Ps;
+  }
+  function glide() {
+    glideRaf = 0;
+    if (running) return;              // vòng chính đang vẽ mỗi khung hình rồi
+    render(simT);
+    if (Ps !== Pt) glideRaf = requestAnimationFrame(glide);
+    else lastSm = null;               // đứng yên: lần cuộn sau bắt đầu lại từ dt = 0
+  }
+  function easeInOutSine(x) { return -(Math.cos(Math.PI * x) - 1) / 2; }
   var introSkipped = reduced;
   var introBase = null;      // thời điểm (đồng hồ mô phỏng) khung đầu tiên bay ra
   var readyAt = null;        // thời điểm chữ bắt đầu mở màn (sau khi có phông)
@@ -999,7 +1024,7 @@
     var cy = (cr.top + cr.bottom) / 2 - hr.top;
     var kx = (r - l) / 2, ky = cr.height / 2;
     var headerH = header.offsetHeight;
-    var base = mobile ? clamp(Math.min(W * 0.3, (H - headerH) * 0.175), 92, 130) : (tall ? clamp(W * 0.154, 116, 154) : clamp(Math.min(W * 0.134, (H - headerH) * 0.242), 123, 196));
+    var base = (mobile ? clamp(Math.min(W * 0.3, (H - headerH) * 0.175), 92, 130) : (tall ? clamp(W * 0.154, 116, 154) : clamp(Math.min(W * 0.134, (H - headerH) * 0.242), 123, 196))) * FRAME_SCALE;
     var depth = tall ? { sMin: 0.8, sMax: 1.04, oMin: 0.74 } : { sMin: 0.58, sMax: 1.05, oMin: 0.4 };
     var rings;
 
@@ -1249,10 +1274,13 @@
       }
     }
     var band = bandFor(n, f.band), morph = null;
+    // Giữ khung đứng nguyên chỗ trên màn hình khi Hero cuộn đi (bù quãng cuộn), rồi mới bay xuống ô ảnh:
+    // điểm xuất phát không bị kéo trôi lên nên đường bay không chững lại khi phần Giới thiệu dừng (sticky).
+    if (!reduced) Y += SY;
     // Chuyển cảnh: khung rời quỹ đạo, bay xuống và nằm đúng vào ô ảnh của phần Giới thiệu
     if (P > 0 && !reduced) {
       var idx = frames.indexOf(f), si = slotOf[idx], sl = si >= 0 ? SLOTS[si] : null;
-      var q = clamp((P - (si >= 0 ? si : 0) * 0.1) / 0.8, 0, 1), e2 = easeInOut(q);
+      var q = clamp((P - (si >= 0 ? si : 0) * 0.08) / 0.84, 0, 1), e2 = easeInOutSine(q);
       if (sl && e2 > 0) {
         // cung lệch ngang luôn phồng ra phía mép ngoài của ô ảnh (xa cột chữ) để khung đang bay không che đoạn giới thiệu
         var arcK = Math.sin(Math.PI * e2) * (G.mobile ? 24 : 60) * (sl.x < G.W / 2 ? -1 : 1);
@@ -1314,7 +1342,9 @@
 
   function render(t) {
     if (!G) return;
-    P = reduced ? 0 : progress();
+    P = smoothP();
+    SY = reduced ? 0 : window.scrollY;
+    if (!running || !inView) sync();
     if (P > 0) trackSlots();
     about.classList.toggle('is-landed', P >= 1);
     hero.querySelector('.hero__orbits').style.opacity = (1 - P).toFixed(3);
@@ -1474,7 +1504,8 @@
     raf = 0;
   }
   function sync() {
-    var shouldRun = !reduced && !userPaused && !document.hidden && inView;
+    // còn đang chuyển cảnh thì vòng quay chạy tiếp dù Hero đã ra khỏi màn hình, để khung không khựng giữa đường bay
+    var shouldRun = !reduced && !userPaused && !document.hidden && (inView || (Pt > 0 && Pt < 1) || Ps !== Pt);
     if (shouldRun) start(); else stop();
     hero.classList.toggle('is-paused', userPaused);
   }
@@ -1543,7 +1574,7 @@
   var scrollQueued = false;
   window.addEventListener('scroll', function () {
     if (scrollQueued) return; scrollQueued = true;
-    requestAnimationFrame(function () { scrollQueued = false; if (!running) render(simT); });
+    requestAnimationFrame(function () { scrollQueued = false; if (!running && !glideRaf) glide(); });
   }, { passive: true });
   new ResizeObserver(relayout).observe(about);
 })();
