@@ -1,15 +1,17 @@
+> **Phân công QA hiện hành — 17/10/2026:** Codex là QA chính, phụ trách kiểm yêu cầu, giao diện/hành vi, hồi quy, báo cáo và kiểm lại sau sửa. Claude thiết kế, triển khai, tự kiểm và sửa theo kết quả QA. Chủ dự án duyệt cuối. [Quyết định QA](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/codex-qa-chinh-2026-10-17.md).
+
 # Website Bệnh viện Thú y Lê Sơn
 
-> **Quyết định hiện hành — 17/10/2026:** Antigravity đã bị loại khỏi kế hoạch. Claude thay thế hoàn toàn Antigravity về thiết kế, bản mẫu, triển khai giao diện và bàn giao; Codex tích hợp và kiểm chéo. Các phân công Antigravity trong tài liệu cũ chỉ còn là lịch sử. [Quyết định chính thức](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/claude-thay-the-antigravity-2026-10-17.md).
+> **Quyết định hiện hành — 17/10/2026:** Antigravity đã bị loại khỏi kế hoạch. Claude thay thế hoàn toàn Antigravity về thiết kế, bản mẫu, triển khai giao diện và bàn giao; Codex tích hợp và làm QA chính. Các phân công Antigravity trong tài liệu cũ chỉ còn là lịch sử. [Quyết định chính thức](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/claude-thay-the-antigravity-2026-10-17.md).
 
 ## Các nhánh làm việc hiện hành
 
 | Nhánh | Nội dung | Người cập nhật |
 |---|---|---|
 | [shared/requirements](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/requirements) | Yêu cầu, quyết định chủ dự án, thiết kế tham khảo và hướng dẫn triển khai | Claude + Codex |
-| [shared/qa-review](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/qa-review) | Báo cáo QA, rà soát chéo, bằng chứng và kết luận PASS/FIX/chưa kiểm | Claude + Codex |
+| [shared/qa-review](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/qa-review) | Báo cáo QA, rà soát chéo, bằng chứng và kết luận PASS/FIX/chưa kiểm | Codex (QA chính); Claude bổ sung tự kiểm |
 | `claude/*` được giao, hiện có [claude/cta-dich-vu-sua](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/claude/cta-dich-vu-sua) | Claude thiết kế, dựng mẫu, triển khai giao diện và bàn giao theo yêu cầu được duyệt | Claude |
-| [codex/hero-chinh-quy-dao](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/codex/hero-chinh-quy-dao) | Tích hợp demo hiện hành, kiểm kỹ thuật và hồi quy | Codex |
+| [codex/hero-chinh-quy-dao](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/codex/hero-chinh-quy-dao) | Tích hợp demo hiện hành; QA chính: kiểm yêu cầu, giao diện/hành vi và hồi quy | Codex |
 
 ### Điểm vào tài liệu
 
@@ -23,8 +25,8 @@
 
 1. Claude/Codex ghi yêu cầu và quyết định được chủ dự án chốt ở shared/requirements.
 2. Claude nhận toàn bộ phần thiết kế, bản mẫu và triển khai giao diện trước đây giao Antigravity; làm trên nhánh Claude được giao, bám yêu cầu và thiết kế chủ dự án đã duyệt.
-3. Claude bàn giao SHA đầy đủ, tệp đổi, ảnh desktop/mobile và kết quả tự kiểm. Codex tích hợp khi được giao và kiểm chéo; không ghi đè nhánh của nhau.
-4. Claude/Codex kiểm đúng commit, đăng QA ở shared/qa-review; ghi rõ đã kiểm, chưa kiểm và việc cần sửa.
+3. Claude bàn giao SHA đầy đủ, tệp đổi, ảnh desktop/mobile và kết quả tự kiểm. Codex tích hợp khi được giao và phụ trách QA chính; không ghi đè nhánh của nhau.
+4. Codex làm QA chính trên đúng commit, đăng kết quả ở shared/qa-review, ghi rõ đã kiểm/chưa kiểm, lỗi và điều kiện đạt; Claude sửa rồi bàn giao SHA mới để Codex kiểm lại.
 5. Chủ dự án duyệt; kết quả QA không tự thay thế quyết định của chủ dự án.
 
 Trước mỗi lần cập nhật đọc HEAD mới nhất để tránh ghi đè thay đổi của người khác. Chỉ đưa đề xuất QA sang nhánh requirements khi đã được chủ dự án chốt.
@@ -34,7 +36,7 @@ Trước mỗi lần cập nhật đọc HEAD mới nhất để tránh ghi đè
 ### Vai trò và phạm vi
 
 - Claude phụ trách toàn bộ thiết kế và triển khai giao diện thay Antigravity, sửa theo yêu cầu đã chốt và bàn giao commit/ảnh/bằng chứng tự kiểm. Antigravity không còn nhiệm vụ hoặc quyền quyết định trong kế hoạch.
-- Claude tự kiểm phần mình thực hiện; Codex kiểm chéo độc lập phần được giao. Không gọi việc tự kiểm hoặc kết quả của người khác là QA độc lập. Chủ dự án duyệt cuối.
+- Codex làm QA chính; Claude tự kiểm phần mình thực hiện trước khi bàn giao. Phần do Codex tự sửa phải ghi rõ là tự kiểm, chưa có QA độc lập nếu chưa được người khác kiểm lại. Không gọi việc tự kiểm hoặc kết quả của người khác là QA độc lập. Chủ dự án duyệt cuối.
 - Kiểm theo từng phần và giai đoạn. Không ép làm backend, trang chưa triển khai hoặc thay ảnh tạm nếu đã được chủ dự án cho phép hoãn.
 
 ### Trước khi kiểm
