@@ -1,26 +1,29 @@
 # Website Bệnh viện Thú y Lê Sơn
 
-## Ba nhánh làm việc chính thức
+> **Quyết định hiện hành — 17/10/2026:** Antigravity đã bị loại khỏi kế hoạch. Claude thay thế hoàn toàn Antigravity về thiết kế, bản mẫu, triển khai giao diện và bàn giao; Codex tích hợp và kiểm chéo. Các phân công Antigravity trong tài liệu cũ chỉ còn là lịch sử. [Quyết định chính thức](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/claude-thay-the-antigravity-2026-10-17.md).
+
+## Các nhánh làm việc hiện hành
 
 | Nhánh | Nội dung | Người cập nhật |
 |---|---|---|
 | [shared/requirements](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/requirements) | Yêu cầu, quyết định chủ dự án, thiết kế tham khảo và hướng dẫn triển khai | Claude + Codex |
 | [shared/qa-review](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/qa-review) | Báo cáo QA, rà soát chéo, bằng chứng và kết luận PASS/FIX/chưa kiểm | Claude + Codex |
-| [antigravity/design](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/antigravity/design) | Mã demo, tài nguyên, bàn giao thiết kế; tổ chức riêng từng mục Hero, Services và các phần sau | Antigravity |
+| `claude/*` được giao, hiện có [claude/cta-dich-vu-sua](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/claude/cta-dich-vu-sua) | Claude thiết kế, dựng mẫu, triển khai giao diện và bàn giao theo yêu cầu được duyệt | Claude |
+| [codex/hero-chinh-quy-dao](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/codex/hero-chinh-quy-dao) | Tích hợp demo hiện hành, kiểm kỹ thuật và hồi quy | Codex |
 
 ### Điểm vào tài liệu
 
 - [Yêu cầu đã chốt](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/README-shared.md)
 - [QA và rà soát](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/qa-review/docs/README-shared.md)
-- [Danh mục thiết kế Antigravity](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/antigravity/design/design/README.md)
-- [Thiết kế Hero / Header](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/antigravity/design/design/hero/README.md)
-- [Thiết kế Services](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/antigravity/design/design/services/README.md)
+- [Danh mục giao diện đã tích hợp](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/codex/hero-chinh-quy-dao/design/README.md)
+- [Thiết kế Hero / Header](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/codex/hero-chinh-quy-dao/design/hero/README.md)
+- [Thiết kế Services](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/codex/hero-chinh-quy-dao/design/services/README.md)
 
 ## Quy trình chung
 
 1. Claude/Codex ghi yêu cầu và quyết định được chủ dự án chốt ở shared/requirements.
-2. Antigravity đọc nhánh yêu cầu, triển khai trên **antigravity/design**. Không tạo nhánh riêng hero-v1/services-v1 để tiếp tục công việc mới.
-3. Antigravity bàn giao commit và ảnh demo theo từng mục trong design/.
+2. Claude nhận toàn bộ phần thiết kế, bản mẫu và triển khai giao diện trước đây giao Antigravity; làm trên nhánh Claude được giao, bám yêu cầu và thiết kế chủ dự án đã duyệt.
+3. Claude bàn giao SHA đầy đủ, tệp đổi, ảnh desktop/mobile và kết quả tự kiểm. Codex tích hợp khi được giao và kiểm chéo; không ghi đè nhánh của nhau.
 4. Claude/Codex kiểm đúng commit, đăng QA ở shared/qa-review; ghi rõ đã kiểm, chưa kiểm và việc cần sửa.
 5. Chủ dự án duyệt; kết quả QA không tự thay thế quyết định của chủ dự án.
 
@@ -30,8 +33,8 @@ Trước mỗi lần cập nhật đọc HEAD mới nhất để tránh ghi đè
 
 ### Vai trò và phạm vi
 
-- Antigravity tập trung thiết kế, sửa đúng yêu cầu đã chốt, bàn giao commit và ảnh desktop/mobile. Chỉ tự kiểm nhanh để tránh bản demo hỏng; không cần lặp lại báo cáo QA đầy đủ.
-- Claude làm QA chính. Codex rà soát chéo hoặc kiểm phần Claude chưa kiểm được. Không gọi kết quả của người khác là lần kiểm độc lập của mình.
+- Claude phụ trách toàn bộ thiết kế và triển khai giao diện thay Antigravity, sửa theo yêu cầu đã chốt và bàn giao commit/ảnh/bằng chứng tự kiểm. Antigravity không còn nhiệm vụ hoặc quyền quyết định trong kế hoạch.
+- Claude tự kiểm phần mình thực hiện; Codex kiểm chéo độc lập phần được giao. Không gọi việc tự kiểm hoặc kết quả của người khác là QA độc lập. Chủ dự án duyệt cuối.
 - Kiểm theo từng phần và giai đoạn. Không ép làm backend, trang chưa triển khai hoặc thay ảnh tạm nếu đã được chủ dự án cho phép hoãn.
 
 ### Trước khi kiểm
@@ -87,11 +90,11 @@ Mục mới tạo thư mục design/<ten-muc>/ và thêm vào design/README.md. 
 
 ## Chạy demo cục bộ
 
-Trên nhánh antigravity/design: chạy `node server.js`, mở http://127.0.0.1:3030/index.html hoặc http://127.0.0.1:3030/services.html.
+Trên nhánh codex/hero-chinh-quy-dao: chạy `node server.js`, mở http://127.0.0.1:3030/index.html hoặc http://127.0.0.1:3030/services.html.
 server.js chỉ phục vụ demo trên máy cá nhân, không dùng cho vận hành công khai.
 
 ## Nhánh cũ
 
-antigravity/hero-v1, antigravity/services-v1, claude/optimistic-mccarthy-d1d15i, codex/qa-services-v1 và codex/review-claude-qa giữ làm lịch sử; từ 15/10/2026 các cập nhật mới dùng ba nhánh chính thức trên. Không xóa hoặc merge code lên nhánh mặc định trong việc tổ chức này.
+antigravity/design, antigravity/hero-v1, antigravity/services-v1 và claude/optimistic-mccarthy-d1d15i chỉ giữ lịch sử; không nhận việc mới. Các nhánh codex/qa-services-v1 và codex/review-claude-qa nếu còn bản lưu cũng chỉ dùng tra cứu. Từ 17/10/2026 dùng phân công và các nhánh hiện hành ở trên. Không xóa hoặc merge code lên nhánh mặc định trong việc tổ chức này.
 
 Nhánh thiết kế chung khởi tạo từ Services acc18e7, bổ sung Hero a47f4e2 (dòng tiêu chí mới); mã app.js và styles.css ở hai nhánh nguồn giống nhau tại thời điểm gom.
