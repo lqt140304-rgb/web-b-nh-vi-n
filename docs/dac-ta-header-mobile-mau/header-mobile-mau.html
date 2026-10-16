@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mẫu header mobile – Lê Sơn</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== Token (kế thừa bộ màu Lê Sơn đã dùng ở Hero chính) ===== */
+  :root {
+    --cream: #FBF7F1; --plum-900: #421247; --plum-700: #5A1E5E; --ink: #3F3342; --ink-soft: #5E4A62;
+    --menu-active: #F6EFF4;
+    --font-sans: "Be Vietnam Pro", system-ui, sans-serif; --font-serif: "Lora", Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: radial-gradient(120% 85% at 50% 46%, #FDFAF5 0%, #FBF6EF 55%, #F7EEE5 100%); color: var(--ink); font-family: var(--font-sans); min-height: 100vh; }
+  a { color: inherit; }
+
+  /* ===== HEADER ===== */
+  .site-header { position: relative; z-index: 50; }
+  .site-header__inner { display: flex; align-items: center; gap: 10px; min-height: 68px; padding: 10px 16px; }
+  .brand { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; flex-shrink: 0; }
+  .brand img { width: 46px; height: 42px; object-fit: contain; }
+  .brand__text { display: flex; flex-direction: column; line-height: 1; }
+  .brand__kicker { font-size: 9.5px; font-weight: 700; letter-spacing: .06em; color: var(--plum-700); }
+  .brand__name { margin-top: 3px; font-family: var(--font-serif); font-weight: 600; font-size: 21px; line-height: 1.05; color: var(--plum-900); }
+  .header-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+  .pill { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border-radius: 999px; font: 600 14.5px/1 var(--font-sans); text-decoration: none; white-space: nowrap; }
+  .pill--outline { color: var(--plum-700); background: rgba(255,255,255,.7); border: 1.5px solid rgba(90,30,94,.2); }
+  .pill--filled { color: var(--cream); background: var(--plum-700); border: 1.5px solid var(--plum-700); box-shadow: 0 10px 22px -12px rgba(90,30,94,.7); }
+  .menu-btn { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0; border-radius: 14px; border: 1.5px solid rgba(90,30,94,.16); background: #FEF7F1; color: var(--plum-700); cursor: pointer; flex-shrink: 0; }
+  .menu-btn svg { width: 22px; height: 22px; }
+  :where(a, button):focus-visible { outline: 3px solid var(--plum-700); outline-offset: 3px; }
+
+  /* ===== MENU XỔ XUỐNG (hộp nằm đè lên nội dung, không đẩy Hero xuống) ===== */
+  .mobile-menu { position: absolute; top: calc(100% - 6px); right: 12px; width: min(318px, calc(100% - 24px)); padding: 10px; border-radius: 22px; background: #fff; border: 1px solid rgba(90,30,94,.08); box-shadow: 0 24px 50px -20px rgba(66,18,71,.35); z-index: 60; }
+  .mobile-menu[hidden] { display: none; }
+  .mobile-menu ul { list-style: none; margin: 0; padding: 0; }
+  .mobile-menu li a { display: flex; align-items: center; min-height: 48px; padding: 0 14px; border-radius: 12px; font-size: 16px; font-weight: 500; color: var(--ink); text-decoration: none; }
+  .mobile-menu li a:hover { background: var(--menu-active); }
+  .mobile-menu li a[aria-current="page"] { color: var(--plum-700); font-weight: 700; background: var(--menu-active); }
+  .mobile-menu__auth { display: flex; gap: 8px; padding: 12px 2px 2px; }
+  .mobile-menu__auth .pill { flex: 1; min-height: 44px; padding: 0 12px; font-size: 14.5px; }
+  .mobile-menu__logout { display: none; padding: 12px 2px 2px; }
+  .pill--logout { width: 100%; min-height: 44px; color: #9C2A2A; background: #fff; border: 1.5px solid rgba(156,42,42,.3); }
+  .is-user .mobile-menu__logout { display: block; }
+  .is-user .mobile-menu__auth { display: none; }
+
+  /* ===== TÀI KHOẢN (đã đăng nhập): giữ nút tài khoản có sẵn, thay cho hai nút khách ===== */
+  .user-btn { display: none; align-items: center; gap: 8px; min-height: 44px; padding: 0 10px 0 6px; border-radius: 999px; border: 1.5px solid rgba(90,30,94,.2); background: rgba(255,255,255,.7); color: var(--plum-700); font: 600 14px/1 var(--font-sans); cursor: pointer; }
+  .user-btn__ava { width: 32px; height: 32px; border-radius: 50%; background: var(--plum-700); color: var(--cream); display: inline-flex; align-items: center; justify-content: center; font-size: 14px; }
+  .is-user .guest-only { display: none; }
+  .is-user .user-btn { display: inline-flex; }
+
+  /* ===== CÁC MỐC KÍCH THƯỚC (đo từng px từ 320 đến 600). Nút luôn to: chữ >= 13,5 px; khi hẹp thì thu chữ thương hiệu, không thu nút ===== */
+  @media (max-width: 500px) {
+    .site-header__inner { padding: 10px 12px; gap: 6px; }
+    .header-actions { gap: 6px; }
+    .pill { padding: 0 12px; font-size: 14px; }
+    .brand { gap: 6px; }
+    .user-btn__name { display: none; }          /* chỉ còn avatar */
+    .user-btn { padding: 0 8px 0 6px; }
+  }
+  @media (max-width: 410px) {
+    .brand__kicker { display: none; }           /* bỏ dòng nhỏ "BỆNH VIỆN THÚ Y"; logo + "Lê Sơn" giữ */
+    .brand__name { margin-top: 0; font-size: 20px; }
+    .brand img { width: 42px; height: 38px; }
+  }
+  @media (max-width: 375px) {
+    .brand__text { display: none; }             /* chỉ còn logo (ảnh logo đã có chữ Lê Sơn) */
+    .brand img { width: 46px; height: 42px; }
+  }
+  @media (max-width: 340px) {
+    .pill { font-size: 13.5px; padding: 0 10px; }
+    .site-header__inner { padding-inline: 10px; gap: 4px; }
+    .header-actions { gap: 5px; }
+  }
+
+  /* nội dung giả bên dưới để thấy menu không đẩy trang */
+  .demo-body { padding: 36px 20px; text-align: center; }
+  .demo-body h1 { font-family: var(--font-serif); color: var(--plum-900); font-size: 2.2rem; line-height: 1.14; margin: 40px 0 12px; }
+</style>
+</head>
+<body>
+<header class="site-header" id="siteHeader">
+  <div class="site-header__inner">
+    <a class="brand" href="#" aria-label="Bệnh viện Thú y Lê Sơn – Trang chủ">
+      <img src="assets/logo-le-son.png" alt="" width="46" height="42">
+      <span class="brand__text"><span class="brand__kicker">BỆNH VIỆN THÚ Y</span><span class="brand__name">Lê Sơn</span></span>
+    </a>
+    <div class="header-actions">
+      <a class="pill pill--outline guest-only" href="#dang-nhap">Đăng nhập</a>
+      <a class="pill pill--filled guest-only" href="#dang-ky">Đăng ký</a>
+      <button class="user-btn" type="button" aria-label="Tài khoản của tôi"><span class="user-btn__ava">K</span><span class="user-btn__name">Khách Demo</span></button>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Mở danh mục điều hướng" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Menu chính" hidden>
+    <ul>
+      <li><a href="#" aria-current="page">Trang chủ</a></li>
+      <li><a href="services.html">Dịch vụ</a></li>
+      <li><a href="#gioi-thieu">Giới thiệu</a></li>
+      <li><a href="#lien-he">Liên hệ</a></li>
+    </ul>
+    <div class="mobile-menu__auth guest-only">
+      <a class="pill pill--outline" href="#dang-nhap">Đăng nhập</a>
+      <a class="pill pill--filled" href="#dang-ky">Đăng ký</a>
+    </div>
+    <div class="mobile-menu__logout user-only">
+      <a class="pill pill--logout" href="#dang-xuat">Đăng xuất</a>
+    </div>
+  </nav>
+</header>
+<main class="demo-body"><h1>Không gian lớn<br>cho những người bạn nhỏ</h1><p>Nội dung bên dưới không bị đẩy xuống khi mở menu.</p></main>
+<script>
+(function () {
+  var btn = document.getElementById('menuBtn'), menu = document.getElementById('mobileMenu');
+  var q = new URLSearchParams(location.search);
+  if (q.get('user') === '1') document.body.classList.add('is-user');
+  function setOpen(o) { menu.hidden = !o; btn.setAttribute('aria-expanded', String(o)); btn.setAttribute('aria-label', o ? 'Đóng danh mục điều hướng' : 'Mở danh mục điều hướng'); }
+  btn.addEventListener('click', function () { setOpen(menu.hidden); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { setOpen(false); btn.focus(); } });
+  document.addEventListener('click', function (e) { if (!menu.hidden && !menu.contains(e.target) && !btn.contains(e.target)) setOpen(false); });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+  if (q.get('open') === '1') setOpen(true);
+})();
+</script>
+</body>
+</html>

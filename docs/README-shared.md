@@ -14,4 +14,5 @@
 [Quy ước hai nhánh](QUY-UOC-NHANH-CHUNG.md)
 
 [Nhánh yêu cầu](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/requirements/docs) · [Nhánh QA](https://github.com/lqt140304-rgb/web-b-nh-vi-n/tree/shared/qa-review/docs)
+- [Đặc tả CHỐT header mobile và menu xổ xuống; giao Codex tích hợp (chủ dự án duyệt 15/10)](dac-ta-header-mobile-2026-10-15.md)
 - [Header mobile theo ảnh: đã chuyển thiết kế sang Claude, chưa giao Antigravity triển khai tiếp](yeu-cau-header-mobile-antigravity-2026-10-15.md)

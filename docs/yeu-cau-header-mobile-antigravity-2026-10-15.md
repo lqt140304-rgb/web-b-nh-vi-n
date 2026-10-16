@@ -1,3 +1,5 @@
+> **Đã thay thế (15/10/2026):** đặc tả chốt và việc giao Codex tích hợp ở [dac-ta-header-mobile-2026-10-15.md](dac-ta-header-mobile-2026-10-15.md). Mục này không giao Antigravity.
+
 > **Cập nhật phân công:** Thiết kế đã chuyển sang Claude theo [quyết định chủ dự án](phan-quyen-thiet-ke-giao-claude-2026-10-15.md). Antigravity chưa được triển khai tiếp mục này; ảnh và tiêu chí dưới đây vẫn giữ làm đầu vào thiết kế.
 
 # Giao Antigravity: header mobile và menu xổ xuống theo ảnh chủ dự án chọn
