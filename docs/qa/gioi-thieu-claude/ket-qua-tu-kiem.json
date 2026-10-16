@@ -1,0 +1,168 @@
+{
+ "desktop": {
+  "errs": [],
+  "END": 1368,
+  "pinTops": [
+   862,
+   725,
+   588,
+   452,
+   315,
+   178,
+   41,
+   1,
+   1,
+   1,
+   1
+  ],
+  "cmp": {
+   "nFr": 3,
+   "worst": 1
+  },
+  "after": {
+   "landed": true,
+   "sw": 1500,
+   "cw": 1500,
+   "vis": "visible"
+  },
+  "back": {
+   "landed": false,
+   "orbOp": "1",
+   "vis": 9
+  }
+ },
+ "mobile": {
+  "errs": [],
+  "END": 1280,
+  "pinTops": [
+   773,
+   645,
+   517,
+   389,
+   261,
+   133,
+   5,
+   0,
+   0,
+   0,
+   0
+  ],
+  "cmp": {
+   "nFr": 3,
+   "worst": 1
+  },
+  "after": {
+   "landed": true,
+   "sw": 1280,
+   "cw": 1280,
+   "vis": "visible"
+  },
+  "back": {
+   "landed": false,
+   "orbOp": "1",
+   "vis": 6
+  }
+ },
+ "resp-1440": {
+  "errs": [],
+  "END": 1338,
+  "pinTops": [
+   832,
+   698,
+   564,
+   431,
+   297,
+   163,
+   29,
+   1,
+   1,
+   1,
+   1
+  ],
+  "cmp": {
+   "nFr": 3,
+   "worst": 1
+  },
+  "after": {
+   "landed": true,
+   "sw": 1440,
+   "cw": 1440,
+   "vis": "visible"
+  },
+  "back": {
+   "landed": false,
+   "orbOp": "1",
+   "vis": 9
+  }
+ },
+ "resp-390": {
+  "errs": [],
+  "END": 1154,
+  "pinTops": [
+   711,
+   596,
+   480,
+   365,
+   249,
+   134,
+   18,
+   0,
+   0,
+   0,
+   0
+  ],
+  "cmp": {
+   "nFr": 3,
+   "worst": 1
+  },
+  "after": {
+   "landed": true,
+   "sw": 390,
+   "cw": 390,
+   "vis": "visible"
+  },
+  "back": {
+   "landed": false,
+   "orbOp": "1",
+   "vis": 6
+  }
+ },
+ "resp-768": {
+  "errs": [],
+  "END": 1370,
+  "pinTops": [
+   807,
+   670,
+   533,
+   396,
+   259,
+   122,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "cmp": {
+   "nFr": 3,
+   "worst": 1
+  },
+  "after": {
+   "landed": true,
+   "sw": 768,
+   "cw": 768,
+   "vis": "visible"
+  },
+  "back": {
+   "landed": false,
+   "orbOp": "1",
+   "vis": 8
+  }
+ },
+ "reduce": {
+  "errs": [],
+  "cls": "gt-pin is-static | gt is-static",
+  "pos": "relative",
+  "space": "none"
+ }
+}
