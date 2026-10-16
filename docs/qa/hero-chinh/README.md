@@ -1,3 +1,7 @@
+# Header: logo lớn và quy tắc tên 196f2ba — 17/10/2026
+
+[Bàn giao mới, ảnh và số đo](../header-mobile-196f2ba/README.md): thay yêu cầu hiện mọi từ bằng 1–3 từ giữ đủ, từ4 từ lấy hai từ cuối; logo mobile56px/desktop72×65px, header desktop96px. Các mục dưới là lịch sử trước bổ sung này.
+
 # Header mobile tích hợp theo đặc tả 84b8f30 — 17/10/2026
 
 Xem [bàn giao header mobile, ảnh đóng/mở và số đo từng pixel](../header-mobile-84b8f30/README.md). Header đã thay bằng mẫu Claude được duyệt; các mục phía dưới là lịch sử trước commit header.
