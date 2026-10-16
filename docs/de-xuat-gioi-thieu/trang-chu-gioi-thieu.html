@@ -1,0 +1,1506 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero và Giới thiệu – Lê Sơn</title>
+<meta name="description" content="Bản xem thử Hero trang chủ Bệnh viện Thú y Lê Sơn: chữ xuất hiện trước, khung ảnh bay ra từ chữ rồi bay vòng quanh.">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --cream: #FBF7F1;
+    --cream-rgb: 251, 247, 241;
+    --plum-900: #421247;
+    --plum-700: #5A1E5E;
+    --plum-500: #824787;        /* 6.15:1 trên nền kem */
+    --plum-muted: #76457A;      /* 6.78:1 trên nền kem */
+    --orange-500: #EA7A24;      /* chỉ dùng cho trang trí (2.69:1) */
+    --orange-400: #FC9238;
+    --orange-text: #C2560C;     /* 4.25:1 trên nền kem (chữ lớn cần >= 3:1) */
+    --ink: #3F3342;
+    --ink-soft: #5E4A62;        /* 7.48:1 */
+    --font-sans: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-serif: "Lora", Georgia, "Times New Roman", serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; overflow-x: clip; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img, svg { display: block; }
+  a { color: inherit; }
+
+  :where(a, button):focus-visible {
+    outline: 3px solid var(--plum-700);
+    outline-offset: 3px;
+  }
+
+  /* ============ HERO SHELL ============ */
+  .hero {
+    --blur-mid: 1.1px;
+    --blur-far: 2.6px;
+    position: relative;
+    z-index: 2;                 /* khung bay ra khỏi Hero phải nằm trên phần Giới thiệu */
+    isolation: isolate;
+    overflow: visible;          /* khung được bay xuống phần sau; nền tự cắt ở .hero__bg */
+    display: flex;
+    flex-direction: column;
+    min-height: max(720px, 100vh);
+    min-height: max(720px, 100svh);
+    background:
+      radial-gradient(120% 85% at 50% 46%, #FDFAF5 0%, #FBF6EF 55%, #F7EEE5 100%);
+  }
+
+  /* Bokeh */
+  .hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform;
+  }
+  .blob--1 { width: 46vw; height: 46vw; left: -16vw; top: 14%;
+    background: radial-gradient(closest-side, rgba(206, 176, 226, .50), rgba(206, 176, 226, 0)); }
+  .blob--2 { width: 50vw; height: 50vw; right: -18vw; top: -12%;
+    background: radial-gradient(closest-side, rgba(255, 206, 168, .55), rgba(255, 206, 168, 0)); }
+  .blob--3 { width: 40vw; height: 40vw; right: 2vw; bottom: -20%;
+    background: radial-gradient(closest-side, rgba(203, 172, 228, .42), rgba(203, 172, 228, 0)); }
+  .blob--4 { width: 38vw; height: 38vw; left: 18vw; bottom: -24%;
+    background: radial-gradient(closest-side, rgba(255, 214, 186, .55), rgba(255, 214, 186, 0)); }
+  .blob--5 { width: 30vw; height: 30vw; left: 36vw; top: -14%;
+    background: radial-gradient(closest-side, rgba(229, 210, 240, .55), rgba(229, 210, 240, 0)); }
+  .blob--6 { width: 26vw; height: 26vw; left: 6vw; top: -10%;
+    background: radial-gradient(closest-side, rgba(255, 222, 200, .5), rgba(255, 222, 200, 0)); }
+  /* Khung ảnh "mờ hẳn" ở hậu cảnh (tĩnh) — gợi lại những khung lệch tiêu cự trong ảnh mẫu */
+  .ghost {
+    position: absolute;
+    width: var(--g); height: var(--g);
+    border-radius: 28%;
+    background: linear-gradient(150deg, rgba(255, 255, 255, .7), rgba(226, 208, 236, .55));
+    filter: blur(14px);
+    opacity: .55;
+    transform: rotate(var(--r, 0deg));
+  }
+
+  /* Orbit lines */
+  .hero__orbits {
+    position: absolute; inset: 0; z-index: 1;
+    pointer-events: none;
+    transform-origin: 50% 55%;
+  }
+  .hero__orbits svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .comet {
+    position: absolute; left: 0; top: 0;
+    width: 8px; height: 8px; margin: -4px 0 0 -4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0 25%, var(--orange-400) 60%);
+    box-shadow: 0 0 12px 4px rgba(252, 146, 56, .35);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  /* Static decor */
+  .hero__decor {
+    /* --tx/--ty: tâm tiêu đề, --l1: nửa bề rộng dòng 1, --tw: nửa bề rộng dòng dài nhất, --th: nửa chiều cao tiêu đề (JS đo) */
+    --tx: 50%; --ty: 48%; --l1: 240px; --tw: 400px; --th: 76px;
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  }
+  .decor-item {
+    position: absolute;
+    left: var(--x); top: var(--y);
+    width: var(--s, 24px); height: var(--s, 24px);
+    opacity: var(--o, 1);
+    transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+  }
+  .decor-item svg { width: 100%; height: 100%; overflow: visible; }
+  .c-plum { color: var(--plum-700); }
+  .c-plum-soft { color: var(--plum-500); }
+  .c-peach { color: #F29A78; }
+  .c-orange { color: var(--orange-500); }
+
+  /* Frames */
+  .hero__frames { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+  .frame {
+    position: absolute; left: 0; top: 0;
+    width: var(--w); height: var(--h);
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+    transform-origin: 50% 50%;
+    backface-visibility: hidden;
+    transition: filter .8s ease;
+  }
+  .frame.is-mid { filter: blur(var(--blur-mid)); }
+  .frame.is-far { filter: blur(var(--blur-far)); }
+  .frame__card {
+    position: absolute; inset: 0;
+    border-radius: calc(var(--w) * .2);
+    padding: calc(var(--w) * .07);
+    background: linear-gradient(150deg, rgba(255, 255, 255, .95) 0%, rgba(255, 255, 255, .72) 55%, rgba(255, 246, 238, .78) 100%);
+    border: 1px solid rgba(255, 255, 255, .95);
+    box-shadow:
+      inset 0 0 0 1.5px rgba(255, 255, 255, .95),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -2px 6px rgba(234, 122, 36, .08),
+      0 24px 46px -20px rgba(90, 30, 94, .34),
+      0 8px 26px -8px rgba(252, 146, 56, .22);
+  }
+  .frame__inner {
+    width: 100%; height: 100%;
+    border-radius: calc(var(--w) * .14);
+    background:
+      radial-gradient(120% 90% at 28% 18%, rgba(255, 255, 255, .78), rgba(255, 255, 255, 0) 55%),
+      linear-gradient(162deg, #F1E9F1 0%, #E8DEE9 60%, #E3D7E4 100%);
+    box-shadow: inset 0 2px 8px rgba(90, 30, 94, .09), inset 0 0 0 1px rgba(130, 71, 135, .07);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: calc(var(--w) * .045);
+    color: #96849A;
+  }
+  .frame__inner > * { transition: opacity .45s ease; }
+  /* Khi lướt ngang qua chữ: chỉ còn tấm kính trống đi phía sau tiêu đề */
+  .frame.is-crossing .frame__inner > * { opacity: .55; }
+  .frame__inner svg { width: calc(var(--w) * .27); height: auto; }
+  .frame__label {
+    font-family: var(--font-sans);
+    font-size: max(7px, calc(var(--w) * .07));
+    font-weight: 600;
+    letter-spacing: .12em;
+    line-height: 1.3;
+    text-align: center;
+    color: #8C7A90;
+  }
+  /* Nhãn vẽ bằng CSS: không lọt vào nội dung chữ của trang (sao chép, tìm kiếm) */
+  .frame__label::before { content: "ẢNH\A ĐANG CHỜ"; white-space: pre; }
+
+  /* ============ HEADER ============ */
+  .site-header { position: relative; z-index: 20; }
+  .site-header__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    min-height: 84px;
+    padding: 14px 24px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .brand {
+    display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none; color: inherit;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+  /* clip-path: ẩn cột điểm ảnh tối 1px ở mép phải file logo (lỗi của file, chờ bản xuất sạch) */
+  .brand img { width: 60px; height: 54px; object-fit: contain; clip-path: inset(0 .5px 0 0); }
+  .brand__text { display: flex; flex-direction: column; line-height: 1; }
+  .brand__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .09em;
+    color: var(--plum-700);
+  }
+  .brand__name {
+    margin-top: 4px;
+    font-family: var(--font-serif); font-weight: 600;
+    font-size: 25px; line-height: 1.05; color: var(--plum-900);
+  }
+  .nav { flex: 1; display: flex; justify-content: center; }
+  .nav ul { display: flex; gap: 4px; margin: 0; padding: 0; list-style: none; }
+  .nav a {
+    position: relative;
+    display: inline-flex; align-items: center;
+    min-height: 44px; padding: 0 14px;
+    border-radius: 10px;
+    font-size: 15px; font-weight: 500;
+    color: var(--ink-soft); text-decoration: none;
+    transition: color .2s ease;
+  }
+  .nav a:hover { color: var(--plum-700); }
+  .nav a[aria-current="page"] { color: var(--plum-700); font-weight: 600; }
+  .nav a[aria-current="page"]::after {
+    content: ""; position: absolute; left: 14px; right: 14px; bottom: 5px;
+    height: 2px; border-radius: 2px; background: var(--plum-700);
+  }
+  .header-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; padding: 0 22px;
+    border-radius: 999px;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none; white-space: nowrap;
+    transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .pill--outline {
+    color: var(--plum-700);
+    background: rgba(255, 255, 255, .66);
+    border: 1.5px solid rgba(90, 30, 94, .26);
+  }
+  .pill--outline:hover { border-color: var(--plum-700); background: #fff; }
+  .pill--filled {
+    color: var(--cream);
+    background: var(--plum-700);
+    border: 1.5px solid var(--plum-700);
+    box-shadow: 0 10px 22px -12px rgba(90, 30, 94, .7);
+  }
+  .pill--filled:hover { background: #4A154E; }
+  .menu-btn {
+    display: none;
+    width: 44px; height: 44px;
+    align-items: center; justify-content: center;
+    border-radius: 14px;
+    border: 1.5px solid rgba(90, 30, 94, .22);
+    background: rgba(255, 255, 255, .7);
+    color: var(--plum-700);
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+  }
+  .menu-btn svg { width: 22px; height: 22px; }
+  .mobile-menu {
+    position: absolute;
+    top: calc(100% - 6px); right: 16px;
+    width: min(320px, calc(100% - 32px));
+    padding: 10px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1px solid rgba(90, 30, 94, .1);
+    box-shadow: 0 24px 50px -20px rgba(66, 18, 71, .35);
+    z-index: 40;
+  }
+  .mobile-menu[hidden] { display: none; }
+  .mobile-menu ul { list-style: none; margin: 0; padding: 0; }
+  .mobile-menu li a {
+    display: flex; align-items: center;
+    min-height: 48px; padding: 0 14px;
+    border-radius: 12px;
+    font-weight: 500; color: var(--ink); text-decoration: none;
+  }
+  .mobile-menu li a:hover { background: #F6EFF4; }
+  .mobile-menu li a[aria-current="page"] { color: var(--plum-700); font-weight: 600; background: #F6EFF4; }
+  .mobile-menu__auth { display: flex; gap: 8px; padding: 8px 4px 4px; }
+  .mobile-menu__auth .pill { flex: 1; }
+
+  /* ============ MAIN CONTENT ============ */
+  .hero__main {
+    position: relative; z-index: 10;
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px 24px 84px;
+  }
+  .hero__content {
+    position: relative;
+    isolation: isolate;
+    max-width: 1000px;
+    text-align: center;
+  }
+  /* Quầng kem phía sau chữ: giữ chữ dễ đọc khi khung ảnh lướt qua phía sau */
+  .hero__content::before {
+    content: "";
+    position: absolute; z-index: -2;
+    inset: -14% -10%;
+    background: radial-gradient(closest-side, rgba(var(--cream-rgb), .34) 0%, rgba(var(--cream-rgb), .24) 50%, rgba(var(--cream-rgb), 0) 100%);
+    pointer-events: none;
+  }
+  .burst {
+    position: absolute; z-index: -1;
+    left: 50%; top: 50%;
+    width: 110%; aspect-ratio: 2 / 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(closest-side, rgba(252, 146, 56, .32), rgba(234, 122, 36, .12) 50%, rgba(234, 122, 36, 0) 100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .eyebrow {
+    margin: 0 0 20px;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: .32em;
+    color: var(--plum-muted);
+  }
+  .eyebrow span { display: inline-block; margin-right: -.32em; }
+  .hero-title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: clamp(2.3rem, 0.9rem + 4.1vw, 4.4rem);
+    line-height: 1.12;
+    letter-spacing: -0.018em;
+    color: var(--plum-900);
+  }
+  .hero-title .line { display: block; }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 700;
+    color: var(--orange-text);
+  }
+  .subtitle {
+    width: fit-content; max-width: 100%;
+    margin: 28px auto 0;
+    padding: 12px 28px;
+    border-radius: 999px;
+    background: rgba(240, 231, 233, .82);
+    border: 1px solid rgba(255, 255, 255, .9);
+    box-shadow: 0 10px 24px -16px rgba(90, 30, 94, .3);
+    font-size: 17px; line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .cta {
+    margin-top: 32px;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 52px; padding: 0 30px;
+    border-radius: 999px;
+    font-size: 16px; font-weight: 600;
+    text-decoration: none; white-space: nowrap;
+    transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .btn--primary {
+    color: var(--cream);
+    background: var(--plum-700);
+    border: 1.5px solid var(--plum-700);
+    box-shadow: 0 16px 30px -14px rgba(90, 30, 94, .75);
+  }
+  .btn--primary:hover { background: #4A154E; }
+  .btn--ghost {
+    color: var(--plum-700);
+    background: rgba(255, 255, 255, .78);
+    border: 1.5px solid var(--plum-500);
+  }
+  .btn--ghost:hover { border-color: var(--plum-700); background: #fff; }
+  .btn .arrow { transition: transform .2s ease; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  /* ============ UTILITY (toggle + tag) ============ */
+  .motion-toggle {
+    position: absolute; right: 16px; bottom: 16px; z-index: 30;
+    display: inline-flex; align-items: center; gap: 8px;
+    min-height: 40px; padding: 0 16px 0 13px;
+    border-radius: 999px;
+    border: 1px solid rgba(90, 30, 94, .22);
+    background: rgba(255, 255, 255, .84);
+    color: var(--plum-700);
+    font: 600 13px/1 var(--font-sans);
+    cursor: pointer;
+    box-shadow: 0 8px 20px -14px rgba(66, 18, 71, .45);
+  }
+  .motion-toggle:hover { background: #fff; border-color: rgba(90, 30, 94, .45); }
+  .motion-toggle svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+  .motion-toggle[aria-pressed="true"] .ico-pause,
+  .motion-toggle:not([aria-pressed="true"]) .ico-play { display: none; }
+  .motion-toggle[hidden] { display: none; }
+  .preview-tag {
+    position: absolute; left: 16px; bottom: 16px; z-index: 30;
+    margin: 0;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .7);
+    border: 1px solid rgba(90, 30, 94, .12);
+    font-size: 12px; font-weight: 500; line-height: 1.3;
+    color: #6B5A6E;               /* 5.94:1 */
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 992px) {
+    .nav { display: none; }
+    .menu-btn { display: inline-flex; }
+    .header-actions { margin-left: auto; }
+    .decor-item.near-far { display: none; }
+  }
+  @media (max-width: 700px) {
+    .hero { min-height: max(640px, 100svh); --blur-mid: .5px; --blur-far: 1.2px; }
+    .site-header__inner { min-height: 68px; padding: 10px 16px; gap: 10px; }
+    .brand img { width: 46px; height: 42px; }
+    .brand__kicker { font-size: 9.5px; }
+    .brand__name { font-size: 21px; }
+    .pill { min-height: 44px; padding: 0 16px; font-size: 14px; }
+    .hero__main { padding: 12px 16px 92px; }
+    .hero__content { width: 100%; }
+    .eyebrow { font-size: 11.5px; letter-spacing: .22em; margin-bottom: 16px; }
+    /* Nền kem riêng cho dòng chào: đường quỹ đạo và khung ảnh không cắt qua chữ nhỏ */
+    .eyebrow span {
+      margin-right: 0;
+      padding: 3px 10px 3px calc(10px + .22em);
+      border-radius: 999px;
+      background: rgba(var(--cream-rgb), .92);
+    }
+    .hero-title { font-size: clamp(2rem, 8.4vw + .1rem, 2.7rem); line-height: 1.14; text-wrap: balance; }
+    .subtitle { font-size: 15px; padding: 10px 18px; border-radius: 20px; margin-top: 22px; }
+    .cta { margin-top: 24px; flex-direction: column; align-items: stretch; gap: 12px; }
+    .btn { width: 100%; min-height: 52px; }
+    /* Nhãn xem thử: một dòng ngay dưới header, không chen với nút tạm dừng */
+    .preview-tag {
+      top: 6px; bottom: auto;
+      max-width: calc(100% - 32px);
+      white-space: nowrap;
+      padding: 4px 10px;
+      font-size: 11px;
+    }
+    .motion-toggle { font-size: 12.5px; padding: 0 14px 0 12px; }
+    .decor-item.hide-sm { display: none; }
+    .ghost { --g: 110px !important; }
+  }
+  @media (max-width: 420px) {
+    .pill--login { display: none; }
+  }
+  @media (max-width: 359px) {
+    .site-header__inner { gap: 6px; }
+    .header-actions { gap: 6px; }
+    .pill { padding: 0 12px; }
+    .brand img { width: 40px; height: 36px; }
+    .brand__name { font-size: 19px; }
+  }
+
+  /* ============ INTRO (chỉ khi người dùng cho phép chuyển động) ============ */
+  @media (prefers-reduced-motion: no-preference) {
+    /* Chờ phông chữ (tối đa 0,7 giây) rồi mới mở màn: chữ không đổi hình dạng sau khi đã hiện */
+    .js .hero:not(.is-ready) :is(.site-header, .reveal, .hero__orbits, .decor-item) { opacity: 0; }
+    .hero.is-ready .site-header { animation: fadeIn .6s ease both; }
+    .hero.is-ready .reveal {
+      animation: rise .56s cubic-bezier(.2, .7, .2, 1) both;
+      animation-delay: calc(var(--i, 0) * .11s + .05s);
+    }
+    .hero.is-ready .burst { animation: burst 1.5s .9s cubic-bezier(.2, .7, .2, 1) both; }
+    .hero.is-ready .hero__orbits { animation: ringsIn 1.5s .85s cubic-bezier(.2, .7, .2, 1) both; }
+    .hero.is-ready .decor-item {
+      animation: decorIn .8s cubic-bezier(.2, .8, .25, 1.2) both;
+      animation-delay: calc(1.7s + var(--d, 0) * .1s);
+    }
+    .blob { animation: drift 24s ease-in-out infinite alternate; }
+    .blob--2 { animation-duration: 28s; animation-delay: -6s; }
+    .blob--3 { animation-duration: 21s; animation-delay: -11s; }
+    .blob--4 { animation-duration: 26s; animation-delay: -3s; }
+    .blob--5 { animation-duration: 30s; animation-delay: -15s; }
+    .hero.is-paused .blob { animation-play-state: paused; }
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes rise {
+    from { opacity: 0; transform: translate3d(0, 18px, 0); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes burst {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(.35); }
+    30%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+  }
+  @keyframes ringsIn {
+    from { opacity: 0; transform: scale(.9); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes decorIn {
+    from { opacity: 0; transform: translate(-50%, -50%) rotate(calc(var(--r, 0deg) - 30deg)) scale(.4); }
+    to   { opacity: var(--o, 1); transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scale(1); }
+  }
+  @keyframes drift {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(4%, -5%, 0) scale(1.07); }
+    100% { transform: translate3d(-4%, 4%, 0) scale(.96); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .motion-toggle { display: none; }
+    .frame, .frame__inner > * { transition: none; }
+  }
+
+  /* ============ GIỚI THIỆU (phần ngay sau Hero) ============ */
+  .about {
+    position: relative; z-index: 1;
+    background: linear-gradient(180deg, #F7EEE5 0%, #FBF7F1 38%, #FBF7F1 100%);
+    padding: 96px 24px 120px;
+  }
+  .about__inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1.08fr 1fr; gap: 64px; align-items: center; }
+  .about__gallery { display: grid; grid-template-columns: 1.25fr 1fr 1fr; grid-template-rows: auto auto; gap: 18px; align-items: start; }
+  .about__slot { margin: 0; }
+  .about__slot--big { grid-row: 1 / span 2; align-self: center; }
+  .about__slot:nth-child(2) { transform: rotate(-3deg); margin-top: 12px; }
+  .about__slot:nth-child(3) { transform: rotate(4deg); }
+  .about__slot:nth-child(4) { transform: rotate(3deg); }
+  .about__slot:nth-child(5) { transform: rotate(-4deg); margin-top: -8px; }
+  .about__slot--big { transform: rotate(-2deg); }
+  .slot-frame { position: relative; width: 100%; aspect-ratio: 1 / 1.06; visibility: hidden; }
+  .about.is-landed .slot-frame, .about.is-static .slot-frame { visibility: visible; }
+  .slot-frame .frame__card { position: absolute; inset: 0; }
+  .about__slot figcaption { margin-top: 8px; font-size: 12px; color: #6B5A6E; text-align: center; opacity: 0; transition: opacity .4s ease; }
+  .about.is-landed figcaption, .about.is-static figcaption { opacity: 1; }
+  .about__eyebrow { margin: 0 0 14px; font-size: 13px; font-weight: 600; letter-spacing: .32em; color: var(--plum-muted); }
+  .about__title { margin: 0 0 18px; font-family: var(--font-serif); font-weight: 700; font-size: clamp(2rem, 1.2rem + 2vw, 2.9rem); line-height: 1.15; color: var(--plum-900); }
+  .about__placeholder { margin: 0 0 26px; padding: 16px 18px; border: 1.5px dashed rgba(90, 30, 94, .28); border-radius: 16px; color: #6B5A6E; font-size: 15px; line-height: 1.6; background: rgba(255, 255, 255, .5); }
+  .about__facts { list-style: none; margin: 0 0 30px; padding: 0; display: grid; gap: 12px; }
+  .about__facts li { display: flex; align-items: center; gap: 12px; font-size: 16px; color: var(--ink); }
+  .about__facts a { color: var(--plum-700); font-weight: 600; text-decoration: none; }
+  .about__facts .ico { flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: #F6EFF4; color: var(--plum-700); }
+  .about__facts .ico svg { width: 20px; height: 20px; }
+  .about__cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .next-stub { padding: 80px 24px 120px; text-align: center; color: #6B5A6E; background: #FBF7F1; position: relative; z-index: 1; }
+  .next-stub p { margin: 0 auto; max-width: 560px; padding: 22px; border: 1.5px dashed rgba(90,30,94,.25); border-radius: 18px; }
+  @media (max-width: 992px) {
+    .about__inner { grid-template-columns: 1fr; gap: 40px; }
+    .about__gallery { max-width: 620px; margin: 0 auto; width: 100%; }
+  }
+  @media (max-width: 700px) {
+    .about { padding: 64px 16px 88px; }
+    .about__gallery { grid-template-columns: 1fr 1fr; gap: 14px; }
+    .about__slot--big { grid-row: auto; }
+    .about__slot:nth-child(5) { display: none; }
+    .about__eyebrow { font-size: 11.5px; letter-spacing: .22em; }
+    .about__cta .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+<div class="hero" id="hero">
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="#" aria-label="Bệnh viện Thú y Lê Sơn – Trang chủ">
+        <img src="assets/logo-le-son.png" alt="" width="60" height="54">
+        <span class="brand__text">
+          <span class="brand__kicker">BỆNH VIỆN THÚ Y</span>
+          <span class="brand__name">Lê Sơn</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Điều hướng chính">
+        <ul>
+          <li><a href="#" aria-current="page">Trang chủ</a></li>
+          <li><a href="services.html">Dịch vụ</a></li>
+          <li><a href="#gioi-thieu">Giới thiệu</a></li>
+          <li><a href="#lien-he">Liên hệ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a class="pill pill--outline pill--login" href="#dang-nhap">Đăng nhập</a>
+        <a class="pill pill--filled" href="#dang-ky">Đăng ký</a>
+        <button class="menu-btn" type="button" aria-label="Mở danh mục điều hướng" aria-expanded="false" aria-controls="mobile-menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <ul>
+        <li><a href="#" aria-current="page">Trang chủ</a></li>
+        <li><a href="services.html">Dịch vụ</a></li>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#lien-he">Liên hệ</a></li>
+      </ul>
+      <div class="mobile-menu__auth">
+        <a class="pill pill--outline" href="#dang-nhap">Đăng nhập</a>
+        <a class="pill pill--filled" href="#dang-ky">Đăng ký</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- NỘI DUNG CHÍNH -->
+  <main class="hero__main">
+    <section class="hero__content" aria-labelledby="hero-title">
+      <span class="burst" aria-hidden="true"></span>
+      <p class="eyebrow reveal" style="--i:0"><span data-measure>CHÀO MỪNG ĐẾN VỚI LÊ SƠN</span></p>
+      <h1 class="hero-title" id="hero-title">
+        <span class="line reveal" style="--i:1"><span data-measure>Không gian lớn</span></span>
+        <span class="line reveal" style="--i:2"><span data-measure>cho những <em>người bạn nhỏ</em></span></span>
+      </h1>
+      <p class="subtitle reveal" style="--i:3" data-measure>Chăm sóc bằng chuyên môn, đồng hành bằng sự thấu hiểu.</p>
+      <div class="cta reveal" style="--i:4">
+        <a class="btn btn--primary" href="#form-dat-lich" data-measure>Gửi yêu cầu đặt lịch <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="services.html" data-measure>Xem dịch vụ</a>
+      </div>
+    </section>
+
+    <p class="preview-tag">Bản xem thử · ảnh sẽ thay sau</p>
+    <button class="motion-toggle" type="button" aria-pressed="false">
+      <svg class="ico-pause" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg>
+      <svg class="ico-play" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4.5 2.8v10.4a.8.8 0 0 0 1.2.7l8.2-5.2a.8.8 0 0 0 0-1.4L5.7 2.1a.8.8 0 0 0-1.2.7z"/></svg>
+      <span class="motion-toggle__label">Tạm dừng chuyển động</span>
+    </button>
+  </main>
+
+  <!-- Các lớp trang trí (nằm sau nội dung trong mã nguồn; thứ tự hiển thị do z-index quyết định) -->
+  <!-- Nền bokeh + khung ảnh mờ hậu cảnh -->
+  <div class="hero__bg" aria-hidden="true">
+    <span class="blob blob--1"></span>
+    <span class="blob blob--2"></span>
+    <span class="blob blob--3"></span>
+    <span class="blob blob--4"></span>
+    <span class="blob blob--5"></span>
+    <span class="blob blob--6"></span>
+    <span class="ghost" style="left:-3%;top:62%;--g:150px;--r:-14deg"></span>
+    <span class="ghost" style="left:85%;top:76%;--g:190px;--r:12deg"></span>
+    <span class="ghost" style="left:89%;top:8%;--g:110px;--r:8deg;opacity:.4"></span>
+  </div>
+
+  <!-- Hai quỹ đạo (vẽ bằng JS theo kích thước màn hình) + đốm sáng chạy dọc quỹ đạo -->
+  <div class="hero__orbits" aria-hidden="true">
+    <svg focusable="false"></svg>
+    <span class="comet"></span>
+  </div>
+
+  <!-- Trang trí tĩnh -->
+  <div class="hero__decor" aria-hidden="true">
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <symbol id="i-paw" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M12 11.2c-3.1 0-6.4 3.3-6.4 6.1 0 1.9 1.5 2.9 3.2 2.9 1.3 0 2.1-.6 3.2-.6s1.9.6 3.2.6c1.7 0 3.2-1 3.2-2.9 0-2.800-3.3-6.1-6.4-6.1z"/>
+          <ellipse fill="currentColor" cx="5" cy="10.4" rx="2.1" ry="2.7" transform="rotate(-22 5 10.4)"/>
+          <ellipse fill="currentColor" cx="9.3" cy="5.9" rx="2.2" ry="2.9" transform="rotate(-8 9.3 5.9)"/>
+          <ellipse fill="currentColor" cx="14.7" cy="5.9" rx="2.2" ry="2.9" transform="rotate(8 14.7 5.9)"/>
+          <ellipse fill="currentColor" cx="19" cy="10.4" rx="2.1" ry="2.7" transform="rotate(22 19 10.4)"/>
+        </symbol>
+        <symbol id="i-sparkle" viewBox="0 0 24 24">
+          <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M12 1.5c.7 6 3.5 9.4 10.5 10.5-7 1.1-9.8 4.5-10.5 10.5-.7-6-3.5-9.4-10.5-10.5 7-1.1 9.8-4.5 10.5-10.5z"/>
+        </symbol>
+        <symbol id="i-sparkle-solid" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M12 1.5c.7 6 3.5 9.4 10.5 10.5-7 1.1-9.8 4.5-10.5 10.5-.7-6-3.5-9.4-10.5-10.5 7-1.1 9.8-4.5 10.5-10.5z"/>
+        </symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24">
+          <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 20.3c-.3 0-8.6-4.9-8.6-10.9 0-2.8 2-4.9 4.6-4.9 1.8 0 3.2 1 4 2.6.8-1.6 2.2-2.6 4-2.6 2.6 0 4.6 2.1 4.6 4.9 0 2.2-1.100 4.3-2.6 6.1"/>
+        </symbol>
+        <symbol id="i-flower" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>
+          </g>
+        </symbol>
+      </defs>
+    </svg>
+    <!-- Bám theo tiêu đề (JS đo --tx/--ty/--l1/--tw/--th): ôm sát dòng chữ ở mọi bề rộng -->
+    <span class="decor-item c-orange hide-sm" style="--x:calc(var(--tx) - var(--l1) - 84px);--y:calc(var(--ty) - var(--th) * .5);--s:22px;--d:1"><svg><use href="#i-sparkle"/></svg></span>
+    <span class="decor-item c-plum-soft hide-sm" style="--x:calc(var(--tx) + var(--l1) + 44px);--y:calc(var(--ty) - var(--th) * .55);--s:30px;--r:12deg;--d:2"><svg><use href="#i-heart"/></svg></span>
+    <span class="decor-item c-plum near-far" style="--x:calc(var(--tx) + var(--tw) + 58px);--y:calc(var(--ty) + var(--th) * .45);--s:24px;--r:18deg;--d:3"><svg><use href="#i-paw"/></svg></span>
+    <span class="decor-item c-orange near-far" style="--x:calc(var(--tx) + var(--tw) + 112px);--y:calc(var(--ty) - var(--th) * .3);--s:20px;--d:6"><svg><use href="#i-sparkle"/></svg></span>
+    <!-- Theo tỉ lệ khung hero -->
+    <span class="decor-item c-plum hide-sm" style="--x:20%;--y:22%;--s:26px;--r:-18deg;--d:0"><svg><use href="#i-paw"/></svg></span>
+    <span class="decor-item c-plum-soft hide-sm" style="--x:79%;--y:20%;--s:22px;--d:4"><svg><use href="#i-flower"/></svg></span>
+    <span class="decor-item c-peach hide-sm" style="--x:7%;--y:60%;--s:30px;--r:-12deg;--d:5"><svg><use href="#i-paw"/></svg></span>
+    <span class="decor-item c-plum hide-sm" style="--x:96%;--y:53%;--s:22px;--r:20deg;--d:6"><svg><use href="#i-paw"/></svg></span>
+    <span class="decor-item c-plum" style="--x:74%;--y:80%;--s:26px;--r:14deg;--d:7"><svg><use href="#i-paw"/></svg></span>
+    <span class="decor-item c-orange" style="--x:13%;--y:80%;--s:16px;--o:.85;--d:8"><svg><use href="#i-sparkle-solid"/></svg></span>
+    <span class="decor-item c-peach" style="--x:36%;--y:87%;--s:20px;--r:24deg;--d:9"><svg><use href="#i-paw"/></svg></span>
+    <span class="decor-item c-orange hide-sm" style="--x:89%;--y:30%;--s:14px;--o:.8;--d:10"><svg><use href="#i-sparkle-solid"/></svg></span>
+  </div>
+
+  <!-- Khung ảnh (tạo bằng JS) -->
+  <div class="hero__frames" aria-hidden="true"></div>
+</div>
+
+<!-- ============ GIỚI THIỆU ============ -->
+<section class="about" id="gioi-thieu" aria-labelledby="about-title">
+  <div class="about__inner">
+    <div class="about__gallery">
+      <figure class="about__slot about__slot--big"><div class="slot-frame" data-slot="0"></div><figcaption>Gợi ý ảnh: sảnh đón tiếp</figcaption></figure>
+      <figure class="about__slot"><div class="slot-frame" data-slot="1"></div><figcaption>Gợi ý ảnh: phòng khám</figcaption></figure>
+      <figure class="about__slot"><div class="slot-frame" data-slot="2"></div><figcaption>Gợi ý ảnh: đội ngũ</figcaption></figure>
+      <figure class="about__slot"><div class="slot-frame" data-slot="3"></div><figcaption>Gợi ý ảnh: khu nội trú</figcaption></figure>
+      <figure class="about__slot"><div class="slot-frame" data-slot="4"></div><figcaption>Gợi ý ảnh: thú cưng và chủ</figcaption></figure>
+    </div>
+    <div class="about__text">
+      <p class="about__eyebrow">VỀ LÊ SƠN</p>
+      <h2 class="about__title" id="about-title">Bệnh viện Thú y Lê Sơn</h2>
+      <p class="about__placeholder">[Đoạn giới thiệu 2–3 câu, chủ dự án cung cấp: bệnh viện là ai, chăm sóc thú cưng thế nào. Chưa dùng câu giới thiệu trên Facebook.]</p>
+      <ul class="about__facts">
+        <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span>Nhận cấp cứu 24/24</span></li>
+        <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span>101 Khuất Duy Tiến, Nhân Chính, Thanh Xuân, Hà Nội</span></li>
+        <li><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.8.7a2 2 0 0 1 1.7 2.1z"/></svg></span><a href="tel:+84973555105">097 355 51 05</a></li>
+      </ul>
+      <div class="about__cta">
+        <a class="btn btn--primary" href="#dich-vu">Xem dịch vụ <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="https://maps.app.goo.gl/xFbQ4BjKtGVa3rp86" target="_blank" rel="noopener noreferrer">Chỉ đường</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="next-stub" id="dich-vu"><p>Phần tiếp theo: Dịch vụ (bốn dịch vụ đã chốt). Chưa thiết kế trong bản xem thử này.</p></section>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- Menu di động ---------- */
+  var menuBtn = document.querySelector('.menu-btn');
+  var menu = document.getElementById('mobile-menu');
+  function setMenu(open) {
+    menu.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', String(open));
+  }
+  menuBtn.addEventListener('click', function () { setMenu(menu.hidden); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !menu.hidden) { setMenu(false); menuBtn.focus(); }
+  });
+  document.addEventListener('click', function (e) {
+    if (!menu.hidden && !menu.contains(e.target) && !menuBtn.contains(e.target)) setMenu(false);
+  });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+})();
+
+(function () {
+  'use strict';
+
+  var hero = document.getElementById('hero');
+  var header = hero.querySelector('.site-header');
+  var content = hero.querySelector('.hero__content');
+  var title = content.querySelector('.hero-title');
+  var titleLines = title.querySelectorAll('.line > [data-measure]');
+  var cta = content.querySelector('.cta');
+  var layer = hero.querySelector('.hero__frames');
+  var svg = hero.querySelector('.hero__orbits svg');
+  var comet = hero.querySelector('.comet');
+  var decor = hero.querySelector('.hero__decor');
+  var toggle = hero.querySelector('.motion-toggle');
+  var toggleLabel = toggle.querySelector('.motion-toggle__label');
+  var measureEls = content.querySelectorAll('[data-measure]');
+  var mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---------- Toán học ---------- */
+  var TAU = Math.PI * 2, DEG = Math.PI / 180;
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function easeOutCubic(t) { var u = 1 - t; return 1 - u * u * u; }
+  function smoother(t) { return t * t * t * (t * (t * 6 - 15) + 10); }
+  function smoothstep(a, b, x) { var t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
+  function easeOutBack(t) { var c1 = 1.35, c3 = c1 + 1, u = t - 1; return 1 + c3 * u * u * u + c1 * u * u; }
+  function mod(a, n) { return ((a % n) + n) % n; }
+  function angDist(a, b) { var d = mod(a - b, TAU); return d > Math.PI ? TAU - d : d; }
+  function wrapPi(a) { return mod(a + Math.PI, TAU) - Math.PI; }
+  function spow(v, e) { return v < 0 ? -Math.pow(-v, e) : Math.pow(v, e); }
+
+  // Ngẫu nhiên có hạt giống: bố cục ổn định mỗi lần tải
+  var seedState = 20240611;
+  function rand() {
+    seedState = (seedState + 0x6D2B79F5) | 0;
+    var t = Math.imul(seedState ^ (seedState >>> 15), 1 | seedState);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+
+  /* ---------- Cấu hình ---------- */
+  // 6 khung đầu dùng cho di động; 8 cho máy tính bảng; 9 cho máy tính.
+  // size: máy tính (lớn / nhỏ xen kẽ); msize: bố cục dọc (di động, máy tính bảng đứng) đều tay hơn.
+  var SPECS = [
+    { ring: 0, size: 1.00, msize: 1.00, tilt: -8 },
+    { ring: 1, size: 0.66, msize: 0.86, tilt: 7 },
+    { ring: 0, size: 0.90, msize: 0.94, tilt: 10 },
+    { ring: 1, size: 0.62, msize: 0.82, tilt: -5 },
+    { ring: 0, size: 0.84, msize: 0.92, tilt: 6 },
+    { ring: 1, size: 0.70, msize: 0.88, tilt: -10 },
+    { ring: 0, size: 0.96, msize: 0.96, tilt: -4 },
+    { ring: 1, size: 0.60, msize: 0.84, tilt: 9 },
+    { ring: 0, size: 0.76, msize: 0.86, tilt: -7 }
+  ];
+  // Bố cục tĩnh khi giảm chuyển động (chọn tay): [góc độ trên quỹ đạo, độ sâu 0..1 (null = theo góc), hệ số bán kính]
+  // Góc: 0° = phải, 90° = dưới (gần), 180° = trái, 270° = trên (xa).
+  var STATIC = {
+    wide9: [[196, .9, .8], [232, null, 1], [112, null, 1], [264, null, 1], [62, null, 1], [133, .62, 1], [354, .9, .82], [304, null, 1], [87, null, 1]],
+    wide8: [[196, .9, .8], [232, null, 1], [128, null, 1], [266, null, 1], [56, null, 1], [92, null, 1], [354, .9, .82], [306, null, 1]],
+    tall8: [[128, null, 1], [222, null, 1], [52, null, 1], [318, null, 1], [97, null, 1], [80, null, 1], [266, null, 1], [282, null, 1]],
+    tall6: [[42, null, 1], [228, null, 1], [138, null, 1], [312, null, 1], [270, null, 1], [90, .8, .78]]
+  };
+  var INTRO_AFTER_CTA = 0.5; // khung bay ra 0,5 giây sau khi hàng nút bắt đầu hiện (~1,0 giây)
+  var INTRO_FALLBACK = 1.4;  // nếu không nhận được sự kiện animation (tính từ lúc mở màn)
+  var INTRO_STAGGER = 0.1;
+  var INTRO_DUR = 1.05;
+  var FIRST_EXCURSION_AFTER = 6.0; // lần lướt qua chữ đầu tiên ~7 giây
+  var FONT_WAIT_MS = 700;    // chờ phông tối đa
+  var COMET_SPEED = 0.2;     // rad/giây
+  var MAX_DT = 1 / 15;       // kẹp delta time
+
+  var FRAME_HTML =
+    '<div class="frame__card"><div class="frame__inner">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="9.5" r="1.8"/><path d="M4.5 18l5-5 3.5 3.5 2.5-2.5 4 4"/></svg>' +
+    '<span class="frame__label"></span></div></div>';
+
+  var frames = SPECS.map(function (spec, i) {
+    var el = document.createElement('div');
+    el.className = 'frame';
+    el.innerHTML = FRAME_HTML;
+    layer.appendChild(el);
+    return {
+      el: el, spec: spec, i: i, ring: spec.ring, tilt: spec.tilt,
+      seed: rand(),
+      rj: 1 + (rand() - 0.5) * 0.05,          // lệch bán kính rất nhẹ
+      ox: (rand() - 0.5) * 1.3,               // điểm xuất phát trong vùng chữ
+      oy: (rand() - 0.5) * 0.9,
+      spinDir: rand() < 0.5 ? -1 : 1,
+      phase: 0, st: null,
+      w: 0, h: 0, active: true,
+      exc: null, band: -1, z: -1, lastO: -1, lastT: '', crossing: false
+    };
+  });
+
+  /* ---------- Trạng thái ---------- */
+  var G = null;              // hình học hiện tại
+  var simT = 0;              // đồng hồ mô phỏng (chỉ chạy khi đang phát)
+  var last = null, raf = 0, running = false;
+  var reduced = mqReduce.matches;
+  var userPaused = false, inView = true;
+  var SNAKE = { V: 0.8, R1: 1.3, R2: 1.4, PRE: 0.15, OFF: 0.14, MARGIN: 0.2, L: 3.0, K: 6, K_MOBILE: 4 };
+  var conv = null, nextExc = Infinity, settleUntil = 0;
+  /* ---------- Chuyển cảnh Hero -> Giới thiệu (gắn theo thanh cuộn) ---------- */
+  var about = document.querySelector('.about');
+  var slotEls = [].slice.call(document.querySelectorAll('.slot-frame'));
+  var SLOTS = [];          // [{x, y, w, rot}] toạ độ tâm ô ảnh, tính theo góc trên-trái của Hero
+  var P = 0;               // tiến độ chuyển cảnh 0..1
+  var slotOf = [];         // chỉ số ô ảnh cho từng khung (-1 = không có ô, sẽ mờ dần)
+  function measureSlots() {
+    var hr = hero.getBoundingClientRect();
+    SLOTS = slotEls.map(function (el) {
+      var fig = el.parentNode, st = getComputedStyle(fig);
+      if (st.display === 'none') return null;
+      var m = new DOMMatrixReadOnly(st.transform === 'none' ? undefined : st.transform);
+      var rot = Math.atan2(m.b, m.a) * 180 / Math.PI;
+      var r = el.getBoundingClientRect();     // hộp bao (đã xoay) -> tâm vẫn đúng
+      var w = el.offsetWidth;
+      el.style.setProperty('--w', w + 'px');
+      if (!el.firstChild) el.innerHTML = FRAME_HTML;
+      return { x: r.left + r.width / 2 - hr.left, y: r.top + r.height / 2 - hr.top, w: w, rot: rot };
+    });
+    // Gán ô: khung lớn nhất vào ô lớn, rồi lần lượt theo thứ tự khung
+    var act = frames.filter(function (f) { return f.active; });
+    var order = act.slice().sort(function (a, b) { return b.spec.size - a.spec.size; });
+    slotOf = frames.map(function () { return -1; });
+    var free = SLOTS.map(function (s, i) { return s ? i : -1; }).filter(function (i) { return i >= 0; });
+    order.forEach(function (f) { if (free.length) slotOf[frames.indexOf(f)] = free.shift(); });
+  }
+  function progress() {
+    var h = hero.offsetHeight || 1;
+    return clamp(window.scrollY / (h * 0.85), 0, 1);
+  }
+  function easeInOut(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  var introSkipped = reduced;
+  var introBase = null;      // thời điểm (đồng hồ mô phỏng) khung đầu tiên bay ra
+  var readyAt = null;        // thời điểm chữ bắt đầu mở màn (sau khi có phông)
+  var cometLastT = '', cometLastO = -1;
+
+  // Đồng bộ với CSS: chữ hiện trước, khung chỉ bay ra khi hàng nút bắt đầu xuất hiện.
+  function beginIntro(at) {
+    if (introBase !== null) return;
+    introBase = at;
+    nextExc = Infinity;   // không còn đợt chui vào giữa: khung chỉ bay vòng ở vùng ngoài
+  }
+  cta.addEventListener('animationstart', function (e) {
+    if (e.target === cta) beginIntro(simT + INTRO_AFTER_CTA);
+  });
+  cta.addEventListener('animationend', function (e) {
+    if (e.target === cta) relayout();   // đo lại khi chữ đã vào vị trí cuối
+  });
+
+  // Mở màn khi phông đã sẵn sàng (hoặc sau tối đa 0,7 giây)
+  function markReady() {
+    if (readyAt !== null) return;
+    readyAt = simT;
+    layout();
+    render(simT);
+    hero.classList.add('is-ready');
+  }
+  (function waitFonts() {
+    var loads = [];
+    if (document.fonts && document.fonts.load) {
+      var sample = title.textContent + content.textContent;
+      ['700 1em Lora', 'italic 700 1em Lora', '400 1em "Be Vietnam Pro"', '600 1em "Be Vietnam Pro"'].forEach(function (f) {
+        loads.push(document.fonts.load(f, sample).catch(function () {}));
+      });
+    }
+    Promise.race([
+      Promise.all(loads),
+      new Promise(function (r) { setTimeout(r, FONT_WAIT_MS); })
+    ]).then(markReady, markReady);
+  })();
+
+  /* ---------- Hình dạng quỹ đạo ----------
+     Máy tính: elip rộng, nghiêng nhẹ.
+     Bố cục dọc (di động, máy tính bảng đứng): "siêu elip" cao, đỉnh và đáy phẳng, khung nán lại ở
+     khoảng trống phía trên dòng chào và phía dưới hàng nút, lướt nhanh qua hai bên. */
+  function shape(rg, th) {
+    var c = Math.cos(th), s = Math.sin(th);
+    if (rg.e !== 1) { c = spow(c, rg.e); s = spow(s, rg.e); }
+    return [rg.rx * c, rg.ry * s];
+  }
+  // Toạ độ so với tâm khối chữ
+  function toLocal(rg, lx, ly) {
+    return [lx * rg.c - ly * rg.s, lx * rg.s + ly * rg.c + rg.oy];
+  }
+  // Mật độ thời gian trên mỗi đơn vị chiều dài: R > 1 => đi nhanh ở hai bên, chậm ở đỉnh/đáy
+  function dens(rg, th) {
+    if (rg.R === 1) return 1;
+    return lerp(1 / rg.R, 1, smoothstep(0.55, 0.85, Math.abs(Math.sin(th))));
+  }
+
+  // Bảng tra đổi tham số s (đều theo thời gian) -> góc θ, theo chiều dài cung có trọng số.
+  var WARP_N = 256;
+  function buildWarp(rg) {
+    var cum = new Float32Array(WARP_N + 1), total = 0, i, prev = shape(rg, 0), p;
+    for (i = 1; i <= WARP_N; i++) {
+      p = shape(rg, i / WARP_N * TAU);
+      total += Math.sqrt((p[0] - prev[0]) * (p[0] - prev[0]) + (p[1] - prev[1]) * (p[1] - prev[1])) * dens(rg, (i - 0.5) / WARP_N * TAU);
+      cum[i] = total;
+      prev = p;
+    }
+    var inv = new Float32Array(WARP_N + 1), j = 0;
+    for (var k = 0; k <= WARP_N; k++) {
+      var target = k / WARP_N * total;
+      while (j < WARP_N - 1 && cum[j + 1] < target) j++;
+      var seg = cum[j + 1] - cum[j];
+      inv[k] = (j + (seg > 0 ? clamp((target - cum[j]) / seg, 0, 1) : 0)) / WARP_N * TAU;
+    }
+    rg.inv = inv;
+  }
+  function warp(rg, s) {
+    var sm = mod(s, TAU), q = sm / TAU * WARP_N, k = Math.floor(q);
+    if (k >= WARP_N) k = WARP_N - 1;
+    var th = rg.inv[k] + (rg.inv[k + 1] - rg.inv[k]) * (q - k);
+    return sm + (th - sm) * rg.mix;
+  }
+
+  /* ---------- Đo đạc & quỹ đạo ---------- */
+  function layout() {
+    var W = hero.clientWidth, H = hero.clientHeight;
+    if (!W || !H) return;
+    var hr = hero.getBoundingClientRect();
+    var cr = content.getBoundingClientRect();
+    var l = Infinity, r = -Infinity;
+    for (var i = 0; i < measureEls.length; i++) {
+      var b = measureEls[i].getBoundingClientRect();
+      if (b.width > 0) { if (b.left < l) l = b.left; if (b.right > r) r = b.right; }
+    }
+    if (!isFinite(l)) { l = cr.left; r = cr.right; }
+
+    var mobile = W <= 700, tablet = !mobile && W <= 992;
+    var tall = mobile || (tablet && H >= W * 1.15);
+    var count = mobile ? 6 : (tablet ? 8 : 9);
+    var cx = (cr.left + cr.right) / 2 - hr.left;
+    var cy = (cr.top + cr.bottom) / 2 - hr.top;
+    var kx = (r - l) / 2, ky = cr.height / 2;
+    var headerH = header.offsetHeight;
+    var base = mobile ? clamp(Math.min(W * 0.3, (H - headerH) * 0.175), 92, 130) : (tall ? clamp(W * 0.154, 116, 154) : clamp(Math.min(W * 0.134, (H - headerH) * 0.242), 123, 196));
+    var depth = tall ? { sMin: 0.8, sMax: 1.04, oMin: 0.74 } : { sMin: 0.58, sMax: 1.05, oMin: 0.4 };
+    var rings;
+
+    if (tall) {
+      // Hai dải trống: trên dòng chào và dưới hàng nút (chừa chỗ cho nút tạm dừng).
+      var cTop = cr.top - hr.top, cBot = cr.bottom - hr.top;
+      var hhBack = base * 1.06 * depth.sMin * 0.5, hhFront = base * 1.06 * depth.sMax * 0.5;
+      var reserve = mobile ? 66 : 74;
+      var yT = Math.max(headerH + hhBack + 8, (headerH + cTop) / 2);
+      var yB = Math.min(H - reserve - hhFront * 0.55, (cBot + H - reserve) / 2);
+      if (yB < cBot) yB = cBot;
+      var ryT = (yB - yT) / 2, oyT = (yT + yB) / 2 - cy;
+      var rxT = mobile ? W * 0.36 : W * 0.38;
+      rings = [
+        { rx: rxT, ry: ryT, oy: oyT, tilt: -1.5 * DEG, e: 0.6, R: mobile ? 3.4 : 2.8, mix: 1 },
+        { rx: rxT * 0.8, ry: ryT * 0.93, oy: oyT, tilt: 1.5 * DEG, e: 0.6, R: mobile ? 3.4 : 2.8, mix: 1 }
+      ];
+    } else {
+      // Bán kính dọc: khung ở phía sau (trên cùng) không chạm header, không đè lên chữ.
+      var backHalf = base * 1.06 * depth.sMin / 2 + 9;
+      var topLimit = cy - headerH - backHalf - 14;
+      var textLimit = ky + backHalf + 10;
+      var ry0 = Math.max(60, Math.min(topLimit, Math.max(textLimit, (H - headerH) * 0.36)));
+      var rx0 = tablet ? W / 2 - base * 0.35 : Math.max(W * 0.46, Math.min(kx + base * 0.95, W * 0.5 + 10));
+      rings = [
+        { rx: rx0, ry: ry0, oy: 0, tilt: -4 * DEG, e: 1, R: 1, mix: 0.8 },
+        { rx: rx0 * 0.87, ry: ry0 * 0.9, oy: 0, tilt: 3 * DEG, e: 1, R: 1, mix: 0.8 }
+      ];
+    }
+    rings.forEach(function (rg) { rg.c = Math.cos(rg.tilt); rg.s = Math.sin(rg.tilt); buildWarp(rg); });
+
+    var key = (tall ? 'tall' : 'wide') + count;
+    var countChanged = !G || G.count !== count || G.tall !== tall;
+    G = {
+      W: W, H: H, cx: cx, cy: cy, kx: kx, ky: ky, rings: rings, count: count, tall: tall,
+      // Cả hai vòng quay cùng tốc độ: đội hình xen kẽ nên các khung giữ khoảng cách.
+      speed: mobile ? 0.07 : 0.08,
+      mobile: mobile, base: base, depth: depth, bob: mobile ? 4 : 7, koX: tall ? 0.55 : 1,
+      // Bố cục dọc trên màn hình thấp: khung không chui dưới header hay nút tạm dừng (thà lùi ra sau chữ)
+      yMin: headerH + 4, yMax: H - (mobile ? 60 : 64)
+    };
+
+    frames.forEach(function (f, idx) {
+      var active = idx < count;
+      if (active !== f.active || countChanged) {
+        f.active = active;
+        f.el.style.display = active ? '' : 'none';
+      }
+      f.st = STATIC[key] ? STATIC[key][idx] || null : null;
+      var w = Math.round(base * (tall ? f.spec.msize : f.spec.size)), h = Math.round(w * 1.06);
+      if (w !== f.w || h !== f.h) {
+        f.w = w; f.h = h;
+        f.el.style.setProperty('--w', w + 'px');
+        f.el.style.setProperty('--h', h + 'px');
+      }
+    });
+    if (countChanged) {
+      assignPhases();
+      frames.forEach(function (f) { f.exc = null; });
+      conv = null;
+    }
+
+    // Biến cho trang trí bám theo tiêu đề
+    var tr = title.getBoundingClientRect();
+    var w1 = titleLines[0].getBoundingClientRect().width, w2 = titleLines[1].getBoundingClientRect().width;
+    if (tr.width > 0) {
+      decor.style.setProperty('--tx', ((tr.left + tr.right) / 2 - hr.left).toFixed(1) + 'px');
+      decor.style.setProperty('--ty', ((tr.top + tr.bottom) / 2 - hr.top).toFixed(1) + 'px');
+      decor.style.setProperty('--th', (tr.height / 2).toFixed(1) + 'px');
+      decor.style.setProperty('--l1', (w1 / 2).toFixed(1) + 'px');
+      decor.style.setProperty('--tw', (Math.max(w1, w2) / 2).toFixed(1) + 'px');
+    }
+    drawRings();
+  }
+
+  // Khung xếp đều theo thứ tự, xen kẽ vòng ngoài / vòng trong.
+  function assignPhases() {
+    var list = frames.filter(function (f) { return f.active; });
+    var n = list.length || 1;
+    // Ba khung đầu (khung 2 dẫn đầu, 1 và 0 theo sau) luôn đi sát nhau thành một "đoàn" để lúc cần thành con rắn;
+    // các khung còn lại chia đều phần vòng còn lại.
+    var g = 0, rest = n > 3 ? (TAU - 2 * g) / (n - 2) : TAU / n, ph = 0.35;
+    g = TAU / n; rest = g;                      // tất cả khung cách đều nhau; cả đàn cùng tham gia đợt chuyển động
+    list.forEach(function (f, j) {
+      f.phase = ph + (f.seed - 0.5) * 0.06;
+      ph += j < 2 ? g : rest;
+    });
+  }
+  // Vị trí của khung trong "đội hình" (tham số s, đều theo thời gian).
+  function angleOf(f, t) {
+    return f.phase + G.speed * t + Math.sin(t * 0.23 + f.seed * 10) * 0.06;
+  }
+
+  function ringPath(rg, th0, th1, steps) {
+    var d = '';
+    for (var i = 0; i <= steps; i++) {
+      var th = th0 + (th1 - th0) * i / steps, p = shape(rg, th), q = toLocal(rg, p[0], p[1]);
+      d += (i ? 'L' : 'M') + (G.cx + q[0]).toFixed(1) + ' ' + (G.cy + q[1]).toFixed(1);
+    }
+    return d;
+  }
+  function ringPoint(rg, th) {
+    var p = shape(rg, th), q = toLocal(rg, p[0], p[1]);
+    return [G.cx + q[0], G.cy + q[1]];
+  }
+
+  function drawRings() {
+    var g = G;
+    svg.setAttribute('viewBox', '0 0 ' + g.W + ' ' + g.H);
+    var out = '<defs>';
+    g.rings.forEach(function (rg, i) {
+      out += '<linearGradient id="orbitGrad' + i + '" gradientUnits="userSpaceOnUse" x1="' + (g.cx - rg.rx).toFixed(1) + '" y1="' + (g.cy + rg.oy - rg.ry * 0.3).toFixed(1) + '" x2="' + (g.cx + rg.rx).toFixed(1) + '" y2="' + (g.cy + rg.oy + rg.ry * 0.5).toFixed(1) + '">' +
+        '<stop offset="0" stop-color="#5A1E5E"/><stop offset=".3" stop-color="#824787"/><stop offset=".62" stop-color="#C77A9C"/><stop offset=".82" stop-color="#EA7A24"/><stop offset="1" stop-color="#FC9238"/></linearGradient>';
+    });
+    // Cung phía trước (gần) của vòng chính: nét dày hơn, mờ dần ở hai đầu
+    var rg0 = g.rings[0], fa = 14 * DEG, fb = 166 * DEG;
+    var pa = ringPoint(rg0, fb), pb = ringPoint(rg0, fa);
+    out += '<linearGradient id="orbitFront" gradientUnits="userSpaceOnUse" x1="' + pa[0].toFixed(1) + '" y1="' + pa[1].toFixed(1) + '" x2="' + pb[0].toFixed(1) + '" y2="' + pb[1].toFixed(1) + '">' +
+      '<stop offset="0" stop-color="#824787" stop-opacity="0"/><stop offset=".24" stop-color="#9A5596" stop-opacity=".85"/><stop offset=".52" stop-color="#C77A9C" stop-opacity=".9"/><stop offset=".78" stop-color="#EA7A24" stop-opacity=".9"/><stop offset="1" stop-color="#FC9238" stop-opacity="0"/></linearGradient>';
+    out += '<filter id="orbitSoft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3"/></filter></defs>';
+
+    var dotSets = [
+      [0.16, 0.86, 1.22, 1.7, 1.93],
+      [0.42, 1.04, 1.48]
+    ];
+    g.rings.forEach(function (rg, i) {
+      var grad = 'url(#orbitGrad' + i + ')';
+      var d = ringPath(rg, 0, TAU, 180) + 'Z';
+      out += '<path d="' + d + '" fill="none" stroke="' + grad + '" stroke-width="7" opacity=".1" filter="url(#orbitSoft)"/>';
+      out += '<path d="' + d + '" fill="none" stroke="' + grad + '" stroke-width="' + (i === 0 ? 1.7 : 1.3) + '" opacity="' + (i === 0 ? .62 : .48) + '"/>';
+      if (i === 0) {
+        var inner = { rx: rg.rx - 18, ry: rg.ry - 12, oy: rg.oy, c: rg.c, s: rg.s, e: rg.e };
+        out += '<path d="' + ringPath(inner, 0, TAU, 180) + 'Z" fill="none" stroke="' + grad + '" stroke-width="1.3" stroke-dasharray="1.5 9" stroke-linecap="round" opacity=".45"/>';
+        out += '<path d="' + ringPath(rg, fa, fb, 90) + '" fill="none" stroke="url(#orbitFront)" stroke-width="2.6" stroke-linecap="round" opacity=".6"/>';
+      }
+      dotSets[i].forEach(function (a, k) {
+        var pt = ringPoint(rg, a * Math.PI);
+        var rr = k % 2 ? 2.4 : 3.6;
+        out += '<circle cx="' + pt[0].toFixed(1) + '" cy="' + pt[1].toFixed(1) + '" r="' + rr + '" fill="' + grad + '" opacity=".85"/>';
+        out += '<circle cx="' + pt[0].toFixed(1) + '" cy="' + pt[1].toFixed(1) + '" r="' + (rr + 4) + '" fill="' + grad + '" opacity=".14"/>';
+      });
+    });
+    svg.innerHTML = out;
+  }
+
+  // Đẩy điểm ra khỏi vùng chữ bằng một "siêu elip" mềm (không có góc gãy).
+  function keepOut(x, y, hw, hh) {
+    var a = G.kx * G.koX + hw * 0.85 + 6;
+    var b = G.ky + hh * 0.85 + 6;
+    var nx = x / a, ny = y / b;
+    var n4 = nx * nx * nx * nx + ny * ny * ny * ny;
+    if (n4 < 1e-8) return [x, y];
+    var n = Math.sqrt(Math.sqrt(n4));
+    var gN = Math.pow(Math.pow(n, 8) + 1, 1 / 8);
+    var f = gN / n;
+    return [x * f, y * f];
+  }
+
+  function bandOf(n) { return n < 0.22 ? 2 : (n < 0.4 ? 1 : 0); }
+  function bandFor(n, prev) {
+    var up = bandOf(n + 0.03), dn = bandOf(n - 0.03);
+    if (prev >= up && prev <= dn) return prev;   // trong vùng trễ: giữ nguyên
+    return bandOf(n);
+  }
+
+  function introEnd() {
+    return (introBase === null || !G) ? Infinity : introBase + (G.count - 1) * INTRO_STAGGER + INTRO_DUR;
+  }
+
+  /* ---------- Đặt một khung ---------- */
+  function place(f, t) {
+    var ring = G.rings[f.ring], D = G.depth;
+    var still = reduced && f.st;
+    var theta, rad = 1, bump = 0, spin = 0, nFix = null, kR = 1, exU = -1, exE = 0;
+    var ex = f.exc;
+    if (still) {
+      theta = f.st[0] * DEG; nFix = f.st[1]; kR = f.st[2];
+      ex = null;
+    } else {
+      var sPar = angleOf(f, t);
+      if (ex) {
+        // Đường đi của "con rắn": cả đàn chạy chung một đường — chạy trên quỹ đạo chính tới điểm rẽ,
+        // chui vào giữa (phía sau chữ), rồi ra lại quỹ đạo. Khung sau đi đúng vệt của khung đầu.
+        var sn = f.sn, phd = ex.phiDep + sn.off;
+        var u = (sPar - phd) / ex.L;
+        if (u >= 1) {
+          sPar += ex.delta - ex.L;
+        } else if (u > 0) {
+          sPar = phd + ex.delta * smoother(u);
+          bump = Math.sin(Math.PI * u);
+          spin = bump * 9 * f.spinDir;
+          exU = u;
+          exE = easeIO(u, sn.p);
+        }
+      }
+      theta = warp(ring, sPar);
+    }
+    var ct = Math.cos(theta), st = Math.sin(theta);
+    var d = ex ? lerp(st, 0.3, bump) : st;   // độ sâu: -1 = phía sau, 1 = phía trước
+    var n = nFix !== null ? nFix : (d + 1) / 2;
+    var s = lerp(D.sMin, D.sMax, n);
+    var o = lerp(D.oMin, 1, clamp(n * 1.7, 0, 1));
+
+    var p = shape(ring, theta);
+    var q = toLocal(ring, p[0] * f.rj * kR, p[1] * f.rj * kR);
+    var x = q[0], y = q[1];
+    if (!still) {
+      x += Math.sin(t * 0.55 + f.seed * 6.283) * G.bob;
+      y += Math.sin(t * 0.83 + f.seed * 9.1) * G.bob * 1.3;
+    }
+    var hw = f.w * s * 0.5, hh = f.h * s * 0.5;
+    var ko;
+    if (exU >= 0) {
+      // đoạn chui vào giữa: mọi khung đi theo đúng một đường cong mượt (vệt của khung đầu), nối liền với vòng ở hai đầu
+      var B = f.sn.B, a0 = B[0], a1 = B[3];
+      var m0 = keepOut(a0[0], a0[1], hw, hh), m1 = keepOut(a1[0], a1[1], hw, hh);
+      var w0 = 1 - smoother(exU), w1 = smoother(exU), q3 = exE, v = 1 - q3;
+      var bx = v * v * v * B[0][0] + 3 * v * v * q3 * B[1][0] + 3 * v * q3 * q3 * B[2][0] + q3 * q3 * q3 * B[3][0];
+      var by = v * v * v * B[0][1] + 3 * v * v * q3 * B[1][1] + 3 * v * q3 * q3 * B[2][1] + q3 * q3 * q3 * B[3][1];
+      ko = [bx + (m0[0] - B[0][0]) * w0 + (m1[0] - B[3][0]) * w1, by + (m0[1] - B[0][1]) * w0 + (m1[1] - B[3][1]) * w1];
+    } else {
+      ko = keepOut(x, y, hw, hh);
+    }
+    var X = G.cx + ko[0] * rad, Y = G.cy + ko[1] * rad;
+    X = clamp(X, hw * 0.75, G.W - hw * 0.75);   // luôn thấy ít nhất ~85% khung
+    if (G.tall) Y = clamp(Y, G.yMin + hh, Math.max(G.yMin + hh, G.yMax - hh));
+
+    var rz = f.tilt + (still ? 0 : Math.sin(t * 0.47 + f.seed * 5) * 3) + spin;
+    var rY = -ct * 14 * (1 - bump), rX = st * 7 * (1 - bump);
+
+    var k = (introSkipped || still) ? 1 : (introBase === null ? -1 : (t - introBase - f.i * INTRO_STAGGER) / INTRO_DUR);
+    if (k < 1) {
+      if (k <= 0) {
+        o = 0; s = 0.22; X = G.cx; Y = G.cy;
+      } else {
+        var e = easeOutCubic(k);
+        var sx = G.cx + f.ox * G.kx * 0.7, sy = G.cy + f.oy * G.ky * 0.6;
+        var dx = X - sx, dy = Y - sy;
+        var arc = Math.sin(Math.PI * e) * 0.18 * f.spinDir;
+        X = sx + dx * e - dy * arc;
+        Y = sy + dy * e + dx * arc;
+        s = lerp(0.22, s, easeOutBack(k));
+        o = o * clamp(k * 2.4, 0, 1);
+        rz += (1 - e) * 30 * f.spinDir;
+        rY *= e; rX *= e;
+      }
+    }
+    var band = bandFor(n, f.band);
+    // Chuyển cảnh: khung rời quỹ đạo, bay xuống và nằm đúng vào ô ảnh của phần Giới thiệu
+    if (P > 0 && !reduced) {
+      var idx = frames.indexOf(f), si = slotOf[idx], sl = si >= 0 ? SLOTS[si] : null;
+      var q = clamp((P - (si >= 0 ? si : 0) * 0.07) / 0.72, 0, 1), e2 = easeInOut(q);
+      if (sl) {
+        // cung lệch ngang luôn phồng ra phía mép ngoài của ô ảnh (xa cột chữ) để khung đang bay không che đoạn giới thiệu
+        var ts = sl.w / f.w, arcK = Math.sin(Math.PI * e2) * (G.mobile ? 24 : 60) * (sl.x < G.W / 2 ? -1 : 1);
+        var nx = lerp(X, sl.x, e2) + arcK, ny = lerp(Y, sl.y, e2);
+        X = nx; Y = ny; s = lerp(s, ts, e2); o = lerp(o, 1, e2);
+        rz = lerp(rz, sl.rot, e2); rY *= (1 - e2); rX *= (1 - e2);
+        if (e2 > 0.35) band = 0;
+        n = Math.max(n, e2);           // bay lên lớp trên cùng khi đang hạ cánh
+        if (P >= 1) o = 0;             // đã hạ cánh: ô ảnh tĩnh thay thế (trùng khít)
+      } else {
+        o *= 1 - clamp(P * 1.6, 0, 1); s *= 1 - 0.3 * P;
+      }
+    }
+
+    var tf = 'translate3d(' + (X - f.w / 2).toFixed(2) + 'px,' + (Y - f.h / 2).toFixed(2) + 'px,0) perspective(900px) rotateY(' +
+      rY.toFixed(2) + 'deg) rotateX(' + rX.toFixed(2) + 'deg) rotate(' + rz.toFixed(2) + 'deg) scale(' + s.toFixed(4) + ')';
+    if (tf !== f.lastT) { f.el.style.transform = tf; f.lastT = tf; }
+    var oR = Math.round(o * 1000) / 1000;
+    if (oR !== f.lastO) { f.el.style.opacity = oR; f.lastO = oR; }
+    var z = 1 + Math.round(n * 20);
+    if (z !== f.z) { f.el.style.zIndex = z; f.z = z; }
+    if (band !== f.band) {
+      f.el.classList.toggle('is-mid', band === 1);
+      f.el.classList.toggle('is-far', band === 2);
+      f.band = band;
+    }
+    var crossing = !!ex && bump > 0.3;
+    if (crossing !== f.crossing) { f.el.classList.toggle('is-crossing', crossing); f.crossing = crossing; }
+  }
+
+  // Đốm sáng chạy dọc vòng chính (sáng hơn ở phía trước)
+  function placeComet(t) {
+    var rg = G.rings[0];
+    var th = reduced ? 205 * DEG : warp(rg, 0.9 + t * COMET_SPEED);
+    var pt = ringPoint(rg, th);
+    var tf = 'translate3d(' + pt[0].toFixed(2) + 'px,' + pt[1].toFixed(2) + 'px,0)';
+    if (tf !== cometLastT) { comet.style.transform = tf; cometLastT = tf; }
+    var o = Math.round((0.45 + 0.4 * Math.sin(th)) * 100) / 100;
+    if (o !== cometLastO) { comet.style.opacity = o; cometLastO = o; }
+  }
+
+  function render(t) {
+    if (!G) return;
+    P = reduced ? 0 : progress();
+    about.classList.toggle('is-landed', P >= 1);
+    hero.querySelector('.hero__orbits').style.opacity = (1 - P).toFixed(3);
+    for (var i = 0; i < frames.length; i++) if (frames[i].active) place(frames[i], t);
+    placeComet(t);
+  }
+
+  /* ---------- Thỉnh thoảng một khung lướt ngang qua chữ ---------- */
+  // Ứng viên: khung đang ở mép trái (đang đi lên); ưu tiên khung lớn để dễ thấy khi lướt qua chữ.
+  function pickExcursionFrame(t) {
+    var best = null, bestScore = -Infinity;
+    frames.forEach(function (f) {
+      if (!f.active) return;
+      var dd = Math.abs(mod(angleOf(f, t), TAU) - Math.PI);
+      if (dd > 0.9) return;
+      var score = f.spec.size - dd * 0.35;
+      if (score > bestScore) { bestScore = score; best = f; }
+    });
+    return best;
+  }
+  // Chọn điểm nhập lại quỹ đạo nằm giữa khoảng trống lớn nhất phía đối diện.
+  function chooseDelta(f, t) {
+    var th = angleOf(f, t);
+    var others = frames.filter(function (o) { return o !== f && o.active; })
+      .map(function (o) { return angleOf(o, t); });
+    var best = Math.PI, bestScore = -Infinity;
+    for (var dd = -0.6; dd <= 0.6001; dd += 0.05) {
+      var target = th + Math.PI + dd, m = Infinity;
+      others.forEach(function (a) { m = Math.min(m, angDist(target, a)); });
+      var score = m - Math.abs(dd) * 0.08;
+      if (score > bestScore) { bestScore = score; best = Math.PI + dd; }
+    }
+    return best;
+  }
+  // "Con rắn": khung đầu chui vào giữa; các khung sau tiếp tục chạy trên quỹ đạo chính, nhờ quán tính tăng tốc dần
+  // tới đúng điểm rẽ rồi đi theo đúng vệt đó. Cuối đợt mọi khung về lại đúng chỗ vốn có của nó trên vòng nên đội hình không lệch.
+  function envInt(c, tau) {
+    if (tau <= 0) return 0;
+    if (tau < c.R1) { var x = tau / c.R1; return c.R1 * (x * x * x - x * x * x * x / 2); }
+    var I = c.R1 / 2;
+    if (tau < c.R1 + c.P) return I + (tau - c.R1);
+    I += c.P;
+    var y = Math.min(1, (tau - c.R1 - c.P) / c.R2);
+    return I + c.R2 * (y - (y * y * y - y * y * y * y / 2));
+  }
+  function localAt(f, sp) {
+    var ring = G.rings[f.ring], p = shape(ring, warp(ring, sp));
+    return toLocal(ring, p[0] * f.rj, p[1] * f.rj);
+  }
+  // Làm mượt/đổi nhịp vào-ra của từng khung: p < 1 vào nhanh ra chậm, p > 1 vào chậm ra nhanh (vẫn 0→1, đơn điệu).
+  function easeIO(u, p) { var a = Math.pow(u, p), b = Math.pow(1 - u, p); return a / (a + b); }
+  function startSnake(t) {
+    var wr = G.speed, S = SNAKE;
+    var act = frames.filter(function (f) { return f.active; });
+    var lead = frames[2].active ? frames[2] : act[0];
+    var la = angleOf(lead, t);
+    var members = act.map(function (f) { return { f: f, d: mod(la - angleOf(f, t), TAU) }; })
+      .sort(function (x, y) { return x.d - y.d; }).slice(0, Math.min(act.length, G.mobile ? S.K_MOBILE : S.K));
+    var dmax = members[members.length - 1].d;
+    var V = S.V, num = S.PRE + S.OFF + S.L + S.MARGIN + dmax + (V - wr) * S.R1 / 2;
+    var P = Math.max(0, num / V - S.R1);
+    var E = (V - wr) * (P + S.R1 / 2 + S.R2 / 2);
+    conv = { t0: t, V: V, R1: S.R1, R2: S.R2, P: P, L: S.L, phiDep: la + S.PRE, delta: S.L - E,
+             total: S.R1 + P + S.R2, wr: wr,
+             members: members.map(function (m) { return { f: m.f, p0: m.f.phase }; }) };
+    // Mỗi khung có đường vào riêng, lệch nhau một chút (điểm rẽ, độ cong, độ cao, nhịp vào/ra) cho mượt và tự nhiên.
+    conv.members.forEach(function (m, i) {
+      var f = m.f, r1 = (Math.sin(i * 12.9898 + f.seed * 78.233) + 1) / 2, r2 = (Math.sin(i * 4.1414 + f.seed * 31.7) + 1) / 2;
+      var off = (r1 - 0.5) * 2 * S.OFF;
+      var phd = conv.phiDep + off;
+      var P0 = localAt(f, phd), P3 = localAt(f, phd + conv.delta);
+      var cy = -(P0[1] + P3[1]) / 6 - 10 + (r2 - 0.5) * 90, cx0 = P0[0] * 0.1 + (r1 - 0.5) * 120, cx3 = P3[0] * 0.1 + (r2 - 0.5) * 120;
+      f.sn = { off: off, p: 0.8 + 0.5 * ((r1 + r2) / 2), B: [P0, [cx0, cy], [cx3, cy + (r1 - 0.5) * 50], P3] };
+      f.exc = conv;
+    });
+    return true;
+  }
+  function updateExcursions(t) {
+    if (conv) {
+      var tau = t - conv.t0;
+      if (tau >= conv.total) {
+        conv.members.forEach(function (m) { m.f.phase = m.p0; m.f.exc = null; });   // đã về đúng chỗ vốn có trên vòng
+        conv = null;
+        nextExc = t + 9 + rand() * 4;
+        settleUntil = t + 3;
+      } else {
+        var ex = (conv.V - conv.wr) * envInt(conv, tau);
+        conv.members.forEach(function (m) { m.f.phase = m.p0 + ex; });
+      }
+    }
+    if (!conv && t > introEnd() && t >= nextExc) {
+      if (!startSnake(t)) nextExc = t + 0.4;
+    }
+  }
+
+  // Đội hình luôn tự giãn đều. Khi có khung đang lướt qua chữ, chỗ nhập lại của nó được mở sẵn:
+  // khung đó là "mốc" cố định tại vị trí đích, các khung còn lại dịch dần (không bao giờ lùi rõ rệt).
+  function relax(t, dt) {
+    var list = frames.filter(function (f) { return f.active; });
+    var n = list.length;
+    if (n < 2) return;
+    var anch = conv ? conv.members.map(function (m) { return { f: m.f, delta: m.p0 - m.f.phase }; }) : [];
+    var ex = anch.length > 0 || t < settleUntil;
+    var cur = list.map(function (f) {
+      var ea = null;
+      for (var k = 0; k < anch.length; k++) if (anch[k].f === f) { ea = anch[k]; break; }
+      return { f: f, a: !!ea, s: mod(f.phase + G.speed * t + (ea ? ea.delta : 0), TAU) };
+    }).sort(function (a, b) { return a.s - b.s; });
+    var step = TAU / n, base, jA = -1;
+    cur.forEach(function (c, j) { if (c.a) jA = j; });
+    if (jA >= 0) {
+      base = cur[jA].s - jA * step;
+    } else {
+      var ref = cur[0].s, sum = 0;
+      cur.forEach(function (c, j) { sum += wrapPi(c.s - j * step - ref); });
+      base = ref + sum / n;
+    }
+    var lo = (ex ? 0.06 : 0.035) * dt, hi = (ex ? 0.14 : 0.035) * dt, gain = ex ? 1.2 : 0.3;
+    cur.forEach(function (c, j) {
+      if (c.a) return;
+      var d = wrapPi(base + j * step - c.s);
+      c.f.phase += clamp(d * gain * dt, -lo, hi);
+    });
+    // Chống chồng khung: hai khung kề nhau trên vòng không bao giờ được gần nhau hơn ~65% khoảng đều.
+    var minGap = step * 0.65, push = 0.6 * dt;
+    for (var j2 = 0; j2 < cur.length; j2++) {
+      var A = cur[j2], B = cur[(j2 + 1) % cur.length];
+      if (A === B) continue;
+      var g = mod(B.s - A.s, TAU);
+      if (g >= minGap) continue;
+      var m = Math.min(push, (minGap - g) * 0.5);
+      if (!A.a) A.f.phase -= m;
+      if (!B.a) B.f.phase += m;
+    }
+  }
+
+  /* ---------- Vòng lặp ---------- */
+  function tick(now) {
+    raf = 0;
+    if (last === null) last = now;
+    var dt = clamp((now - last) / 1000, 0, MAX_DT);
+    last = now;
+    simT += dt;
+    if (introBase === null && readyAt !== null && simT >= readyAt + INTRO_FALLBACK) beginIntro(simT);
+    updateExcursions(simT);
+    render(simT);
+    if (running) raf = requestAnimationFrame(tick);
+  }
+  function start() {
+    if (running) return;
+    running = true; last = null;
+    raf = requestAnimationFrame(tick);
+  }
+  function stop() {
+    running = false;
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
+  }
+  function sync() {
+    var shouldRun = !reduced && !userPaused && !document.hidden && inView;
+    if (shouldRun) start(); else stop();
+    hero.classList.toggle('is-paused', userPaused);
+  }
+
+  /* ---------- Giảm chuyển động ---------- */
+  function applyReduced() {
+    reduced = mqReduce.matches;
+    toggle.hidden = reduced;
+    if (reduced) {
+      stop();
+      introSkipped = true;
+      frames.forEach(function (f) { f.exc = null; });
+      conv = null;
+      render(simT);               // bố cục tĩnh chọn sẵn: khung nằm trên quỹ đạo, hai khung lớn hai bên tiêu đề
+    } else {
+      if (introSkipped) beginIntro(simT);   // bật lại chuyển động: không phát lại intro
+      sync();
+    }
+  }
+
+  /* ---------- Nút tạm dừng (WCAG 2.2.2) ---------- */
+  toggle.addEventListener('click', function () {
+    userPaused = !userPaused;
+    toggle.setAttribute('aria-pressed', String(userPaused));
+    toggleLabel.textContent = userPaused ? 'Tiếp tục chuyển động' : 'Tạm dừng chuyển động';
+    sync();
+  });
+
+  document.addEventListener('visibilitychange', sync);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      inView = entries[0].isIntersecting;
+      sync();
+    }).observe(hero);
+  }
+
+  var relayoutQueued = false;
+  function relayout() {
+    if (relayoutQueued) return;
+    relayoutQueued = true;
+    requestAnimationFrame(function () {
+      relayoutQueued = false;
+      layout();
+      measureSlots();
+      if (!running) render(simT);
+    });
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(relayout).observe(hero);
+  else window.addEventListener('resize', relayout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
+
+  if (mqReduce.addEventListener) mqReduce.addEventListener('change', applyReduced);
+  else if (mqReduce.addListener) mqReduce.addListener(applyReduced);
+
+  layout();
+  measureSlots();
+  render(0);
+  applyReduced();
+  about.classList.toggle('is-static', reduced);
+  if (mqReduce.addEventListener) mqReduce.addEventListener('change', function () { about.classList.toggle('is-static', mqReduce.matches); });
+  // Cuộn: vẽ lại ngay cả khi vòng lặp đang dừng (tạm dừng / Hero ra khỏi màn hình)
+  var scrollQueued = false;
+  window.addEventListener('scroll', function () {
+    if (scrollQueued) return; scrollQueued = true;
+    requestAnimationFrame(function () { scrollQueued = false; if (!running) render(simT); });
+  }, { passive: true });
+  new ResizeObserver(relayout).observe(about);
+})();
+</script>
+</body>
+</html>
