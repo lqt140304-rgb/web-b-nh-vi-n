@@ -19,9 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const userDropdownMenu = document.getElementById('userDropdownMenu');
 
   const btnMobileMenu = document.getElementById('btnMobileMenu');
-  const mobileDrawer = document.getElementById('mobileDrawer');
-  const drawerOverlay = document.getElementById('drawerOverlay');
-  const btnCloseDrawer = document.getElementById('btnCloseDrawer');
 
   const siteHeader = document.getElementById('siteHeader');
   const heroMain = document.getElementById('hero-main');
@@ -48,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btnMobile.classList.toggle('active', mode === 'mobile');
     btnResponsive.classList.toggle('active', mode === 'responsive');
 
-    // Đóng drawer nếu đang mở
-    closeMobileDrawer(false);
+    // Đóng menu nếu đang mở
+    document.dispatchEvent(new Event('header:close'));
   }
 
   // Khởi tạo theo URL query param nếu có
@@ -65,14 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
   btnResponsive.addEventListener('click', () => setViewportMode('responsive'));
 
   // 1b. Menu điều hướng chính: cập nhật trạng thái active
-  const navLinks = document.querySelectorAll('.nav-link, .drawer-link');
+  const navLinks = document.querySelectorAll('.nav-link, .mobile-menu li a');
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       navLinks.forEach(l => l.classList.remove('active'));
       link.classList.add('active');
-      if (link.classList.contains('drawer-link')) {
-        closeMobileDrawer(true);
-      }
+      if (link.closest('#mobileMenu')) document.dispatchEvent(new Event('header:close'));
     });
   });
 
@@ -80,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let isLoggedIn = false;
   btnToggleAuth.addEventListener('click', () => {
     isLoggedIn = !isLoggedIn;
+    siteHeader.classList.toggle('is-user', isLoggedIn);
     if (isLoggedIn) {
       authGuestGroup.style.display = 'none';
       authUserGroup.style.display = 'block';
@@ -135,90 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
       closeUserDropdown(true);
     }
   });
-
-  // 4. Mobile Menu Drawer (WCAG AA: inert khi đóng, bẫy tiêu điểm khi mở, phím Escape)
-  // Khởi tạo ban đầu: Drawer đóng -> bật inert
-  mobileDrawer.setAttribute('inert', '');
-  btnMobileMenu.setAttribute('aria-expanded', 'false');
-
-  function openMobileDrawer() {
-    mobileDrawer.removeAttribute('inert');
-    mobileDrawer.classList.add('open');
-    drawerOverlay.classList.add('open');
-    if (siteHeader) siteHeader.setAttribute('inert', '');
-    if (heroMain) heroMain.setAttribute('inert', '');
-    btnMobileMenu.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-
-    // Drawer vừa bỏ inert có thể còn visibility:hidden ở lượt render đầu.
-    // Chỉ chuyển focus khi nút đã hiện; dừng nếu menu đóng trước đó.
-    function focusDrawerWhenVisible() {
-      if (!mobileDrawer.classList.contains('open')) return;
-      if (btnCloseDrawer && getComputedStyle(btnCloseDrawer).visibility === 'visible') {
-        btnCloseDrawer.focus();
-      } else {
-        requestAnimationFrame(focusDrawerWhenVisible);
-      }
-    }
-    requestAnimationFrame(focusDrawerWhenVisible);
-  }
-
-  function closeMobileDrawer(returnFocus = true) {
-    if (!mobileDrawer.classList.contains('open')) return;
-
-    mobileDrawer.setAttribute('inert', '');
-    mobileDrawer.classList.remove('open');
-    drawerOverlay.classList.remove('open');
-    if (siteHeader) siteHeader.removeAttribute('inert');
-    if (heroMain) heroMain.removeAttribute('inert');
-    btnMobileMenu.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-
-    if (returnFocus && btnMobileMenu) {
-      btnMobileMenu.focus();
-    }
-  }
-
-  if (btnMobileMenu) {
-    btnMobileMenu.addEventListener('click', openMobileDrawer);
-    btnMobileMenu.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openMobileDrawer();
-      }
-    });
-  }
-  if (btnCloseDrawer) btnCloseDrawer.addEventListener('click', () => closeMobileDrawer(true));
-  if (drawerOverlay) drawerOverlay.addEventListener('click', () => closeMobileDrawer(true));
-
-  // Bẫy tiêu điểm & phím Escape cho Drawer
-  mobileDrawer.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      closeMobileDrawer(true);
-      return;
-    }
-
-    if (e.key === 'Tab') {
-      const focusables = getFocusableElements(mobileDrawer);
-      if (focusables.length === 0) return;
-
-      const firstEl = focusables[0];
-      const lastEl = focusables[focusables.length - 1];
-
-      if (e.shiftKey && document.activeElement === firstEl) {
-        e.preventDefault();
-        lastEl.focus();
-      } else if (!e.shiftKey && document.activeElement === lastEl) {
-        e.preventDefault();
-        firstEl.focus();
-      }
-    }
-  });
-
-  if (urlParams.get('drawer') === 'open') {
-    openMobileDrawer();
-  }
 
   // 6. Modal Tiêu chí nghiệm thu & Design Tokens (WCAG AA: inert khi đóng, bẫy tiêu điểm, phím Escape)
   specsModal.setAttribute('inert', '');

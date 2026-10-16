@@ -1369,13 +1369,6 @@ img {
 .viewport-outer.mode-mobile .header-social-links {
   display: none !important;
 }
-.viewport-outer.mode-mobile .btn-mobile-menu {
-  display: inline-flex !important;
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
-}
 
 /* Định vị Drawer và Overlay nằm gọn trong khung điện thoại 390px khi xem thử (Lỗi A2) */
 .viewport-outer.mode-mobile .mobile-drawer-overlay {
@@ -1391,33 +1384,6 @@ img {
   width: 310px !important;
   max-width: 85% !important;
   border-radius: 0 46px 46px 0 !important;
-}
-.viewport-outer.mode-mobile .site-header {
-  padding: 10px 16px !important;
-  height: 64px !important;
-  min-height: 64px !important;
-  box-sizing: border-box !important;
-}
-.viewport-outer.mode-mobile .brand-logo-img {
-  height: 38px !important;
-}
-.viewport-outer.mode-mobile .brand-text-block {
-  white-space: nowrap !important;
-}
-.viewport-outer.mode-mobile .brand-subtitle {
-  font-size: 9.5px !important;
-}
-.viewport-outer.mode-mobile .brand-name {
-  font-size: 17px !important;
-}
-.viewport-outer.mode-mobile .user-profile-name {
-  display: none !important;
-}
-.viewport-outer.mode-mobile .btn-user-profile {
-  padding: 4px 6px !important;
-  gap: 4px !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
 }
 .viewport-outer.mode-mobile .hero-minimal-creative {
   padding-top: 14px !important;
@@ -1514,10 +1480,6 @@ img {
 @media (max-width: 992px) {
   .nav-menu { display: none !important; }
   .header-social-links { display: none !important; }
-  .btn-mobile-menu { display: inline-flex !important; }
-  .site-header { padding: 14px 20px; }
-  .brand-logo-img { height: 40px; }
-  .brand-name { font-size: 18px; }
   .hero-title { font-size: 40px; }
   .hero-description { font-size: 17px; }
   .hero-arches-stage {
@@ -1536,33 +1498,6 @@ img {
 }
 
 @media (max-width: 680px) {
-  .site-header {
-    padding: 10px 16px;
-    height: 64px;
-    min-height: 64px;
-    box-sizing: border-box;
-  }
-  .brand-logo-img { height: 38px; }
-  .brand-text-block { white-space: nowrap; }
-  .brand-subtitle { font-size: 9.5px; }
-  .brand-name { font-size: 17px; }
-
-  /* User profile & hamburger trên mobile */
-  .btn-user-profile {
-    padding: 4px 6px;
-    gap: 4px;
-    min-width: 44px;
-    min-height: 44px;
-  }
-  .user-profile-name {
-    display: none !important;
-  }
-  .btn-mobile-menu {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
-  }
 
   .hero-minimal-creative { padding-top: 14px; }
   .hero-eyebrow { font-size: 11px; letter-spacing: 0.12em; padding: 4px 12px; margin-bottom: 12px; }
@@ -1627,14 +1562,6 @@ img {
 }
 
 @media (max-width: 360px) {
-  .site-header {
-    padding: 8px 12px;
-    height: 60px;
-    min-height: 60px;
-  }
-  .brand-logo-img { height: 34px; }
-  .brand-name { font-size: 15.5px; }
-  .brand-subtitle { font-size: 9px; }
   .hero-title { font-size: 22px; }
 
   .hero-arches-stage {
@@ -2530,27 +2457,7 @@ img {
 }
 
 
-/* Header chung: giữ cả hai nút tài khoản, kể cả khung Mobile 390. */
 .btn-auth-login, .btn-auth-register { text-decoration: none; min-height: 44px; white-space: nowrap; }
-.viewport-outer.mode-mobile .header-actions,
-.viewport-outer.mode-mobile .auth-guest-group { gap: 6px; }
-.viewport-outer.mode-mobile .site-header .btn-auth-login,
-.viewport-outer.mode-mobile .site-header .btn-auth-register { padding-inline: 8px; font-size: 12px; }
-.viewport-outer.mode-mobile .site-header .brand-link { gap: 6px; flex-shrink: 0; }
-.viewport-outer.mode-mobile .site-header .brand-subtitle { letter-spacing: 0; }
-@media (max-width: 500px) {
-  .header-actions, .auth-guest-group { gap: 6px; }
-  .site-header .btn-auth-login, .site-header .btn-auth-register { padding-inline: 8px; font-size: 12px; }
-  .site-header .brand-link { gap: 6px; flex-shrink: 0; }
-  .site-header .brand-subtitle { letter-spacing: 0; }
-}
-@media (max-width: 375px) {
-  .site-header .btn-auth-login, .site-header .btn-auth-register { padding-inline: 5px; font-size: 11px; }
-  .header-actions, .auth-guest-group { gap: 4px; }
-  .site-header .brand-subtitle { font-size: 8px; letter-spacing: 0; }
-  .site-header .brand-link { flex-shrink: 0; gap: 4px; }
-}
-
 /* ==========================================================================
    CTA Dịch vụ — sửa 2 điểm (Claude, 15/10/2026, theo docs/phan-quyen-thiet-ke-giao-claude-2026-10-15.md)
    1) Họa tiết góc không được chạm chữ/nút: thu nhỏ vào góc trống trên cùng bên phải (cách nút ≥ 6px);

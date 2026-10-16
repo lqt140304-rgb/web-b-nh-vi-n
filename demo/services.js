@@ -19,9 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const userDropdownMenu = document.getElementById('userDropdownMenu');
 
   const btnMobileMenu = document.getElementById('btnMobileMenu');
-  const mobileDrawer = document.getElementById('mobileDrawer');
-  const drawerOverlay = document.getElementById('drawerOverlay');
-  const btnCloseDrawer = document.getElementById('btnCloseDrawer');
 
   const siteHeader = document.getElementById('siteHeader');
   const servicesMain = document.getElementById('services-main');
@@ -89,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnMobile.classList.toggle('active', mode === 'mobile');
     btnResponsive.classList.toggle('active', mode === 'responsive');
 
-    closeMobileDrawer(false);
+    document.dispatchEvent(new Event('header:close'));
   }
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -107,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let isLoggedIn = false;
   btnToggleAuth.addEventListener('click', () => {
     isLoggedIn = !isLoggedIn;
+    siteHeader.classList.toggle('is-user', isLoggedIn);
     if (isLoggedIn) {
       authGuestGroup.style.display = 'none';
       authUserGroup.style.display = 'block';
@@ -162,85 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
       closeUserDropdown(true);
     }
   });
-
-  // 4. Mobile Menu Drawer (WCAG AA: inert khi đóng, bẫy tiêu điểm, phím Escape)
-  mobileDrawer.setAttribute('inert', '');
-  btnMobileMenu.setAttribute('aria-expanded', 'false');
-
-  function openMobileDrawer() {
-    mobileDrawer.removeAttribute('inert');
-    mobileDrawer.classList.add('open');
-    drawerOverlay.classList.add('open');
-    if (siteHeader) siteHeader.setAttribute('inert', '');
-    if (servicesMain) servicesMain.setAttribute('inert', '');
-    btnMobileMenu.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-
-    requestAnimationFrame(() => {
-      if (btnCloseDrawer) btnCloseDrawer.focus();
-    });
-    setTimeout(() => {
-      if (btnCloseDrawer && document.activeElement !== btnCloseDrawer) {
-        btnCloseDrawer.focus();
-      }
-    }, 40);
-  }
-
-  function closeMobileDrawer(returnFocus = true) {
-    if (!mobileDrawer.classList.contains('open')) return;
-
-    mobileDrawer.setAttribute('inert', '');
-    mobileDrawer.classList.remove('open');
-    drawerOverlay.classList.remove('open');
-    if (siteHeader) siteHeader.removeAttribute('inert');
-    if (servicesMain) servicesMain.removeAttribute('inert');
-    btnMobileMenu.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-
-    if (returnFocus && btnMobileMenu) {
-      btnMobileMenu.focus();
-    }
-  }
-
-  if (btnMobileMenu) {
-    btnMobileMenu.addEventListener('click', openMobileDrawer);
-    btnMobileMenu.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openMobileDrawer();
-      }
-    });
-  }
-  if (btnCloseDrawer) btnCloseDrawer.addEventListener('click', () => closeMobileDrawer(true));
-  if (drawerOverlay) drawerOverlay.addEventListener('click', () => closeMobileDrawer(true));
-
-  mobileDrawer.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      closeMobileDrawer(true);
-      return;
-    }
-
-    if (e.key === 'Tab') {
-      const focusables = getFocusableElements(mobileDrawer);
-      if (focusables.length === 0) return;
-
-      const firstEl = focusables[0];
-      const lastEl = focusables[focusables.length - 1];
-
-      if (e.shiftKey && document.activeElement === firstEl) {
-        e.preventDefault();
-        lastEl.focus();
-      } else if (!e.shiftKey && document.activeElement === lastEl) {
-        e.preventDefault();
-        firstEl.focus();
-      }
-    }
-  });
-
-  if (urlParams.get('drawer') === 'open') {
-    openMobileDrawer();
-  }
 
   // 5. Modal Chi tiết Dịch vụ (Service Detail Modal)
   serviceDetailModal.setAttribute('inert', '');
