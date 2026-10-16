@@ -1,5 +1,5 @@
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE);const fs=require('fs');const assert=require('assert');
-const output='docs/qa/header-mobile-196f2ba';
+const output=process.env.QA_OUTPUT||'docs/qa/header-mobile-196f2ba';fs.mkdirSync(output,{recursive:true});
 (async()=>{const b=await chromium.launch({executablePath:process.env.CHROME_BIN});const errors=[],results=[];try{
  for(const width of [1440,1024,390,360]){const p=await b.newPage({viewport:{width,height:900}});p.on('pageerror',e=>errors.push(e.message));p.on('console',m=>{if(m.type()==='error')errors.push(m.text())});await p.goto('http://127.0.0.1:3030/services.html?mode=responsive');await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(500);
  assert.equal(await p.locator('.service-card').count(),4);

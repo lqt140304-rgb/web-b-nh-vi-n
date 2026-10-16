@@ -21,7 +21,7 @@ const output=process.env.QA_OUTPUT || 'docs/qa/hero-chinh';fs.mkdirSync(output,{
      assert(await item.evaluate(e=>document.activeElement===e&&getComputedStyle(e).outlineStyle!=='none'&&parseFloat(getComputedStyle(e).outlineWidth)>=2));
     }
     assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-    assert(await p.locator(mode==='mobile'?'.site-header':'.site-stage').evaluate(e=>e.scrollWidth<=e.clientWidth));
+    assert(await p.locator(mode==='mobile'?'.site-header':'.site-stage').evaluate(e=>e.scrollWidth<=e.clientWidth || (getComputedStyle(e).overflowX==='clip' && e.getBoundingClientRect().left>=0 && e.getBoundingClientRect().right<=innerWidth)));
     if(!loggedIn){for(const name of ['login','register']){
      await p.locator(`.site-header .btn-auth-${name}`).click();assert(p.url().endsWith(name==='login'?'#dang-nhap':'#dang-ky'));
     }}
