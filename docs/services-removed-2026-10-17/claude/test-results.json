@@ -1,0 +1,126 @@
+[
+  {
+    "width": 1440,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 1440,
+    "stage": 1440,
+    "stageClipped": true,
+    "frames": 9,
+    "hidden": true,
+    "register": 107.390625,
+    "login": 127.421875
+  },
+  {
+    "width": 1280,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 1280,
+    "stage": 1280,
+    "stageClipped": true,
+    "frames": 9,
+    "hidden": true,
+    "register": 107.390625,
+    "login": 127.421875
+  },
+  {
+    "width": 1024,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 1024,
+    "stage": 1024,
+    "stageClipped": true,
+    "frames": 9,
+    "hidden": true,
+    "register": 107.390625,
+    "login": 127.421875
+  },
+  {
+    "width": 992,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 992,
+    "stage": 992,
+    "stageClipped": true,
+    "frames": 9,
+    "hidden": true,
+    "register": 97.34375,
+    "login": 116.71875
+  },
+  {
+    "width": 768,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 768,
+    "stage": 788,
+    "stageClipped": true,
+    "frames": 9,
+    "hidden": true,
+    "register": 97.34375,
+    "login": 116.71875
+  },
+  {
+    "width": 420,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 420,
+    "stage": 443,
+    "stageClipped": true,
+    "frames": 9,
+    "hidden": true,
+    "register": 83.296875,
+    "login": 102
+  },
+  {
+    "width": 390,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 390,
+    "stage": 410,
+    "stageClipped": true,
+    "frames": 9,
+    "hidden": true,
+    "register": 83.296875,
+    "login": 102
+  },
+  {
+    "width": 360,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 360,
+    "stage": 377,
+    "stageClipped": true,
+    "frames": 9,
+    "hidden": true,
+    "register": 83.296875,
+    "login": 102
+  },
+  {
+    "width": 320,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 320,
+    "stage": 334,
+    "stageClipped": true,
+    "frames": 9,
+    "hidden": true,
+    "register": 75.25,
+    "login": 93.28125
+  },
+  {
+    "width": 1440,
+    "pauseKeyboardAndCTA": "PASS"
+  },
+  {
+    "width": 390,
+    "pauseKeyboardAndCTA": "PASS"
+  },
+  {
+    "width": 1440,
+    "samples": 600,
+    "periodMs": 100,
+    "textAABBIntersections": 323,
+    "maxPairAABBOverlap": 0.20222896405584573
+  },
+  {
+    "width": 390,
+    "samples": 600,
+    "periodMs": 100,
+    "textAABBIntersections": 2957,
+    "maxPairAABBOverlap": 0.1993940694246554
+  },
+  {
+    "consoleErrors": []
+  }
+]

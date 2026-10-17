@@ -1,0 +1,118 @@
+Responsive, reduced-motion, keyboard, CTA checks PASS; starting 60-second orbit sampling.
+[
+  {
+    "width": 1440,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 1440,
+    "stage": 1440,
+    "frames": 9,
+    "hidden": true,
+    "register": 107.390625,
+    "login": 127.421875
+  },
+  {
+    "width": 1280,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 1280,
+    "stage": 1280,
+    "frames": 9,
+    "hidden": true,
+    "register": 107.390625,
+    "login": 127.421875
+  },
+  {
+    "width": 1024,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 1024,
+    "stage": 1024,
+    "frames": 9,
+    "hidden": true,
+    "register": 107.390625,
+    "login": 127.421875
+  },
+  {
+    "width": 992,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 992,
+    "stage": 992,
+    "frames": 9,
+    "hidden": true,
+    "register": 97.34375,
+    "login": 116.71875
+  },
+  {
+    "width": 768,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 768,
+    "stage": 768,
+    "frames": 9,
+    "hidden": true,
+    "register": 97.34375,
+    "login": 116.71875
+  },
+  {
+    "width": 420,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 420,
+    "stage": 420,
+    "frames": 9,
+    "hidden": true,
+    "register": 83.296875,
+    "login": 102
+  },
+  {
+    "width": 390,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 390,
+    "stage": 390,
+    "frames": 9,
+    "hidden": true,
+    "register": 83.296875,
+    "login": 102
+  },
+  {
+    "width": 360,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 360,
+    "stage": 360,
+    "frames": 9,
+    "hidden": true,
+    "register": 83.296875,
+    "login": 102
+  },
+  {
+    "width": 320,
+    "reducedMotionResponsive": "PASS",
+    "scroll": 320,
+    "stage": 320,
+    "frames": 9,
+    "hidden": true,
+    "register": 75.25,
+    "login": 93.28125
+  },
+  {
+    "width": 1440,
+    "pauseKeyboardAndCTA": "PASS"
+  },
+  {
+    "width": 390,
+    "pauseKeyboardAndCTA": "PASS"
+  },
+  {
+    "width": 1440,
+    "samples": 600,
+    "periodMs": 100,
+    "textAABBIntersections": 200,
+    "maxPairAABBOverlap": 0.12908247169827278
+  },
+  {
+    "width": 390,
+    "samples": 600,
+    "periodMs": 100,
+    "textAABBIntersections": 2323,
+    "maxPairAABBOverlap": 0.1910538122109386
+  },
+  {
+    "consoleErrors": []
+  }
+]

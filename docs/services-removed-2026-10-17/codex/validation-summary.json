@@ -1,0 +1,35 @@
+[
+  {
+    "test": "services-removed",
+    "status": 0,
+    "log": "services-removed-rerun.log"
+  },
+  {
+    "test": "verify-header-source",
+    "status": 0
+  },
+  {
+    "test": "hero-shell",
+    "status": 0
+  },
+  {
+    "test": "header-auth",
+    "status": 0
+  },
+  {
+    "test": "header-mobile",
+    "status": 0
+  },
+  {
+    "test": "header-names",
+    "status": 0
+  },
+  {
+    "test": "header-parity",
+    "status": 0
+  },
+  {
+    "test": "hero-orbit",
+    "status": 0
+  }
+]

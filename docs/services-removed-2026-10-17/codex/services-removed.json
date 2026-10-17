@@ -1,0 +1,91 @@
+{
+  "states": 14,
+  "rows": [
+    {
+      "mode": "responsive",
+      "width": 360,
+      "user": false,
+      "headerFits": true
+    },
+    {
+      "mode": "responsive",
+      "width": 360,
+      "user": true,
+      "headerFits": true
+    },
+    {
+      "mode": "responsive",
+      "width": 390,
+      "user": false,
+      "headerFits": true
+    },
+    {
+      "mode": "responsive",
+      "width": 390,
+      "user": true,
+      "headerFits": true
+    },
+    {
+      "mode": "responsive",
+      "width": 681,
+      "user": false,
+      "headerFits": true
+    },
+    {
+      "mode": "responsive",
+      "width": 681,
+      "user": true,
+      "headerFits": true
+    },
+    {
+      "mode": "responsive",
+      "width": 700,
+      "user": false,
+      "headerFits": true
+    },
+    {
+      "mode": "responsive",
+      "width": 700,
+      "user": true,
+      "headerFits": true
+    },
+    {
+      "mode": "responsive",
+      "width": 768,
+      "user": false,
+      "headerFits": true
+    },
+    {
+      "mode": "responsive",
+      "width": 768,
+      "user": true,
+      "headerFits": true
+    },
+    {
+      "mode": "responsive",
+      "width": 1440,
+      "user": false,
+      "headerFits": true
+    },
+    {
+      "mode": "responsive",
+      "width": 1440,
+      "user": true,
+      "headerFits": true
+    },
+    {
+      "mode": "mobile",
+      "width": 1000,
+      "user": false,
+      "headerFits": true
+    },
+    {
+      "mode": "mobile",
+      "width": 1000,
+      "user": true,
+      "headerFits": true
+    }
+  ],
+  "pageErrors": [],
+  "retiredRoutes": 404
+}
