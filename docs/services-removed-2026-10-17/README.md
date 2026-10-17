@@ -6,7 +6,7 @@ Chủ dự án xác nhận: **Bỏ hẳn trang Dịch vụ và các liên kết 
 
 - codex/hero-chinh-quy-dao: `239a0ae564c6da0cd6e674a0f0d43f857db199ad` (nền63d2643).
 - claude/cta-dich-vu-sua: `ee11ffa3cb8382c2462f0c679dee6a89e6d673f7` (nền e1c43df7eab172a716271d0b6d3687b629cf4c1d).
-- Không gộp Giới thiệu sang Codex, không merge main/deploy/xóa nhánh. Mã nhánh Antigravity giữ lịch sử, chỉ cập nhật README ngừng dùng Services.
+- Không gộp Giới thiệu sang Codex, không merge main/deploy/xóa nhánh. Chỉ đẩy hai nhánh demo hiện hành và hai nhánh shared. Mã nhánh Antigravity giữ lịch sử. Các commit README bổ sung ở bốn nhánh lịch sử còn cục bộ, chưa push: lần push gồm Antigravity bị hệ thống duyệt tự động từ chối, nên đã thu hẹp về bốn nhánh hiện hành.
 
 ## Đã thay đổi
 
