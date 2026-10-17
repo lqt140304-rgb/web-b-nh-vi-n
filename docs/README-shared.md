@@ -1,3 +1,5 @@
+> **Quyết định 17/10/2026:** Chủ dự án bỏ hẳn trang Dịch vụ và mọi liên kết dẫn tới trang đó. Không tiếp tục sửa/khôi phục Services theo các bàn giao cũ. Claude triển khai, Codex QA chính. [Quyết định hiện hành](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/bo-trang-dich-vu-2026-10-17.md).
+
 > **Phân công QA hiện hành — 17/10/2026:** Codex là QA chính, phụ trách kiểm yêu cầu, giao diện/hành vi, hồi quy, báo cáo và kiểm lại sau sửa. Claude thiết kế, triển khai, tự kiểm và sửa theo kết quả QA. Chủ dự án duyệt cuối. [Quyết định QA](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/codex-qa-chinh-2026-10-17.md).
 
 > **Quyết định hiện hành — 17/10/2026:** Antigravity đã bị loại khỏi kế hoạch. Claude thay thế hoàn toàn Antigravity về thiết kế, bản mẫu, triển khai giao diện và bàn giao; Codex tích hợp và làm QA chính. Các phân công Antigravity trong tài liệu cũ chỉ còn là lịch sử. [Quyết định chính thức](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/claude-thay-the-antigravity-2026-10-17.md).

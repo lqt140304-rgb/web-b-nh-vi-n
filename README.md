@@ -1,3 +1,5 @@
+> **Quyết định 17/10/2026:** Chủ dự án bỏ hẳn trang Dịch vụ và mọi liên kết dẫn tới trang đó. Không tiếp tục sửa/khôi phục Services theo các bàn giao cũ. Claude triển khai, Codex QA chính. [Quyết định hiện hành](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/bo-trang-dich-vu-2026-10-17.md).
+
 > **Phân công QA hiện hành — 17/10/2026:** Codex là QA chính, phụ trách kiểm yêu cầu, giao diện/hành vi, hồi quy, báo cáo và kiểm lại sau sửa. Claude thiết kế, triển khai, tự kiểm và sửa theo kết quả QA. Chủ dự án duyệt cuối. [Quyết định QA](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/codex-qa-chinh-2026-10-17.md).
 
 # Website Bệnh viện Thú y Lê Sơn
@@ -19,7 +21,7 @@
 - [QA và rà soát](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/qa-review/docs/README-shared.md)
 - [Danh mục giao diện đã tích hợp](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/codex/hero-chinh-quy-dao/design/README.md)
 - [Thiết kế Hero / Header](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/codex/hero-chinh-quy-dao/design/hero/README.md)
-- [Thiết kế Services](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/codex/hero-chinh-quy-dao/design/services/README.md)
+- [Quyết định bỏ trang Dịch vụ](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/bo-trang-dich-vu-2026-10-17.md)
 
 ## Quy trình chung
 
@@ -43,7 +45,7 @@ Trước mỗi lần cập nhật đọc HEAD mới nhất để tránh ghi đè
 
 1. Đọc yêu cầu mới nhất trên shared/requirements, ảnh mẫu đã chốt và các quyết định thay thế yêu cầu cũ.
 2. Ghi tên nhánh, SHA commit cụ thể và phiên bản demo đang chạy. Nếu chưa đối chiếu được bản local với commit, ghi rõ; không suy ra local là bản mới nhất.
-3. Đọc thay đổi so với bản QA trước, xác định các trang/tệp dùng chung bị ảnh hưởng. CSS, header hoặc tài nguyên chung đổi thì kiểm cả Hero và Services.
+3. Đọc thay đổi so với bản QA trước, xác định các trang/tệp dùng chung bị ảnh hưởng. CSS, header hoặc tài nguyên chung đổi thì kiểm Hero và phần Giới thiệu đang có; Services đã bỏ.
 4. Khi chủ dự án yêu cầu giống ảnh mẫu, dùng ảnh làm chuẩn vị trí/tỷ lệ/màu/trang trí; vẫn giữ logo, ảnh gốc và nội dung được xác nhận trong repo. Không lấy nội dung do AI sinh làm thông tin bệnh viện.
 
 ### Kiểm tra bắt buộc trong phần bị ảnh hưởng
@@ -83,16 +85,15 @@ P1: sai luồng quan trọng, nút cấp cứu hỏng, sai thông tin liên hệ
 ## Cấu trúc nhánh thiết kế
 
 - design/hero/: mục riêng cho Hero và Header, liên kết mã/tài nguyên/bàn giao.
-- design/services/: mục riêng cho trang Services, liên kết mã/tài nguyên/bàn giao.
+- design/services/: chỉ giữ ghi chú lịch sử; trang Services đã bỏ.
 - demo/index.html, demo/app.js: demo Hero.
-- demo/services.html, demo/services.js: demo Services.
 - demo/styles.css và demo/assets/: phần dùng chung; thay đổi phải kiểm ảnh hưởng tới cả hai trang.
 
 Mục mới tạo thư mục design/<ten-muc>/ và thêm vào design/README.md. Không sao chép CSS/ảnh dùng chung chỉ để tách mục.
 
 ## Chạy demo cục bộ
 
-Trên nhánh codex/hero-chinh-quy-dao: chạy `node server.js`, mở http://127.0.0.1:3030/index.html hoặc http://127.0.0.1:3030/services.html.
+Trên nhánh codex/hero-chinh-quy-dao: chạy `node server.js`, mở http://127.0.0.1:3030/index.html .
 server.js chỉ phục vụ demo trên máy cá nhân, không dùng cho vận hành công khai.
 
 ## Nhánh cũ
@@ -107,7 +108,7 @@ Nhánh thiết kế chung khởi tạo từ Services acc18e7, bổ sung Hero a47
 |---|---|
 | shared/requirements | Giữ: yêu cầu và quyết định chủ dự án |
 | shared/qa-review | Giữ: Codex QA chính; Claude bổ sung tự kiểm/bản mẫu |
-| claude/cta-dich-vu-sua | Giữ: Claude thiết kế/triển khai; có CTA và Giới thiệu chưa QA/tích hợp xong |
+| claude/cta-dich-vu-sua | Giữ: Claude thiết kế/triển khai Giới thiệu và các phần được giao; Services/CTA Services đã bỏ |
 | codex/hero-chinh-quy-dao | Giữ: tích hợp được giao và QA chính, demo hiện hành |
 | antigravity/design | Có thể xóa sau khi chủ dự án chọn; mã 40aa56d đã có trong lịch sử nhánh giữ lại, commit riêng chỉ là cập nhật tài liệu vai trò |
 | antigravity/services-v1 | Có thể xóa sau khi chủ dự án chọn; mã acc18e7 đã có trong lịch sử nhánh giữ lại, commit riêng chỉ là cập nhật tài liệu vai trò |
