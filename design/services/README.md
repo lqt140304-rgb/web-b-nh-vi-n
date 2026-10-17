@@ -1,12 +1,5 @@
-> **Quyết định hiện hành — 17/10/2026:** Antigravity đã bị loại khỏi kế hoạch. Claude thay thế hoàn toàn Antigravity về thiết kế, bản mẫu, triển khai giao diện và bàn giao; Codex tích hợp và làm QA chính. Các phân công Antigravity trong tài liệu cũ chỉ còn là lịch sử. [Quyết định chính thức](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/claude-thay-the-antigravity-2026-10-17.md).
+# Services đã dừng — 17/10/2026
 
-# Services
+> **Quyết định 17/10/2026:** Chủ dự án bỏ hẳn trang Dịch vụ và mọi liên kết dẫn tới trang đó. Không tiếp tục sửa/khôi phục Services theo các bàn giao cũ. Claude triển khai, Codex QA chính. [Quyết định hiện hành](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/bo-trang-dich-vu-2026-10-17.md).
 
-- [Mã giao diện](../../demo/services.html)
-- [Tương tác](../../demo/services.js)
-- [CSS dùng chung](../../demo/styles.css)
-- [Tài nguyên](../../demo/assets/)
-- [Bàn giao Services](../../docs/ban-giao-services-v1-antigravity.md)
-- [Bộ icon đã chốt](https://github.com/lqt140304-rgb/web-b-nh-vi-n/blob/shared/requirements/docs/chot-icon-services-v1.md)
-
-Claude tiếp tục thiết kế và triển khai trên nhánh được giao; Codex tích hợp và làm QA chính. Ghi commit và ảnh xem thử trong bàn giao; QA đăng trên shared/qa-review. CSS chung phải kiểm ảnh hưởng lên Hero.
+Trang Services không còn trong demo hiện hành; không giao việc sửa CTA/thẻ/modal Services hoặc thiết kế lại trang này nếu chưa có yêu cầu mới. Các bàn giao/ảnh cũ chỉ để tra cứu lịch sử Git, không phải tính năng hiện tại.
